@@ -24,7 +24,9 @@
   <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
     <mat-tab>
       <ng-template mat-tab-label>
-        <ion-card-title class="title-css" style="text-align: center;">Chats</ion-card-title>
+        <ion-card-title class="title-css" style="font-size: 18px;">
+          <ion-icon name="chatbubbles"></ion-icon>
+          </ion-card-title>
       </ng-template>
       <br>
       <ion-card>
@@ -54,7 +56,9 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <ion-card-title class="title-css" style="text-align: center;">Notificaciones</ion-card-title>
+        <ion-card-title class="title-css">
+          <ion-icon name="notifications"></ion-icon>
+          </ion-card-title>
       </ng-template>
       <br>
       <div *ngFor="let not of notoficaciones">

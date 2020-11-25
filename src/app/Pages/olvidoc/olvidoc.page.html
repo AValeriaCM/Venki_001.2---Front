@@ -1,0 +1,38 @@
+<ion-content class="ion-content-login">
+  <br>
+  <br>
+  <br>
+  <div  class="butonCs">
+    <ion-button class="loginBtn2" (click)="volverLogin()" expand="block">
+      Ya Recuerdo La Contraseña</ion-button>
+  </div>
+  <hr class="solid">
+  <br>
+  <br>
+  <div>
+    <ion-card-title class="title-css">Recupera tu cuenta</ion-card-title>
+    <ion-card-subtitle class="Subtitle-css">¿Olvidaste tu contraseña? no te preocupes puedes recuperar tu cuenta solo envianos tu email
+    </ion-card-subtitle>
+
+    <div>
+      <form [formGroup]="correoForm">
+        <ion-item class="ion-item-css">
+          <ion-input name="email" type="email" placeholder="Ingresa Tu Correo" formControlName="correo"></ion-input>
+        </ion-item>
+        <ion-item class='form-text-error'
+          *ngIf="!correoForm.controls.correo.valid && (correoForm.controls.correo.touched || correoForm.controls.correo.dirty)">
+          <ion-label>Debe ser un correo <br> valido</ion-label>
+        </ion-item>
+        <div padding>
+          <ion-button class="button-css" type="submit" (click)="RecuperarEmail()" [disabled]="!correoForm.valid" expand="block">Recupera
+            Tu Cuenta</ion-button>
+        </div>
+      </form>
+    </div>
+    <hr class="solid">
+
+  </div>
+
+
+
+</ion-content>

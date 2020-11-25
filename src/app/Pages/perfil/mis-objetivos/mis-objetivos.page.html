@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/users/perfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="tituloInfo">
+      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="title-css" style="text-align: center;">Mis Objetivos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div>
+        <ion-button fill="clear"  class="larger" (click)="onDetalles()">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" class="larger" (click)="onClear()">
+          <ion-icon name="refresh-outline"></ion-icon>
+        </ion-button>
+        <br>
+        <br>
+
+        <form [formGroup]="dynamicForm" (ngSubmit)="operar()">
+          <div *ngFor="let detalle of t.controls; let i = index">
+            <div [formGroup]="detalle">
+              <div>
+                <ion-item class="ion-item-css">
+                  <textarea class="textArea" name="item" formControlName="item" pattern="^[A-Za-z0-9]*$" placeholder="¿Cual es mi Objetivo?" rows="4" cols="150" maxlength="150" required></textarea>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <ion-button fill="clear" class="larger" (click)="onReset(i)">
+                    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+                  </ion-button>
+                </ion-item>
+                <br>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div>
+        <ion-button class="button-css-options" [disabled]="t.length === 0" (click)="operar()">Agregar Objetivos</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <br>
+  <br>
+
+  <div  *ngIf="objetivosList" class="expansionCsss2">
+    <br>
+    <p style="text-align: center; font-family: 'Proxima'; text-transform: uppercase; font-size: 18px;">Mis Objetivos</p>
+    <br>
+    <ion-list *ngFor="let  obj of objetivosList" style="text-align: center;">
+      <label style="text-align: center; font-family: 'Proxima'; font-size: 10px; text-transform: uppercase;">{{obj.achievement}}</label>
+    </ion-list>
+  </div>
+  
+
+</ion-content>

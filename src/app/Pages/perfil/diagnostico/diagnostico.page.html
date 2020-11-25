@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/users/perfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="tituloInfo">
+      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <br>
+  <ion-title class="title-css">Diagnostico</ion-title>
+  <ion-slides #slider (ionSlideWillChange)="verifImg()">
+
+    <ion-slide [hidden]="currentPage === 4">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12"><label class="subtitle-css">
+            Recuerda que no se guardará el progreso hasta que termines la primer 
+            ronda de preguntas. Responderás 20 de ellas y tendrás 2 opciones: guardar
+             y salir o continuar. Tu progreso solo se guarda hasta que llegues al final de la ronda.
+             ¡Animo!
+          </label>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide [hidden]="etapa === true || arrayFEnv.length  === totallenght" *ngFor="let dt of cantidad; let i of index;" >
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12"><label class="subtitle-css">{{preguntat}}/{{preguntot}}</label></ion-col>
+          <ion-col size="12"><label class="subtitle-css">{{dt.question}}</label></ion-col>
+          <ion-col size="12">
+            <ion-range class="range" min="1" max="5" step="1" [(ngModel)]="dt.calificacionVal" (ionChange)="calificacion($event, dt.id, i)"
+            snaps="true" pin="true" ticks="true" color="tertiary">
+            <ion-icon slot="start" size="small" color="danger" name="sad"></ion-icon>
+            <ion-icon slot="end" color="success" name="happy"></ion-icon>
+          </ion-range>
+          <label >Valor seleccionado: {{dt.calificacionVal}}</label>
+          <br>
+          <ion-button [hidden]="finalDta.length  !== preguntot" class="button-css" (click)="terminarEtapa()">Terminar Etapa</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide [hidden]="finalDta.length  !== preguntot || finalDta.length  === totallenght" *ngFor="let dt of cantidad; let i of index;" >
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button class="button-css" (click)="guardar()">Guardar Y Salir </ion-button>
+          </ion-col>
+          <ion-col size="12">
+            <ion-button class="button-css" (click)="Continuar()">Continuar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide [hidden]="arrayFEnv.length  !== totallenght" >
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button class="button-css" (click)="enviarQuestion()">Enviar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

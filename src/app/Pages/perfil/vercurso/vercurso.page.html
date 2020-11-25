@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/users/perfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="tituloInfo">
+      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="info">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title><span><b>Nombre Del Curso:</b>&nbsp;{{info.name}}</span><br></ion-card-title>
+        <ion-card-subtitle>
+          <span><b>Categoria:</b>&nbsp;{{info.categoria}}</span><br>
+          <span><b>Descripcion:</b>&nbsp;{{info.description}}</span><br>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <img src="http://venki.tk/{{info.photo}}">
+        <br>
+        <iframe #playerVim [src]="info.trailer + '?playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
+      webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+      <br>
+        <div>
+          <ion-item>
+            <ion-range min="1" max="10" step="1" [(ngModel)]="calificacionVal" (ionChange)="calificacion($event)" snaps="true"  pin="true" color="tertiary">
+              <ion-icon slot="start" size="small" color="danger" name="sad"></ion-icon>
+              <ion-icon slot="end" color="success" name="happy"></ion-icon>
+            </ion-range>
+          </ion-item>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="divBack">
+    <ion-grid>
+      <div *ngFor="let com of comentariosGeneral;">
+        <ion-row class="user-comments">
+          <ion-col size="2">
+            <ion-avatar item-start>
+              <img class="icon-photo" src="{{img}}">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="10">
+            <div>
+              <p class="usernamecss"><strong></strong></p>
+              <p class="mensajecss">{{com.comment}}</p>
+              <div class="time" class="ion-text-right"><br>
+                {{com.created_at | date:'short'}}
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+    </div>
+    </ion-grid>
+  </div>
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row class="ion-align-items-center ion-no-padding">
+      <ion-col size="10">
+        <textarea autosize maxRow="4" placeholder="Digita tu mensaje...." [(ngModel)]="menajeNuevo"
+          class="msg-input"></textarea>
+      </ion-col>
+      <ion-col size="2">
+        <button expand="block" [disabled]="menajeNuevo === ''" class="msg-btn" (click)="enviarMensaje()">
+          <ion-icon name="arrow-redo-outline"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

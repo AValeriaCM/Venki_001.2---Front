@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1055244002105",
+    "firebase_url": "https://magin-148fa.firebaseio.com",
+    "project_id": "magin-148fa",
+    "storage_bucket": "magin-148fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055244002105:android:445c284e20729a6395bee8",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1055244002105-dnqjjrtmq6is8ctf683ffv2q8ihd0l3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFx3yKsTH8Hzuwh8couPlLqmdG0NrVOSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055244002105-dnqjjrtmq6is8ctf683ffv2q8ihd0l3o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1055244002105-db8l380bnjljbmgl9j5djaiup1o0gfpq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.ionic.starter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

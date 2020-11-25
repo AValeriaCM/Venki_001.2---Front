@@ -1,0 +1,96 @@
+
+<ion-content class="ion-content-login">
+  <br>
+  <br>
+  <br>
+  <div>
+    <ion-button class="loginBtn2" (click)="volverLogin()" expand="block">
+      Ingresar con mi Cuenta</ion-button>
+  </div>
+  <hr class="solid">
+  <button class="loginBtn loginBtn--facebook" (click)="loginFacebook()">
+    Registrate con Facebook
+  </button>
+  <button class="loginBtn loginBtn--google" (click)="loginGoogle()">
+    Registrate con Google
+  </button>
+  <hr class="solid-visible">
+  <ion-card-title class="title-css">Ó</ion-card-title>
+  <ion-card-title class="title-css">Registrate</ion-card-title>
+
+  <div>
+    <form [formGroup]="regisform">
+      <ion-item class="ion-item-css">
+        <ion-input name="nombre" type="text" placeholder="Ingresa Tu Nombre" formControlName="name">
+        </ion-input>
+      </ion-item>
+      <ion-item class='form-text-error'
+        *ngIf="!regisform.controls.name.valid && (regisform.controls.name.touched || regisform.controls.name.dirty)">
+        <ion-label>El nombre Debe <br>tener minimo 5 Caracteres</ion-label>
+      </ion-item>
+      <ion-item class="ion-item-css">
+        <ion-input name="apellido" type="text" placeholder="Ingresa Tu Apellido" formControlName="lastname">
+        </ion-input>
+      </ion-item>
+      <ion-item class='form-text-error'
+        *ngIf="!regisform.controls.lastname.valid && (regisform.controls.lastname.touched || regisform.controls.lastname.dirty)">
+        <ion-label>El Apellido Debe <br>tener minimo 5 Caracteres</ion-label>
+      </ion-item>
+      <div>
+        <international-phone-number class="mystyle form-control form-control-sm"  [maxlength]="22" formControlName="phone" placeholder="Ingres Tu # De Contacto" [defaultCountry]="'co'"
+          [required]="true" [allowDropdown]="true"></international-phone-number>
+      </div>
+      <ion-item class='form-text-error'
+        *ngIf="!regisform.controls.phone.valid && (regisform.controls.phone.touched || regisform.controls.phone.dirty)">
+        <ion-label>tu telefono Debe <br>tener minimo 8 Caracteres</ion-label>
+      </ion-item>
+      <ion-item class="ion-item-css">
+        <ion-input name="email" type="email" placeholder="Ingresa Tu Correo" formControlName="email">
+        </ion-input>
+      </ion-item>
+      <ion-item class='form-text-error'
+        *ngIf="!regisform.controls.email.valid && (regisform.controls.email.touched || regisform.controls.email.dirty)">
+        <ion-label>Debe ser un correo <br> valido</ion-label>
+      </ion-item>
+      <ion-item class="ion-item-css">
+        <ion-datetime placeholder="Fecha de Nacimiento" displayFormat="YYYY/MM/DD" min="1980" max="2005"
+          formControlName="birthday"></ion-datetime>
+      </ion-item>
+      <ion-item class="ion-item-css">
+        <ion-input name="contrasena" [type]="showpassword ? 'text' : 'password'" placeholder="Ingresa Tu Constraseña"
+          formControlName="password">
+        </ion-input>
+        <ion-icon slot="end" [name]="passwordToggleIcon" (click)="showpass()"></ion-icon>
+      </ion-item>
+      <ion-item class='form-text-error'
+        *ngIf="!regisform.controls.password.valid && (regisform.controls.password.touched || regisform.controls.password.dirty)">
+        <ion-label>La Contraseña debe tener: <br>1 numero <br> 1 letra Mayuscula <br> 1 letra minuscula <br> y 8 o más
+          caracteres</ion-label>
+      </ion-item>
+      <ion-item class="ion-item-css">
+        <ion-input placeholder="Repite Tu Constraseña" [type]="showpasswordConfirm ? 'text' : 'password'"
+          formControlName="password_confirmation" show-password></ion-input>
+        <ion-icon slot="end" [name]="passwordToggleIconConfirm" (click)="showpassConfirm()"></ion-icon>
+      </ion-item>
+      <ion-item class='form-text-error'
+        *ngIf="regisform.controls.password_confirmation.touched && regisform.hasError('mismatchedPasswords') && regisform.controls.password.valid">
+        <ion-label no-margin stacked>Las Contraseñas No Coinciden</ion-label>
+      </ion-item>
+    </form>
+    <ion-item class="ion-item-css" *ngFor="let check of ischeck" (click)="checkval(check)">
+      <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
+      &nbsp;&nbsp;
+      <ion-button fill="clear" (click)="leerterminos()">
+        <ion-label color="dark">Leer los Terminos Y Condiciones</ion-label>
+      </ion-button>
+    </ion-item>
+
+    <div>
+      <ion-button class="button-css" type="submit" (click)="Registrarce()" [disabled]="!regisform.valid" expand="block">
+        Unete a nosotros</ion-button>
+    </div>
+
+  </div>
+  <hr class="solid">
+  <hr class="solid">
+</ion-content>

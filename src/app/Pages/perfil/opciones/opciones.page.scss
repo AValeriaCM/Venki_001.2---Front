@@ -1,0 +1,197 @@
+.divBack{
+    background-color: rgba(248, 249, 250, 0.651);
+}
+
+#notifications-badge {
+    background-color: red;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    border-radius: 100%;
+}
+
+.cart-btn{
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 5%;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    width: 85%;
+    
+}
+
+.button-css{
+    -webkit-box-shadow : 0  10px  30px  0 rgba(95,186,233,0.4);
+    box-shadow : 0  10px  30px  0 rgba(95,186,233,0.4);
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 5%;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    width: 85%;
+    height: 35px;
+    color: #ffffff;
+}
+
+.button-css-options{
+    -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
+    box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.151);
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 5%;
+    text-align: center;
+    border: rgba(20, 110, 155, 0.267);;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    width: 85%;
+    height: 35px;
+    color: #050505;
+    fill: rgba(95, 187, 233, 0.144);
+}
+
+.title-css{
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+    color: rgb(8, 8, 8);
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 11px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.Subtitle-css{
+    font-family: Gill Sans, Verdana;
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: rgb(8, 8, 8);
+}
+
+.profile-photo{
+    border-radius:50%;
+    margin-top: 10px;
+    width: 8em !important;
+    height: 8em !important;
+}
+
+.larger{
+    font-size: 14px;
+    text-align:center;
+    display: inline-block;
+}
+
+.expand-css{
+    max-width: 900px;
+}
+
+.profile-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.info-square{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.follow-button{
+    width:90%;
+    margin: 0px 10px;
+    background-color: #3E99ED;
+}
+
+.more-details{
+    padding-left: 10px;
+}
+
+.user-name{
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+    font-size: 19px;
+    letter-spacing: 1px;
+}
+
+.user-bio{
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: justify;
+}
+
+.image-grid{
+    padding: 0px;
+    margin: 0px;
+}
+
+.single-row{
+    height: 18rem;
+}
+
+.single-image{
+    padding:0px;
+}
+
+.ion-item-css{
+    background-color: #f6f6f685;
+    border: none;
+    color: #000000;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid  #ffffff79;
+    transition: all 0.3s ease-in-out;
+    height: 55px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    --background: rgba(255, 255, 255, 0.562) !important;
+    }
+
+.expansionCsss{
+  background-color: rgba(248, 249, 250, 0.527);
+}
+
+.larger {
+  font-size: 20px;
+  color: rgba(0, 48, 97, 0.856) !important;
+}
+
+.itemCssF{
+    --background: var(--ion-item-background, var(--ion-background-color, #f3f2f279)) !important;
+}
+
+.list-md {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
+}

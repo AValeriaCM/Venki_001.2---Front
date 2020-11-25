@@ -1,0 +1,53 @@
+.msg-input{
+    width: 100%;
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 10px;
+    background: #fff;
+    resize: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.msg-btn{
+
+    --padding-start: 8.5em;
+    --padding-end: 0.5em;
+
+}
+
+.divBack{
+    background-color:#ffffff;
+}
+
+.icon-photo{
+    border-radius:50% !important;
+    margin-top: 10px;
+    height: 1.7em !important;
+    width: 1.7em !important;
+}
+
+.usernamecss{
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+    color: #444;
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 9px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin-top: 2px;
+    text-align: left;
+}
+
+.mensajecss{
+    font-family: Gill Sans, Verdana;
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: justify;
+}
+

@@ -1,0 +1,437 @@
+.header .col {
+    background-color:lightgrey;
+}
+
+.col {
+    border: solid 1px grey;
+    border-bottom-style: none;
+    border-right-style: none;
+}
+
+.col:last-child {
+    border-right: solid 1px grey;
+}
+
+.row:last-child .col {
+    border-bottom: solid 1px grey;
+}
+
+.divBack{
+    background-color: rgba(248, 249, 250, 0.651);
+    padding-bottom: 89px;
+}
+
+.image-cont{
+    width: 250px;
+    height: 200px;
+    margin-left: 12px;
+    border-radius: 25px;
+}
+
+.time{
+    color: #1b1b1b;
+    float: right;
+    font-size: small;
+}
+
+.boder{
+    border: 0.5px solid rgb(114, 114, 114);
+    background-color: rgba(253, 253, 253, 0.562);
+    border-radius: 20px;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+
+hr.solid {
+    border-top: 1px solid rgb(155, 155, 155);
+}
+
+.divBackMiActividad{
+    background-color: rgba(248, 249, 250, 0.651);
+}
+
+#notifications-badge {
+    background-color: red;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    border-radius: 100%;
+}
+
+.cart-btn{
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 5%;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    width: 85%;
+    
+}
+
+.button-css{
+    -webkit-box-shadow : 0  10px  30px  0 rgba(95,186,233,0.4);
+    box-shadow : 0  10px  30px  0 rgba(95,186,233,0.4);
+    font-family: 'Proxima';
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 5%;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    width: 85%;
+    height: 35px;
+    color: #ffffff;
+}
+
+.button-css-options{
+    -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
+    box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.151);
+    font-family: 'Proxima';
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 5%;
+    text-align: center;
+    border: rgba(20, 110, 155, 0.267);;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    width: 85%;
+    height: 35px;
+    color: #ffffff;
+    --background: #002a68 !important;
+}
+
+
+.button-css-options2{
+    -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
+    box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.151);
+    font-family: 'Proxima';
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 7%;
+    text-align: center;
+    border: rgba(20, 110, 155, 0.267);;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    width: 85%;
+    height: 35px;
+    color: #ffffff;
+    --background: #80b9f6 !important;
+}
+
+.button-css-options22{
+    -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
+    box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.151);
+    font-family: 'Proxima';
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: 5%;
+    text-align: center;
+    border: rgba(20, 110, 155, 0.267);;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    width: 85%;
+    height: 35px;
+    color: #ffffff;
+    --background: #80b9f6 !important;
+}
+
+.title-css{
+    font-family: 'Proxima';
+    color: rgb(8, 8, 8);
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 11px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.title-cssCursos{
+    font-family: 'Proxima';
+    color: rgb(255, 255, 255);
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 11px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.title-css2{
+    font-family: 'Proxima';
+    color: rgb(255, 255, 255);
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 11px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.expacionCss{
+    background: #002a68;
+}
+
+.Subtitle-css{
+    font-family: 'Proxima';
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: rgb(8, 8, 8);
+}
+
+.Subtitle-css-label{
+    font-family: 'Proxima';
+    font-size: 9px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.Subtitle-css-title{
+    font-family: 'Proxima';
+    font-size: 9px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+.Subtitle-cs-desc{
+    font-family:'Proxima';
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: rgb(8, 8, 8);
+    text-align: justify;
+}
+
+.titlename{
+    font-family: 'Proxima';
+    font-size: 6.5px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-right: 190px;
+}
+
+.labelContent{
+    margin-bottom: 10px;
+    font-family: 'Proxima';
+    font-size: 7.5px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 12px;
+    margin-right: 10px;
+    margin-top: -15px;
+    padding-left: 12px;
+}
+
+.itemCssFActividad{
+    --background: var(--ion-item-background, var(--ion-background-color, #0e0e0ebe)) !important;
+    border: 2px solid  #00000000;
+}
+
+.list-mdActividad{
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: var(--ion-item-background, var(--ion-background-color, #868585cb));
+}
+
+.ion-item-css-{
+    background-color: #f7f7f765;
+    color: #000000;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 5px;
+    width: 100%;
+    border: 2px solid  #79797900;
+    transition: all 0.3s ease-in-out;
+    height: 55px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    --background: rgba(255, 255, 255, 0.603) !important;
+    margin-left: 0px;
+    margin-right: 189px;
+    border-left-width: 0px;
+    }
+
+    .my-customback{
+        --background: url(/src/assets/imagenesDiagnostico/img1.jpeg) 0 0/100% 100% no-repeat;
+        --width: 100%;
+        --height: 100%;
+    }
+
+.imagestyle{
+    width: 20px;
+    height: 20px;
+}
+
+.iconDesc{
+    margin-top: 12px;
+}
+
+.profile-photo{
+    border-radius:50%;
+    margin-top: 10px;
+    width: 8em !important;
+    height: 8em !important;
+}
+
+.larger{
+    text-align:center;
+    display: inline-block;
+    font-size: 20px;
+    color: #002a68 !important;
+}
+
+.expand-css{
+    max-width: 900px;
+}
+
+.expand-css2{
+    max-width: 900px;
+    background: #002a68;
+}
+
+.profile-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.info-square{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.follow-button{
+    width:90%;
+    margin: 0px 10px;
+    background-color: #3E99ED;
+}
+
+.more-details{
+    padding-left: 10px;
+}
+
+.user-name{
+    font-family: 'Proxima';
+    font-size: 18px;
+    letter-spacing: -1px;
+    text-align: justify;
+    margin-right: 59px;margin-top: 12px;
+}
+
+.user-bio{
+    font-family: 'Proxima';
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: justify;
+    margin-right: 12px;
+}
+
+.image-grid{
+    padding: 0px;
+    margin: 0px;
+}
+
+.single-row{
+    height: 18rem;
+}
+
+.single-image{
+    padding:0px;
+}
+
+.ion-item-css{
+    background-color: #f6f6f685;
+    border: none;
+    color: #000000;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid  #ffffff79;
+    transition: all 0.3s ease-in-out;
+    height: 55px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    --background: rgba(255, 255, 255, 0.562) !important;
+    }
+
+.expansionCsss{
+  background-color: rgba(248, 249, 250, 0.527);
+}
+
+
+
+.itemCssF{
+    --background: var(--ion-item-background, var(--ion-background-color, #f3f2f279)) !important;
+}
+
+.list-md {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
+}

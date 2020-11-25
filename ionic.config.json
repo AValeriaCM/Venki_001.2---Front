@@ -1,0 +1,7 @@
+{
+  "name": "VIGIA",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

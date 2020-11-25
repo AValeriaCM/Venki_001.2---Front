@@ -1,0 +1,25 @@
+<ion-content class="modal-wrapper" fullscreen>
+
+  <ion-item class="close-fake"  lines="none" text-center>
+    <ion-button (click)="close()" fill="clear" color="light"> 
+      <ion-icon name="close" slot="start"></ion-icon>
+      close
+    </ion-button>
+  </ion-item>
+  
+  <div *ngIf="usertk" class="itemback" style="padding-top: 0px;margin-bottom: 4px;margin-left: 10px;margin-right: 50px;">
+    <h3>
+      ¡Cambiate a Premium!
+    </h3>
+    <br>
+    <br>
+    <ion-button class="buttonCss" *ngIf="usertk.surveyed === 0" (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">Hacer Diagnostico</ion-button>
+    <br>
+    <br>
+    <ion-button class="buttonCss" *ngIf="usertk.surveyed === 1" (click)="recomedacionesRedirect(usertk.id)">Comprar un Paquete</ion-button>
+    <br>
+    <br>
+  </div>
+  
+  </ion-content>
+  

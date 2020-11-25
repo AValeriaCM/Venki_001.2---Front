@@ -1,0 +1,115 @@
+<ion-header #header>
+  <ion-toolbar #toolbar class="ion-toolbar-ccs">
+    <div align="center">
+      <ion-toolbar>
+        <img src="/assets/FINAL-LOGO-MAGIN-PNG.png" width="150" height="80">
+      </ion-toolbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" id="ion-content-opcional">
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary">
+      <ion-icon name="help-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-grid>
+    <ion-row style="border-bottom: groove;">
+      <ion-col size="12">
+        <div class="card card-3">
+          <h3>¡Bienvenido nuevamente!</h3>
+          <ion-label *ngIf="usertk" style=" font-family: 'Century Gothic'; color: #000; text-align: center;">
+            {{usertk.name}} {{usertk.lastname}}</ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <br>
+        <div class="div-imagen h3" align="center">
+          <ion-label *ngIf="usertk" style=" font-size: 14px; font-family: 'Century Gothic'; color: #000;">
+            <h3>¡Empieza bien tu día!</h3>
+          </ion-label>
+          <img src="../../../assets/icon/image1.jpg" (click)="imageView('../../../assets/icon/image1.jpg')" />
+        </div>
+        
+
+      </ion-col>
+      <ion-col size="12">
+        <div class="boderbox">
+          <br>
+          <br>
+          <h3>No olvides tu actividad de hoy</h3>
+          <label style="text-align: center;" *ngIf="actividadDiaria === null">No hay actividad Diaria Aprovecha nuestro contenido</label>
+          <ion-icon name="arrow-forward">   </ion-icon>
+          <label style="text-align: center;" *ngIf="actividadDiaria">    {{actividadDiaria}}</label>
+          <ion-button *ngIf="actividadDiaria !== null" shape="round" style="float: right; margin: 20px;font-family: 'Century Gothic';"
+            (click)="opinarSobreActividad(actividadDiaria)">
+            Opina!
+            <ion-icon name="heart" ></ion-icon>
+          </ion-button>
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <div class="boderbox" *ngIf="leccionActiva ===  null">
+          <h3>Tus cursos</h3>
+          <ion-label *ngIf="leccionActiva === null"
+            style="  font-size: 14px; font-family: 'Century Gothic'; color: #000;">
+            <ion-icon name="information-circle"></ion-icon>
+            No tienes una lección activa, puedes elegir
+          </ion-label>
+        </div>
+        <div class="boderbox" *ngIf="leccionActiva">
+          <br>
+          <ion-button *ngIf="leccionActiva !== null" class="buttonCss" (click)="retomarleccion()">Retomar <br>
+            {{leccionActiva.name}}</ion-button>
+        </div>
+      </ion-col>
+      <ion-col *ngIf="usertk" size="12">
+        <div class="boderbox" *ngIf="usertk.surveyed !== 1 || miactividad === 0 || usertk.premium === 0">
+          <br>
+          <ion-button *ngIf="usertk.surveyed === 0" shape="round" style="margin: 20px; margin-bottom: 0%; font-family: 'Century Gothic';"
+            (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
+            <ion-icon name="bulb"></ion-icon>
+            Hacer Diagnostico
+          </ion-button>
+          <ion-button *ngIf="miactividad === 0" shape="round" style="margin: 20px; margin-top: 5%;font-family: 'Century Gothic';"
+           (click)="crearEntrada()">
+            <ion-icon name="people"></ion-icon>
+            Ir a la comunidad
+          </ion-button>
+          <br>
+          <ion-button *ngIf="usertk.surveyed === 1" class="buttonCss" (click)="recomedacionesRedirect(usertk.id)">
+            Comprar un paquete</ion-button>
+          <br>
+          <br>
+        </div>
+        <br>
+      </ion-col>
+      <br>
+    </ion-row>
+  </ion-grid>
+  <label class="title-css-infoTitle" style="margin-right: 20px; margin-left: 60px;">Más Contenido de Ayuda</label>
+  <ion-card class="expansionCsss" *ngFor="let item of videos | async">
+    <ion-card-header>
+      <ion-item class="ion-item-css">
+        <ion-avatar class="avatar-css" slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+        </ion-avatar>
+        <ion-card-title class="title-css">{{item.title}}</ion-card-title>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <iframe #playerVim [src]="item.url + '?loop=false&muted=1&playsinline=flase' | vimeoUrl" frameborder="0"
+        allow="autoplay;" width="100%" height="100%" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </ion-card-content>
+    <br />
+    <br />
+    <div class="vermas">
+      <ion-button class="larger" (click)="seeMore(item.id,item)" fill="clear">
+        <ion-icon slot="icon-only" name="ellipsis-horizontal-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card>
+</ion-content>

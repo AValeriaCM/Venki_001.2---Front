@@ -1,0 +1,55 @@
+.textArea{
+    width: 97%;
+    max-width: 500px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+    resize: none;
+    border-bottom: 1px solid ;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-left: 1px solid;
+    padding: 10px;
+    outline: 0;
+    border-radius: 8px;
+    margin-top: 10%;
+}
+
+.image-cont{
+    width: 150px;
+    height: 150px;
+    margin-left: 16px;
+    margin-top: 7.5px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+ion-slides{
+    background: rgba(104, 103, 103, 0.151);
+    width: 50%;
+    height: 20%;
+    border-radius: 8px;
+}
+
+.back{
+    background-color: rgba(255, 255, 255, 0.555);
+}
+
+.buttonUploadImg{
+    margin-left: 0px;
+    margin-right: 0px;
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    left: 20px;
+}
+
+.buttonUploadImg2{
+    margin-left: 0px;
+    margin-right: 0px;
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: right;
+    right: 20px;
+}

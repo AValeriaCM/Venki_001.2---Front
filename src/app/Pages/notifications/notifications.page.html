@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-icon src="/assets/maginLog.svg" size="large" class="icon"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-button class="buttonCss" (click)="openChat()">
+        <ion-badge *ngIf="msj.length > 0">{{ msj.length }}</ion-badge>
+        <ion-icon slot="icon-only" name="navigate"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-content-opcional">
+  
+      <br>
+      <div *ngFor="let not of notoficaciones">
+        <ion-item class="ion-item-css" >
+          <ion-avatar slot="start">
+            <img src="{{not.img_notif}}" />
+          </ion-avatar>
+          <ion-textarea [disabled]="true" rows="5" class="Subtitle-cs-desc">{{not.notificacion}}
+          </ion-textarea>
+        </ion-item>
+      </div>
+
+</ion-content>

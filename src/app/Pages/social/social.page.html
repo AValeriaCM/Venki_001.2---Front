@@ -1,0 +1,134 @@
+<ion-header #header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-icon src="/assets/maginLog.svg" size="large" class="icon"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [appHideHeader]="header"  [scrollEvents]="true" class="ion-content-principal">
+  <ion-infinite-scroll threshold="25px"  position="top" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"  loadingText="Cargando post...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <br>
+  <br>
+  <br>
+  <br>
+  <label *ngIf="actividad" style="text-align: center;  margin-left: 20%; font-size: 18px; font-family: proxima;">Actividad: {{actividad}}</label>
+  <br>
+  <br>
+  <div  class="back">
+    <textarea class="textArea" [(ngModel)]="textareainput" placeholder="Que estas Pensando?" rows="4" cols="150" maxlength="150"></textarea>
+    <br>
+    <div *ngIf="photos">
+      <ion-slides [options]="sliderImgOption2">
+        <ion-slide *ngFor="let imag of photos">
+          <img class="image-cont" src="{{imag.imagen}}">
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <ion-button class="buttonUploadImg" fill=clear (click)="selccionImg()">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </ion-button>
+    <ion-button class="buttonUploadImg2" fill=clear (click)="Publicar()">
+      <ion-icon name="send"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div  class="back">
+    <textarea class="textArea" [(ngModel)]="textareainput" placeholder="Cual es tu estado actual?" rows="4" cols="150" maxlength="150"></textarea>
+    <br>
+    <div *ngIf="photos">
+      <ion-slides [options]="sliderImgOption2">
+        <ion-slide *ngFor="let imag of photos">
+          <img class="image-cont" src="{{imag.imagen}}">
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <ion-button class="buttonUploadImg" fill=clear (click)="selccionImg()">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </ion-button>
+    <ion-button class="buttonUploadImg2" fill=clear (click)="Publicar()">
+      <ion-icon name="send"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div  class="back">
+    <textarea class="textArea" [(ngModel)]="textareainput" placeholder="Realiza un Reto!" rows="4" cols="150" maxlength="150"></textarea>
+    <br>
+    <div *ngIf="photos">
+      <ion-slides [options]="sliderImgOption2">
+        <ion-slide *ngFor="let imag of photos">
+          <img class="image-cont" src="{{imag.imagen}}">
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <ion-button class="buttonUploadImg" fill=clear (click)="selccionImg()">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </ion-button>
+    <ion-button class="buttonUploadImg2" fill=clear (click)="Publicar()">
+      <ion-icon name="send"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div  class="back">
+    <textarea class="textArea" [(ngModel)]="textareainput" placeholder="Compartir información" rows="4" cols="150" maxlength="150"></textarea>
+    <br>
+    <div *ngIf="photos">
+      <ion-slides [options]="sliderImgOption2">
+        <ion-slide *ngFor="let imag of photos">
+          <img class="image-cont" src="{{imag.imagen}}">
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <ion-button class="buttonUploadImg" fill=clear (click)="selccionImg()">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </ion-button>
+    <ion-button class="buttonUploadImg2" fill=clear (click)="Publicar()">
+      <ion-icon name="send"></ion-icon>
+    </ion-button>
+  </div>
+  <br>
+  <ion-list *ngFor="let pst of miactividad" class="itemCssFActividad  list-mdActividad">
+    <div class="boder">
+      <ion-item class="ion-item-css-">
+        <ion-avatar slot="start">
+          <img src="http://venki.ml/photos/{{pst.user.photo}}" class="imagestyle"  (click)="verUser(pst.user)">
+        </ion-avatar>
+        <ion-label class="titlename" (click)="verUser(pst.user)">{{pst.user.name}} {{pst.user.lastname}}</ion-label>
+      </ion-item>
+      <br>
+      <div *ngIf="pst.medias.length === 0" class="labelContent">
+        <label>{{pst.post}}</label>
+        <div class="time" class="ion-text-right"><br>
+          {{pst.created_at | date:'short'}}
+        </div>
+      </div>
+      <br>
+      <div *ngIf="pst.medias.length !== 0" class="labelContent">
+        <label>{{pst.post}}</label>
+        <ion-slides [options]="sliderImgOption">
+          <ion-slide *ngFor="let imag of pst.medias">
+            <img class="image-cont" src="http://venki.ml/medias/{{imag.media}}" (click)="imageView(imag.media)">
+          </ion-slide>
+        </ion-slides>
+          
+        <div class="time" class="ion-text-right"><br>
+          {{pst.created_at | date:'short'}}
+        </div>
+      </div>
+      <hr class="solid">
+      <ion-grid>
+        <ion-row style="border-bottom: groove;">
+          <ion-col size="6" style="text-align: center; font-size: 25px;">
+            <ion-icon name="heart-half"></ion-icon>
+          </ion-col>
+          <ion-col size="6" style="text-align: center; font-size: 25px;">
+            <ion-icon name="chatbubble-ellipses"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-list>
+  <br>
+  <br>
+</ion-content>

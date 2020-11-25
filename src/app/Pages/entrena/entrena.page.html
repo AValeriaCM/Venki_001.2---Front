@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-icon src="/assets/maginLog.svg" size="large" class="icon"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-content-principal">
+  <br>
+  <br>
+  <ion-grid>
+    <ion-row style="border-bottom: groove;">
+      <ion-col size="6" *ngFor="let curso of cursos; let i of index;">
+        <div class="boderbox">
+            <ion-label class="Subtitle-css" (click)="verCurso(curso, curso.description)">
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>{{curso.name}}</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/users/entrena"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="tituloInfo">
+      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <br>
+  <div class="divBack">
+    <ion-list>
+      <div *ngFor="let curso of cursosUser;">
+        <div *ngIf="curso.users.length !== 0">
+          <ion-item class="ion-item-css">
+          <ion-avatar slot="start">
+            <img src="http://venki.ml/{{curso.photo}}" (click)="verCurso(curso)">
+          </ion-avatar>
+          <ion-label class="Subtitle-css" (click)="verCurso(curso)">{{curso.name}}</ion-label>
+          <ion-icon name="add-circle-outline" (click)="agregarCurso(curso)"></ion-icon>
+        </ion-item>
+        </div>
+        <div *ngIf="curso.users.length === 0">
+          <ion-item class="ion-item-css2">
+          <ion-avatar slot="start">
+            <img src="http://venki.ml/{{curso.photo}}" (click)="verCurso(curso)">
+          </ion-avatar>
+          <ion-label class="Subtitle-css" (click)="verCurso(curso)">{{curso.name}}</ion-label>
+          <ion-icon name="add-circle-outline" (click)="agregarCurso(curso)"></ion-icon>
+        </ion-item>
+        </div>
+      </div>
+    </ion-list>
+
+
+    
+  </div>
+</ion-content>

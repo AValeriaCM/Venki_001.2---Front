@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/users/entrena/cursos-categorias"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="tituloInfo">
+      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngFor="let ex of examenDT">
+      <ion-label>{{ex.p}}</ion-label> <br>
+      <ion-item *ngFor="let optP of ex.op">
+        <ion-checkbox slot="end" color="primary" [(ngModel)]="optP.select" (click)="obtenerVal(ex.p,optP, ex.co)"></ion-checkbox>
+        <ion-label style="margin-left: 20px; font-size: 10px;">{{optP.dt}}</ion-label>
+        <br>
+      </ion-item>
+
+    <br>
+  </div>
+
+  <ion-button [disabled]="tama !== totalExam.length" (click)="calificar()">
+    <ion-icon name="pencil-outline"></ion-icon>&nbsp;Calificar
+  </ion-button>
+</ion-content>

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/users/cursos-general"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="tituloInfo">
+      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div *ngIf="info">
+  <br>
+  <span><b>Nombre Del Curso:</b>&nbsp;{{info.name}}</span><br>
+  <span><b>Categoria:</b>&nbsp;{{info.categoria}}</span><br>
+  <span><b>Descripcion:</b>&nbsp;{{info.description}}</span><br>
+  <br>
+  <iframe #playerVim [src]="info.trailer + '?playsinline=1' | vimeoUrl"
+        frameborder="0" 
+        allow="autoplay;"  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  <br>
+  <img src="http://venki.tk/{{info.photo}}">
+</div>
+  
+</ion-content>

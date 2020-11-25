@@ -1,0 +1,295 @@
+.boderbox{
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    font-family: Century Gothic;
+    width: 98%;
+    height: auto;
+    color: #000;
+    text-emphasis: inherit;
+    text-align: center;
+}
+
+.div-imagen{
+    border-radius: 8px;
+    
+}
+
+.card{
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 14px 80px 18px 36px;
+  cursor: pointer;
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.card h3{
+  font-weight: 600;
+  color: #000000;
+  font-family: Century Gothic;
+  text-align: center;
+  font-style: var(--background);
+}
+
+h3{
+    font-weight: 600;
+    color: #000000;
+    font-family: Century Gothic;
+    text-align: center;
+    font-style: var(--background);
+  }
+
+.card img{
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  max-height: 120px;
+  border-radius: 8px;
+}
+
+.card-3{
+    background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80px;
+    border: white 2px outset;
+    margin: 10px;
+ }
+ 
+ @media(max-width: 990px){
+   .card{
+    
+   }
+ } 
+
+.buttonCss{
+    width:30px;
+    height:30px;
+    background-color:#002a68 !important;
+    margin: 20px;
+    padding:20px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    font-size:11px;
+    line-height:32px;
+    text-transform: uppercase;
+    float:right;
+    color: #ffffff;
+}
+
+video{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    width:100%;
+    box-shadow: 1px 1px rgba(160, 160, 160, 0.453);
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.avatar-css{
+    width:100% !important;  
+    height : 100% !important;  
+    max-width: 25px !important;  //any size
+    max-height: 25px !important; //any size 
+}
+
+.video-vimeo{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.car-content{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+
+.vermas{
+    z-index: 2;
+    width: 100%;
+    text-align: right;
+    transform: translate(0%, -100%);
+    background-color: rgba(255, 255, 255, 0);
+
+}
+ 
+.category-block {
+    margin-bottom: 4px;
+}
+ 
+.category-banner {
+    border-left: 8px solid var(--ion-color-secondary);
+    background: var(--ion-color-light);
+    height: 40px;
+    padding: 10px;
+    font-weight: 500;
+}
+
+.title-css{
+    font-family: Century Gothic;
+    font-style: 'Proxima';
+    text-transform: uppercase;
+    color: rgb(8, 8, 8);
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 11px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.Subtitle-css{
+    font-family: Century Gothic;
+    font-style: 'Proxima';
+    text-transform: uppercase;
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: rgb(8, 8, 8);
+}
+
+
+.title-css-user{
+    font-family: Century Gothic;
+    font-style: 'Proxima';
+    text-transform: uppercase;
+    color: #444;
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 18px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.title-css-infoTitle{
+    font-family: Century Gothic;
+    font-style: 'Proxima';
+    text-transform: uppercase;
+    margin-right: 20px;
+    margin-left: 60px;
+    color: rgb(255, 255, 255);
+    margin: 0;
+    font-size: 18px;
+    padding: 0px 0px 6px 0px;
+    font-size: 18px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.Subtitle-css-user{
+    font-family: Century Gothic;
+    font-style: 'Proxima';
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.ion-item-css{
+  background-color: #ffffff00;
+  border: none;
+  color: #000000;
+  text-decoration: none;
+  font-size: 13px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid  #ffffff00;
+  transition: all 0.3s ease-in-out;
+  height: 45px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  --background: rgba(255, 255, 255, 0) !important;
+  }
+
+  .larger {
+    font-size: 20px;
+    color: #002a68 !important;
+  }
+
+
+  .button-css{
+    -webkit-box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.24);
+    box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.233);
+    font-family: Century Gothic;
+    font-style: 'Proxima';
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 2%;
+    border-radius: 20px;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 11px;
+    transition: all 0.3s ease-in-out;
+    width: 85%;
+    height: 35px;
+    color: #ffffff;
+    --background: rgba(0, 48, 97, 0.856) !important;
+  }
+
+  .msg-input{
+    width: 100%;
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 10px;
+    background: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.expansionCsss{
+  background-color: rgba(248, 249, 250, 0.527);
+}
+
+.larger {
+  font-size: 20px;
+  color: rgba(0, 48, 97, 0.856) !important;
+}
+
+.itemCssF{
+    --background: var(--ion-item-background, var(--ion-background-color, #f3f2f279)) !important;
+}
+
+.list-md {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
+}

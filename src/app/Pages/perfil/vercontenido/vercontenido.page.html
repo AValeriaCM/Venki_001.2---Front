@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/users/perfil"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="tituloInfo">
+      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+        <br>
+          <ion-title style="text-align: center;">{{prueba.title}}</ion-title>
+          <br>
+          <br>
+      
+            <img src="{{prueba.url}}" >
+         
+           
+            <br>
+            <br>
+            <ion-list *ngFor="let com of comments">
+              <ion-item>
+                <ion-avatar slot="start">
+                  <img src="{{com.img}}" />
+                </ion-avatar>
+                <ion-label>
+                  <p class="titulo-user">{{com.user}}</p>
+                  <br />
+                  <ion-textarea class="coment">{{com.msg}}</ion-textarea>
+                  <p class="tiempo">{{com.currentTime | date: 'short'}}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+    
+
+
+</ion-content>

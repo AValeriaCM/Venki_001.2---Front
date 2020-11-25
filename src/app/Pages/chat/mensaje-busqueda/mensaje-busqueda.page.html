@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start">
+      <ion-button (click)="volver()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="tituloInfo">
+      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="data">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="{{data.profilepic}}" />
+      </ion-avatar>
+      <ion-label>{{data.name}}</ion-label>
+    </ion-item>
+  </div>
+  <ion-grid>
+    <ion-row *ngFor="let m of menjs">
+      <ion-col size="8" *ngIf="transmiterID !== m.user_id" class="mensaje usuarios">
+        <b>{{data.name}}</b><br>
+        <span>{{m.message}}</span>
+        <div class="time" class="ion-text-right"><br>
+          {{m.created_at | date:'short'}}
+        </div>
+      </ion-col>
+
+      <ion-col offset="3" size="8" *ngIf="transmiterID === m.user_id" class="mensaje mi-usuarios">
+        <b>{{usuarioActual}}</b><br>
+        <span>{{m.message}}</span>
+        <div class="time" class="ion-text-right"><br>
+          {{m.created_at | date:'short'}}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row class="ion-align-items-center ion-no-padding">
+      <ion-col size="10">
+        <textarea autosize maxRow="4" placeholder="Digita tu mensaje...." [(ngModel)]="newMsg"
+          class="msg-input"></textarea>
+      </ion-col>
+      <ion-col size="2">
+        <button expand="block" [disabled]="newMsg === ''" class="msg-btn" (click)="enviarMsg()">
+          <ion-icon name="arrow-redo-outline"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,206 @@
+.msg-input{
+    width: 100%;
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 10px;
+    background: #fff;
+    resize: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.msg-btn{
+
+    --padding-start: 8.5em;
+    --padding-end: 0.5em;
+
+}
+
+.imgStyle{
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.divBack{
+    background-color:#ffffff;
+}
+
+.icon-photo{
+    border-radius:50% !important;
+    margin-top: 10px;
+    height: 1.7em !important;
+    width: 1.7em !important;
+}
+
+.usernamecss{
+    font-family: 'Proxima';
+    color: #444;
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 9px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin-top: 2px;
+    text-align: left;
+}
+
+.mensajecss{
+    font-family: 'Proxima';
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: justify;
+}
+
+.divBack{
+    background-color: rgba(248, 249, 250, 0.527);
+}
+
+.rowcss{
+    padding: 0 0 0 0;
+    align-items: center;
+}
+
+.cursoName{
+    font-family: 'Proxima';
+    color: #444;
+    margin: 0;
+    padding: 0px 6px 6px 0px;
+    font-size: 12px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.lessonName{
+    font-family: 'Proxima';
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: -0.1px;
+    font-weight: bold;
+}
+
+.contentName{
+    font-family: 'Proxima';
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+hr.dashed {
+    border-top: 3px dotted #bbb;
+}
+.contentNamedesc{
+    font-family: 'Proxima';
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    text-transform: lowercase;
+    letter-spacing: -0.1px;
+    font-weight: bold;
+    text-align: justify;
+}
+
+.child-item{
+    --ion-item-background: #f3f2f1;
+    --padding-start:  8px;
+    --inner-padding-end: 8px;
+    margin-bottom: 2px;
+}
+
+.section{
+    --ion-item-background: #f3f2f1;
+    --padding-start:  8px;
+    --inner-padding-end: 8px;
+    margin-bottom: 2px;
+}
+
+.section-active{
+    --ion-item-background: linear-gradient(162deg, rgba(114, 150, 247, 0.836) 20%, rgba(33, 65, 153, 0.712) 100%),url(/assets/img-back.jpg) 0 0/100% 100% no-repeat;;
+    --padding-start:  8px;
+    --inner-padding-end: 8px;
+    margin-bottom: 2px;
+}
+
+.lecciones-active{
+    --ion-item-background: linear-gradient(162deg, rgba(114, 150, 247, 0.541) 20%, rgba(33, 65, 153, 0.589) 100%),url(/assets/img-back.jpg) 0 0/100% 100% no-repeat;;
+    --padding-start:  8px;
+    --inner-padding-end: 8px;
+    margin-bottom: 2px;
+}
+
+.itemCssF{
+    --background: var(--ion-item-background, var(--ion-background-color, #f3f2f279)) !important;
+}
+
+.list-md {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
+}
+
+.ion-item-css{
+    background-color: #f6f6f685;
+    border: none;
+    color: #000000;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid  #ffffff79;
+    transition: all 0.3s ease-in-out;
+    height: 55px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    --background: rgba(255, 255, 255, 0.562) !important;
+    }
+
+    .title-css{
+        font-family: 'Proxima';
+        color: rgb(8, 8, 8);
+        margin: 0;
+        padding: 0px 0px 6px 0px;
+        font-size: 11px;
+        line-height: 44px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    
+    .Subtitle-css{
+        font-family: 'Proxima';
+        font-size: 7px;
+        line-height: 12px;
+        margin: 0;
+        padding: 7px 7px 7px 7px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        color: rgb(8, 8, 8);
+        text-transform: uppercase;
+    }

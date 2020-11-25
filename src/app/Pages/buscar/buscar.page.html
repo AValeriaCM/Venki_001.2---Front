@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon src="/assets/anchor.svg" size="large" class="icon"></ion-icon>
+    <ion-title class="tituloInfo">VENKI</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <ion-searchbar animated (ionChange)="buscar($event)"></ion-searchbar>
+  <br>
+  <ion-list>
+    <ion-item *ngFor="let item of data | filtro: textoBuscar: 'title'">
+      {{item.title}}
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,69 @@
+<ion-header #header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/users/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="tituloInfo">
+      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true">
+  <ion-card *ngFor="let item of vid">
+    <ion-card-header>
+      <ion-card-title class="title-css" style="text-align: center;">{{item.title}}</ion-card-title>
+      <ion-item>
+        <ion-avatar item-start>
+          <img class="icon-photo-css" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+        <h2 class="userN-css">{{item.user_name}}</h2>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <iframe #playerVim [src]="item.url + '?loop=1&muted=1&playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
+        width="100%" height="100%" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <br>
+      <p class="Subtitle-css">{{item.description}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="divBack">
+    <ion-grid>
+      <div *ngFor="let com of comments">
+        <ion-row class="user-comments">
+          <ion-col size="2">
+            <ion-avatar item-start>
+              <img class="icon-photo" src="{{com.img}}">
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="10">
+            <div>
+              <p class="usernamecss"><strong>{{com.user}}</strong></p>
+              <p class="mensajecss">{{com.msg}}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+    </div>
+    </ion-grid>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <div *ngIf="comments">
+    <ion-toolbar>
+      <ion-row class="ion-align-items-center ion-no-padding">
+        <ion-col size="10">
+          <textarea autosize maxRow="4" placeholder="Deja tu Comentario...." [(ngModel)]="newMsg"
+            class="msg-input"></textarea>
+        </ion-col>
+        <ion-col size="2">
+          <button expand="block" [disabled]="newMsg === ''" class="msg-btn" (click)="enviarMsg()">
+            <ion-icon name="arrow-redo-outline"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </div>
+</ion-footer>

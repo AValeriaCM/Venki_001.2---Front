@@ -1,0 +1,123 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
+import { ChatServiceService } from 'src/app/_services/chat-service.service';
+import { AuthService } from 'src/app/_services/auth.service';
+import { LoginService } from 'src/app/_services/login.service';
+import { PassObjectService } from 'src/app/_services/pass-object.service';
+
+
+
+@Component({
+  selector: 'app-chat',
+  templateUrl: './chat.page.html',
+  styleUrls: ['./chat.page.scss'],
+})
+export class ChatPage implements OnInit {
+
+  notoficaciones = [
+    {
+      id: 1,
+      notificacion: 'El usuario xxxxx te ah agregado como amigo',
+      img_notif: 'https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png'
+    },
+    {
+      id: 2,
+      notificacion: 'El usuario xxxxx te ah agregado como amigo',
+      img_notif: 'https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png'
+    },
+    {
+      id: 3,
+      notificacion: 'El usuario xxxxx te ah agregado como amigo',
+      img_notif: 'https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png'
+    },
+    {
+      id: 4,
+      notificacion: 'El usuario xxxxx te ah agregado como amigo',
+      img_notif: 'https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png'
+    }
+  ];
+
+  userList: any[] = [];
+  data: Array<any>;
+  textoBuscar = '';
+  correoUser;
+  searhVariable: string;
+  idUser: any;
+  nameUser: any;
+  constructor(
+    private router: Router,
+    private chatS: ChatServiceService,
+    private auth: AuthService,
+    private log: LoginService,
+    private pObjecto: PassObjectService) {
+    }
+
+  ngOnInit() {
+    this.data = [];
+    this.userList = [];
+    this.auth.gettokenLog().then( tkInf => {
+      this.log.logdataInfData(tkInf).subscribe( resTk => {
+        this.idUser = resTk.id;
+        this.nameUser = resTk.name;
+        this.chatS.getchatsUser(this.idUser).subscribe((chatData: any)  => {
+          console.log('data',chatData);
+          this.userList  = chatData.data;
+          console.log(this.userList);
+        });
+      });
+    });
+
+    this.chatS.var.subscribe( res => {
+      this.auth.gettokenLog().then( tkInf => {
+        this.log.logdataInfData(tkInf).subscribe( resTk => {
+          this.idUser = resTk.id;
+          this.nameUser = resTk.name;
+          this.chatS.getchatsUser(this.idUser).subscribe((chatData: any)  => {
+            this.userList  = chatData.data;
+          });
+        });
+      });
+    });
+    this.chatS.removeNotification();
+    this.chatS.var.next('token remove');
+  }
+
+  buscar(event){
+    this.textoBuscar = event.detail.value;
+    this.chatS.getAllUsers(this.textoBuscar).subscribe( allUser => {
+      let result = allUser.data;
+      if (result.length > 0){
+        console.log(allUser);
+        this.data = allUser.data;
+        this.searhVariable = '';
+        this.chatS.var.next('User find');
+      }
+    });
+  }
+
+  abrirDialogo(info: any){
+    this.data = [];
+    let dataObj = {
+      infoDt :  info,
+      transferID : this.idUser,
+      useractual : this.nameUser
+    };
+    this.pObjecto.setData(dataObj);
+    this.router.navigate(['/users/chat/enviomsj/']);
+  }
+
+  abrirMensajesBusqueda(info: any){
+    this.data = [];
+    let dataObj = {
+      infoDt :  info,
+      transferID : this.idUser,
+      useractual : this.nameUser
+    };
+    this.pObjecto.setData(dataObj);
+    this.router.navigate(['/users/chat/mensaje-busqueda/']);
+  }
+
+  volverHome(){
+    this.router.navigate(['/users/home/']);
+  }
+}

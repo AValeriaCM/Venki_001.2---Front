@@ -1,0 +1,222 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+.ion-content-login{
+  //--ion-background-color:linear-gradient(rgba(255,255,255), rgba(253,202,85) );
+  //--ion-background-color: #002a68;
+  //--ion-background-color: linear-gradient(123deg, #002a68 0%, #80b9f6 53%, #0041a2 100%);
+  --background: url(/assets/magin-fondo.jpg) 0 0/100% 100% no-repeat;
+}
+
+.ion-content-principal{
+  //--ion-background-color:linear-gradient(rgba(255,255,255), rgba(253,202,85) );
+  //--ion-background-color: #002a68;
+  //--ion-background-color: linear-gradient(123deg, #002a68 0%, #80b9f6 53%, #0041a2 100%);
+  --background: url(/assets/fondo-1.jpg) 0 0/100% 100% no-repeat;
+}
+
+#ion-content-opcional{
+  //--ion-background-color:linear-gradient(rgba(255,255,255), rgba(253,202,85) );
+  //--ion-background-color: #002a68;
+  //--ion-background-color: linear-gradient(123deg, #002a68 0%, #80b9f6 53%, #0041a2 100%);
+  --background: white  0 0/100% 100% no-repeat;
+}
+
+
+.my-custom-class{
+  --background: url(/assets/imagenesDiagnostico/img1.jpeg) 0 0/100% 100% no-repeat;
+}
+
+.buttonCss{
+  color: rgba(253, 253, 253, 0.904) !important;
+}
+
+.ion-toolbar-ccs{
+  --background: white 0 0/100% 100% no-repeat;
+  border-bottom-right-radius:  20px;
+  border-bottom:#9db2c0 3px solid;
+  border-bottom-left-radius: 20px;
+}
+
+.titlePadding{
+  margin-left: 5%;
+}
+  
+
+.tituloInfo {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    padding: 0 19px 1px;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+  }
+
+  .color-blue{
+    color: #002a68;
+  }
+
+  .color-blueC{
+    color: #80b9f6;
+  }
+
+  .modal-wrapper{
+    background: transparent !important;
+}
+
+  .my-class .mat-dialog-container{
+    border-radius: 10px;
+    background: rgb(46, 105, 184);
+    color: #faf4f4;
+  }
+
+   
+  .my-class .mat-raised-button{
+    border-radius: 10px;
+    background: rgb(45, 59, 88);
+    color: #faf9f9;
+  }
+
+  
+  .my-class .matInput{
+    border-radius: 10px;
+    background: rgb(19, 18, 18);
+    color: #050505;
+  }
+
+  .my-class .mat-form-field.mat-focused .mat-form-field-label {
+    color: #ffffff !important;
+  }
+
+  .my-class .mat-form-field.mat-underline .mat-form-field-label {
+    color: #ffffff !important;
+  }
+
+  .my-class .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+    background-color: #ffffff !important;
+  }
+  
+.icon {
+    padding: initial;
+    width: 90px;
+    height: 90px;
+  }
+
+  .my-custom-class {
+    --background: #ffffffbd;
+}
+
+.my-custom-class2 {
+    --background: #fdfcfcc7;
+}
+
+.my-customback{
+  --background: url(/assets/imagenesDiagnostico/img1.jpeg) 0 0/100% 100% no-repeat;
+  --width: 100%;
+  --height: 100%;
+  --min-width: 90%;
+}
+
+.my-custombackentrena{
+  --background: url(/assets/slidesImg/img1.jpg) 0 0/100% 100% no-repeat;
+  --width: 100%;
+  --height: 100%;
+  --min-width: 90%;
+}
+
+.alert-message.sc-ion-alert-md{
+  max-height: 540px; 
+  font-size: 18px; 
+  color: rgb(0, 0, 0); 
+  font-family: 'Arial'; 
+  text-align: justify;
+  text-decoration: #000000;
+  font-weight: bold;
+}
+
+
+.alert-button-inner.sc-ion-alert-md{
+  font-size: 18px; 
+  color: rgb(0, 0, 0); 
+  font-family: 'Arial'; 
+}
+
+.my-customback1{
+  --background: url(/assets/imagenesDiagnostico/img2.jpeg) 0 0/100% 100% no-repeat;
+  --width: 100%;
+  --height: 100%;
+  --min-width: 90%;
+}
+
+.my-customback2{
+  --background: url(/assets/imagenesDiagnostico/img3.jpeg) 0 0/100% 100% no-repeat;
+  --width: 100%;
+  --height: 100%;
+  --min-width: 90%;
+}
+
+
+.my-custombackInicio{
+  --background: url(/assets/imagenesVar/deslizaDerecha.gif) 0 0/100% 100% no-repeat;
+  --width: 100%;
+  --height: 100%;
+  --min-width: 90%;
+}
+
+.my-customback3{
+  --background: url(/assets/imagenesDiagnostico/img4.jpeg) 0 0/100% 100% no-repeat;
+  --width: 100%;
+  --height: 100%;
+  --min-width: 90%;
+}
+
+.secondaryClose{
+  background-image: url(/assets/icon/close-circle-outline.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; 
+}
+
+@font-face{
+  //font-family: 'BebasNeue';
+  //font-family: 'BulletJournal';
+  //font-family: 'Revoxa';
+  font-family: 'Arial';
+  //font-family: 'BeriberuSweetie-Normal';
+  // src: url('../src/assets/fonts/bebas_nue/BebasNeue-Regular.woff2') format('woff2');
+  //src: url('../src/assets/fonts/bullet_journal/BulletJournal.ttf') format('ttf');
+  //src: url('../src/assets/fonts/revoxa/Revoxa.otf') format('otf');
+  src: url('../src/assets/fonts/proxima/proxima-nova.otf') format('otf');
+  //src: url('../src/assets/fonts/buburia/BeriberuSweetie-Normal.ttf') format('ttf');
+}
+
+*{
+  font-family: 'Arial';
+}

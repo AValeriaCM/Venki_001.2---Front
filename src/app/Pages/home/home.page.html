@@ -21,7 +21,7 @@
       <ion-col size="12">
         <div class="card card-3">
           <h3>¡Bienvenido nuevamente!</h3>
-          <ion-label *ngIf="usertk" style=" font-family: 'Century Gothic'; color: #000; text-align: center;">
+          <ion-label *ngIf="usertk" style="font-size: 16px; font-family: 'Century Gothic'; color: #000; text-align: center;">
             {{usertk.name}} {{usertk.lastname}}</ion-label>
         </div>
       </ion-col>
@@ -43,7 +43,7 @@
           <h3>No olvides tu actividad de hoy</h3>
           <label style="text-align: center;" *ngIf="actividadDiaria === null">No hay actividad Diaria Aprovecha nuestro contenido</label>
           <ion-icon name="arrow-forward">   </ion-icon>
-          <label style="text-align: center;" *ngIf="actividadDiaria">    {{actividadDiaria}}</label>
+          <label style="text-align: center; font-size: 17px;" *ngIf="actividadDiaria">    {{actividadDiaria}}</label>
           <ion-button *ngIf="actividadDiaria !== null" shape="round" style="float: right; margin: 20px;font-family: 'Century Gothic';"
             (click)="opinarSobreActividad(actividadDiaria)">
             Opina!
@@ -55,7 +55,7 @@
         <div class="boderbox" *ngIf="leccionActiva ===  null">
           <h3>Tus cursos</h3>
           <ion-label *ngIf="leccionActiva === null"
-            style="  font-size: 14px; font-family: 'Century Gothic'; color: #000;">
+            style="  font-size: 17px; font-family: 'Century Gothic'; color: #000;">
             <ion-icon name="information-circle"></ion-icon>
             No tienes una lección activa, puedes elegir
           </ion-label>

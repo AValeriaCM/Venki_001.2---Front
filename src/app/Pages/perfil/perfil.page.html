@@ -15,7 +15,8 @@
       <ion-grid class="profile-intro">
         <ion-row>
           <ion-col col-4>
-            <img class="profile-photo" src="{{usertk.photo}}" (click)="selccionImg()">
+            <img class="profile-photo" src="../../../assets/avatar/{{usertk.avatar}}.png" (click)="selccionImg()"> 
+         
           </ion-col>
           <ion-col col-8>
             <div class="profile-info">
@@ -62,11 +63,11 @@
                 </ion-item>
                 <ion-item class="ion-item-css">
                   <ion-icon name="layers"></ion-icon>
-                  <ion-label class="Subtitle-css">Categoria: <br> {{usertk.profile.name}}</ion-label>
+                <!--  <ion-label class="Subtitle-css">Categoria: <br> {{usertk.profile.name}}</ion-label> -->
                 </ion-item>
                 <ion-item class="ion-item-css">
                   <ion-icon name="body"></ion-icon>
-                  <ion-label class="Subtitle-css">Especialidad: <br> {{usertk.profile.name}}</ion-label>
+                <!--  <ion-label class="Subtitle-css">Especialidad: <br> {{usertk.profile.name}}</ion-label>-->
                 </ion-item>
                 <ion-item class="ion-item-css"  *ngIf="usertk.description === null || usertk.description === ''">
                   <ion-icon name="chatbubble-ellipses" class="iconDesc"></ion-icon> &nbsp;

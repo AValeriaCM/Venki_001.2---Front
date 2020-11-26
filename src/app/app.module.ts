@@ -32,6 +32,9 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
+import * as Sentry from "@sentry/angular";
+import { APP_INITIALIZER } from "@angular/core";
+import { Router } from "@angular/router";
 import { SentryService } from './_services/sentry.service';
 
 
@@ -77,7 +80,19 @@ import { SentryService } from './_services/sentry.service';
     File,
     {
       provide: ErrorHandler,
-      useClass: SentryService,
+      useValue: Sentry.createErrorHandler({
+        showDialog: true,
+      }),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,

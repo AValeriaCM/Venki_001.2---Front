@@ -6,4 +6,5 @@ export class UsuariosF {
     address: string;
     birthday: string;
     phone: string;
+    avatar: string;
 }

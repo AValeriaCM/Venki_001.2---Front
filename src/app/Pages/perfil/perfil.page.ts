@@ -8,8 +8,8 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { ActionSheetController, AlertController, IonInfiniteScroll, LoadingController } from '@ionic/angular';
 import { LoginService } from 'src/app/_services/login.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
-
-
+import { PopoverController } from '@ionic/angular';  
+import { AvatarPage } from '../popup/avatar/avatar.page';
 
 
 @Component({
@@ -71,6 +71,7 @@ export class PerfilPage implements OnInit {
     private loadingCtrl: LoadingController,
     private pObjecto: PassObjectService,
     public alertController: AlertController,
+    private popover:PopoverController 
     ) { }
 
   ngOnInit() {
@@ -118,6 +119,14 @@ export class PerfilPage implements OnInit {
       });
     });
 
+  }
+
+  CreatePopover()
+  {
+    this.popover.create({component:AvatarPage,
+    showBackdrop:false}).then((popoverElement)=>{
+      popoverElement.present();
+    })
   }
 
   async selccionImg(){

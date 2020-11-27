@@ -36,6 +36,7 @@ import * as Sentry from "@sentry/angular";
 import { APP_INITIALIZER } from "@angular/core";
 import { Router } from "@angular/router";
 import { SentryService } from './_services/sentry.service';
+import { AvatarPageModule } from './Pages/popup/avatar/avatar.module';
 
 
 
@@ -61,7 +62,8 @@ import { SentryService } from './_services/sentry.service';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     InternationalPhoneNumberModule,
-    ImageModalPageModule
+    ImageModalPageModule,
+    AvatarPageModule
   ],
   providers: [
     MatDatepickerModule,

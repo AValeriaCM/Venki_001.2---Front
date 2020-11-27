@@ -7,15 +7,19 @@
     </div>
   </ion-toolbar>
 </ion-header>
-
+ 
 <ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" slot="start" id="ion-content-opcional">
   <br>
+  
+ 
+
+
   <div class="divBack">
     <div *ngIf="usertk !== null">
       <ion-grid class="profile-intro">
         <ion-row>
           <ion-col col-2>
-            <img class="profile-photo" src="../../../assets/avatar/{{usertk.avatar}}.png" (click)="selccionImg()">
+            <img class="profile-photo" src="../../../assets/avatar/{{usertk.avatar}}.png" (click)="CreatePopover()">
 
           </ion-col>
           <ion-col col-10>

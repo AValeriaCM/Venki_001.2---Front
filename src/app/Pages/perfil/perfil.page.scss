@@ -94,26 +94,34 @@ hr.solid {
 }
 
 .button-css-options{
-    -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
-    box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.151);
+    -webkit-box-shadow : 0  10px  30px  0 rgba(255, 255, 255, 0.288);
+    box-shadow : 0  10px  30px  0 rgb(252, 252, 252);
     font-family: Century Gothic;
-    font-size: 9px;
+    font-size: 13px;
     letter-spacing: 1px;
     margin: 0px;
-    margin-top: 10px;
+    margin-top: 13px;
     margin-left: 5%;
     text-align: center;
-    border: rgba(20, 110, 155, 0.267);;
+    border: rgb(254, 255, 255);;
     text-decoration: none;
-    display: inline-block;
+    display: table-cell;
     text-transform: uppercase;
     transition: all 0.3s ease-in-out;
     width: 85%;
     height: 35px;
-    color: #ffffff;
-    --background: #002a68 !important;
+    color: #002a68;
+    --background: #ffffff !important;
 }
 
+.md ion-list > .item:last-child, 
+.md ion-list > .item-wrapper:last-child .item,
+.wp ion-list > .item:last-child, 
+.wp ion-list > .item-wrapper:last-child .item,
+.ios ion-list > .item:last-child, 
+.ios ion-list > .item-wrapper:last-child .item {
+       border-bottom: none;
+}
 
 .button-css-options2{
     -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
@@ -127,20 +135,20 @@ hr.solid {
     text-align: center;
     border: rgba(20, 110, 155, 0.267);;
     text-decoration: none;
-    display: inline-block;
+    display: table-cell;
     text-transform: uppercase;
     transition: all 0.3s ease-in-out;
     width: 85%;
     height: 35px;
     color: #ffffff;
-    --background: #80b9f6 !important;
+    --background: #002a68 !important;
 }
 
 .button-css-options22{
     -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
     box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.151);
     font-family: Century Gothic;
-    font-size: 9px;
+    font-size: 13px;
     letter-spacing: 1px;
     margin: 0px;
     margin-top: 10px;
@@ -148,13 +156,13 @@ hr.solid {
     text-align: center;
     border: rgba(20, 110, 155, 0.267);;
     text-decoration: none;
-    display: inline-block;
+    display: table-cell;
     text-transform: uppercase;
     transition: all 0.3s ease-in-out;
     width: 85%;
     height: 35px;
     color: #ffffff;
-    --background: #80b9f6 !important;
+    --background: #002a68 !important;
 }
 
 .title-css{
@@ -232,6 +240,18 @@ hr.solid {
     letter-spacing: 0.8px;
     font-weight: bold;
     color: rgb(255, 255, 255);
+}
+
+.Subtitle-css-expansive{
+    font-family: Century Gothic;
+    font-size: 10px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: bold;
+    color: rgb(2, 0, 0);
 }
 
 .Subtitle-cs-desc{

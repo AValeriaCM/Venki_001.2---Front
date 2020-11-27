@@ -61,14 +61,14 @@
                   <ion-icon name="calendar"></ion-icon>
                   <ion-label class="Subtitle-css">{{usertk.birthday}}</ion-label>
                 </ion-item>
-                <ion-item class="ion-item-css">
+              <!-- <ion-item class="ion-item-css">
                   <ion-icon name="layers"></ion-icon>
-                <!--  <ion-label class="Subtitle-css">Categoria: <br> {{usertk.profile.name}}</ion-label> -->
+                  <ion-label class="Subtitle-css">Categoria: <br> {{usertk.profile.name}}</ion-label> 
                 </ion-item>
                 <ion-item class="ion-item-css">
                   <ion-icon name="body"></ion-icon>
-                <!--  <ion-label class="Subtitle-css">Especialidad: <br> {{usertk.profile.name}}</ion-label>-->
-                </ion-item>
+                  <ion-label class="Subtitle-css">Especialidad: <br> {{usertk.profile.name}}</ion-label>
+                </ion-item> -->
                 <ion-item class="ion-item-css"  *ngIf="usertk.description === null || usertk.description === ''">
                   <ion-icon name="chatbubble-ellipses" class="iconDesc"></ion-icon> &nbsp;
                   <ion-textarea [disabled]="true" rows="5" class="Subtitle-cs-desc">Puedes agregar tu descripcion.</ion-textarea>
@@ -169,11 +169,8 @@
                 <mat-expansion-panel class="expacionCss">
                   <mat-expansion-panel-header class="expacionCss">
                     <mat-panel-title>
-                      <label class="Subtitle-css-title">TROFEOS E INSIGNIAS</label>
+                      <label class="Subtitle-css-expansive">TROFEOS E INSIGNIAS</label>
                     </mat-panel-title>
-                    <mat-panel-description>
-                      <label class="Subtitle-css-label">Trofeos e Insignias de Cursos</label>
-                    </mat-panel-description>
                   </mat-expansion-panel-header>
                   <ion-row style="border-bottom: groove;">
                     <ion-col col-4>
@@ -233,67 +230,68 @@
           </ng-template>
           <br>
           <ion-grid>
-            <ion-row>
-                <ion-col size="12" >
+            <ion-list no-lines>
+              <ion-item lines="none">
+                <ion-label>
                   <ion-button  [disabled]="usertk.premium  === 0" class="button-css-options" fill="clear" expand="block" (click)="miCalendario()">
-                    <ion-icon name="calendar-outline"></ion-icon>&nbsp;
-                    Calendario
-                  </ion-button>
-                </ion-col>
-                <ion-col size="12">
-                  <!--[disabled]="usertk.premium  === 0"-->
+                  <ion-icon name="calendar-outline"></ion-icon>&nbsp;
+                  Calendario
+                </ion-button>
+              </ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>
                   <ion-button  class="button-css-options" fill="clear" expand="block" (click)="miTimeLine()">
                     <ion-icon name="calendar-outline"></ion-icon>&nbsp;
                     TimeLine
                   </ion-button>
-                </ion-col>
-
-                <ion-col size="12" >
-                  <!--[disabled]="usertk.premium  === 0"-->
+                </ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>
                   <ion-button [disabled]="usertk.surveyed  !== 1" class="button-css-options" fill="clear" expand="block" (click)="misEstadisticas()">
                     <ion-icon name="stats-chart-outline"></ion-icon>&nbsp;
                     Metricas
                   </ion-button>
-                </ion-col>
-                <ion-col size="12">
+                </ion-label>
+              </ion-item >
+              <ion-item lines="none">
+                <ion-label >
                   <ion-button  class="button-css-options" fill="clear" expand="block" (click)="MisObjetivos(usertk.id)">
                     <ion-icon name="stats-chart-outline"></ion-icon>&nbsp;
                     Mis Objetivos
                   </ion-button>
-                </ion-col>
-
-                <!--[disabled]="usertk.surveyed  === 1"-->
-                <ion-col size="12" >
+                </ion-label>
+              </ion-item >
+              <ion-item lines="none">
+                <ion-label>  
                   <ion-button [disabled]="usertk.surveyed  === 1" class="button-css-options" fill="clear" expand="block"
-                    (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
-                    <ion-icon name="book"></ion-icon>&nbsp;
-                    Diagnostico
-                  </ion-button>
-                </ion-col>
-
-                <!--[disabled]="usertk.surveyed  !== 1"-->
-                <ion-col size="12">
+                  (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
+                  <ion-icon name="book"></ion-icon>&nbsp;
+                  Diagnostico
+                </ion-button>
+              </ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>  
                   <ion-button [disabled]="usertk.surveyed  !== 1" class="button-css-options" fill="clear" expand="block"
                     (click)="recomedacionesRedirect(usertk.id)">
                     <ion-icon name="book"></ion-icon>&nbsp;
                     Recomendaciones
                   </ion-button>
-                </ion-col>
-              
-
-              <ion-col size="12">
-                <ion-button class="button-css-options22" fill="clear" expand="block" (click)="opcionesRedirect()">
-                  <ion-icon name="settings-outline">Más Opciones</ion-icon>
-                </ion-button>
-              </ion-col>
-              <!--<ion-col size="6">
-                <ion-button class="cart-btn" fill="clear" (click)="openCart()" data-count="">
-                  <ion-badge id="notifications-badge" *ngIf="cart.length > 0">{{ cart.length }}</ion-badge>
-                  <ion-icon slot="icon-only" name="cart"></ion-icon>
-                  </ion-button>
-              </ion-col>-->
-            </ion-row>
+              </ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>  
+  
+              </ion-label>
+              </ion-item>
+            </ion-list>
+          
           </ion-grid>
+         <!-- <ion-fab-button color="light" fill="clear" expand="block" (click)="opcionesRedirect()">
+            <ion-icon  name="settings-outline"></ion-icon>
+          </ion-fab-button> -->
           <br>
         </mat-tab>
       </mat-tab-group>

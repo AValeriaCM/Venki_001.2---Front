@@ -16,10 +16,10 @@ export class EditPerfilPage implements OnInit {
 
   items = [
     {
-      situacion: 'soltero'
+      situacion: 'Soltero'
     },
     {
-      situacion: 'En Relación'
+      situacion: 'Casado'
     }
   ];
 

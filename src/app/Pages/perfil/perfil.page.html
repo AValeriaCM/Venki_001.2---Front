@@ -14,11 +14,11 @@
     <div *ngIf="usertk !== null">
       <ion-grid class="profile-intro">
         <ion-row>
-          <ion-col col-4>
+          <ion-col col-2>
             <img class="profile-photo" src="../../../assets/avatar/{{usertk.avatar}}.png" (click)="selccionImg()"> 
          
           </ion-col>
-          <ion-col col-8>
+          <ion-col col-10>
             <div class="profile-info">
               <div class="info-square">
                 <p class="user-name"><strong>
@@ -74,8 +74,8 @@
                   <ion-textarea [disabled]="true" rows="5" class="Subtitle-cs-desc">Puedes agregar tu descripcion.</ion-textarea>
                 </ion-item>
                 <ion-item class="ion-item-css"  *ngIf="usertk.description !== null || usertk.description !== ''">
-                  <ion-icon name="chatbubble-ellipses" class="iconDesc"></ion-icon> &nbsp;
-                  <ion-textarea [disabled]="true" rows="5" class="Subtitle-cs-desc">{{usertk.description}}</ion-textarea>
+                  <ion-icon name="chatbubble-ellipses"></ion-icon> &nbsp;
+                  <ion-textarea [disabled]="true"  class="Subtitle-cs-desc">{{usertk.description}}</ion-textarea>
                 </ion-item>
                 
 

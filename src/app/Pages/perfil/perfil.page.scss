@@ -172,7 +172,7 @@ hr.solid {
 
 .title-cssCursos{
     font-family: Century Gothic;
-    color: rgb(255, 255, 255);
+    color: rgb(10, 10, 10);
     margin: 0;
     padding: 0px 0px 6px 0px;
     font-size: 11px;
@@ -184,7 +184,7 @@ hr.solid {
 
 .title-css2{
     font-family: Century Gothic;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     margin: 0;
     padding: 0px 0px 6px 0px;
     font-size: 11px;
@@ -195,16 +195,16 @@ hr.solid {
 }
 
 .expacionCss{
-    background: #002a68;
+    background: #ffffff;
 }
 
 .Subtitle-css{
     font-family: Century Gothic;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 12px;
     margin: 0;
     padding: 7px 7px 7px 7px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: 1px;
     font-weight: bold;
     color: rgb(8, 8, 8);
@@ -332,7 +332,7 @@ hr.solid {
     text-align:center;
     display: inline-block;
     font-size: 20px;
-    color: #002a68 !important;
+    color: #002a68  !important;
 }
 
 .expand-css{
@@ -342,7 +342,7 @@ hr.solid {
 
 .expand-css2{
     max-width: 900px;
-    background: #002a68;
+    background: #ffffff;
 }
 
 .profile-info{
@@ -369,16 +369,15 @@ hr.solid {
 }
 
 .user-name{
-    font-family: Century Gothic;
-    font-size: 18px;
+    font-size: 23px;
     letter-spacing: -1px;
     text-align: justify;
-    margin-right: 59px;margin-top: 12px;
+    margin-right: 30px;margin-top: 12px;
 }
 
 .user-bio{
     font-family: Century Gothic;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 1px;
     text-align: justify;
     margin-left: 20px;
@@ -400,15 +399,15 @@ hr.solid {
 .ion-item-css{
     background-color: #f6f6f685;
     border: none;
-    color: #000000;
+    color: #1b4078;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 15px;
     margin: 5px;
     width: 85%;
     border: 2px solid  #ffffff79;
     transition: all 0.3s ease-in-out;
     height: 55px;
-    text-align: center;
+    text-align: left;
     margin: 0 auto;
     margin-bottom: 10px;
     border-radius: 8px;

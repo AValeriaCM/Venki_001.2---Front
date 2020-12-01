@@ -339,7 +339,7 @@ export class PerfilPage implements OnInit {
 
 
         this.share.getpostNextPage(this.paginaActual).subscribe( resPg => {
-          console.log('Respuesta paguina', resPg);
+          console.log('Respuesta pagina', resPg);
           resPg.data.forEach(element => {
             this.miactividad.push(element);
           });

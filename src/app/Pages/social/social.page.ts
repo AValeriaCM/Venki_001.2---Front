@@ -36,7 +36,7 @@ export class SocialPage implements OnInit {
   };
   usertk = null;
   loading: any;
-  textareainput: any;
+  textareainputPiensa: any;
   photos: Array<any>;
   alert: any;
   sFotos: Array<any>;
@@ -170,12 +170,12 @@ export class SocialPage implements OnInit {
   }
 
   Publicar(){
-    console.log(this.textareainput, this.photos);
-    if (this.textareainput === undefined){
+    //console.log(this.textareainput, this.photos);
+    if (this.textareainputPiensa === undefined){
       this.alertDespuesTiempo();
     }else{
       console.log('SFOTOS',this.photos);
-      this.share.guardarpost(this.usertk.id, this.textareainput, this.photos).subscribe(  res => {
+      this.share.guardarpost(this.usertk.id, this.textareainputPiensa, this.photos).subscribe(  res => {
         console.log(res);
         this.share.varPostUpdate.next('update data');
       });
@@ -188,8 +188,8 @@ export class SocialPage implements OnInit {
       subHeader:
         'Debes Escribir algo',
       message:
-        'Dinos que piensas escribe algo no se puede ir vacio',
-      buttons: ['Acepto'],
+        'No puedes publicar algo vacío',
+      buttons: ['Entendido'],
     });
     await this.alert.present();
   }
@@ -232,11 +232,9 @@ export class SocialPage implements OnInit {
           this.infonitescroll.disabled  = true;
           return;
         }
-
-
         this.share.getpostNextPage(this.paginaActual).subscribe( resPg => {
-          console.log('Respuesta paguina', resPg);
-          console.log('Respuesta paguina', resPg.data);
+          console.log('Respuesta pagina', resPg);
+          console.log('Respuesta pagina', resPg.data);
           resPg.data.forEach(element => {
             this.miactividad.unshift(element);
           });

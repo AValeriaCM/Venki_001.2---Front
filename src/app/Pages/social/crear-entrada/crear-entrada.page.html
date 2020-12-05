@@ -18,7 +18,7 @@
     <label>{{actividad}}</label>
     <br>
     <br>
-    <textarea class="textArea" [(ngModel)]="textareainput" placeholder="Que estas Pensando..." rows="4" cols="150" maxlength="150"></textarea>
+    <textarea class="textArea" fill=clear [(ngModel)]="textareainput" placeholder="Escribe aquí..." rows="4" cols="150" maxlength="150"></textarea>
     <br>
     <div *ngIf="photos">
       <ion-slides [options]="sliderImgOption">

@@ -1,5 +1,5 @@
 .title-css{
-    font-family: times, Times New Roman, times-roman, georgia, serif;
+    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     color: rgb(8, 8, 8);
     margin: 0;
     padding: 0px 0px 6px 0px;
@@ -10,8 +10,23 @@
     text-align: center;
 }
 
+.fab-buttons{
+  margin-left: 15px;
+  box-shadow: 10px #000000; 
+  margin-bottom: 0%; font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
+}
+
+.label-fab{
+  font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
+  font-weight: bolder;
+  color: rgba(0, 48, 97, 0.856) !important;
+  font-size: 14px;
+  margin-bottom: 0%;
+  margin: 12px;
+}
+
 .Subtitle-css{
-    font-family: Gill Sans, Verdana;
+    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     font-size: 7px;
     line-height: 12px;
     margin: 0;
@@ -46,7 +61,7 @@
   .button-css{
     -webkit-box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.24);
     box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.233);
-    font-family: times, Times New Roman, times-roman, georgia, serif;
+    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     font-size: 11px;
     letter-spacing: 1px;
     margin: 0 auto;
@@ -102,7 +117,7 @@
 }
 
 .titlename{
-  font-family: times, Times New Roman, times-roman, georgia, serif;
+  font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
   font-size: 6.5px;
   letter-spacing: 1px;
   font-weight: bold;
@@ -167,7 +182,7 @@
 .time{
   color: #1b1b1b;
   float: right;
-  font-size: small;
+  font-size: medium;
 }
 
 ion-slides{
@@ -222,6 +237,7 @@ ion-slides{
 
 .back{
   background-color: rgba(255, 255, 255, 0.555);
+  display: inline;
 }
 
 .buttonUploadImg{
@@ -245,7 +261,7 @@ ion-slides{
 
 .labelContent{
   margin-bottom: 10px;
-  font-family: times, Times New Roman, times-roman, georgia, serif;
+  font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
   font-size: 7.5px;
   letter-spacing: 1px;
   font-weight: bold;
@@ -261,4 +277,8 @@ ion-slides{
 
 ion-slides{
   background: rgba(104, 103, 103, 0.151);
+}
+
+.botones{
+
 }

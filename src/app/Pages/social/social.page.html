@@ -8,12 +8,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" [appHideHeader]="header"  [scrollEvents]="true" class="ion-content-principal">
-  
-  <label *ngIf="actividad" style="text-align: center;  margin-left: 20%; font-size: 18px; font-family: proxima;">Actividad: {{actividad}}</label>
+<ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" class="ion-content-principal">
+
+  <label *ngIf="actividad"
+    style="text-align: center;  margin-left: 35%; font-size: 18px; font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);">Actividad:
+    {{actividad}}</label>
   <br>
-  <div  class="back">
-    <textarea class="textArea" [(ngModel)]="textareainputPiensa" placeholder="Que estas Pensando?" rows="4" cols="150" maxlength="150"></textarea>
+  <div class="back">
+    <!--<textarea class="textArea" [(ngModel)]="textareainputPiensa" placeholder="Que estas Pensando?" rows="4" cols="150" maxlength="150"></textarea>
     <br>
     <div *ngIf="photos">
       <ion-slides [options]="sliderImgOption2">
@@ -27,7 +29,34 @@
     </ion-button>
     <ion-button class="buttonUploadImg2" fill=clear (click)="Publicar()">
       <ion-icon name="send"></ion-icon>
-    </ion-button>
+    </ion-button>-->
+    <ion-toolbar style="display: inline;">
+      <ion-title>
+        ¿Que deseas hacer hoy?
+      </ion-title>
+    </ion-toolbar>
+    <ion-toolbar style="display: inline;">
+      <ion-buttons >
+        <ion-fab-button style="margin-left:80px;" class="fab-buttons" (click)="crearEntrada()" >
+          <ion-icon name="bulb" size="large"></ion-icon>
+        </ion-fab-button>
+      </ion-buttons>
+      <ion-buttons slot="secondary">
+        <ion-fab-button class="fab-buttons" (click)="crearEntrada()">
+          <ion-icon name="megaphone" size="large"></ion-icon>
+        </ion-fab-button>
+      </ion-buttons>
+      <ion-buttons slot="primary">
+        <ion-fab-button style="margin-left:20px; margin-right: 25px;" class="fab-buttons" (click)="crearEntrada()">
+          <ion-icon name="flash" size="large"></ion-icon>
+        </ion-fab-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar style="display: inline; vertical-align: middle;">
+      <ion-label  class="label-fab">Compartir</ion-label>
+      <ion-label style="margin-left: 60px;" class="label-fab">Informar</ion-label>
+      <ion-label style="margin-left: 85px;" class="label-fab">Retar</ion-label>
+    </ion-toolbar>
   </div>
 
   <br>
@@ -35,7 +64,7 @@
     <div class="boder">
       <ion-item class="ion-item-css-">
         <ion-avatar slot="start">
-          <img src="http://venki.ml/photos/{{pst.user.photo}}" class="imagestyle"  (click)="verUser(pst.user)">
+          <img src="http://venki.ml/photos/{{pst.user.photo}}" class="imagestyle" (click)="verUser(pst.user)">
         </ion-avatar>
         <ion-label class="titlename" (click)="verUser(pst.user)">{{pst.user.name}} {{pst.user.lastname}}</ion-label>
       </ion-item>
@@ -54,7 +83,7 @@
             <img class="image-cont" src="http://venki.ml/medias/{{imag.media}}" (click)="imageView(imag.media)">
           </ion-slide>
         </ion-slides>
-          
+
         <div class="time" class="ion-text-right"><br>
           {{pst.created_at | date:'short'}}
         </div>
@@ -72,8 +101,8 @@
       </ion-grid>
     </div>
   </ion-list>
-  <ion-infinite-scroll threshold="25px"  position="center" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles"  loadingText="Cargando post...">
+  <ion-infinite-scroll threshold="25px" position="center" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando post...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
   <br>

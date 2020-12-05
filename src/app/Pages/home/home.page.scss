@@ -1,7 +1,7 @@
 .boderbox{
     border-radius: 8px;
     -webkit-border-radius: 8px;
-    font-family: Century Gothic;
+    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     width: 98%;
     height: auto;
     color: #000;
@@ -182,8 +182,6 @@ video{
 
 .title-css-infoTitle{
     font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
-    font-style: 'Proxima';
-    text-transform: uppercase;
     margin-right: 20px;
     margin-left: 60px;
     color: rgb(255, 255, 255);
@@ -199,13 +197,10 @@ video{
 
 .Subtitle-css-user{
     font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
-    font-style: 'Proxima';
-    text-transform: uppercase;
     font-size: 14px;
     line-height: 12px;
     margin: 0;
     padding: 7px 7px 7px 7px;
-    text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
 }
@@ -238,8 +233,6 @@ video{
     -webkit-box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.24);
     box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.233);
     font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
-    font-style: 'Proxima';
-    text-transform: uppercase;
     font-size: 11px;
     letter-spacing: 1px;
     margin: 0 auto;
@@ -251,7 +244,6 @@ video{
     border: none;
     text-decoration: none;
     display: inline-block;
-    text-transform: uppercase;
     font-size: 11px;
     transition: all 0.3s ease-in-out;
     width: 85%;

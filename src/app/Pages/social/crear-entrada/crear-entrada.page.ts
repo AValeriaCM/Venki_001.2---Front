@@ -46,6 +46,7 @@ export class CrearEntradaPage implements OnInit {
 
   ngOnInit() {
 
+    //this.textareainput = ;
     const informacion = this.pObjecto.getNavData();
     console.log(informacion);
     this.actividad = informacion.actividad;
@@ -131,7 +132,7 @@ export class CrearEntradaPage implements OnInit {
   }
 
   subirVideo() {
-    
+
   }
 
   Publicar(){
@@ -139,10 +140,11 @@ export class CrearEntradaPage implements OnInit {
     if (this.textareainput === undefined){
       this.alertDespuesTiempo();
     }else{
-      console.log('SFOTOS',this.photos);
+      console.log('SFOTOS', this.photos);
       this.share.guardarpost(this.usertk.id, this.textareainput, this.photos).subscribe(  res => {
         console.log(res);
         this.share.varPostUpdate.next('update data');
+        this.router.navigate(['/users/social/']);
       });
     }
   }
@@ -153,7 +155,7 @@ export class CrearEntradaPage implements OnInit {
       subHeader:
         'Debes Escribir algo',
       message:
-        'Dinos que piensas escribe algo no se puede ir vacio',
+        'Dinos que piensas, no puede ir vacio',
       buttons: ['Acepto'],
     });
     await this.alert.present();

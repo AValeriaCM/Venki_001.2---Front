@@ -52,9 +52,8 @@
         </div>
       </ion-col>
       <ion-col size="12">
-        <div class="boderbox" *ngIf="leccionActiva ===  null">
-          <br>
-          <h3 style="margin-top: 10px;">Tus cursos</h3>
+       
+        <div class="boderbox" *ngIf="leccionActiva ===  null">          
           <ion-label *ngIf="leccionActiva === null"
             style=" font-size: 17px; font-family: url(../../../assets/fonts/proxima/proxima-nova.otf); color: #000;">
             <ion-icon name="information-circle"></ion-icon>
@@ -63,25 +62,33 @@
         </div>
         <div class="boderbox" *ngIf="leccionActiva">
           <br>
-          <ion-button *ngIf="leccionActiva !== null" class="buttonCss" (click)="retomarleccion()">Retomar <br>
-            {{leccionActiva.name}}</ion-button>
+          <h3 style="margin-top: 10px;">Tus cursos</h3>
+          <br>
+          <ion-button *ngIf="leccionActiva !== null" shape="round" style="margin: 10px; width: 150px;
+          font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
+           (click)="retomarleccion()">Retomar <br>
+            </ion-button>
+            <ion-label style="color: #000; font-weight: bold;"><br>{{leccionActiva.name}}</ion-label>
         </div>
       </ion-col>
       <ion-col *ngIf="usertk" size="12">
         <div class="boderbox" *ngIf="usertk.surveyed !== 1 || miactividad === 0 || usertk.premium === 0">
           <br>
+          <ion-button *ngIf="miactividad === 0" shape="round" style="margin: 20px; margin-top: 5%;font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
+          (click)="crearEntrada()">
+           <ion-icon name="people"></ion-icon>
+           Ir a la comunidad
+         </ion-button>
+         <br>
           <ion-button *ngIf="usertk.surveyed === 0" shape="round" style="margin: 20px; margin-bottom: 0%; font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
             (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
             <ion-icon name="bulb"></ion-icon>
             Hacer Diagnostico
           </ion-button>
-          <ion-button *ngIf="miactividad === 0" shape="round" style="margin: 20px; margin-top: 5%;font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
-           (click)="crearEntrada()">
-            <ion-icon name="people"></ion-icon>
-            Ir a la comunidad
-          </ion-button>
+         
           <br>
-          <ion-button *ngIf="usertk.surveyed === 1" class="buttonCss" (click)="recomedacionesRedirect(usertk.id)">
+          <ion-button *ngIf="usertk.surveyed === 1" shape="round" style="margin: 20px; margin-top: 5%;font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
+           (click)="recomedacionesRedirect(usertk.id)">
             Comprar un paquete</ion-button>
           <br>
           <br>

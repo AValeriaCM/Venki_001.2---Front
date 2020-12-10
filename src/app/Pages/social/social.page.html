@@ -36,8 +36,8 @@
       </ion-title>
     </ion-toolbar>
     <ion-toolbar style="display: inline;">
-      <ion-buttons >
-        <ion-fab-button style="margin-left:80px;" class="fab-buttons" (click)="crearEntrada()" >
+      <ion-buttons>
+        <ion-fab-button style="margin-left:80px;" class="fab-buttons" (click)="crearEntrada()">
           <ion-icon name="bulb" size="large"></ion-icon>
         </ion-fab-button>
       </ion-buttons>
@@ -53,7 +53,7 @@
       </ion-buttons>
     </ion-toolbar>
     <ion-toolbar style="display: inline; vertical-align: middle;">
-      <ion-label  class="label-fab">Compartir</ion-label>
+      <ion-label class="label-fab">Compartir</ion-label>
       <ion-label style="margin-left: 60px;" class="label-fab">Informar</ion-label>
       <ion-label style="margin-left: 85px;" class="label-fab">Retar</ion-label>
     </ion-toolbar>
@@ -90,12 +90,16 @@
       </div>
       <hr class="solid">
       <ion-grid>
-        <ion-row style="border-bottom: groove;">
+        <ion-row>
           <ion-col size="6" style="text-align: center; font-size: 25px;">
-            <ion-icon name="heart-half"></ion-icon>
+            <button icon-only (click)="verUser()" style="font-size: 25px;">
+              <ion-icon name="heart-outline"></ion-icon>
+            </button>
           </ion-col>
-          <ion-col size="6" style="text-align: center; font-size: 25px;">
-            <ion-icon name="chatbubble-ellipses"></ion-icon>
+          <ion-col size="6" style="text-align: center;">
+            <button (click)="openChat()" style="font-size: 25px;">
+              <ion-icon name="chatbubbles"></ion-icon>
+            </button>
           </ion-col>
         </ion-row>
       </ion-grid>

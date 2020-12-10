@@ -170,7 +170,6 @@ export class SocialPage implements OnInit {
   }
 
   Publicar(){
-    //console.log(this.textareainput, this.photos);
     if (this.textareainputPiensa === undefined){
       this.alertDespuesTiempo();
     }else{

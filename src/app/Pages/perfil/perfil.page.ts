@@ -10,6 +10,7 @@ import { LoginService } from 'src/app/_services/login.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { PopoverController } from '@ionic/angular';  
 import { AvatarPage } from '../popup/avatar/avatar.page';
+import { ImagesService } from 'src/app/_services/images.service';
 
 
 @Component({

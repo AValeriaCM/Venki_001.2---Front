@@ -37,6 +37,7 @@ import { APP_INITIALIZER } from "@angular/core";
 import { Router } from "@angular/router";
 import { AvatarPageModule } from './Pages/popup/avatar/avatar.module';
 import { CondicionesPageModule } from './Pages/condiciones/condiciones.module';
+import { TerminosNinosPageModule } from './Pages/terminos-ninos/terminos-ninos.module';
 
 
 
@@ -64,7 +65,8 @@ import { CondicionesPageModule } from './Pages/condiciones/condiciones.module';
     InternationalPhoneNumberModule,
     ImageModalPageModule,
     AvatarPageModule,
-    CondicionesPageModule
+    CondicionesPageModule,
+    TerminosNinosPageModule
   ],
   providers: [
     MatDatepickerModule,

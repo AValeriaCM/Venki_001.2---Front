@@ -11,6 +11,7 @@ import { format } from 'date-fns';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { CondicionesPage } from '../condiciones/condiciones.page';
+import { TerminosNinosPage } from '../terminos-ninos/terminos-ninos.page';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,7 @@ export class RegisterPage implements OnInit {
   phonePatten: any = /^[ +0-9 +]+$/;
   // ----------Pattern-----------
 
-
+  edad: number= 18;
   regisform: FormGroup;
   isSubmitted = false;
   nUsuario: Registro;
@@ -46,6 +47,14 @@ export class RegisterPage implements OnInit {
     }
   ];
   termSelect = false;
+
+
+  ischeckNino = [
+    {
+      selected: false
+    }
+  ];
+  termSelectNino = false;
 
   constructor(
     private router: Router,
@@ -118,6 +127,10 @@ export class RegisterPage implements OnInit {
     this.termSelect = check.selected;
   }
 
+  checkvalNinos(checkNino) {
+    this.termSelectNino = checkNino.selected;
+  }
+
   leerterminos() {
     var url = 'http://api.vigiaelectronic.com.co/tratamiento_de_datos.pdf';
     this.previewAnyFile.preview(url).then(() => {
@@ -163,6 +176,14 @@ export class RegisterPage implements OnInit {
     })
   }
 
+  terminosMostrarNinos()
+  {
+    this.pop.create({component:TerminosNinosPage,
+    showBackdrop:false}).then((popoverElement)=>{
+      popoverElement.present();
+    })
+  }
+
 
   async mesnajeAlert() {
     const alert = await this.alertController.create({
@@ -174,7 +195,12 @@ export class RegisterPage implements OnInit {
 
     await alert.present();
   }
-
+  cambioFecha($event){
+    const convertAge = new Date($event);
+    const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+    this.edad = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+    console.log (this.edad);
+  }
   hasError(e){
     console.log(e);
   }

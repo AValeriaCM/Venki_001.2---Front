@@ -62,7 +62,7 @@ export class ChatServiceService {
 
 
   getAllUsers(correo: any) {
-    return this.http.get<any>(this.urlServ + `/api/users?query=email|=|${correo}`, {
+    return this.http.get<any>(this.urlServ + `/api/users?query=name|=|${correo}`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
     });

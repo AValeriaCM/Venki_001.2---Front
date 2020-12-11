@@ -18,6 +18,8 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import * as shuffleArray from 'shuffle-array';
 import { LoginService } from 'src/app/_services/login.service';
+import { ImagesService } from 'src/app/_services/images.service';
+import { Image } from 'src/app/_model/Image';
 
 @Component({
   selector: 'app-home',
@@ -31,8 +33,9 @@ export class HomePage implements OnInit {
     'Recuerda que puedes hacer uso del Diagnostico si aun no lo haces',
     'No te rindas con tus cursos Recuerda Siempre culminarlos  es la meta'
   ];
-
+  imageSelect: Image;
   alert: any;
+  urlP:string;
   user = 'user119572637';
   videos;
   albums;
@@ -40,6 +43,7 @@ export class HomePage implements OnInit {
   items = [];
   slid = true;
   msj = [];
+  images: Array<Image>=new Array();
   usertk;
   miactividad;
 
@@ -57,6 +61,7 @@ export class HomePage implements OnInit {
     private router: Router,
     public alertController: AlertController,
     private auth: AuthService,
+    private imageS: ImagesService,
     private share: ShareserviceService,
     private vimeoService: VimeoserviceService,
     private chatS: ChatServiceService,
@@ -66,15 +71,22 @@ export class HomePage implements OnInit {
     private modelcontroller: ModalController,
   ) { }
 
-  ngOnInit() {
 
+  
+
+  ngOnInit() {
+    this.imageSelect=new Image();
     this.share.getaactividadesDiaria().subscribe( res => {
       console.log('Actividad Diairia', res);
       this.actividadDiaria = res.data.activity;
+     
+ 
     });
 
+      
+
     this.share.getleccionActiva().then( res => {
-      console.log(res);
+     
       this.leccionActiva = res;
     });
 
@@ -90,6 +102,7 @@ export class HomePage implements OnInit {
           this.usertk = infoUser;
           this.getMiactividad(this.usertk.id);
         });
+        
       });
     });
 
@@ -110,6 +123,22 @@ export class HomePage implements OnInit {
     });
     this.msj = this.chatS.getbadge();
     this.localNotification();
+    this.cargarImagenes();
+  }
+
+   cargarImagenes(){
+    this.imageS.getImages().subscribe(data=>{
+      this.images=data;
+      let i=0;
+      for (const [name, image] of Object.entries(data)){
+         if(i==0){
+            console.log("Datos ",name, image[0]);
+            this.urlP="http://venki.ml/"+image[0].url;
+            console.log("DatosIma ",this.urlP);
+         }
+         i=1;
+      }
+    });
   }
 
   addToCart(product) {

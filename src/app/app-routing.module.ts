@@ -36,7 +36,11 @@ const routes: Routes = [
   {
     path: 'condiciones',
     loadChildren: () => import('./Pages/condiciones/condiciones.module').then( m => m.CondicionesPageModule)
+  },  {
+    path: 'terminos-ninos',
+    loadChildren: () => import('./Pages/terminos-ninos/terminos-ninos.module').then( m => m.TerminosNinosPageModule)
   },
+
 
 
 

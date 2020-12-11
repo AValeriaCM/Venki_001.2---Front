@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { format } from 'date-fns';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-import { CondicionesPage } from '../terminos/condiciones/condiciones.page';
+import { CondicionesPage } from '../condiciones/condiciones.page';
 
 @Component({
   selector: 'app-register',

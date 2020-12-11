@@ -36,7 +36,7 @@ import * as Sentry from "@sentry/angular";
 import { APP_INITIALIZER } from "@angular/core";
 import { Router } from "@angular/router";
 import { AvatarPageModule } from './Pages/popup/avatar/avatar.module';
-//import { CondicionesPageModule } from './Pages/terminos/condiciones/condiciones.module';
+import { CondicionesPageModule } from './Pages/condiciones/condiciones.module';
 
 
 
@@ -63,8 +63,8 @@ import { AvatarPageModule } from './Pages/popup/avatar/avatar.module';
     AngularFireAuthModule,
     InternationalPhoneNumberModule,
     ImageModalPageModule,
-    AvatarPageModule
-    
+    AvatarPageModule,
+    CondicionesPageModule
   ],
   providers: [
     MatDatepickerModule,

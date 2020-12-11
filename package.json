@@ -119,10 +119,7 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-local-notification": {},
       "cordova-plugin-fcm-with-dependecy-updated": {
-        "ANDROID_FCM_VERSION": "19.0.0",
-        "ANDROID_GRADLE_TOOLS_VERSION": "3.5.3",
-        "ANDROID_GOOGLE_SERVICES_VERSION": "4.3.3",
-        "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher"
+       
       },
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {},

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';  
-import { CondicionesPageModule } from './condiciones.module';
+import { PopoverController } from '@ionic/angular'; 
+
 @Component({
   selector: 'app-condiciones',
   templateUrl: './condiciones.page.html',
@@ -16,5 +16,6 @@ export class CondicionesPage implements OnInit {
   ClosePopover(){
     this.pop.dismiss();
   }
+
 
 }

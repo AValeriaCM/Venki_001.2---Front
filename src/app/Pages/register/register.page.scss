@@ -1,7 +1,7 @@
 :host{
   ::ng-deep{
     .mystyle .dropbtn {
-      background: #f3f4f54d;
+      background: #eee5e5e7;
       color: white ;
       border: none;
       height: 45px;
@@ -129,7 +129,7 @@ ion-card {
   .ion-item-css{
     background-color: #f6f6f6;
     border: 1.5px;
-    border-color: #535353;
+    border-color: #ffffff;
     border-radius: 8px;
     color: #535353;
     text-decoration: none;
@@ -219,7 +219,9 @@ ion-card {
     background-color: #5B7BD5;
     background-image: linear-gradient(#5B7BD5, #4864B1);
   }
-  
+  .cb_color {
+    border: #025975 2px solid;
+  }
   /* Google */
   .loginBtn--google {
     /*font-family: "Roboto", Roboto, arial, sans-serif;*/
@@ -233,6 +235,7 @@ ion-card {
   .loginBtn--google:focus {
     background: #E74B37;
   }
+ 
 
   hr.solid {
     border-top: 3px solid rgba(253, 251, 251, 0.034);
@@ -241,3 +244,15 @@ ion-card {
   hr.solid-visible{
     border-top: 1px solid rgba(133, 133, 133, 0);
   }
+
+  .item-inner {
+    padding-left: unset;
+    padding-right: unset;
+    padding-inline-start: var(--inner-padding-start);
+    padding-inline-end: calc(var(--ion-safe-area-right, 0px) + var(--inner-padding-end));
+    background-color: white;
+  }
+
+  .item-native {
+    --ion-background-color: #fdfcfcc7 !important;
+   }

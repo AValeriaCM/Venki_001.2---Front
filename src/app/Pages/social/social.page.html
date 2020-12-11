@@ -31,32 +31,36 @@
       <ion-icon name="send"></ion-icon>
     </ion-button>-->
     <ion-toolbar style="display: inline;">
-      <ion-title>
+      <ion-title style="text-align: center;">
         ¿Que deseas hacer hoy?
       </ion-title>
     </ion-toolbar>
-    <ion-toolbar style="display: inline;">
-      <ion-buttons>
-        <ion-fab-button style="margin-left:80px;" class="fab-buttons" (click)="crearEntrada()">
-          <ion-icon name="bulb" size="large"></ion-icon>
-        </ion-fab-button>
-      </ion-buttons>
-      <ion-buttons slot="secondary">
-        <ion-fab-button class="fab-buttons" (click)="crearEntrada()">
-          <ion-icon name="megaphone" size="large"></ion-icon>
-        </ion-fab-button>
-      </ion-buttons>
-      <ion-buttons slot="primary">
-        <ion-fab-button style="margin-left:20px; margin-right: 25px;" class="fab-buttons" (click)="crearEntrada()">
-          <ion-icon name="flash" size="large"></ion-icon>
-        </ion-fab-button>
-      </ion-buttons>
-    </ion-toolbar>
-    <ion-toolbar style="display: inline; vertical-align: middle;">
-      <ion-label class="label-fab">Compartir</ion-label>
-      <ion-label style="margin-left: 60px;" class="label-fab">Informar</ion-label>
-      <ion-label style="margin-left: 85px;" class="label-fab">Retar</ion-label>
-    </ion-toolbar>
+    <ion-grid style="display: inline; margin-top: 0px; margin-bottom: 0px;">
+      <ion-row>
+        <ion-col>
+          <ion-fab-button class="fab-buttons" (click)="crearEntrada()">
+            <ion-icon name="bulb" size="large"></ion-icon>
+          </ion-fab-button>
+          <br>
+          <ion-label class="label-fab">Informar</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-fab-button class="fab-buttons" (click)="crearEntrada()">
+            <ion-icon name="megaphone" size="large"></ion-icon>
+          </ion-fab-button>
+          <br>
+          <ion-label class="label-fab">Compartir</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-fab-button class="fab-buttons" (click)="crearEntrada()">
+            <ion-icon name="flash" size="large"></ion-icon>
+          </ion-fab-button>
+          <br>
+          <ion-label class="label-fab" style="padding-left: 15px;">Retar</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
   </div>
 
   <br>
@@ -90,15 +94,15 @@
       </div>
       <hr class="solid">
       <ion-grid>
-        <ion-row>
+        <ion-row >
           <ion-col size="6" style="text-align: center; font-size: 25px;">
             <button icon-only (click)="verUser(pst.user)" style="font-size: 25px;">
-              <ion-icon name="heart-outline"></ion-icon>
+              <ion-icon name="heart-outline" style="color:  #002a68"></ion-icon>
             </button>
           </ion-col>
           <ion-col size="6" style="text-align: center;">
             <button (click)="openChat()" style="font-size: 25px;">
-              <ion-icon name="chatbubbles"></ion-icon>
+              <ion-icon name="chatbubbles" style="color:  #002a68"></ion-icon>
             </button>
           </ion-col>
         </ion-row>

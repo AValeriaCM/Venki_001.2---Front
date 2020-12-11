@@ -58,11 +58,11 @@
               <br>
               <div *ngIf="usertk !== null">
                 <ion-item class="ion-item-css">
-                  <ion-icon name="person"></ion-icon>
+                  <ion-icon name="person" style="color:  #002a68"></ion-icon>
                   <ion-label class="Subtitle-css">{{usertk.name}} {{usertk.lastname}}</ion-label>
                 </ion-item>
                 <ion-item class="ion-item-css">
-                  <ion-icon name="calendar"></ion-icon>
+                  <ion-icon name="calendar" style="color:  #002a68"></ion-icon>
                   <ion-label class="Subtitle-css">{{usertk.birthday}}</ion-label>
                 </ion-item>
                 <!-- <ion-item class="ion-item-css">
@@ -74,38 +74,38 @@
                   <ion-label class="Subtitle-css">Especialidad: <br> {{usertk.profile.name}}</ion-label>
                 </ion-item> -->
                 <ion-item class="ion-item-css" *ngIf="usertk.description === null || usertk.description === ''">
-                  <ion-icon name="chatbubble-ellipses" class="iconDesc"></ion-icon> &nbsp;
+                  <ion-icon name="chatbubble-ellipses" class="iconDesc" style="color:  #002a68"></ion-icon> &nbsp;
                   <ion-textarea [disabled]="true" rows="5" class="Subtitle-cs-desc">Puedes agregar tu descripcion.
                   </ion-textarea>
                 </ion-item>
                 <ion-item class="ion-item-css" *ngIf="usertk.description !== null || usertk.description !== ''">
-                  <ion-icon name="chatbubble-ellipses"></ion-icon> &nbsp;
+                  <ion-icon name="chatbubble-ellipses" style="color:  #002a68"></ion-icon> &nbsp;
                   <ion-textarea [disabled]="true" class="Subtitle-cs-desc">{{usertk.description}}</ion-textarea>
                 </ion-item>
 
 
                 <ion-item class="ion-item-css" *ngIf="usertk.institution === null || usertk.institution === ''">
-                  <ion-icon name="school" class="iconDesc"></ion-icon> &nbsp;
+                  <ion-icon name="school" class="iconDesc" style="color:  #002a68"></ion-icon> &nbsp;
                   <ion-label class="Subtitle-css">Agrega Donde estudiaste</ion-label>
                 </ion-item>
                 <ion-item class="ion-item-css" *ngIf="usertk.institution !== null">
-                  <ion-icon name="school" class="iconDesc"></ion-icon> &nbsp;
+                  <ion-icon name="school" class="iconDesc" style="color:  #002a68"></ion-icon> &nbsp;
                   <ion-label class="Subtitle-css">Donde Estudie: <br> {{usertk.institution}}</ion-label>
                 </ion-item>
                 <ion-item class="ion-item-css" *ngIf="usertk.status === null || usertk.status === ''">
-                  <ion-icon name="heart-circle"></ion-icon> &nbsp;
+                  <ion-icon name="heart-circle" style="color:  #002a68"></ion-icon> &nbsp;
                   <ion-label class="Subtitle-css">Agrega tu Sitacion Sentimental</ion-label>
                 </ion-item>
                 <ion-item class="ion-item-css" *ngIf="usertk.status !== null">
-                  <ion-icon name="heart-circle"></ion-icon> &nbsp;
+                  <ion-icon name="heart-circle" style="color:  #002a68"></ion-icon> &nbsp;
                   <ion-label class="Subtitle-css">Situacion status: <br> {{usertk.status}}</ion-label>
                 </ion-item>
                 <ion-item class="ion-item-css" *ngIf="usertk.city === null || usertk.city === ''">
-                  <ion-icon name="location"></ion-icon> &nbsp;
+                  <ion-icon name="location" style="color:  #002a68"></ion-icon> &nbsp;
                   <ion-label class="Subtitle-css">Agrega Donde vives</ion-label>
                 </ion-item>
                 <ion-item class="ion-item-css" *ngIf="usertk.city !== null">
-                  <ion-icon name="location"></ion-icon> &nbsp;
+                  <ion-icon name="location" style="color:  #002a68"></ion-icon> &nbsp;
                   <ion-label class="Subtitle-css">Donde Vives: <br> {{usertk.city}}</ion-label>
                 </ion-item>
                 <div align="center">

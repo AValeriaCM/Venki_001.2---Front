@@ -1,5 +1,5 @@
 {
-  "name": "VIGIA",
+  "name": "venki",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -45,7 +45,6 @@
     "chart.js": "^2.9.3",
     "compare-func": "^2.0.0",
     "cordova": "^10.0.0",
-    "cordova-android": "^9.0.0",
     "cordova-browser": "6.0.0",
     "cordova-plugin-androidx": "^2.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.1",
@@ -119,7 +118,12 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-local-notification": {},
-      "cordova-plugin-fcm-with-dependecy-updated": {},
+      "cordova-plugin-fcm-with-dependecy-updated": {
+        "ANDROID_FCM_VERSION": "19.0.0",
+        "ANDROID_GRADLE_TOOLS_VERSION": "3.5.3",
+        "ANDROID_GOOGLE_SERVICES_VERSION": "4.3.3",
+        "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher"
+      },
       "cordova-plugin-androidx": {},
       "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-preview-any-file": {},

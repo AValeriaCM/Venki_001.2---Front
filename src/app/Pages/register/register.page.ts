@@ -1,6 +1,6 @@
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { AuthService } from './../../_services/auth.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, PopoverController } from '@ionic/angular';
 import { RegistroService } from './../../_services/registro.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Registro } from './../../_model/Registro';
@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { format } from 'date-fns';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { CondicionesPage } from '../terminos/condiciones/condiciones.page';
 
 @Component({
   selector: 'app-register',
@@ -54,7 +55,8 @@ export class RegisterPage implements OnInit {
     private auth: AuthService,
     private previewAnyFile: PreviewAnyFile,
     private googlePlus: GooglePlus,
-    private fb: Facebook) {
+    private fb: Facebook,
+    private pop:PopoverController) {
     }
 
   ngOnInit() {
@@ -153,7 +155,13 @@ export class RegisterPage implements OnInit {
     });
   }
 
-
+  terminosMostrar()
+  {
+    this.pop.create({component:CondicionesPage,
+    showBackdrop:false}).then((popoverElement)=>{
+      popoverElement.present();
+    })
+  }
 
 
   async mesnajeAlert() {

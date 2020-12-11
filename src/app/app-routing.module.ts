@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { NoLogginGuard } from './_guards/no-loggin.guard';
+
 
 
 const routes: Routes = [
@@ -28,9 +28,14 @@ const routes: Routes = [
   {
     path: 'users',
     loadChildren: () => import('./Pages/tabs/tabs.module').then(m => m.TabsPageModule)
-  },  {
+  },
+  {
     path: 'avatar',
     loadChildren: () => import('./Pages/popup/avatar/avatar.module').then( m => m.AvatarPageModule)
+  },
+  {
+    path: 'condiciones',
+    loadChildren: () => import('./Pages/terminos/condiciones/condiciones.module').then( m => m.CondicionesPageModule)
   },
 
 ];

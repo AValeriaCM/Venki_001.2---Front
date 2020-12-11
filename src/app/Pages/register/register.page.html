@@ -78,10 +78,10 @@
       </ion-item>
     </form>
     <ion-item class="ion-item-css" *ngFor="let check of ischeck" (click)="checkval(check)">
-      <ion-checkbox [(ngModel)]="check.selected" color="primary"></ion-checkbox>
+      <ion-checkbox color="dark" class="cb_color" checked slot="start" [(ngModel)]="check.selected" ></ion-checkbox>
       &nbsp;&nbsp;
-      <ion-button fill="clear" (click)="leerterminos()">
-        <ion-label color="dark">Leer los Terminos Y Condiciones</ion-label>
+      <ion-button fill="clear" (click)="terminosMostrar()">
+        <ion-label style="color: black;">Leer terminos y condiciones</ion-label>
       </ion-button>
     </ion-item>
 

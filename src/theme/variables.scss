@@ -152,7 +152,9 @@
    * iOS Dark Theme
    * -------------------------------------------
    */
-
+   .item-native {
+    --ion-background-color: #fdfcfcc7 !important;
+   }
   .ios body {
     --ion-background-color: #fafafa;
     --ion-background-color-rgb: 0,0,0;

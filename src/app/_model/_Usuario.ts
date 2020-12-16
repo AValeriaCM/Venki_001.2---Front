@@ -7,4 +7,5 @@ export class UsuariosF {
     birthday: string;
     phone: string;
     avatar: string;
+    confirmation_code:string;
 }

@@ -23,7 +23,7 @@ export class LoginService {
       .set('password', contrasena)
       .set('client_secret', this.clientsec)
       .set('client_id', this.clientid)
-      .set('grant_type', 'password');
+      .set('grant_type', 'password')
 
     return this.http.post(this.basePath + this.url, body, {
       headers: new HttpHeaders()

@@ -10,8 +10,8 @@
   <br>
   <ion-grid>
     <ion-row style="border-bottom: groove;">
-      <ion-col size="6" *ngFor="let curso of cursos; let i of index;">
-        <div class="boderbox">
+      <ion-col size="6" *ngFor="let curso of cursos;">
+        <div class="boderbox" >
             <ion-label class="Subtitle-css" (click)="verCurso(curso, curso.description)">
               <br>
               <br>
@@ -23,4 +23,8 @@
     </ion-row>
   </ion-grid>
 
+
+
+
+  
 </ion-content>

@@ -33,7 +33,7 @@ export class ServiceErrorInterceptorService implements HttpInterceptor{
       // err.message
       // err.error.mensaje
       if (err.status === 400) {
-        this.snackBar.open(err.error.message, 'ERROR 400', { duration: 5000 });
+        this.snackBar.open("Proceso invalido, intenta nuevamente", 'ERROR 400', { duration: 5000 });
       } else if (err.status === 401) {
         this.snackBar.open(err.error.message, 'ERROR 401', { duration: 5000 });
         this.aut.getTokeR().then( dt => {

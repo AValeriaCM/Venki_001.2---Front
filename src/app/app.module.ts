@@ -38,7 +38,7 @@ import { Router } from "@angular/router";
 import { AvatarPageModule } from './Pages/popup/avatar/avatar.module';
 import { CondicionesPageModule } from './Pages/condiciones/condiciones.module';
 import { TerminosNinosPageModule } from './Pages/terminos-ninos/terminos-ninos.module';
-
+import { Chart } from 'chart.js';
 
 
 @NgModule({
@@ -66,7 +66,8 @@ import { TerminosNinosPageModule } from './Pages/terminos-ninos/terminos-ninos.m
     ImageModalPageModule,
     AvatarPageModule,
     CondicionesPageModule,
-    TerminosNinosPageModule
+    TerminosNinosPageModule,
+    Chart
   ],
   providers: [
     MatDatepickerModule,

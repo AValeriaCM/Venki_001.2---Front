@@ -40,7 +40,8 @@
             <ion-icon slot="start" size="small" color="danger" name="sad"></ion-icon>
             <ion-icon slot="end" color="success" name="happy"></ion-icon>
           </ion-range>
-          <label >Valor seleccionado: {{dt.calificacionVal}}</label>
+          <label ></label><img 
+          src="../../../assets/estados/{{dt.calificacionVal}}.png">
           <br>
           <ion-button [hidden]="finalDta.length  !== preguntot" class="button-css" (click)="terminarEtapa()">Terminar Etapa</ion-button>
           </ion-col>

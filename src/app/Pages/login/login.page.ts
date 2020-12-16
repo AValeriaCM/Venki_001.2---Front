@@ -32,39 +32,39 @@ export class LoginPage implements OnInit {
   showpassword = false;
   passwordToggleIcon = 'eye';
   splash = true;
-
+  token: string;
 
   constructor(
     private route: Router,
     private snackbar: MatSnackBar,
     private auth: AuthService,
     private log: LoginService
-              ) {
-      this.auth.gettokenLog().then( tkInf => {
-        console.log(tkInf);
-        if (tkInf !==  null){
-          this.log.logdataInfData(tkInf).subscribe( resTk => {
-            this.auth.gettokenDevice().then( DeviceTk => {
-              if (DeviceTk  !== null){
-                this.log.saveDevice(resTk.id, DeviceTk).subscribe( deviceUpdate => {
-                  console.log(deviceUpdate);
-                });
-              }
-            });
-            if (resTk){
-              this.route.navigateByUrl('/users/home');
-            }else {
-              console.log('falle');
+  ) {
+    this.auth.gettokenLog().then(tkInf => {
+      console.log(tkInf);
+      if (tkInf !== null) {
+        this.log.logdataInfData(tkInf).subscribe(resTk => {
+          this.auth.gettokenDevice().then(DeviceTk => {
+            if (DeviceTk !== null) {
+              this.log.saveDevice(resTk.id, DeviceTk).subscribe(deviceUpdate => {
+                console.log(deviceUpdate);
+              });
             }
           });
-        }else{
-          console.log('falle');
-        }
-      });
-    }
+          if (resTk) {
+            this.route.navigateByUrl('/users/home');
+          } else {
+            console.log('falle');
+          }
+        });
+      } else {
+        console.log('falle');
+      }
+    });
+  }
 
   ngOnInit() {
-    setTimeout( () => {
+    setTimeout(() => {
       this.splash = false;
     }, 5000);
     this.inicializarFormulario();
@@ -73,52 +73,61 @@ export class LoginPage implements OnInit {
 
   inicializarFormulario() {
     this.loginForm = new FormGroup({
-      correo : new FormControl('',
-      [Validators.required, Validators.minLength(10) , Validators.maxLength(70), Validators.pattern(this.emailPattern)]),
-      contrasena : new FormControl('',
-      [Validators.required, Validators.minLength(8) , Validators.maxLength(12), Validators.pattern(this.contrasenaPattern)]),
+      correo: new FormControl('',
+        [Validators.required, Validators.minLength(10), Validators.maxLength(70), Validators.pattern(this.emailPattern)]),
+      contrasena: new FormControl('',
+        [Validators.required, Validators.minLength(8), Validators.maxLength(12), Validators.pattern(this.contrasenaPattern)]),
     });
   }
 
-  showpass(): void{
+  showpass(): void {
     this.showpassword = !this.showpassword;
 
-    if (this.passwordToggleIcon === 'eye'){
-        this.passwordToggleIcon = 'eye-off';
-    }else{
+    if (this.passwordToggleIcon === 'eye') {
+      this.passwordToggleIcon = 'eye-off';
+    } else {
       this.passwordToggleIcon = 'eye';
     }
   }
 
-  login(){
+  login() {
     this.isSubmitted = true;
     if (!this.loginForm.valid) {
       this.mostrarmensaje('Los Datos Ingresados no son validos', 'Error');
       return false;
     } else {
       this.loginData = this.loginForm.value;
-      this.auth.login(this.loginData.correo, this.loginData.contrasena).subscribe(async  res => {
-        console.log(res);
-        if (res){
-          this.log.logdataInfData(res).subscribe( resTk => {
-            console.log(resTk.id);
-            this.auth.gettokenDevice().then( DeviceTk => {
-              this.log.saveDevice(resTk.id, DeviceTk).subscribe( deviceUpdate => {
-                console.log(deviceUpdate);
+      this.auth.login(this.loginData.correo, this.loginData.contrasena).subscribe(async res => {
+        console.log('Los datos', res);
+        if (res) {
+          this.log.logdataInfData(res).subscribe(resTk => {
+            console.log("Mi token",resTk.confirmation_code);
+            this.token = resTk.confirmation_code;
+            if (this.token == null) {
+              console.log(resTk.id);
+              this.auth.gettokenDevice().then(DeviceTk => {
+                this.log.saveDevice(resTk.id, DeviceTk).subscribe(deviceUpdate => {
+                  console.log(deviceUpdate);
+                });
               });
-            });
-          });
-          this.inicializarFormulario();
-          this.auth.getPrimeraVez().then( data => {
-            if (data === 'true'){
-              this.route.navigateByUrl('/slides');
-            } else if (data ===  'false'){
-              this.route.navigateByUrl('/users/home');
-            }else if (data === null){
-              this.auth.setPrimeraVez();
+              this.inicializarFormulario();
+              this.auth.getPrimeraVez().then(data => {
+                if (data === 'true') {
+                  this.route.navigateByUrl('/slides');
+                } else if (data === 'false') {
+                  this.route.navigateByUrl('/users/home');
+                } else if (data === null) {
+                  this.auth.setPrimeraVez();
+                }
+              });
+            } else {
+              this.mostrarmensaje('Verifique su correo', 'Error');
+              this.route.navigateByUrl('/login');
             }
           });
-        }else{
+         
+
+        } else {
           this.mostrarmensaje('Ah ocurrido un error Intente más tarde o revise sus credenciales', 'Error');
         }
       });
@@ -126,15 +135,15 @@ export class LoginPage implements OnInit {
     }
   }
 
-  registro(){
+  registro() {
     this.route.navigateByUrl('/register');
   }
 
-  olvidoc(){
+  olvidoc() {
     this.route.navigateByUrl('/olvidoc');
   }
 
-  mostrarmensaje(message: string , action: string) {
+  mostrarmensaje(message: string, action: string) {
     this.snackbar.open(message, action, {
       duration: 2000,
     });

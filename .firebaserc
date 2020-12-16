@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "venki-plataforma": {
+      "hosting": {
+        "app": [
+          "venki-plataforma"
+        ]
+      }
+    }
+  }
+}

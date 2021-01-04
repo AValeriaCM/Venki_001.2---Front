@@ -13,7 +13,7 @@
 
   <ion-list class="listColor">
     <ion-item class="listColor" button *ngFor="let track of aud" (click)="start(track)">
-      <ion-label [color]="track === activetrack ?  'success': 'light'">
+      <ion-label [color]="track === activetrack ?  'success': 'dark'">
         {{audioname}}
       </ion-label>
     </ion-item>
@@ -172,24 +172,24 @@
         <ion-label color="light">{{audioname}}</ion-label>
       </ion-col>
       <ion-col size="12">
-        <ion-range #range [(ngModel)]="progress" max="100" color="light" (touched)="seek()" (mouseup)="seek()">
+        <ion-range #range [(ngModel)]="progress" max="100" color="dark" (touched)="seek()" (mouseup)="seek()">
         </ion-range>
       </ion-col>
       <ion-col size="12" class="ion-text-center" *ngFor="let track of aud">
 
-        <ion-button fill=clear (click)="prev()" color="light">
+        <ion-button fill=clear (click)="prev()" color="dark">
           <ion-icon slot="icon-only" name="play-back"></ion-icon>
         </ion-button>
 
-        <ion-button fill=clear (click)="toggleplayer(false, track)" *ngIf="!isPlaying" color="light">
+        <ion-button fill=clear (click)="toggleplayer(true, track)" *ngIf="!isPlaying" color="dark">
           <ion-icon slot="icon-only" name="play"></ion-icon>
         </ion-button>
 
-        <ion-button fill=clear (click)="toggleplayer(true, track)" *ngIf="isPlaying" color="light">
+        <ion-button fill=clear (click)="toggleplayer(true, track)" *ngIf="isPlaying" color="dark">
           <ion-icon slot="icon-only" name="pause"></ion-icon>
         </ion-button>
 
-        <ion-button fill=clear (click)="next()" color="light">
+        <ion-button fill=clear (click)="next()" color="dark">
           <ion-icon slot="icon-only" name="play-forward"></ion-icon>
         </ion-button>
 

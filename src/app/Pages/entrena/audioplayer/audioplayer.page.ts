@@ -64,7 +64,7 @@ export class AudioplayerPage implements OnInit {
         this.updateProgress();
       },
       onend: () => {
-
+        this.player.stop();
       }
     });
     this.player.play();

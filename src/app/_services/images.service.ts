@@ -7,7 +7,7 @@ import { Image } from '../_model/Image';
 })
 export class ImagesService {
 
-  urlServ = 'http://127.0.0.1:8000';
+  urlServ = 'http://venki.3utilities.com/';
   constructor(private http: HttpClient) { }
 
 

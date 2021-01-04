@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class ChatServiceService {
 
   url = 'https://fcm.googleapis.com/fcm/send';
-  urlServ = 'http://127.0.0.1:8000';
+  urlServ = 'http://venki.3utilities.com/';
 
   private msjServ = [];
 

@@ -16,7 +16,7 @@ export class ShareserviceService {
 
   url2 = `/api/user`;
   urlCuros = `/api/courses`;
-  basePath = `http://127.0.0.1:8000`;
+  basePath = `http://venki.3utilities.com/`;
 
   var = new Subject<string>();
   varorder = new Subject<string>();

@@ -60,7 +60,7 @@ export class DiagnosticoPage implements OnInit {
     this.profileid = informacion.idprofile;
     this.userID = informacion.idUser;
     this.pagina=0;
-    this.alertAvisoGif();
+
 
     this.slidefromHtml.lockSwipeToPrev(true);
 
@@ -83,7 +83,7 @@ export class DiagnosticoPage implements OnInit {
           this.validadExistencia(this.existe);
         }
       });
-
+      this.pagina=this.currentPage;
       this.share.retornarDiagnosticoLastpage().then( restt  => {
         let tempL = restt;
         console.log('Pagina', tempL);
@@ -278,6 +278,13 @@ export class DiagnosticoPage implements OnInit {
         this.share.removerDiagnosticoCurrenpage();
         this.share.removerDiagnosticoLastpage();
         this.share.var.next('Update Diagnostico');
+        let dataObj = {
+          idprofile: this.profileid,
+          idUser:  this.userID,
+          page:3,
+          status:this.status
+        };
+        this.pEtapa.setData(dataObj);
         this.router.navigate(['/users/perfil/diagnostico-etapa/']);
       });
     });

@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  HOST: 'http://venki.3utilities.com/',
+  HOST: 'http://venki.3utilities.com',
   REINTENTOS: 2,
   CLIENT_SECRET: 'gRkm3DmM8DNwhDS5l7UYkUMkJiFa4tgRYgviMRVf',
   CLIENT_ID: '90ef3f03-b692-496e-9240-c6486e4c8c51'

@@ -10,7 +10,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class LoginService {
   url = `/api/oauth/token`;
   url2 = `/api/users`;
-  basePath = `http://venki.3utilities.com/`;
+  basePath = `http://venki.3utilities.com`;
 
   clientsec = `${environment.CLIENT_SECRET}`;
   clientid = `${environment.CLIENT_ID}`;

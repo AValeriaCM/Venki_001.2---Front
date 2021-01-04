@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class PerfilesService {
 
-  urlServ = 'http://venki.3utilities.com/';
+  urlServ = 'http://venki.3utilities.com';
   constructor(private http: HttpClient) { }
 
 

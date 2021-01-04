@@ -64,7 +64,7 @@ export class EditPerfilPage implements OnInit {
       phone : new FormControl(dt.phone,
       [Validators.required, Validators.minLength(8) , Validators.maxLength(22), Validators.pattern(this.phonePatten)]),
       description : new FormControl(dt.description,
-      [Validators.required, Validators.pattern(this.nombrePattern)]),
+      [Validators.required]),
       institution : new FormControl(dt.institution,
         [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
       city : new FormControl(dt.city,

@@ -151,7 +151,7 @@ export class RegisterPage implements OnInit {
       console.log(this.nUsuario.phone);
       this.auth.setPrimeraVez();
       this.registro.registro(this.nUsuario).subscribe(() => {
-        this.mostrarmensaje('Registro Satisfactorio', 'Sucess');
+        this.mostrarmensaje('Registro Satisfactorio, revise su correo', 'Sucess');
         this.inicializarFormulario();
         this.router.navigateByUrl('/');
       });

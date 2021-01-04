@@ -2,7 +2,39 @@
 .range {
     --knob-size: 40px;
 }
+.circulo {
+	width: 5rem;
+	border-radius: 50%;
+	background: #002a68;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+    margin:0px auto;
+    padding:3%;
+    color:white;
+}
 
+.footer-dis-bot1{
+    display:list-item;
+    --background:#35538f;
+}
+.footer-dis-bot2{
+    --background:#252632;
+    display:list-item;
+}
+.question-st{
+    padding:3px 10px;
+    border:#002a68 2px solid;
+    border-radius:20px;
+}
+.questions{
+    margin:22px;
+}
+.icono-lateral{
+    color:#002a68;
+    font-size:20px;
+}
 .title-css{
     font-family: Century Gothic;
     color: rgb(8, 8, 8);
@@ -23,15 +55,15 @@
     margin: 0;
     padding: 0px 0px 6px 0px;
     font-size: 15px;
-    line-height: 44px;
+    line-height: 30px;
     font-weight: bold;
-    text-align: center;
+    text-align: justify;
     white-space: normal;
     background-color:whitesmoke
 }
 
 ion-slides {
-    height: 75%;
+    height: 80%;
     background-color:whitesmoke
 }
 
@@ -56,7 +88,9 @@ ion-slides {
     margin-bottom: 30px;
     --background: #80b9f6 !important;
 }
-
+.alert-head.sc-ion-alert-ios{
+    --background: #80b9f6 !important;
+}
 .my-custom-class {
     --background: whitesmoke;
 }

@@ -79,7 +79,7 @@
     </form>
     <div *ngIf="edad<18">
     <ion-item  class="ion-item-css" *ngFor="let check of ischeckNino" (click)="checkvalNinos(check)">
-      <ion-checkbox color="dark" class="cb_color" checked slot="start" [(ngModel)]="ischeckNino.selected" ></ion-checkbox>
+      <ion-checkbox color="dark" class="cb_color" checked slot="start"  ></ion-checkbox>
       &nbsp;&nbsp;
       <ion-button fill="clear" (click)="terminosMostrarNinos()">
         <ion-label style="color: black;">Leer terminos y condiciones para niños</ion-label>

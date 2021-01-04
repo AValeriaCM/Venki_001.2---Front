@@ -133,7 +133,7 @@ export class HomePage implements OnInit {
       for (const [name, image] of Object.entries(data)){
          if(i==0){
             console.log("Datos ",name, image[0]);
-            this.urlP="http://venki.ml/"+image[0].url;
+            this.urlP="http://127.0.0.1:8000/"+image[0].url;
             console.log("DatosIma ",this.urlP);
          }
          i=1;
@@ -199,15 +199,13 @@ export class HomePage implements OnInit {
   }
 
   diagnosticoRedirect(info, id){
-    const img = '../../../assets/imagenesDiagnostico/img1.jpeg';
-    this.alertDespuesTiempo2(img);
     console.log(info);
     let dataObj = {
       idprofile: info,
       idUser: id
     };
     this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/perfil/diagnostico/']);
+    this.router.navigate(['/users/perfil/diagnostico-inicio/']);
   }
 
   async alertDespuesTiempo2(img: any) {

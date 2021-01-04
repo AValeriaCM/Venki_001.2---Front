@@ -292,15 +292,12 @@ export class PerfilPage implements OnInit {
   }
 
   diagnosticoRedirect(info, id){
-    const img = '../../../assets/imagenesDiagnostico/img1.jpeg';
-    this.alertDespuesTiempo(img);
-    console.log(info);
     let dataObj = {
       idprofile: info,
       idUser: id
     };
     this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/perfil/diagnostico/']);
+    this.router.navigate(['/users/perfil/diagnostico-inicio/']);
   }
 
   async alertDespuesTiempo(img: any) {

@@ -172,10 +172,43 @@ hr.dashed {
         margin-top: 5%;
     }
 
-    .boderbox{
+    .boderbox-0{
         border: 5px solid;
         border-color:white;
-        background:url(/assets/cat.png) 0 0/100% 100% no-repeat;
+        background:url(/assets/cat0.png) 0 0/100% 100% no-repeat;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        text-align: center;
+        width: 100%;
+        height: 200px;
+    }
+
+    .boderbox-1{
+        border: 5px solid;
+        border-color:white;
+        background:url(/assets/cat1.png) 0 0/100% 100% no-repeat;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        text-align: center;
+        width: 100%;
+        height: 200px;
+    }
+
+    .boderbox-2{
+        border: 5px solid;
+        border-color:white;
+        background:url(/assets/cat2.png) 0 0/100% 100% no-repeat;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        text-align: center;
+        width: 100%;
+        height: 200px;
+    }
+
+    .boderbox-3{
+        border: 5px solid;
+        border-color:white;
+        background:url(/assets/cat3.png) 0 0/100% 100% no-repeat;
         border-radius: 8px;
         -webkit-border-radius: 8px;
         text-align: center;

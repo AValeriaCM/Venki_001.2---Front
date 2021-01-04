@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class RegistroService {
 
   url2 = `/api/users`;
-  basePath = `http://venki.ml`;
+  basePath = `http://127.0.0.1:8000`;
 
   constructor(private http: HttpClient,
               private router: Router, ) { }

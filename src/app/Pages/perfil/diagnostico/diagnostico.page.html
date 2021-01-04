@@ -10,59 +10,75 @@
 </ion-header>
 
 <ion-content>
+
   <br>
   <br>
   <ion-title class="title-css">Diagnostico</ion-title>
   <ion-slides #slider (ionSlideWillChange)="verifImg()">
 
     <ion-slide [hidden]="currentPage === 4">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12"><label class="subtitle-css">
-            Recuerda que no se guardará el progreso hasta que termines la primer 
-            ronda de preguntas. Responderás 20 de ellas y tendrás 2 opciones: guardar
-             y salir o continuar. Tu progreso solo se guarda hasta que llegues al final de la ronda.
-             ¡Animo!
-          </label>
-        </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-card>
+        <img src="../../../../assets/inicio-diag.jpg" />
+        <ion-card-header>
+          <ion-card-title>Inicio de diagnóstico</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <strong>Recuerda: </strong>que no se guardará el progreso hasta que termines la primer
+          ronda de preguntas. Responderás 20 de ellas y tendrás 2 opciones: guardar
+          y salir o continuar. Tu progreso solo se guarda hasta que llegues al final de la ronda.
+          ¡Animo!
+        </ion-card-content>
+      </ion-card>
+
     </ion-slide>
 
-    <ion-slide [hidden]="etapa === true || arrayFEnv.length  === totallenght" *ngFor="let dt of cantidad; let i of index;" >
-      <ion-grid>
+    <ion-slide [hidden]="etapa === true || arrayFEnv.length  === totallenght"
+      *ngFor="let dt of cantidad; let i of index;">
+      <ion-grid class="questions">
         <ion-row>
-          <ion-col size="12"><label class="subtitle-css">{{preguntat}}/{{preguntot}}</label></ion-col>
-          <ion-col size="12"><label class="subtitle-css">{{dt.question}}</label></ion-col>
+          <ion-col size="12"><label class="circulo">
+              {{preguntat}}/{{preguntot}}</label></ion-col>
           <ion-col size="12">
-            <ion-range class="range" min="1" max="5" step="1" [(ngModel)]="dt.calificacionVal" (ionChange)="calificacion($event, dt.id, i)"
-            snaps="true" pin="true" ticks="true" color="tertiary">
-            <ion-icon slot="start" size="small" color="danger" name="sad"></ion-icon>
-            <ion-icon slot="end" color="success" name="happy"></ion-icon>
-          </ion-range>
-          <label ></label><img 
-          src="../../../assets/estados/{{dt.calificacionVal}}.png">
-          <br>
-          <ion-button [hidden]="finalDta.length  !== preguntot" class="button-css" (click)="terminarEtapa()">Terminar Etapa</ion-button>
+            <ion-card class="question-st">
+              <ion-card-content>
+                {{dt.question}}
+              </ion-card-content>
+            </ion-card>
+
+          </ion-col>
+          <ion-col size="12">
+            <ion-range class="range" min="1" max="5" step="1" [(ngModel)]="dt.calificacionVal"
+              (ionChange)="calificacion($event, dt.id, i)" snaps="true" pin="true" ticks="true" color="tertiary">
+              <ion-icon slot="start" size="small" color="danger" name="sad"></ion-icon>
+              <ion-icon slot="end" color="success" name="happy"></ion-icon>
+            </ion-range>
+            <div *ngIf="dt.calificacionVal as value; else elseBlock"> <img src="../../../assets/estados/{{value}}.png">
+            </div>
+            <ng-template #elseBlock> <img src="../../../assets/estados/1.png"></ng-template>
+            <br>
+            <ion-row  [hidden]="finalDta.length  !== preguntot">
+              <ion-col>
+                <ion-button size="small" class="footer-dis-bot1" (click)="guardar()">
+                  <ion-icon name="enter-outline"></ion-icon>
+                  Terminar y salir
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button size="small" class="footer-dis-bot2" (click)="Continuar()">
+                  Continuar
+                  <ion-icon name="caret-forward-circle-outline"></ion-icon>
+               </ion-button>
+              </ion-col>
+            </ion-row>
+      
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-slide>
 
-    <ion-slide [hidden]="finalDta.length  !== preguntot || finalDta.length  === totallenght" *ngFor="let dt of cantidad; let i of index;" >
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12">
-            <ion-button class="button-css" (click)="guardar()">Guardar Y Salir </ion-button>
-          </ion-col>
-          <ion-col size="12">
-            <ion-button class="button-css" (click)="Continuar()">Continuar</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-slide>
+   
 
-    <ion-slide [hidden]="arrayFEnv.length  !== totallenght" >
+    <ion-slide [hidden]="finalDta.length  !== preguntot-1 || finalDta.length === totallenght-1">
       <ion-grid>
         <ion-row>
           <ion-col size="12">
@@ -73,4 +89,13 @@
     </ion-slide>
 
   </ion-slides>
+  <ion-fab vertical="center" horizontal="start" slot="fixed">
+    <ion-icon class="icono-lateral" name="caret-back-outline"></ion-icon>
+  </ion-fab>
+
+  <ion-fab vertical="center" horizontal="end" slot="fixed">
+    <ion-icon class="icono-lateral" name="caret-forward-outline"></ion-icon>
+  </ion-fab>
+
+
 </ion-content>

@@ -1,0 +1,12 @@
+.my-custom-class {
+    --background: #222;
+  }
+
+  .modal-wrapper {
+    background: #222;
+  }
+  
+  /* Works - pass "my-custom-class" in cssClass to increase specificity */
+  .my-custom-class .modal-wrapper {
+    background: #222;
+  }

@@ -1,0 +1,49 @@
+
+<ion-content> 
+  
+  <svg viewBox="0 0 550 327" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0 327 200 173.8 400 327" />
+    <polygon points="91 327 291 280.3 491 327" />
+    <polygon points="-101 327 99 201 299 327" />
+  </svg>
+  <br>
+
+  <div class="confetti">
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+    <div class="confetti-piece"></div>
+
+  <br>
+  <ion-card-content>
+    <div class="card card-3">
+      <h3>ETAPA N° {{etapa}}</h3>
+      <ion-label> !Felicitaciones! acabas de culminar con exito esta etapa</ion-label>
+    </div>
+  </ion-card-content>
+  <ion-card-content>
+    <canvas #doughnutChart></canvas>
+  </ion-card-content>
+  </div>
+  <br><br>
+  <ion-row>
+    <ion-col>
+    </ion-col>
+    <ion-col>
+      <ion-button size="small" class="footer-dis-bot2"  (click)="continue()" >
+        {{textButton}}
+        <ion-icon name="caret-forward-outline"></ion-icon>
+     </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
+

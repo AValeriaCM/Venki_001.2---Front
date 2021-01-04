@@ -53,9 +53,18 @@ const routes: Routes = [
     loadChildren: () => import('../../Pages/perfil/diagnostico/diagnostico.module').then( m => m.DiagnosticoPageModule)
   },
   {
+    path: 'diagnostico-inicio',
+    loadChildren: () => import('../../Pages/perfil/diagnostico-inicio/diagnostico-inicio.module').then( m => m.DiagnosticoInicioPageModule)
+  },
+  {
     path: 'recomendaciones',
     loadChildren: () => import('../../Pages/perfil/recomendaciones/recomendaciones.module').then( m => m.RecomendacionesPageModule)
-  }
+  },
+  {
+    path: 'diagnostico-etapa',
+    loadChildren: () => import('../../Pages/perfil/diagnostico-etapa/diagnostico-etapa.module').then( m => m.DiagnosticoEtapaPageModule)
+  },
+
 ];
 
 @NgModule({

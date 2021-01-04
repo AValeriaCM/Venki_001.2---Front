@@ -5,14 +5,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { IonSlides, AlertController } from '@ionic/angular';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
-
+import { DiagnosticHelpComponent } from '../diagnostic-help/diagnostic-help.component';
+import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-diagnostico',
   templateUrl: './diagnostico.page.html',
   styleUrls: ['./diagnostico.page.scss'],
 })
 export class DiagnosticoPage implements OnInit {
-
+  status:number;
   cantidad: any;
   profileid: any;
   cuestionario: Array<any>;
@@ -32,6 +33,7 @@ export class DiagnosticoPage implements OnInit {
   cacheArray: Array<any>;
   etapa = false;
   arrayFEnv;
+  pagina:number;
 
   @ViewChild('slider', { static: true }) slidefromHtml: IonSlides;
 
@@ -39,12 +41,15 @@ export class DiagnosticoPage implements OnInit {
     private perfile: PerfilesService,
     private route: ActivatedRoute,
     private pObjecto: PassObjectService,
+    private pEtapa: PassObjectService,
     public alertController: AlertController,
     private share: ShareserviceService,
-    private router: Router) {
+    private router: Router,
+    private dialogo: ModalController) {
   }
 
   ngOnInit() {
+    this.status=0;
     this.cacheArray = [];
     this.arrayFEnv = [];
     this.cuestionario = [];
@@ -54,7 +59,7 @@ export class DiagnosticoPage implements OnInit {
     const informacion = this.pObjecto.getNavData();
     this.profileid = informacion.idprofile;
     this.userID = informacion.idUser;
-
+    this.pagina=0;
     this.alertAvisoGif();
 
     this.slidefromHtml.lockSwipeToPrev(true);
@@ -67,6 +72,7 @@ export class DiagnosticoPage implements OnInit {
 
       this.share.retornarDiagnosticoCurrentpage().then( rest => {
         let tempP = rest;
+        this.pagina=tempP;
         console.log('Pagina', tempP);
         if (tempP === null){
           this.currentPage = profileQ.meta.current_page;
@@ -204,7 +210,17 @@ export class DiagnosticoPage implements OnInit {
     }
   }
 
+  async presentarDialogo() {
+    const modal = await this.dialogo.create({
+      component: DiagnosticHelpComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+
   guardar(){
+    this.status=1;
     this.currentPage = this.currentPage + 1;
     this.cacheArray.push({myPropArray: this.finalDta});
     this.share.guardarDiagnostico(this.cacheArray);
@@ -214,10 +230,13 @@ export class DiagnosticoPage implements OnInit {
     this.cuestionario = [];
     this.cantidad = [];
     this.etapa = false;
-    this.router.navigate(['/users/perfil']);
+    console.log( this.currentPage);
+    this.terminarEtapa();
+  //  this.router.navigate(['/users/perfil']);
   }
 
   Continuar(){
+    this.status=2;
     setTimeout(() => {
       this.currentPage = this.currentPage + 1;
       const nuevoArra = this.totallenght;
@@ -244,6 +263,8 @@ export class DiagnosticoPage implements OnInit {
         });
       }
     }, 1000);
+    console.log( this.currentPage);
+    this.terminarEtapa();
   }
 
   enviarQuestion() {
@@ -257,7 +278,7 @@ export class DiagnosticoPage implements OnInit {
         this.share.removerDiagnosticoCurrenpage();
         this.share.removerDiagnosticoLastpage();
         this.share.var.next('Update Diagnostico');
-        this.router.navigate(['/users/perfil']);
+        this.router.navigate(['/users/perfil/diagnostico-etapa/']);
       });
     });
   }
@@ -275,60 +296,45 @@ export class DiagnosticoPage implements OnInit {
   }
 
   async alertAvisoGif() {
-    this.alert = await this.alertController.create({
-      cssClass: 'my-custombackInicio',
-      header: 'Recuerda Dezlizar a la Derecha',
-      buttons: [
-        {
-          text: '',
-          cssClass: 'secondaryClose',
-        }
-      ],
-    });
-    await this.alert.present();
+  
   }
 
 
-  async alertDespuesTiempoimg1() {
-    this.alert = await this.alertController.create({
-      cssClass: 'my-customback1',
-      header: '',
-      buttons: [
-        {
-          text: '',
-          cssClass: 'secondaryClose',
-        }
-      ],
-    });
-    await this.alert.present();
+   alertDespuesTiempoimg1() {
+    const informacion = this.pObjecto.getNavData();
+    let dataObj = {
+      idprofile: this.profileid,
+      idUser:  this.userID,
+      page:1,
+      status:this.status
+    };
+    this.pEtapa.setData(dataObj);
+    this.router.navigate(['/users/perfil/diagnostico-etapa/']);
+
   }
 
-  async alertDespuesTiempoimg2() {
-    this.alert = await this.alertController.create({
-      cssClass: 'my-customback2',
-      header: '',
-      buttons: [
-        {
-          text: '',
-          cssClass: 'secondaryClose',
-        }
-      ],
-    });
-    await this.alert.present();
+   alertDespuesTiempoimg2() {
+    const informacion = this.pObjecto.getNavData();
+    let dataObj = {
+      idprofile: this.profileid,
+      idUser:  this.userID,
+      page:2,
+      status:this.status
+    };
+    this.pEtapa.setData(dataObj);
+    this.router.navigate(['/users/perfil/diagnostico-etapa/']);
   }
 
-  async alertDespuesTiempoimg3() {
-    this.alert = await this.alertController.create({
-      cssClass: 'my-customback3',
-      header: '',
-      buttons: [
-        {
-          text: '',
-          cssClass: 'secondaryClose',
-        }
-      ],
-    });
-    await this.alert.present();
+   alertDespuesTiempoimg3() {
+    const informacion = this.pObjecto.getNavData();
+    let dataObj = {
+      idprofile: this.profileid,
+      idUser:  this.userID,
+      page:3,
+      status:this.status
+    };
+    this.pEtapa.setData(dataObj);
+    this.router.navigate(['/users/perfil/diagnostico-etapa/']);
   }
 
   async alertnodata() {

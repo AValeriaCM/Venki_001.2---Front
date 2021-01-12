@@ -7,6 +7,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { ChatServiceService } from 'src/app/_services/chat-service.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { AlertController } from '@ionic/angular';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cursos-categorias',
@@ -17,9 +18,11 @@ export class CursosCategoriasPage implements OnInit {
 
   autoClose = true;
   progesoVal;
+  video: any;
   usertk = null;
   userIDName: any; 
   coursetk: any;
+  color:String;
   cursos: any[] = [];
   cursosUser: any[] = [];
   msj = [];
@@ -33,14 +36,18 @@ export class CursosCategoriasPage implements OnInit {
     private chatS: ChatServiceService,
     private pObjecto: PassObjectService,
     public alertController: AlertController,
+    private sanitizer: DomSanitizer,
     ) { }
 
   ngOnInit() {
 
     let informacion = this.pObjecto.getNavData();
+    console.log(informacion);
+    this.color=informacion.color;
     this.usertk = informacion.userInf;
     this.userIDName  = informacion.userInf.id;
     this.coursetk = informacion.infoCurso;
+    this.video=this.sanitizer.bypassSecurityTrustResourceUrl(this.coursetk.video);
     this.getcursos(this.usertk.id, this.coursetk.id);
   }
 
@@ -59,7 +66,8 @@ export class CursosCategoriasPage implements OnInit {
     let dataObj = {
       infoCurso: info,
       userInf: this.usertk,
-      course: this.coursetk
+      course: this.coursetk,
+      color: this.color,
     };
     this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/entrena/vercurso/']);
@@ -85,5 +93,12 @@ export class CursosCategoriasPage implements OnInit {
     });
     await this.alert.present();
   }
+
+
+  descargarPDF(){
+    window.open("http://venki.3utilities.com/"+this.coursetk.pdf, "_blank");
+  }
+
+
 
 }

@@ -7,6 +7,48 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+.title-gen{
+    display: contents;
+}
+.semi-circulo-2 {
+    width: 30px; 
+    height: 60px; 
+    position: absolute;
+    -moz-border-radius: 0 100px 100px 0;
+    -webkit-border-radius: 0 100px 100px 0;
+    border-radius: 0 100px 100px 0;
+}
+.title-cat{
+    text-transform: uppercase;
+    text-align:center;
+    margin:0 0 1px;
+   
+}
+.title-emb p{
+    text-transform: lowercase;
+    text-align:center;
+    font-size: 16px;
+    
+}
+
+.title-list{
+    font-size:18px;
+    margin-bottom: 10px;
+}
+
+.title-item-list{
+    font-size:15px;
+}
+
+.title-emb p:first-letter {
+    font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf); 
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.logo{
+    background-color:#002a68;
+}
 
 .msg-btn{
 
@@ -115,6 +157,11 @@ hr.dashed {
     margin-bottom: 2px;
 }
 
+.download{
+    margin-left: 40%;
+    color:#002a68;
+}
+
 .section{
     --ion-item-background: #f3f2f1;
     --padding-start:  8px;
@@ -152,22 +199,8 @@ hr.dashed {
     background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
 }
 
-.ion-item-css{
-    background-color: #80b9f6bd;
-    border: none;
-    color: #000000;
-    text-decoration: none;
-    font-size: 13px;
-    margin: 5px;
-    width: 85%;
-    border: 2px solid  #ffffff79;
-    transition: all 0.3s ease-in-out;
-    height: 55px;
-    text-align: center;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    --background: #80b9f6bd !important;
+    .ion-item-css{
+        border-bottom:1px solid #002a68;
     }
 
     .ion-item-css2{

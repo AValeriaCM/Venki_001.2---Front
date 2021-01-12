@@ -16,16 +16,19 @@
 }
 
 .imgStyle{
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
     display: block;
-    margin-left: auto;
+    margin-left: 10px;
     margin-right: auto;
 }
-
+.icon-color{
+    color:white;
+}
 .divBack{
     background-color:#ffffff;
+    margin-top:0px ;
 }
 
 .icon-photo{
@@ -36,11 +39,11 @@
 }
 
 .usernamecss{
-    font-family: 'Proxima';
+
     color: #444;
     margin: 0;
     padding: 0px 0px 6px 0px;
-    font-size: 9px;
+    font-size: 14px;
     line-height: 44px;
     letter-spacing: 1px;
     font-weight: bold;
@@ -49,8 +52,8 @@
 }
 
 .mensajecss{
-    font-family: 'Proxima';
-    font-size: 7px;
+
+    font-size: 14px;
     line-height: 12px;
     margin: 0;
     padding: 7px 7px 7px 7px;
@@ -70,31 +73,39 @@
 }
 
 .cursoName{
-    font-family: 'Proxima';
     color: #444;
     margin: 0;
     padding: 0px 6px 6px 0px;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 44px;
     letter-spacing: 1px;
     font-weight: bold;
     text-transform: uppercase;
+    border-bottom: #002a68 10px solid;
 }
 
 .lessonName{
-    font-family: 'Proxima';
-    font-size: 7px;
+    font-size: 14px;
     line-height: 12px;
     margin: 0;
     padding: 7px 7px 7px 7px;
-    text-transform: uppercase;
+    text-transform: initial;
     letter-spacing: -0.1px;
-    font-weight: bold;
+    text-transform: lowercase;
+    color: black;
+    text-align: initial;
 }
 
+.lessonName p:first-letter {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: black;
+}
+.color-text{
+    color: black;
+}
 .contentName{
-    font-family: 'Proxima';
-    font-size: 7px;
+    font-size: 14px;
     line-height: 12px;
     margin: 0;
     padding: 7px 7px 7px 7px;
@@ -107,16 +118,21 @@ hr.dashed {
     border-top: 3px dotted #bbb;
 }
 .contentNamedesc{
-    font-family: 'Proxima';
-    font-size: 7px;
-    line-height: 12px;
+    font-size: 16px;
+    line-height: 16px;
     margin: 0;
     text-transform: lowercase;
     letter-spacing: -0.1px;
-    font-weight: bold;
     text-align: justify;
+    margin:20px;
+    font-weight: unset;
 }
-
+.button-lesson{
+    border:0px;
+}
+.lesson-content{
+    margin-left: 12%;
+}
 .child-item{
     --ion-item-background: #f3f2f1;
     --padding-start:  8px;
@@ -149,6 +165,15 @@ hr.dashed {
     --background: var(--ion-item-background, var(--ion-background-color, #f3f2f279)) !important;
 }
 
+.semi-circulo-2 {
+    width: 30px; 
+    height: 60px; 
+    position: absolute;
+    -moz-border-radius: 0 100px 100px 0;
+    -webkit-border-radius: 0 100px 100px 0;
+    border-radius: 0 100px 100px 0;
+}
+
 .list-md {
     margin-left: 0;
     margin-right: 0;
@@ -159,6 +184,9 @@ hr.dashed {
     padding-top: 8px;
     padding-bottom: 8px;
     background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
+}
+.title-gen{
+    display: contents;
 }
 
 .ion-item-css{
@@ -180,27 +208,33 @@ hr.dashed {
     }
 
     .title-css{
-        font-family: 'Proxima';
+        text-align: center;
         color: rgb(8, 8, 8);
-        margin: 0;
         padding: 0px 0px 6px 0px;
-        font-size: 11px;
+        font-size: 16px;
         line-height: 44px;
         letter-spacing: 1px;
-        font-weight: bold;
-        text-align: center;
         text-transform: uppercase;
     }
     
     .Subtitle-css{
-        font-family: 'Proxima';
-        font-size: 7px;
-        line-height: 12px;
+        font-size: 14px;
+        line-height: 14px;
         margin: 0;
-        padding: 7px 7px 7px 7px;
-        text-transform: uppercase;
+        padding: 6px 6px 6px 6px;
         letter-spacing: 1px;
-        font-weight: bold;
         color: rgb(8, 8, 8);
+        text-align: justify;
+        margin-right: 20px;
+        text-transform: initial;
+        font-weight: normal;
+    }
+
+    .title-cat{
+        font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf); 
         text-transform: uppercase;
+        text-align:center;
+        padding: 7px 7px 7px 7px;
+        font-size: calc(0.6em + 1vw);
+       
     }

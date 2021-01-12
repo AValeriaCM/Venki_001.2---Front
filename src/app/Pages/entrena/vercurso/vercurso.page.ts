@@ -30,6 +30,7 @@ export class VercursoPage implements OnInit {
   cursos: any[] = [];
   orderStorage: any;
   exam = 0;
+  color:string;
   progreso: any;
   @ViewChild(IonContent) content: IonContent;
   constructor(
@@ -44,6 +45,7 @@ export class VercursoPage implements OnInit {
 
   ngOnInit() {
     const informacion = this.pObjecto.getNavData();
+    this.color=informacion.color;
     this.data = informacion.infoCurso;
     this.userinfo = informacion.userInf;
     this.course = informacion.course.name;

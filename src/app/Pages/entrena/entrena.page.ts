@@ -19,10 +19,11 @@ import { LoginService } from 'src/app/_services/login.service';
 })
 export class EntrenaPage implements OnInit {
 
-
+  colores=['#175fa2','#581845','#283747','#FF5733','#943126', '#64797f', '#191f63']
   autoClose = true;
   progesoVal;
   usertk = null;
+  cursosCargados: any[] = [];
   cursos: any[] = [];
   cursosUser: any[] = [];
   msj = [];
@@ -88,6 +89,7 @@ export class EntrenaPage implements OnInit {
   getcursos(userid: any) {
     this.share.getCategorias().subscribe(info => {
       this.cursos = info.data;
+      this.cursosCargados=this.cursos;
       console.log(this.cursos);
     });
   }
@@ -96,14 +98,14 @@ export class EntrenaPage implements OnInit {
     this.router.navigate(['/users/chat']);
   }
 
-  verCurso(info: any, desc: any) {
+  verCurso(info: any, desc: any, color:any) {
     console.log(info);
     let dataObj = {
       infoCurso: info,
-      userInf: this.usertk
+      userInf: this.usertk,
+      color:color,
     };
     this.pObjecto.setData(dataObj);
-    this.alertDespuesTiempoDescripcion(desc);
     this.router.navigate(['/users/entrena/cursos-categorias/']);
   }
 
@@ -138,4 +140,11 @@ export class EntrenaPage implements OnInit {
     });
     await this.alert.present();
   }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.cursos = this.cursosCargados.filter((item) => {
+      return (item.name.indexOf(filtro) > -1);
+    });
+  }  
 }

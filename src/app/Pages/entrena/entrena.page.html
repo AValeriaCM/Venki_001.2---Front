@@ -1,30 +1,35 @@
-<ion-header>
-  <ion-toolbar class="ion-toolbar-ccs">
-    <ion-icon src="/assets/maginLog.svg" size="large" class="icon"></ion-icon>
+<ion-header #header>
+  <ion-toolbar #toolbar class="ion-toolbar-ccs">
+    <div align="center" class="logo">
+        <img src="/assets/finallogo.png" width="120" height="70"> 
+    </div>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="ion-content-principal">
-  <br>
-  <br>
-  <ion-grid>
-    <ion-row style="border-bottom: groove;">
-      <ion-col size="6" *ngFor="let curso of cursos; ; index as i;">
-        <div class="boderbox-{{i}}">
-            <ion-label class="Subtitle-css" (click)="verCurso(curso, curso.description)">
+  <ion-item>
+    <ion-label><ion-icon name="search-outline"></ion-icon></ion-label>
+    <ion-input placeholder="Buscar" (keyup)="filtrar($event)"></ion-input>
+  </ion-item>
+  <ion-grid *ngFor="let curso of cursos; ; index as i;">
+    <ion-row >
+      <article class="card">
+        <header class="card__thumb">
+         <img src="http://venki.3utilities.com/{{curso.photo}}">
 
-              <br>
-              <br>
-              <br>
-              <br>{{curso.name}}</ion-label>
+        </header>
+        <div class="card__index" style="background:{{colores[curso.id-1]}}">
+          <span class="card__date__index">{{curso.id}}</span>
         </div>
-      </ion-col>
+        <div class="card__body">
+          <div class="card__category" style="background:{{colores[i]}}"><label>Categoria</label></div>
+          <div class="card__title"><ion-label  (click)="verCurso(curso, curso.description, colores[curso.id-1])"><u>{{curso.name.split(':')[0]}}</u></ion-label></div>
+          <p class="card__description">{{curso.name.split(':')[1]}}</p>
+        </div>
+      </article>
     </ion-row>
+    
   </ion-grid>
 
 
-
-
-  
 </ion-content>

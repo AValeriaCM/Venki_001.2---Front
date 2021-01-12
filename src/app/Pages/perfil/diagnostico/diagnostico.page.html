@@ -58,13 +58,13 @@
             <br>
             <ion-row  [hidden]="finalDta.length  !== preguntot">
               <ion-col>
-                <ion-button size="small" class="footer-dis-bot1" (click)="guardar()">
+                <ion-button size="small" [hidden]="pagina == 3"  class="footer-dis-bot1" (click)="guardar()">
                   <ion-icon name="enter-outline"></ion-icon>
                   Terminar y salir
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button size="small" class="footer-dis-bot2" (click)="Continuar()">
+                <ion-button size="small" class="footer-dis-bot2" [hidden]="pagina == 3"  (click)="Continuar()">
                   Continuar
                   <ion-icon name="caret-forward-circle-outline"></ion-icon>
                </ion-button>
@@ -74,7 +74,7 @@
           </ion-col>
         </ion-row>
         <ion-row [hidden]="finalDta.length  !== preguntot">
-            <ion-button [hidden]="pagina == 3" class="button-css" (click)="enviarQuestion()">Enviar</ion-button>
+            <ion-button [hidden]="pagina != 3" class="footer-dis-bot2" (click)="enviarQuestion()">Enviar</ion-button>
         </ion-row>
       </ion-grid>
     </ion-slide>

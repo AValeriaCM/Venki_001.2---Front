@@ -1,0 +1,52 @@
+<ion-header #header>
+  <ion-toolbar #toolbar class="ion-toolbar-ccs">
+    <div align="center">
+      <ion-toolbar>
+        <img src="/assets/FINAL-LOGO-MAGIN-PNG.png" width="170" height="100">
+      </ion-toolbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="ion-content-opcional">
+  <ion-grid>
+    <ion-row>
+      <ion-title class="title-gen">
+        <h1 class="title-cat" >
+          <strong>Lista de Videos</strong>
+        </h1>
+      </ion-title>
+    </ion-row>
+    <ion-row>
+      <iframe #playerVim [src]="video" frameborder="0" allow="autoplay;" width="100%" height="100%"
+      webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </ion-row>
+    <ion-row>
+      <ion-col size="1"></ion-col>
+      <ion-col size="10">
+      <br>
+      <ion-input placeholder="Buscar" class="input-date" (keyup)="filtrar($event)"></ion-input>
+      <ion-col size="1"></ion-col>
+      <br>
+      <ion-list>
+      
+
+        <ion-item   *ngFor="let item of videos | async">
+          <ion-avatar slot="start">
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+          </ion-avatar>
+          <ion-label>
+            <h3 class="item-list"  (click)="seeVideo(item)" >{{item.title}}</h3>
+            <ion-button  (click)="seeMore(item.id,item)" fill="clear">
+              <ion-icon slot="icon-only" name="ellipsis-horizontal-outline"></ion-icon>
+            </ion-button>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+    </ion-col>
+    <ion-col size="1"></ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

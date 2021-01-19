@@ -33,7 +33,12 @@ export class DiagnosticoPage implements OnInit {
   cacheArray: Array<any>;
   etapa = false;
   arrayFEnv;
+  color:any;
   pagina:number;
+  colors= ["rgba(0, 42, 104,1)",
+  "rgba(20, 20, 240, 1)",
+  "rgba(10, 155, 240, 1)",
+  "rgba(216, 99, 99, 1)"];
 
   @ViewChild('slider', { static: true }) slidefromHtml: IonSlides;
 
@@ -50,6 +55,7 @@ export class DiagnosticoPage implements OnInit {
 
   ngOnInit() {
     this.status=0;
+    this.pagina=0;
     this.cacheArray = [];
     this.arrayFEnv = [];
     this.cuestionario = [];
@@ -60,8 +66,10 @@ export class DiagnosticoPage implements OnInit {
     this.profileid = informacion.idprofile;
     this.userID = informacion.idUser;
     this.pagina=0;
-
-
+    this.color="ffff";
+    if(this.pagina==0){
+      this.color=this.colors[0];
+    }
     this.slidefromHtml.lockSwipeToPrev(true);
 
     this.perfile.getPreguntasPerfil(this.profileid).subscribe((profileQ: any) => {
@@ -73,6 +81,7 @@ export class DiagnosticoPage implements OnInit {
       this.share.retornarDiagnosticoCurrentpage().then( rest => {
         let tempP = rest;
         this.pagina=tempP;
+        this.color=this.colors[this.pagina-1];
         console.log('Pagina', tempP);
         if (tempP === null){
           this.currentPage = profileQ.meta.current_page;
@@ -107,7 +116,7 @@ export class DiagnosticoPage implements OnInit {
         if (diag !== null){
           this.cacheArray = diag;
         }
-        if(this.currentPage === 4){
+        if(this.currentPage === 5){
           this.cacheArray.forEach(element => {
             result01 = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))]
           });
@@ -122,7 +131,7 @@ export class DiagnosticoPage implements OnInit {
           if (diag !== null){
             this.cacheArray = diag;
           }
-          if (this.currentPage === 4){
+          if (this.currentPage === 5){
             this.cacheArray.forEach(element => {
               result = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))];
             });
@@ -132,7 +141,7 @@ export class DiagnosticoPage implements OnInit {
                 if (diag !== null){
                   this.cacheArray = diag;
                 }
-                if(this.currentPage === 4){
+                if(this.currentPage === 5){
                   this.cacheArray.forEach(element => {
                     result01 = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))];
                   });
@@ -204,8 +213,10 @@ export class DiagnosticoPage implements OnInit {
     if (this.currentPage === 1){
       this.alertDespuesTiempoimg1();
     } else if (this.currentPage === 2){
-      this.alertDespuesTiempoimg2();
+      this.alertDespuesTiempoimg2(2);
     } else if (this.currentPage  === 3){
+      this.alertDespuesTiempoimg2(3);
+    }else if (this.currentPage  === 4){
       this.alertDespuesTiempoimg3();
     }
   }
@@ -256,7 +267,7 @@ export class DiagnosticoPage implements OnInit {
           this.share.guardarDiagnosticoLastpage(this.lastPage);
           this.finalDta = [];
           this.cuestionario = [];
-          if (this.currentPage === 4){
+          if (this.currentPage === 5){
             this.share.varTotalPreguntas.next('update preguntas');
           }
           this.etapa = false;
@@ -320,12 +331,12 @@ export class DiagnosticoPage implements OnInit {
 
   }
 
-   alertDespuesTiempoimg2() {
+   alertDespuesTiempoimg2(position:number) {
     const informacion = this.pObjecto.getNavData();
     let dataObj = {
       idprofile: this.profileid,
       idUser:  this.userID,
-      page:2,
+      page:position,
       status:this.status
     };
     this.pEtapa.setData(dataObj);
@@ -337,7 +348,7 @@ export class DiagnosticoPage implements OnInit {
     let dataObj = {
       idprofile: this.profileid,
       idUser:  this.userID,
-      page:3,
+      page:4,
       status:this.status
     };
     this.pEtapa.setData(dataObj);

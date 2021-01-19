@@ -170,7 +170,7 @@ export class ShareserviceService {
 
 
   getNetDiagnostico(idDiagnostico: any, idPage: any){
-    return this.http.get<any[]>(this.basePath + `/api/surveys/${idDiagnostico}/questions?page=${idPage}&per_page=20`, {
+    return this.http.get<any[]>(this.basePath + `/api/surveys/${idDiagnostico}/questions?page=${idPage}&per_page=15`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
     });

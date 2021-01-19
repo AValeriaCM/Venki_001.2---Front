@@ -75,7 +75,7 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
 
   loadData(event) {
     setTimeout(() => {
-      const nuevoArra = this.total.total;
+      const nuevoArra = this.total;
       if (this.menjs.length !== nuevoArra) {
         this.chatS.getMessageOFPages(this.data.id, this.page).subscribe((chatMsg: any) => {
           chatMsg.data.forEach(element => {

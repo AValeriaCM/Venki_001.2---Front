@@ -1,0 +1,26 @@
+.title-gen{
+    display: contents;
+}
+
+.title-cat{
+    text-transform: uppercase;
+    text-align:center;
+    margin:0 0 1px;
+   
+}
+
+.avatar-css{
+    width:100% !important;  
+    height : 100% !important;  
+    max-width: 25px !important;  //any size
+    max-height: 25px !important; //any size 
+}
+
+.item-list{
+    margin:0px;
+    font-size: calc(0.6em + 0.8vw);
+}
+
+.input-date{
+    border-bottom: 2px solid rgb(0, 51, 110);
+}

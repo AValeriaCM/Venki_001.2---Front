@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'img-prev',
     loadChildren: () => import('../../Pages/home/img-prev/img-prev.module').then( m => m.ImgPrevPageModule)
+  },  {
+    path: 'resources',
+    loadChildren: () => import('../../Pages/home/resources/resources.module').then( m => m.ResourcesPageModule)
   }
+
 ];
 
 @NgModule({

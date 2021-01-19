@@ -46,8 +46,18 @@ export class EstadisticasPage implements OnInit {
         datasets: [{
           label: 'Resultados',
           data: [2.0, 1.0, 2.0, 3.0],
-          backgroundColor: 'rgba(8, 37, 83, 0.6)', // array should have same number of elements as number of dataset
-          borderColor: 'rgb(13, 8, 83)',// array should have same number of elements as number of dataset
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.8)",
+            "rgba(54, 162, 235, 0.8)",
+            "rgba(255, 206, 86, 0.8)",
+            "rgba(75, 192, 192, 0.8)",
+          ],
+          borderColor: [
+            "rgba(255,99,132,1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)"
+          ],// array should have same number of elements as number of dataset
           borderWidth: 1
         }]
       },

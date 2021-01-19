@@ -21,10 +21,12 @@ export class DiagnosticoEtapaPage implements OnInit {
 
   ngOnInit() {
     this.textButton="Continuar";
+
     this.info= this.pEtapa.getNavData();
+    console.log(this.info);
     this.etapa=this.info.page;
     console.log(this.info);
-    if(this.etapa==3){
+    if(this.etapa==4){
       this.textButton="Ver resultados";
     }
   }
@@ -39,7 +41,7 @@ export class DiagnosticoEtapaPage implements OnInit {
   continue(){
     console.log(this.etapa);
     console.log(this.info.status);
-      if(this.etapa==3){
+      if(this.etapa==4){
          this.router.navigate(['/users/perfil/estadisticas']);
       }else{
       if(this.info.status == 1){
@@ -54,34 +56,55 @@ export class DiagnosticoEtapaPage implements OnInit {
     this.arrayBac= [
       "rgba(0, 42, 104, 0.95)",
       "rgba(20, 20, 240, 0.2)",
-      "rgba(10, 155, 240, 0.2)"
+      "rgba(10, 155, 240, 0.2)",
+      "rgba(216, 99, 99, 0.2)"
     ];
     if(this.etapa==2){
       this.arrayBac= [
         "rgba(0, 42, 104, 0.95)",
         "rgba(20, 20, 240, 0.95)",
-        "rgba(10, 155, 240, 0.2)"
+        "rgba(10, 155, 240, 0.2)",
+        "rgba(216, 99, 99, 0.2)"
       ];
     }
     if(this.etapa==3){
       this.arrayBac= [
         "rgba(0, 42, 104, 0.95)",
         "rgba(20, 20, 240, 0.95)",
-        "rgba(10, 155, 240, 0.95)"
+        "rgba(10, 155, 240, 0.95)",
+        "rgba(216, 99, 99, 0.2)"
+      ];
+    }
+    if(this.etapa==3){
+      this.arrayBac= [
+        "rgba(0, 42, 104, 0.95)",
+        "rgba(20, 20, 240, 0.95)",
+        "rgba(10, 155, 240, 0.95)",
+        "rgba(216, 99, 99, 0.2)"
+      ];
+    }
+    if(this.etapa==4){
+      this.arrayBac= [
+        "rgba(0, 42, 104, 0.95)",
+        "rgba(20, 20, 240, 0.95)",
+        "rgba(10, 155, 240, 0.95)",
+        "rgba(85, 97, 240, 0.95)",
+        "rgba(216, 99, 99,1)"
       ];
     }
     this.donuts = new Chart(this.doughnutChart.nativeElement, {
       type: 'doughnut',
       data: {
-        labels: ['Etapa 1', 'Etapa 2', 'Etapa 3'],
+        labels: ['Etapa 1', 'Etapa 2', 'Etapa 3','Etapa 4'],
         datasets: [{
           label: "# of Votes",
-          data: [0.35,0.35,0.3],
+          data: [0.25,0.25,0.25,0.25],
           backgroundColor:  this.arrayBac, // array should have same number of elements as number of dataset
           borderColor:[
             "rgba(0,12,30, 1)",
             "rgba(185, 197, 202, 1)",
-            "rgba(185, 197, 202, 1)"
+            "rgba(185, 197, 202, 1)",
+            "rgba(185, 197, 202, 1)",
           ],// array should have same number of elements as number of dataset
           borderWidth: 1,
           hoverBackgroundColor: ["#8BB9F6", "#848B94B"]

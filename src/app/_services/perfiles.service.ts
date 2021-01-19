@@ -31,12 +31,14 @@ export class PerfilesService {
   }
 
   getPreguntasPerfil(idPerfil: any){
-    return this.http.get(this.urlServ + `/api/surveys/${idPerfil}/questions?per_page=20`, {
+    return this.http.get(this.urlServ + `/api/surveys/${idPerfil}/questions?per_page=15`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
+
+  
 
   SendSurveyInfo(surveyData: any, surveyid: any, userid: any){
 

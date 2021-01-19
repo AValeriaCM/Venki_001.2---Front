@@ -16,7 +16,7 @@
   <ion-title class="title-css">Diagnostico</ion-title>
   <ion-slides #slider (ionSlideWillChange)="verifImg()">
 
-    <ion-slide [hidden]="currentPage === 4">
+    <ion-slide [hidden]="currentPage === 5">
       <ion-card>
         <img src="../../../../assets/inicio-diag.jpg" />
         <ion-card-header>
@@ -36,10 +36,10 @@
       *ngFor="let dt of cantidad; let i of index;">
       <ion-grid class="questions">
         <ion-row>
-          <ion-col size="12"><label class="circulo">
+          <ion-col size="12"><label style="background-color: {{color}};" class="circulo">
               {{preguntat}}/{{preguntot}}</label></ion-col>
           <ion-col size="12">
-            <ion-card class="question-st">
+            <ion-card class="question-st" style="border: {{color}} 2px solid;">
               <ion-card-content>
                 {{dt.question}}
               </ion-card-content>
@@ -58,13 +58,13 @@
             <br>
             <ion-row  [hidden]="finalDta.length  !== preguntot">
               <ion-col>
-                <ion-button size="small" [hidden]="pagina == 3"  class="footer-dis-bot1" (click)="guardar()">
+                <ion-button size="small" [hidden]="pagina == 4"  class="footer-dis-bot1" (click)="guardar()">
                   <ion-icon name="enter-outline"></ion-icon>
                   Terminar y salir
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button size="small" class="footer-dis-bot2" [hidden]="pagina == 3"  (click)="Continuar()">
+                <ion-button size="small" class="footer-dis-bot2" [hidden]="pagina == 4"  (click)="Continuar()">
                   Continuar
                   <ion-icon name="caret-forward-circle-outline"></ion-icon>
                </ion-button>
@@ -74,7 +74,7 @@
           </ion-col>
         </ion-row>
         <ion-row [hidden]="finalDta.length  !== preguntot">
-            <ion-button [hidden]="pagina != 3" class="footer-dis-bot2" (click)="enviarQuestion()">Enviar</ion-button>
+            <ion-button [hidden]="pagina != 4" class="footer-dis-bot2" (click)="enviarQuestion()">Enviar</ion-button>
         </ion-row>
       </ion-grid>
     </ion-slide>
@@ -82,11 +82,11 @@
    
   </ion-slides>
   <ion-fab vertical="center" horizontal="start" slot="fixed">
-    <ion-icon class="icono-lateral" name="caret-back-outline"></ion-icon>
+    <ion-icon class="icono-lateral" style="color: {{color}};" name="caret-back-outline"></ion-icon>
   </ion-fab>
 
   <ion-fab vertical="center" horizontal="end" slot="fixed">
-    <ion-icon class="icono-lateral" name="caret-forward-outline"></ion-icon>
+    <ion-icon class="icono-lateral" style="color: {{color}};" name="caret-forward-outline"></ion-icon>
   </ion-fab>
 
 

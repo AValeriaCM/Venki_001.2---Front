@@ -8,28 +8,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" class="ion-content-principal">
+<ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" >
 
   <label *ngIf="actividad"
     style="text-align: center;  margin-left: 35%; font-size: 18px; font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);">Actividad:
     {{actividad}}</label>
   <br>
   <div class="back">
-    <!--<textarea class="textArea" [(ngModel)]="textareainputPiensa" placeholder="Que estas Pensando?" rows="4" cols="150" maxlength="150"></textarea>
-    <br>
-    <div *ngIf="photos">
-      <ion-slides [options]="sliderImgOption2">
-        <ion-slide *ngFor="let imag of photos">
-          <img class="image-cont" src="{{imag.imagen}}">
-        </ion-slide>
-      </ion-slides>
-    </div>
-    <ion-button class="buttonUploadImg" fill=clear (click)="selccionImg()">
-      <ion-icon name="cloud-upload"></ion-icon>
-    </ion-button>
-    <ion-button class="buttonUploadImg2" fill=clear (click)="Publicar()">
-      <ion-icon name="send"></ion-icon>
-    </ion-button>-->
     <ion-toolbar style="display: inline;">
       <ion-title style="text-align: center;">
         ¿Que deseas hacer hoy?
@@ -66,14 +51,14 @@
   <br>
   <ion-list *ngFor="let pst of miactividad" class="itemCssFActividad  list-mdActividad">
     <div class="boder">
-      <ion-item class="ion-item-css-">
+      <ion-item class="ion-item-css-" style="background-color: transparent;" >
         <ion-avatar slot="start">
           <img src="../../../assets/avatar/{{pst.user.avatar}}.jpg"  class="imagestyle" (click)="verUser(pst.user)">
         </ion-avatar>
         <ion-label class="titlename" (click)="verUser(pst.user)">{{pst.user.name}} {{pst.user.lastname}}</ion-label>
       </ion-item>
       <br>
-      <div *ngIf="pst.medias.length === 0" class="labelContent">
+      <div style="background-color: transparent;"  *ngIf="pst.medias.length === 0" class="labelContent">
         <label>{{pst.post}}</label>
         <div class="time" class="ion-text-right"><br>
           {{pst.created_at | date:'short'}}
@@ -96,12 +81,12 @@
       <ion-grid>
         <ion-row >
           <ion-col size="6" style="text-align: center; font-size: 25px;">
-            <button icon-only (click)="verUser(pst.user)" style="font-size: 25px;">
+            <button icon-only (click)="verUser(pst.user)" style="font-size: 25px; background-color: transparent;">
               <ion-icon name="heart-outline" style="color:  #002a68"></ion-icon>
             </button>
           </ion-col>
           <ion-col size="6" style="text-align: center;">
-            <button (click)="openChat()" style="font-size: 25px;">
+            <button (click)="openChat()" style="font-size: 25px; background-color: transparent;">
               <ion-icon name="chatbubbles" style="color:  #002a68"></ion-icon>
             </button>
           </ion-col>

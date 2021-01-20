@@ -42,7 +42,7 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
 
   scrollToBottom() {
     if (this.menjs.length === 15) {
-      console.log('entre perro');
+      console.log('entre ');
       this.content.scrollToBottom(100);
       this.scrollBottom = false;
     }
@@ -81,7 +81,7 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
           chatMsg.data.forEach(element => {
             this.menjs.unshift(element);
           });
-          this.page = this.page + 1;
+          //this.page = this.page + 1;
           event.target.complete();
           console.log(this.menjs);
         })

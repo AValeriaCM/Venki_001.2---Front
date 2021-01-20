@@ -12,40 +12,81 @@
 </ion-header>
 
 
-<ion-content #scrollMe>
-  <div *ngIf="data">
+<ion-content class="message-wrap" #scrollMe>
+  <!--<div class="sender" *ngIf="data">
     <ion-item *ngIf="transmiterID === data.receiver.id">
       <ion-avatar slot="start">
-        <img src="{{data.profilepic}}" />
+        <img class="friend-img" src="{{data.avatar}}" />
       </ion-avatar>
       <ion-label>{{data.transmitter.name}}&nbsp;{{data.transmitter.lastname}}</ion-label>
     </ion-item>
     <ion-item *ngIf="transmiterID !== data.receiver.id">
       <ion-avatar slot="start">
-        <img src="{{data.profilepic}}" />
+        <img class="friend-img" src="{{data.profilepic}}" />
       </ion-avatar>
       <ion-label>{{data.receiver.name}}&nbsp;{{data.receiver.lastname}}</ion-label>
     </ion-item>
   </div>
-  <ion-grid>
-    <ion-row *ngFor="let m of menjs">
-      <ion-col size="8" *ngIf="transmiterID !== m.user_id" class="mensaje usuarios">
-        <b>{{usuarioActual}}</b><br>
-        <span>{{m.message}}</span>
-        <div class="time" class="ion-text-right"><br>
-          {{m.created_at | date:'short'}}
-        </div>
-      </ion-col>
+  <div class="me">
+    <ion-grid>
+      <ion-row *ngFor="let m of menjs">
+        <ion-col size="8" *ngIf="transmiterID !== m.user_id" class="sender">
+          <p>{{usuarioActual}}</p><br>
+          <p>{{m.message}}</p>
+          <div class="time" class="ion-text-right"><br>
+            {{m.created_at | date:'short'}}
+          </div>
+        </ion-col>
+  
+        <ion-col size="8" *ngIf="transmiterID === m.user_id" class="me">
+          <p>{{usuarioActual}}</p><br>
+          <p>{{m.message}}</p>
+          <div class="time" class="ion-text-right"><br>
+            {{m.created_at | date:'short'}}
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+-->
+<div class="message-wrap">
+<div *ngIf="data">
+  <ion-item>
+    <ion-avatar slot="start">
+      <img class="friend-img" src="{{data.profilepic}}" />
+    </ion-avatar>
+    <ion-label>{{data.transmitter.name}}&nbsp;{{data.transmitter.lastname}}</ion-label>
+  </ion-item>
+</div>
+  <div *ngFor="let msg of menjs">
+    <div class="sender" *ngIf="transmiterID !== msg.user_id">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2 text-left>
+            <img class="friend-img" src="{{data.avatar}}">
+          </ion-col>
+          <ion-col style="background: var(--ion-color-tertiary);
+          " col-10>
+            <p style="color: white;">{{msg.message}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
 
-      <ion-col offset="3" size="8" *ngIf="transmiterID === m.user_id" class="mensaje mi-usuarios">
-        <b>{{usuarioActual}}</b><br>
-        <span>{{m.message}}</span>
-        <div class="time" class="ion-text-right"><br>
-          {{m.created_at | date:'short'}}
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <div class="me" *ngIf="transmiterID === msg.user_id">
+      <ion-grid>
+        <ion-row>
+          <ion-col style="border-width: 1.8px; border-style: solid; border-color: black;" col-10>
+            <p>{{msg.message}}</p>
+          </ion-col>
+          <ion-col col-2>
+            <img class="friend-img" src="{{data.avatar}}">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</div>
   <ion-infinite-scroll threshold="100px"  position="top" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles"  loadingText="Cargando Mensajes...">
 

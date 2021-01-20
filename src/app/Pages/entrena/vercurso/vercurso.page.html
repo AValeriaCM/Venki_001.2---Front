@@ -25,18 +25,18 @@
       <br>
 
       <ion-row>
-        <ion-col size="4">
-          <img class="imgStyle" src="http://venki.3utilities.com/{{info.photo}}">
+        <ion-col size="2">
+          <!--<img class="imgStyle" src="http://venki.3utilities.com/{{info.photo}}">-->
         </ion-col>
-        <ion-col size="8">
+        <ion-col size="7">
           <ion-card-subtitle class="Subtitle-css"><strong>Curso:</strong> &nbsp;{{info.name}}
           </ion-card-subtitle>
           <ion-card-subtitle class="Subtitle-css">
-            <strong>Categoria:</strong>&nbsp;{{course}}
+            <strong>Duracion:</strong>&nbsp;{{info.duration}} minutos por sesión
           </ion-card-subtitle>
-          <ion-card-subtitle class="Subtitle-css">
-            <strong>Duracion:</strong>&nbsp;{{info.duration}}
-          </ion-card-subtitle>
+        </ion-col>
+        <ion-col size="1">
+
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -36,16 +36,18 @@
             <ion-list>
               <ion-item class="ion-item-css" *ngIf="idUser === cont.receiver.id">
                 <ion-avatar slot="start">
-                  <img src="https://www.computerhope.com/jargon/g/guest-user.jpg" (click)="abrirDialogo(cont)" />
+                  <img  src="/assets/user.png" (click)="abrirDialogo(cont)" />
+              
                 </ion-avatar>
-                <ion-label (click)="abrirDialogo(cont)">{{cont.transmitter.name}}&nbsp;{{cont.transmitter.lastname}}
+                <ion-label class="user-list" (click)="abrirDialogo(cont)">{{cont.transmitter.name}}&nbsp;{{cont.transmitter.lastname}}
                 </ion-label>
               </ion-item>
               <ion-item class="ion-item-css"  *ngIf="idUser !== cont.receiver.id">
                 <ion-avatar slot="start">
-                  <img src="https://www.computerhope.com/jargon/g/guest-user.jpg" (click)="abrirDialogo(cont)" />
+                  <img  src="/assets/user.png" (click)="abrirDialogo(cont)" />
+                
                 </ion-avatar>
-                <ion-label (click)="abrirDialogo(cont)">{{cont.receiver.name}}&nbsp;{{cont.receiver.lastname}}
+                <ion-label  class="user-list" (click)="abrirDialogo(cont)">{{cont.receiver.name}}&nbsp;{{cont.receiver.lastname}}
                 </ion-label>
               </ion-item>
             </ion-list>

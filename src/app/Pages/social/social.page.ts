@@ -41,8 +41,6 @@ export class SocialPage implements OnInit {
   alert: any;
   sFotos: Array<any>;
   actividad;
-  LikeValue: number;
-
 
   msj = [];
 
@@ -51,8 +49,10 @@ export class SocialPage implements OnInit {
   paginaActual: any;
   ultimaPage: any;
   totalDt: any;
+  LikeValue: number;
 
   constructor(
+    
     private route: Router,
     private chatS: ChatServiceService,
     private modelcontroller: ModalController,
@@ -197,6 +197,11 @@ export class SocialPage implements OnInit {
     await this.alert.present();
   }
 
+  handleLike(){
+    this.LikeValue++;
+   }
+
+
   verUser(userdt: any){
     console.log('user enviado', userdt);
     const dataObj = {
@@ -220,9 +225,14 @@ export class SocialPage implements OnInit {
     this.route.navigate(['/users/chat']);
   }
 
-  crearEntrada(){
+  crearEntrada(id:number){
+    let dataObj = {
+      idAction: id
+    };
+    this.pObjecto.setData(dataObj);
     this.route.navigate(['/users/social/crear-entrada/']);
   }
+
 
   loadData(event){
     console.log('evento', event);
@@ -246,8 +256,4 @@ export class SocialPage implements OnInit {
     }, 2000);
   }
 
-  handleLike(){
-    this.LikeValue++;
-   }
-    
 }

@@ -25,6 +25,7 @@ export class CursosCategoriasPage implements OnInit {
   color:String;
   cursos: any[] = [];
   cursosUser: any[] = [];
+  cursosU: any[] = [];
   msj = [];
   alert: any;
   constructor(
@@ -55,6 +56,7 @@ export class CursosCategoriasPage implements OnInit {
       console.log(userid,  categoriaid);
       this.share.getCursosCategorias(categoriaid, userid).subscribe(dataCurso => {
         this.cursosUser = dataCurso;
+        this.cursosU=this.cursosUser;
       });
   }
 
@@ -99,6 +101,11 @@ export class CursosCategoriasPage implements OnInit {
     window.open("http://venki.3utilities.com/"+this.coursetk.pdf, "_blank");
   }
 
-
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.cursosUser = this.cursosU.filter((item) => {
+      return (item.name.indexOf(filtro) > -1);
+    });
+  } 
 
 }

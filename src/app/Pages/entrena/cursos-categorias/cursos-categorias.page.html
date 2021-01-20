@@ -12,6 +12,10 @@
 
 <ion-content>
   <div class="semi-circulo-2" style="background-color: {{color}};"></div>
+  <ion-item>
+    <ion-label><ion-icon name="search-outline"></ion-icon></ion-label>
+    <ion-input placeholder="Buscar" (keyup)="filtrar($event)"></ion-input>
+  </ion-item>
   <br>
   <div class="divBack">
     <ion-grid>

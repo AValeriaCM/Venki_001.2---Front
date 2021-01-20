@@ -141,10 +141,5 @@ export class EntrenaPage implements OnInit {
     await this.alert.present();
   }
 
-  filtrar(event: Event) {
-    const filtro = (event.target as HTMLInputElement).value;
-    this.cursos = this.cursosCargados.filter((item) => {
-      return (item.name.indexOf(filtro) > -1);
-    });
-  }  
+   
 }

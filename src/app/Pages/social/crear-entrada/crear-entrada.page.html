@@ -11,27 +11,58 @@
 
 
 <ion-content>
+  
+  <div class="oval" style="background: {{colors[idAction-1]}};" ></div>
+  <div class="back">
+    <br>
 
-  <div  class="back">
-    <h1>A continuación, puedes compartir información, retos y muchas cosas más!</h1>
-    <br>
-    <label style="color: black;">{{actividad}}</label>
-    <br>
-    <textarea class="textArea" fill=clear [(ngModel)]="textareainput" placeholder="Escribe aquí..." rows="4" cols="150" maxlength="150"></textarea>
-    <br>
-    <div *ngIf="photos">
-      <ion-slides [options]="sliderImgOption">
-        <ion-slide *ngFor="let imag of photos">
-          <img class="image-cont" src="{{imag.imagen}}">
-        </ion-slide>
-      </ion-slides>
+    <div *ngIf="idAction == 1">
+      <div align="center"  class="title">
+        INFORMAR
+      </div>
     </div>
-    <ion-button class="buttonUploadImg" fill=clear (click)="selccionImg()">
-      <ion-icon name="cloud-upload"></ion-icon>
-    </ion-button>
-    <ion-button class="buttonUploadImg2" fill=clear (click)="Publicar()">
-      <ion-icon name="send"></ion-icon>
-    </ion-button>
+    <div *ngIf="idAction == 2">
+      <div align="center" class="title">
+        COMPARTIR
+      </div>
+    </div>
+    <div *ngIf="idAction == 3">
+      <div align="center"  class="title">
+        RETAR
+      </div>
+    </div>
+    <br>
+    <br>
+    <ion-row>
+      <div align="center">
+        
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2" class="col-img">
+        <img src="/assets/social/im{{idAction}}.png">
+      </ion-col>
+      <ion-col size="9">
+        <textarea class="textArea" fill=clear [(ngModel)]="textareainput" placeholder="Escribe aquí..." rows="4"
+          cols="150" maxlength="150"></textarea>
+        <div *ngIf="photos">
+          <ion-slides [options]="sliderImgOption">
+            <ion-slide *ngFor="let imag of photos">
+              <img class="image-cont" src="{{imag.imagen}}">
+            </ion-slide>
+          </ion-slides>
+        </div>
+        <ion-button class="buttonUploadImg" style="color: {{colors[idAction-1]}};" fill=clear (click)="selccionImg()">
+          <ion-icon name="cloud-upload"></ion-icon>
+        </ion-button>
+        <ion-button class="buttonUploadImg2" style="color: {{colors[idAction-1]}};" fill=clear (click)="Publicar()">
+          <ion-icon name="send"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+    <br>
+
   </div>
 
 </ion-content>

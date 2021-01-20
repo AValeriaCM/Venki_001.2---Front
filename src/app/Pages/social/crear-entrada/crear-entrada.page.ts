@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./crear-entrada.page.scss'],
 })
 export class CrearEntradaPage implements OnInit {
-
+  colors= ["#3dc2ff","#3880ff", "#eb445a"];
   sliderImgOption = {
     zoom: false,
     slidesPerView: 1,
@@ -28,6 +28,7 @@ export class CrearEntradaPage implements OnInit {
   textareainput: any;
   photos: Array<any>;
   alert: any;
+  idAction:number;
   sFotos: Array<any>;
   actividad;
   constructor(
@@ -48,12 +49,13 @@ export class CrearEntradaPage implements OnInit {
 
     //this.textareainput = ;
     const informacion = this.pObjecto.getNavData();
+    this.idAction=informacion.idAction;
     console.log(informacion);
     this.actividad = informacion.actividad;
-
+    console.log("Actividad",this.actividad );
     this.share.varDesafio.subscribe( res => {
       const informacion = this.pObjecto.getNavData();
-      console.log(informacion);
+      console.log("Informacion ->",informacion);
       this.actividad = informacion.actividad;
     });
 

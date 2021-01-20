@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" >
+<ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true">
 
   <label *ngIf="actividad"
     style="text-align: center;  margin-left: 35%; font-size: 18px; font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);">Actividad:
@@ -27,7 +27,7 @@
             <ion-icon name="bulb" size="large"></ion-icon>
           </ion-fab-button>
           <br>
-          <ion-label class="label-fab" >Informar</ion-label>
+          <ion-label class="label-fab">Informar</ion-label>
         </ion-col>
         <ion-col>
           <ion-fab-button class="fab-buttons" (click)="crearEntrada()">
@@ -45,59 +45,62 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    
+
   </div>
 
   <br>
-  <ion-list *ngFor="let pst of miactividad" class="itemCssFActividad  list-mdActividad">
-    <div class="boder">
-      <ion-item class="ion-item-css-" style="background-color: transparent;" >
-        <ion-avatar slot="start">
-          <img src="../../../assets/avatar/{{pst.user.avatar}}.jpg"  class="imagestyle" (click)="verUser(pst.user)">
-        </ion-avatar>
-        <ion-label class="titlename" (click)="verUser(pst.user)">{{pst.user.name}} {{pst.user.lastname}}</ion-label>
-      </ion-item>
-      <br>
-      <div style="background-color: transparent;"  *ngIf="pst.medias.length === 0" class="labelContent">
-        <label>{{pst.post}}</label>
-        <div class="time" class="ion-text-right"><br>
-          {{pst.created_at | date:'short'}}
+  <ion-list *ngFor="let pst of miactividad" style="background-color: transparent !important;" class="itemCssFActividad  list-mdActividad">
+    <ion-card>
+      <div class="boder">
+        <ion-item class="ion-item-css-" style="background-color: transparent;">
+          <ion-avatar item-left>
+            <img class="avatar" src="../../../assets/avatar/{{pst.user.avatar}}.jpg" class="imagestyle"
+              (click)="verUser(pst.user)">
+          </ion-avatar>
+          <ion-label class="author" (click)="verUser(pst.user)">{{pst.user.name}} {{pst.user.lastname}}</ion-label>
+        </ion-item>
+        <br>
+        <div style="background-color: transparent;" *ngIf="pst.medias.length === 0" class="labelContent">
+          <label class="content">{{pst.post}}</label>
+          <div class="time" class="ion-text-right"><br>
+            {{pst.created_at | date:'short'}}
+          </div>
         </div>
-      </div>
-      <br>
-      <div *ngIf="pst.medias.length !== 0" class="labelContent">
-        <label>{{pst.post}}</label>
-        <ion-slides [options]="sliderImgOption">
-          <ion-slide *ngFor="let imag of pst.medias">
-            <img class="image-cont" src="http://venki.3utilities.com/medias/{{imag.media}}" (click)="imageView(imag.media)">
-          </ion-slide>
-        </ion-slides>
+        <br>
+        <div *ngIf="pst.medias.length !== 0" class="labelContent">
+          <label class="content">{{pst.post}}</label>
+          <ion-slides [options]="sliderImgOption">
+            <ion-slide *ngFor="let imag of pst.medias">
+              <img class="image-cont" src="http://venki.3utilities.com/medias/{{imag.media}}"
+                (click)="imageView(imag.media)">
+            </ion-slide>
+          </ion-slides>
 
-        <div class="time" class="ion-text-right"><br>
-          {{pst.created_at | date:'short'}}
+          <div class="time" class="ion-text-right"><br>
+            {{pst.created_at | date:'short'}}
+          </div>
         </div>
+        <ion-grid class="footer">
+          <ion-row>
+            <ion-col size="6" style="text-align: center; font-size: 25px;">
+              <button ion-button icon-only style="color: white; font-size: 20px; background-color: transparent;"
+                (click)="handleLike()" clear> {{LikeValue}}
+                <ion-icon name="thumbs-up"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col size="6" style="text-align: center;">
+              <button ion-button icon-only style="color: white; font-size: 25px; background-color: transparent;" clear>
+                <ion-icon name="chatbubbles"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
-      <hr class="solid">
-      <ion-grid>
-        <ion-row >
-          <ion-col size="6" style="text-align: center; font-size: 25px;">
-            <button icon-only (click)="verUser(pst.user)" style="font-size: 25px; background-color: transparent;">
-              <ion-icon name="heart-outline" style="color:  #002a68"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col size="6" style="text-align: center;">
-            <button (click)="openChat()" style="font-size: 25px; background-color: transparent;">
-              <ion-icon name="chatbubbles" style="color:  #002a68"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+    </ion-card>
   </ion-list>
   <ion-infinite-scroll threshold="25px" position="center" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando post...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <br>
   <br>
 </ion-content>

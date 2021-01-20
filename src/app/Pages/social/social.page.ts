@@ -41,6 +41,8 @@ export class SocialPage implements OnInit {
   alert: any;
   sFotos: Array<any>;
   actividad;
+  LikeValue: number;
+
 
   msj = [];
 
@@ -62,8 +64,10 @@ export class SocialPage implements OnInit {
     private loadingCtrl: LoadingController,
     private auth: AuthService,
     private imagePick: ImagePicker,
-    private alertController: AlertController,
-    ) { }
+    private alertController: AlertController
+    ) {
+      this.LikeValue = 0;
+     }
 
   ngOnInit() {
     this.chatS.var.subscribe( chatMsg => {
@@ -75,7 +79,7 @@ export class SocialPage implements OnInit {
       console.log(res);
       this.miactividad = res.data;
       this.paginaActual = res.meta.current_page;
-      this.ultimaPage = res.meta.last_page;
+      this.ultimaPage = res.meta.first_page;
       this.totalDt = res.meta.total;
     });
 
@@ -242,4 +246,8 @@ export class SocialPage implements OnInit {
     }, 2000);
   }
 
+  handleLike(){
+    this.LikeValue++;
+   }
+    
 }

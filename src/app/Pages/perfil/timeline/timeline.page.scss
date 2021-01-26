@@ -158,3 +158,34 @@
 .direction-r .desc {
   margin: 1em 0 0 0.75em;
 }
+
+.title-timeline {
+  position: relative;
+  background-color: #80b9f6;
+  border-radius: 20px;
+  text-align: justify;
+}
+
+h2, h3 {
+  color: black;
+}
+
+.profile-photo{
+  border-radius:50%;
+  margin-top: 10px;
+  width: 8em !important;
+  height: 8em !important;
+}
+
+.profile-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.info-square{
+  text-align: center;
+  margin-top: 40px;
+}

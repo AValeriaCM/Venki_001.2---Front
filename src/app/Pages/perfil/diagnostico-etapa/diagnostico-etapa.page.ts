@@ -14,6 +14,7 @@ export class DiagnosticoEtapaPage implements OnInit {
   textButton:string;
   colorArray: any;
   info:any;
+
   constructor(    
     private pEtapa: PassObjectService,
     private router: Router,
@@ -37,21 +38,26 @@ export class DiagnosticoEtapaPage implements OnInit {
     this.createDoughnutChart();
   }
 
-
   continue(){
     console.log(this.etapa);
     console.log(this.info.status);
-      if(this.etapa==4){
-         this.router.navigate(['/users/perfil/estadisticas']);
-      }else{
-      if(this.info.status == 1){
-           this.router.navigate(['/users/perfil']);
-      } else{
-        this.pObjecto.setData(this.info);
-        this.router.navigate(['/users/perfil/diagnostico/']);
-      }
-      }
+    /*if(this.etapa == 3){
+      this.etapa = this.etapa + 1;
+      this.router.navigate(['/users/perfil/diagnostico-etapa/']);
+    }*/
+    if (this.etapa==4){
+      console.log('entro al if de la cuarta etapa');
+      this.router.navigate(['/users/perfil/estadisticas']);
+    }else{
+    if(this.info.status == 1){
+       this.router.navigate(['/users/perfil']);
+    } else{
+      this.pObjecto.setData(this.info);
+      this.router.navigate(['/users/perfil/diagnostico-inicio/']);
+    }
+    }
   }
+
   createDoughnutChart() {
     this.arrayBac= [
       "rgba(0, 42, 104, 0.95)",

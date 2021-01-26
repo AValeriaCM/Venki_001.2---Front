@@ -12,7 +12,9 @@ import { ShareserviceService } from 'src/app/_services/shareservice.service';
 export class DiagnosticoInicioPage implements OnInit {
   alerta: any;
   informacion:any;
-  cursos: any[] = [];
+  categorias: any[] = [];
+  cursos:any[] = [];
+
   constructor(private share: ShareserviceService,  
     public alertController: AlertController,
     private pObjecto: PassObjectService,
@@ -21,6 +23,7 @@ export class DiagnosticoInicioPage implements OnInit {
   ngOnInit() {
       this.informacion = this.pObjecto.getNavData();
       this.getcursos();
+      this.getcategorias();
   }
 
   async alertAvisoGif() {
@@ -48,6 +51,12 @@ export class DiagnosticoInicioPage implements OnInit {
     this.share.getCategorias().subscribe(info => {
       this.cursos = info.data;
       console.log(this.cursos);
+    });
+  }
+
+  getcategorias() {
+    this.share.getCategorias().subscribe(categ => {
+      this.categorias = categ.data;
     });
   }
 

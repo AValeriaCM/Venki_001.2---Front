@@ -22,6 +22,7 @@ export class AudioplayerPage implements OnInit {
   audioname;
   orderID: any;
   tam: any;
+  
   @ViewChild('range', {static: false})  range: IonRange;
   constructor(
     private route: ActivatedRoute,

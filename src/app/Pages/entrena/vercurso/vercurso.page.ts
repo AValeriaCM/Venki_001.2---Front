@@ -172,7 +172,7 @@ export class VercursoPage implements OnInit {
         this.share.updateorder(order);
       }
     });
-    let url = 'http://venki.ml/' + doc;
+    let url = 'http://venki.3utilities.com/' + doc;
     this.previewAnyFile.preview(url).then(() => {
 
     }, (err) => {
@@ -182,7 +182,7 @@ export class VercursoPage implements OnInit {
 
   audioPlayer(lectionName: any, content: any, order: any, tma: any) {
     console.log('TAMAÑO', tma);
-    const dataaud = 'http://venki.ml/' + content;
+    const dataaud = 'http://venki.3utilities.com/' + content;
     const dataObj = {
       name: lectionName,
       audioInfo: dataaud,

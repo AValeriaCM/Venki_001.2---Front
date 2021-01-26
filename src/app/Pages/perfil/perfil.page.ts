@@ -87,14 +87,14 @@ export class PerfilPage implements OnInit {
     this.share.var.subscribe( res => {
       this.auth.gettokenLog().then( dt => {
         this.log.logdataInfData(dt).subscribe( infoUser => {
-          console.log(infoUser);
+          console.log('info user:',infoUser);
           this.usertk = infoUser;
           if (this.usertk.photo === null){
             this.usertk.photo = 'https://i.ibb.co/f0Z6QWK/default.jpg';
             this.getcursos(this.usertk.id);
             this.getMiactividad(this.usertk.id);
           }else{
-            let pht = 'http://venki.ml/photos/' + this.usertk.photo;
+            let pht = 'http://http://venki.3utilities.com/photos/' + this.usertk.photo;
             this.usertk.photo = pht;
             this.getcursos(this.usertk.id);
             this.getMiactividad(this.usertk.id);
@@ -112,7 +112,7 @@ export class PerfilPage implements OnInit {
           this.getcursos(this.usertk.id);
           this.getMiactividad(this.usertk.id);
         }else{
-          let pht = 'http://venki.ml/photos/' + this.usertk.photo;
+          let pht = 'http://http://venki.3utilities.com/photos/' + this.usertk.photo;
           this.usertk.photo = pht;
           this.getcursos(this.usertk.id);
           this.getMiactividad(this.usertk.id);
@@ -216,7 +216,7 @@ export class PerfilPage implements OnInit {
 
   getMiactividad(userid: any) {
     this.share.getActividadUsuario(userid).subscribe(info => {
-      console.log(info);
+      console.log('esta es mi actividad', info);
       this.miactividad = info.data;
       this.paginaActual = info.meta.current_page;
       this.ultimaPage = info.meta.last_page;
@@ -227,6 +227,8 @@ export class PerfilPage implements OnInit {
   getcursos(userid: any) {
     this.share.getCursosUsuario(userid).subscribe(info => {
       this.cursos = info.data;
+      console.log('cursos: ',this.cursos);
+      console.log('data: ',info.data);
     });
   }
 

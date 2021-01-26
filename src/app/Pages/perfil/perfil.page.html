@@ -10,17 +10,12 @@
  
 <ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" slot="start" id="ion-content-opcional">
   <br>
-  
- 
-
-
   <div class="divBack">
     <div *ngIf="usertk !== null">
       <ion-grid class="profile-intro">
         <ion-row>
           <ion-col col-2>
             <img class="profile-photo" src="../../../assets/avatar/{{usertk.avatar}}.jpg" (click)="CreatePopover()">
-
           </ion-col>
           <ion-col col-10>
             <div class="profile-info">
@@ -142,7 +137,7 @@
                     <label>{{contenido.post}}</label>
                     <ion-slides [options]="sliderImgOption">
                       <ion-slide *ngFor="let imag of contenido.medias">
-                        <img class="image-cont" src="http://venki.ml/photos/{{imag.media}}">
+                        <img class="image-cont" src="http://venki.3utilities.com/photos/{{imag.media}}">
                       </ion-slide>
                     </ion-slides>
                     <div class="time" class="ion-text-right"><br>
@@ -209,12 +204,36 @@
                   <br>
                   <ion-list class="itemCssF list-md">
                     <div *ngFor="let curso of cursos">
-                      <ion-item class="ion-item-css">
+                      
+                      <!--<ion-item class="ion-item-css">
                         <ion-avatar slot="start">
-                          <img src="http://venki.ml/{{curso.photo}}" (click)="verCurso(curso)">
+                          <img src="http://venki.3utilities.com/{{curso.photo}}" (click)="verCurso(curso)">
                         </ion-avatar>
                         <ion-label class="Subtitle-css" (click)="verCurso(curso)">{{curso.name}}</ion-label>
+                        <div class="progress-course">
+                          <ion-list-header>
+                            <ion-label>Tu progreso: </ion-label>
+                          </ion-list-header>
+                          <ion-progress-bar value="0.5">{{curso.pivot.progress}}</ion-progress-bar>
+                        </div>
                       </ion-item>
+                      -->
+                      <div *ngIf="curso.pivot.progress != 1">
+                        <ion-item class="ion-item-css">
+                          <ion-avatar slot="start">
+                            <img src="http://venki.3utilities.com/{{curso.photo}}" (click)="verCurso(curso)">
+                          </ion-avatar>
+                          <ion-label class="Subtitle-css" (click)="verCurso(curso)">
+                            <h4>{{curso.name}}</h4>
+                          </ion-label>         
+                          <div>
+                            <ion-list-header>
+                              <h5 style="text-align: right;">Progreso: <span>{{curso.pivot.progress*100}}%</span></h5>
+                            </ion-list-header>
+                            <ion-progress-bar [value]="curso.pivot.progress" color="primary"></ion-progress-bar>
+                          </div>
+                        </ion-item>
+                      </div>    
                     </div>
                   </ion-list>
                 </mat-tab>
@@ -223,6 +242,26 @@
                     <ion-card-title class="title-css2" style="text-align: center;">COMPLETADO</ion-card-title>
                   </ng-template>
                   <br>
+                  <ion-list class="itemCssF list-md">
+                    <div *ngFor="let curso of cursos">
+                      <div *ngIf="curso.pivot.progress == 1">
+                        <ion-item class="ion-item-css">
+                          <ion-avatar slot="start">
+                            <img src="http://venki.3utilities.com/{{curso.photo}}" (click)="verCurso(curso)">
+                          </ion-avatar>
+                          <ion-label class="Subtitle-css" (click)="verCurso(curso)">
+                            <h4>{{curso.name}}</h4>
+                          </ion-label>         
+                          <div>
+                            <ion-list-header>
+                              <h5 style="text-align: right;">Progreso: <span>{{curso.pivot.progress*100}}%</span></h5>
+                            </ion-list-header>
+                            <ion-progress-bar [value]="curso.pivot.progress" color="primary"></ion-progress-bar>
+                          </div>
+                        </ion-item>
+                      </div>    
+                    </div>
+                  </ion-list>
                 </mat-tab>
               </mat-tab-group>
             </div>

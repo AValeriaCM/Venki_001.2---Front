@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -19,6 +20,7 @@ export class EstadisticasPage implements OnInit {
   constructor(
     private auth: AuthService,
     private log: LoginService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -36,6 +38,10 @@ export class EstadisticasPage implements OnInit {
   @ViewChild('barChart') barChart;
   ionViewDidEnter() {
     this.createBarChart();
+  }
+
+  close() {
+    this.router.navigate(['/users/perfil']);
   }
 
   createBarChart() {

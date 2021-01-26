@@ -17,6 +17,9 @@ export class TimelinePage implements OnInit {
   paginaActual: any;
   ultimaPage: any;
   totalDt: any;
+  miactividad: any;
+  usertk = null;
+
   constructor(
     private auth: AuthService,
     private log: LoginService,
@@ -34,8 +37,20 @@ export class TimelinePage implements OnInit {
           this.paginaActual = Res.meta.current_page;
           this.ultimaPage = Res.meta.last_page;
           this.totalDt = Res.meta.total;
-        })
+
+          this.usertk = infoUser;
+          this.getMiactividad(this.usertk.id);
+        });
       });
+    });
+  }
+
+  getMiactividad(userid: any) {
+    this.share.getActividadUsuario(userid).subscribe(info => {
+      this.miactividad = info.data;
+      this.paginaActual = info.meta.current_page;
+      this.ultimaPage = info.meta.last_page;
+      this.totalDt = info.meta.total;
     });
   }
 
@@ -51,7 +66,6 @@ export class TimelinePage implements OnInit {
           return;
         }
 
-
         this.share.getpostNextPage(this.paginaActual).subscribe( resPg => {
           console.log('Respuesta paguina', resPg);
           resPg.data.forEach(element => {
@@ -59,7 +73,7 @@ export class TimelinePage implements OnInit {
           });
           event.target.complete();
         });
-    }, 2000);
+    }, 2500);
   }
 
 }

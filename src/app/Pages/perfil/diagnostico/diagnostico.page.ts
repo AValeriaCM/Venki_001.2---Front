@@ -292,7 +292,7 @@ export class DiagnosticoPage implements OnInit {
         let dataObj = {
           idprofile: this.profileid,
           idUser:  this.userID,
-          page:3,
+          page:4,
           status:this.status
         };
         this.pEtapa.setData(dataObj);

@@ -11,9 +11,26 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Timeline: {{currentUser}} </ion-card-title>
-    </ion-card-header>
+    <div *ngIf="usertk !== null">
+      <ion-grid class="profile-intro">
+        <ion-row>
+          <ion-col col-2>
+            <img class="profile-photo" src="../../../assets/avatar/{{usertk.avatar}}.jpg">
+          </ion-col>
+          <ion-col col-10>
+            <div class="profile-info">
+              <div class="info-square">
+                <ion-card-header class="title-timeline">
+                  <h2>Timeline</h2>
+                  <h3>{{currentUser}}</h3>
+                </ion-card-header>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    </div>
   
     <ion-card-content>
       <div>
@@ -24,10 +41,19 @@
               <div class="flag-wrapper">
                 <span class="flag">{{info.event}}</span>
                 <br>
-                <br>
                 <span class="time-wrapper"><span class="time">{{info.created_at | date:'short'}}</span></span>
+              </div> 
+            </div>
+          </li>
+        </div>
+        <div *ngFor="let contenido of miactividad">
+          <li>
+            <div class="direction-r">
+              <div class="flag-wrapper">
+                <span class="flag">{{contenido.post}}</span>
+                <br>
+                <span class="time-wrapper"><span class="time">{{contenido.created_at | date:'short'}}</span></span>
               </div>
-    
             </div>
           </li>
         </div>

@@ -228,11 +228,33 @@ hr.dashed {
         font-weight: normal;
     }
 
+    .card-3{
+        background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: 80px;
+        border: white 2px outset;
+        margin: 10px;
+     }
+     
+     @media(max-width: 990px){
+       .card{
+        
+       }
+     } 
+
+    .title-gen{
+        display: contents;
+    }
     .title-cat{
-        font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf); 
         text-transform: uppercase;
         text-align:center;
-        padding: 7px 7px 7px 7px;
-        font-size: calc(0.6em + 1vw);
+        margin:0 0 1px;
        
+    }
+    .title-emb p{
+        text-transform: lowercase;
+        text-align:center;
+        font-size: 16px;
+        
     }

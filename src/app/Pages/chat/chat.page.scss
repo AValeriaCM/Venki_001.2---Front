@@ -19,28 +19,93 @@
     margin-bottom: 10px;
     border-radius: 8px;
     --background:#ffffff !important;
-    }
+}
 
-    .Subtitle-cs-desc{
-        font-family: Century Gothic;
-        font-size: 7px;
-        line-height: 12px;
-        margin: 0;
-        padding: 7px 7px 7px 7px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: bold;
-        color: rgb(8, 8, 8);
-        text-align: justify;
-    }
+.Subtitle-cs-desc{
+    font-family: Century Gothic;
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: rgb(8, 8, 8);
+    text-align: justify;
+}
 
-    .title-css {
-        font-family: Century Gothic;
-        color: rgb(8, 8, 8);
-        margin: 0;
-        padding: 0px 0px 6px 0px;
-        line-height: 44px;
-        letter-spacing: 1px;
-        font-weight: bold;
-        text-align: center;
-    }
+.title-css {
+    font-family: Century Gothic;
+    color: rgb(8, 8, 8);
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.friend {
+    height: 70px;
+    border-bottom: 1px solid #e7ebee;
+    position: relative;
+}
+
+.friend:hover {
+    background: #f1f4f6;
+    cursor: pointer;
+}
+
+.friend img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    border: 3px solid #fff;
+}
+
+.friend p {
+    padding: 15px 0 0 0;
+    float: left;
+    width: 220px;
+}
+
+.friend p strong {
+    font-weight: 600;
+    font-size: 15px;
+    color: #597a96;
+}
+
+.friend p span {
+    font-size: 13px;
+    font-weight: 400;
+    color: #aab8c2;
+}
+
+.titlefriends {
+    text-align: center;
+    color: #597a96;
+}
+
+.container {
+    height: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 30px;
+}
+
+.author-block {
+    color: #717a84;
+    // display: flex;
+    // width: 100%;
+    // font-size: 12px;
+}
+
+.author-image {
+    // width: 30px;
+    // height: 30px;
+    border-radius: 50%;
+    // background-image: url('https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png');
+}

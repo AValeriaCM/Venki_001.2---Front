@@ -18,7 +18,6 @@ import { Camera } from '@ionic-native/camera/ngx';
 })
 export class SocialPage implements OnInit {
 
-
   miactividad: any;
 
   sliderImgOption = {
@@ -41,6 +40,7 @@ export class SocialPage implements OnInit {
   alert: any;
   sFotos: Array<any>;
   actividad;
+  elemento: any;
 
   msj = [];
 
@@ -50,9 +50,11 @@ export class SocialPage implements OnInit {
   ultimaPage: any;
   totalDt: any;
   LikeValue: number;
+  contadorlike: number;
+  idPost: any;
 
   constructor(
-    
+
     private route: Router,
     private chatS: ChatServiceService,
     private modelcontroller: ModalController,
@@ -76,17 +78,17 @@ export class SocialPage implements OnInit {
     this.msj = this.chatS.getbadge();
 
     this.share.getpost().subscribe( res => {
-      console.log(res);
       this.miactividad = res.data;
       this.paginaActual = res.meta.current_page;
       this.ultimaPage = res.meta.first_page;
       this.totalDt = res.meta.total;
+      console.log('esta es mi actividad: ', this.miactividad);
     });
 
     this.share.varPostUpdate.subscribe( res => {
       console.log(res);
       this.infonitescroll.disabled  = false;
-    })
+    });
 
     this.share.varDesafio.subscribe( res => {
       const informacion = this.pObjecto.getNavData();
@@ -106,6 +108,7 @@ export class SocialPage implements OnInit {
   }
 
   async selccionImg(){
+
     const acctionSheet = await this.actionSheetcontroller.create({
       header: 'Selecciona Una Imagen',
       buttons: [
@@ -170,21 +173,32 @@ export class SocialPage implements OnInit {
   }
 
   subirVideo() {
-    
+
   }
 
   Publicar(){
     if (this.textareainputPiensa === undefined){
       this.alertDespuesTiempo();
     }else{
-      console.log('SFOTOS',this.photos);
+      console.log('SFOTOS', this.photos);
       this.share.guardarpost(this.usertk.id, this.textareainputPiensa, this.photos).subscribe(  res => {
         console.log(res);
         this.share.varPostUpdate.next('update data');
       });
     }
   }
-  
+
+  handleLike(valor: any, valorid: any){
+    this.contadorlike = valor;
+    this.contadorlike = this.contadorlike + 1;
+    this.idPost = valorid;
+    this.share.actualizarpost(this.idPost, this.contadorlike).subscribe( res => {
+      console.log(res);
+      this.share.varPostUpdate.next('update data');
+      this.route.navigate(['/users/social/']);
+    });
+   }
+
   async alertDespuesTiempo() {
     this.alert = await this.alertController.create({
       header: 'HEY!',
@@ -197,11 +211,6 @@ export class SocialPage implements OnInit {
     await this.alert.present();
   }
 
-  handleLike(){
-    this.LikeValue++;
-   }
-
-
   verUser(userdt: any){
     console.log('user enviado', userdt);
     const dataObj = {
@@ -210,7 +219,6 @@ export class SocialPage implements OnInit {
     this.pObjecto.setData(dataObj);
     this.route.navigate(['/users/social/ver-usuario/']);
   }
-
 
   imageView(imag: any){
     this.modelcontroller.create({
@@ -221,18 +229,24 @@ export class SocialPage implements OnInit {
     }).then(model => model.present());
   }
 
-  openChat(){
-    this.route.navigate(['/users/chat']);
+  openChat(infouserpost: any){
+    const dataObj = {
+      infoDt: infouserpost,
+      transferID: this.usertk.id,
+      useractual: this.usertk.name
+    };
+    this.pObjecto.setData(dataObj);
+    this.route.navigate(['/users/chat/mensaje-busqueda/']);
+    // this.route.navigate(['/users/chat']);
   }
 
-  crearEntrada(id:number){
-    let dataObj = {
+  crearEntrada(id: number){
+    const dataObj = {
       idAction: id
     };
     this.pObjecto.setData(dataObj);
     this.route.navigate(['/users/social/crear-entrada/']);
   }
-
 
   loadData(event){
     console.log('evento', event);
@@ -257,3 +271,4 @@ export class SocialPage implements OnInit {
   }
 
 }
+

@@ -15,11 +15,13 @@
     {{actividad}}</label>
   <br>
   <div class="back">
-    <ion-toolbar style="display: inline;">
-      <ion-title style="text-align: center;">
-        ¿Que deseas hacer hoy?
-      </ion-title>
-    </ion-toolbar>
+    <ion-header>
+      <ion-toolbar style="display: inline;">
+        <ion-title style="text-align: center;">
+          ¿Que deseas hacer hoy?
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-grid style="display: inline; margin-top: 0px; margin-bottom: 0px;">
       <ion-row>
         <ion-col>
@@ -45,12 +47,15 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </div>
 
   <br>
+  <ion-title style="text-align: center;">Posts</ion-title>
   <ion-list *ngFor="let pst of miactividad" style="background-color: transparent !important;" class="itemCssFActividad  list-mdActividad">
-    <ion-card>
+    <ion-card class="border-post" [ngClass]="{
+      'border-post-retar': pst.post[0] == '#',
+      'border-post-informar': pst.post[0] == '!',
+      'border-post-compartir': pst.post[0] == '@'}">
       <div class="boder">
         <ion-item class="ion-item-css-" style="background-color: transparent;">
           <ion-avatar item-left>
@@ -59,7 +64,6 @@
           </ion-avatar>
           <ion-label class="author" (click)="verUser(pst.user)">{{pst.user.name}} {{pst.user.lastname}}</ion-label>
         </ion-item>
-        <br>
         <div style="background-color: transparent;" *ngIf="pst.medias.length === 0" class="labelContent">
           <label class="content">{{pst.post}}</label>
           <div class="time" class="ion-text-right"><br>
@@ -75,26 +79,26 @@
                 (click)="imageView(imag.media)">
             </ion-slide>
           </ion-slides>
-
           <div class="time" class="ion-text-right"><br>
             {{pst.created_at | date:'short'}}
           </div>
-        </div>
-        <ion-grid class="footer">
-          <ion-row>
-            <ion-col size="6" style="text-align: center; font-size: 25px;">
-              <button ion-button icon-only style="color: white; font-size: 20px; background-color: transparent;"
-                (click)="handleLike()" clear> {{LikeValue}}
-                <ion-icon name="thumbs-up"></ion-icon>
-              </button>
-            </ion-col>
-            <ion-col size="6" style="text-align: center;">
-              <button ion-button icon-only style="color: white; font-size: 25px; background-color: transparent;" clear>
-                <ion-icon name="chatbubbles"></ion-icon>
-              </button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+          <ion-grid class="footer">
+            <ion-row>
+              <ion-col size="6" style="text-align: center; font-size: 25px;">
+                <button ion-button icon-only style="color: white; font-size: 20px; background-color: transparent;"
+                  (click)="handleLike(pst.count_like, pst.user_id)" clear> {{pst.count_like}}
+                  <ion-icon name="thumbs-up"></ion-icon>
+                </button>
+              </ion-col>
+              <ion-col size="6" style="text-align: center;">
+                <button ion-button icon-only style="color: white; font-size: 25px; background-color: transparent;"
+                  (click)="openChat(pst.user)" clear>
+                  <ion-icon name="chatbubbles"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>   
       </div>
     </ion-card>
   </ion-list>

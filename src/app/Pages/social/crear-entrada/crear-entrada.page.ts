@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./crear-entrada.page.scss'],
 })
 export class CrearEntradaPage implements OnInit {
-  colors= ["#3dc2ff","#3880ff", "#eb445a"];
+  colors = ['#3dc2ff', '#3880ff', '#eb445a'];
   sliderImgOption = {
     zoom: false,
     slidesPerView: 1,
@@ -28,9 +28,10 @@ export class CrearEntradaPage implements OnInit {
   textareainput: any;
   photos: Array<any>;
   alert: any;
-  idAction:number;
+  idAction: number;
   sFotos: Array<any>;
   actividad;
+
   constructor(
     private camara: Camera,
     private actionSheetcontroller: ActionSheetController,
@@ -47,15 +48,15 @@ export class CrearEntradaPage implements OnInit {
 
   ngOnInit() {
 
-    //this.textareainput = ;
+    // this.textareainput = ;
     const informacion = this.pObjecto.getNavData();
-    this.idAction=informacion.idAction;
+    this.idAction = informacion.idAction;
     console.log(informacion);
     this.actividad = informacion.actividad;
-    console.log("Actividad",this.actividad );
+    console.log('Actividad', this.actividad );
     this.share.varDesafio.subscribe( res => {
       const informacion = this.pObjecto.getNavData();
-      console.log("Informacion ->",informacion);
+      console.log('Informacion ->', informacion);
       this.actividad = informacion.actividad;
     });
 
@@ -139,6 +140,15 @@ export class CrearEntradaPage implements OnInit {
 
   Publicar(){
     console.log(this.textareainput, this.photos);
+    if (this.idAction == 1) {
+      this.textareainput = '!Informa: ' + this.textareainput;
+    }
+    if (this.idAction == 2) {
+      this.textareainput = '@Comparte: ' + this.textareainput;
+    }
+    if (this.idAction == 3) {
+      this.textareainput = '#Reto: ' + this.textareainput;
+    }
     if (this.textareainput === undefined){
       this.alertDespuesTiempo();
     }else{
@@ -150,7 +160,7 @@ export class CrearEntradaPage implements OnInit {
       });
     }
   }
-  
+
   async alertDespuesTiempo() {
     this.alert = await this.alertController.create({
       header: 'HEY!',

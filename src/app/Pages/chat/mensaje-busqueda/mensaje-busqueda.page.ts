@@ -1,8 +1,10 @@
+import { catchError } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatServiceService } from 'src/app/_services/chat-service.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-mensaje-busqueda',
@@ -50,7 +52,7 @@ export class MensajeBusquedaPage implements OnInit {
         this.chatS.getchatsMSGUser(responseChat.data.id).subscribe( msgServ => {
           this.chatS.var.next('update mgs');
           setTimeout(() => {
-            this.content.scrollToBottom(200);
+            this.content.scrollToBottom();
           });
         });
         this.newMsg = '';
@@ -59,7 +61,7 @@ export class MensajeBusquedaPage implements OnInit {
   }
 
   volver() {
-    this.chatS.var.next('update');
+    // this.chatS.var.next('update');
     this.router.navigate(['/users/chat']);
   }
 }

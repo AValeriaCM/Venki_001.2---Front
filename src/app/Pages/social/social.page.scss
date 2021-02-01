@@ -11,8 +11,8 @@
 }
 
 img.avatar {
-  height: 5%;
-  width: 5%;
+  height: 10%;
+  width: 10%;
   background-color: #ddd;
 }
 
@@ -130,8 +130,8 @@ img.avatar {
     margin-bottom: 0;
     padding-left: 0;
     padding-right: 0;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     background: var(--ion-item-background, var(--ion-background-color, #ffffff00));
 }
 
@@ -192,10 +192,10 @@ img.avatar {
 .boder{
   //border: 0.5px solid rgb(114, 114, 114);
   //border-radius: 20px;
-  margin-left: 5%;
+  margin-left: 2%;
   margin-right: 2%;
-
-  box-shadow: 10px #000000;
+  padding-bottom: 0px;
+  
 }
 
 .time{
@@ -222,8 +222,8 @@ ion-slides{
 }
 
 .image-cont{
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   margin-left: 90px;
   border-radius: 25px;
   margin-top: 7.5px;
@@ -314,4 +314,56 @@ ion-slides{
 
 .botones{
 
+}
+
+:root {
+  --informacolor: #3dc2ff;
+  --informar-color: #3dc2ff;
+  --compartir-color: #3880ff;
+  --retar--color: #eb445a;
+}
+
+.border-post {
+  border: 4px solid;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 12px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.border-post-informar {
+  border-color: #3dc2ff;
+  .footer {
+    background-color: #1c99d3;
+  }
+
+  .author {
+    color: #3dc2ff;
+    text-align: center;
+  }
+}
+
+.border-post-compartir {
+  border-color: #3880ff;
+  .footer {
+    background-color: #3880ff;
+  }
+
+  .author {
+    color: #3880ff;
+    text-align: center;
+  }
+}
+
+.border-post-retar {
+  border-color: #eb445a;
+  .footer {
+    background-color: #eb445a;
+  }
+
+  .author {
+    color: #eb445a;
+    text-align: center;
+  }
 }

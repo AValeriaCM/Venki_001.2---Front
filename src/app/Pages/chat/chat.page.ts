@@ -14,29 +14,6 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 })
 export class ChatPage implements OnInit {
 
-  notoficaciones = [
-    {
-      id: 1,
-      notificacion: 'El usuario xxxxx te ah agregado como amigo',
-      img_notif: 'https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png'
-    },
-    {
-      id: 2,
-      notificacion: 'El usuario xxxxx te ah agregado como amigo',
-      img_notif: 'https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png'
-    },
-    {
-      id: 3,
-      notificacion: 'El usuario xxxxx te ah agregado como amigo',
-      img_notif: 'https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png'
-    },
-    {
-      id: 4,
-      notificacion: 'El usuario xxxxx te ah agregado como amigo',
-      img_notif: 'https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png'
-    }
-  ];
-
   userList: any[] = [];
   data: Array<any>;
   textoBuscar = '';
@@ -44,6 +21,8 @@ export class ChatPage implements OnInit {
   searhVariable: string;
   idUser: any;
   nameUser: any;
+  userTk = null;
+
   constructor(
     private router: Router,
     private chatS: ChatServiceService,
@@ -56,6 +35,7 @@ export class ChatPage implements OnInit {
     this.data = [];
     this.userList = [];
     this.auth.gettokenLog().then( tkInf => {
+      this.userTk = tkInf;
       this.log.logdataInfData(tkInf).subscribe( resTk => {
         this.idUser = resTk.id;
         this.nameUser = resTk.name;
@@ -80,6 +60,7 @@ export class ChatPage implements OnInit {
     });
     this.chatS.removeNotification();
     this.chatS.var.next('token remove');
+
   }
 
   buscar(event){
@@ -108,7 +89,7 @@ export class ChatPage implements OnInit {
 
   abrirMensajesBusqueda(info: any){
     this.data = [];
-    let dataObj = {
+    const dataObj = {
       infoDt :  info,
       transferID : this.idUser,
       useractual : this.nameUser

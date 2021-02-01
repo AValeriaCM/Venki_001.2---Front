@@ -14,7 +14,7 @@ export class ChatServiceService {
 
   var = new Subject<string>();
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient) { }
 
   getbadge() {
     return this.msjServ;
@@ -88,17 +88,17 @@ export class ChatServiceService {
     });
   }
 
-  enviarMensajeChat(chatid: any, transmiterID: any, msg: any) {
+  enviarMensajeChat(chatid: any, userid: any, msg: any) {
+    console.log('en el servicio', 'chatid', chatid, 'userid', userid, 'msg', msg);
     const body = new HttpParams()
       .set('chat_id', chatid)
-      .set('user_id', transmiterID)
+      .set('user_id', userid)
       .set('message', msg);
-
 
     return this.http.post(this.urlServ + `/api/messages`, body, {
       headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 

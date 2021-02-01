@@ -113,7 +113,7 @@ export class ShareserviceService {
   });
   }
 
-  agregarCurso(idUser:any, curso: any){
+  agregarCurso(idUser: any, curso: any){
     const body = new HttpParams()
       .set('course_id', curso);
     return this.http.post(this.basePath  + `/api/users/${idUser}/courses`, body, {
@@ -216,9 +216,9 @@ export class ShareserviceService {
     let diag = this.storage.get(INFO_TEMP);
 
     return diag.then(info => {
-      console.log('diagnistico service',info);
+      console.log('diagnistico service', info);
       return info;
-    })
+    });
   }
 
   hayorder() {
@@ -235,7 +235,6 @@ export class ShareserviceService {
   guardarLeccionActiva(dataCurso: any){
     this.storage.set(CURSOCONTROL, dataCurso);
   }
-  
 
   guardarCursoActiva(dataCurso: any){
     this.storage.set(CURSOCONTROLNAME, dataCurso);
@@ -273,6 +272,16 @@ export class ShareserviceService {
 
     return this.http.post(this.basePath + `/api/posts`, formData, {
       headers: new HttpHeaders()
+    });
+  }
+
+  actualizarpost(userid: any, countlike: any) {
+    const body = new HttpParams()
+    .set('count_like', countlike);
+
+    return this.http.put(this.basePath + `/api/posts/${userid}`, body, {
+      headers: new HttpHeaders()
+        .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 
@@ -379,5 +388,4 @@ export class ShareserviceService {
       .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
-  
 }

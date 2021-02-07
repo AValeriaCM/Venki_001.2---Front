@@ -178,22 +178,22 @@
       <ion-col size="12" class="ion-text-center" *ngFor="let track of aud">
 
         <ion-button fill=clear (click)="prev()" color="dark">
-          <ion-icon slot="icon-only" name="play-back"></ion-icon>
+          <ion-icon slot="icon-only" style="color: black;" name="play-back"></ion-icon>
         </ion-button>
 
         <ion-button fill=clear (click)="toggleplayer(true, track)" *ngIf="!isPlaying" color="dark">
-          <ion-icon slot="icon-only" name="play"></ion-icon>
+          <ion-icon slot="icon-only" style="color: black;" name="play"></ion-icon>
         </ion-button>
 
         <ion-button fill=clear (click)="toggleplayer(true, track)" *ngIf="isPlaying" color="dark">
-          <ion-icon slot="icon-only" name="pause"></ion-icon>
+          <ion-icon slot="icon-only" style="color: black;" name="pause"></ion-icon>
         </ion-button>
 
         <ion-button fill=clear (click)="next()" color="dark">
-          <ion-icon slot="icon-only" name="play-forward"></ion-icon>
+          <ion-icon slot="icon-only" style="color: black;" name="play-forward"></ion-icon>
         </ion-button>
-
       </ion-col>
+      <ion-button (click)="continue()">Continuar</ion-button>
     </ion-row>
   </ion-toolbar>
 </ion-footer>

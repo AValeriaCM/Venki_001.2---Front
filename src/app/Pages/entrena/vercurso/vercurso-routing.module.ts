@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: VercursoPage
+  },
+  {
+    path: 'verleccion',
+    loadChildren: () => import('../../../Pages/entrena/vercurso/verleccion/verleccion.module').then( m => m.VerleccionPageModule)
   }
 ];
 

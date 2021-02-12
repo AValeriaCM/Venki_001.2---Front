@@ -63,6 +63,27 @@ export class PerfilPage implements OnInit {
   usertk = null;
   loading: any;
   alert: any;
+  //var from edit
+  items = [
+    {
+      situacion: 'Soltero'
+    },
+    {
+      situacion: 'Casado'
+    }
+  ];
+  
+  emailPattern: any = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/;
+  nombrePattern: any = /^[A-Za-z -]+$/;
+  contrasenaPattern: any = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+  adressPattern: any = /^[#.0-9a-zA-Z\s,-]+$/;
+  phonePatten: any = /^[0-9]+$/;
+  
+  editarForm: FormGroup;
+  isSubmitted = false;
+  editarUser: Registro;
+  situacionS = null;
+  
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -355,27 +376,7 @@ export class PerfilPage implements OnInit {
 
 /*
 * form-edit
- */ 
-items = [
-  {
-    situacion: 'Soltero'
-  },
-  {
-    situacion: 'Casado'
-  }
-];
-
-emailPattern: any = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/;
-nombrePattern: any = /^[A-Za-z -]+$/;
-contrasenaPattern: any = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-adressPattern: any = /^[#.0-9a-zA-Z\s,-]+$/;
-phonePatten: any = /^[0-9]+$/;
-
-editarForm: FormGroup;
-isSubmitted = false;
-editarUser: Registro;
-situacionS = null;
-
+*/
 inicializarFormulario(dt: any) {
   this.editarForm = new FormGroup({
     name : new FormControl(dt.name,

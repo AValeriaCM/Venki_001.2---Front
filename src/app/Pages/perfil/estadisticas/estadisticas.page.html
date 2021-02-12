@@ -18,12 +18,13 @@
   <ion-card-content>
     <canvas #barChart></canvas>
   </ion-card-content>
-  <ion-card-content>
+  
+  <ion-card-content>    
     <ion-list>
-
+      
       <ion-item>
         <ion-avatar slot="start">
-          <label class="circulo" style="background-color: rgba(255, 99, 132, 0.8);">2.0</label>
+          <label class="circulo" style="background-color: rgba(255, 99, 132, 0.8);" >{{emocional}}</label>
         </ion-avatar>
         <ion-label>
           <h3>Emocional</h3>
@@ -32,7 +33,7 @@
 
       <ion-item>
         <ion-avatar slot="start" >
-          <label class="circulo" style="background-color: rgba(54, 162, 235, 0.8)">1.0</label>
+          <label class="circulo" style="background-color: rgba(54, 162, 235, 0.8)">{{cognitivo}}</label>
         </ion-avatar>
         <ion-label>
           <h3>Cognitivo</h3>
@@ -41,7 +42,7 @@
 
       <ion-item>
         <ion-avatar slot="start">
-          <label class="circulo" style="background-color: rgba(255, 206, 86, 0.8)">2.0</label>
+          <ion-label class="circulo" style="background-color: rgba(255, 206, 86, 0.8)">{{conductual}}</ion-label>
         </ion-avatar>
         <ion-label>
           <h3>Conductual</h3>
@@ -50,19 +51,20 @@
 
       <ion-item>
         <ion-avatar slot="start">
-          <label class="circulo" style="background-color: rgba(75, 192, 192, 0.8)">3.0</label>
+          <label class="circulo" style="background-color: rgba(75, 192, 192, 0.8)">{{fortaleza}}</label>
         </ion-avatar>
         <ion-label>
           <h3>Fortaleza mental</h3>
         </ion-label>
       </ion-item>
+    
     </ion-list>
+    
   </ion-card-content>
 
   <ion-row>
     <ion-col>
       <ion-button size="small" class="footer-dis-bot2"  (click)="close()" >
-        {{Cerrar}}
         <ion-icon name="close-circle-outline"></ion-icon>
      </ion-button>
     </ion-col>

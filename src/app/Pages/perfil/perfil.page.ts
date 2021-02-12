@@ -1,3 +1,6 @@
+import { RegistroService } from './../../_services/registro.service';
+import { Registro } from './../../_model/Registro';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import { ShareserviceService } from './../../_services/shareservice.service';
 import { AuthService } from './../../_services/auth.service';
@@ -60,6 +63,27 @@ export class PerfilPage implements OnInit {
   usertk = null;
   loading: any;
   alert: any;
+  //var from edit
+  items = [
+    {
+      situacion: 'Soltero'
+    },
+    {
+      situacion: 'Casado'
+    }
+  ];
+  
+  emailPattern: any = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/;
+  nombrePattern: any = /^[A-Za-z -]+$/;
+  contrasenaPattern: any = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+  adressPattern: any = /^[#.0-9a-zA-Z\s,-]+$/;
+  phonePatten: any = /^[0-9]+$/;
+  
+  editarForm: FormGroup;
+  isSubmitted = false;
+  editarUser: Registro;
+  situacionS = null;
+  
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -72,7 +96,8 @@ export class PerfilPage implements OnInit {
     private loadingCtrl: LoadingController,
     private pObjecto: PassObjectService,
     public alertController: AlertController,
-    private popover:PopoverController 
+    private popover:PopoverController,
+    private edit: RegistroService  
     ) { }
 
   ngOnInit() {
@@ -107,6 +132,7 @@ export class PerfilPage implements OnInit {
       this.log.logdataInfData(dt).subscribe( infoUser => {
         console.log(infoUser);
         this.usertk = infoUser;
+        this.inicializarFormulario(this.usertk);  
         if (this.usertk.photo === null){
           this.usertk.photo = 'https://i.ibb.co/f0Z6QWK/default.jpg';
           this.getcursos(this.usertk.id);
@@ -348,4 +374,41 @@ export class PerfilPage implements OnInit {
     }, 2000);
   }
 
+/*
+* form-edit
+*/
+inicializarFormulario(dt: any) {
+  this.editarForm = new FormGroup({
+    name : new FormControl(dt.name,
+    [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+    lastname : new FormControl(dt.lastname,
+    [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+    birthday : new FormControl(dt.birthday, [Validators.required]),
+    email : new FormControl(dt.email,
+    [Validators.required, Validators.min(7) , Validators.max(70), Validators.pattern(this.emailPattern)]),
+    phone : new FormControl(dt.phone,
+    [Validators.required, Validators.minLength(8) , Validators.maxLength(22), Validators.pattern(this.phonePatten)]),
+    description : new FormControl(dt.description,
+    [Validators.required]),
+    institution : new FormControl(dt.institution,
+      [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+    city : new FormControl(dt.city,
+        [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+  });
+}
+
+editar(){
+  console.log(this.editarForm.value, this.usertk.id);
+  this.editarUser = this.editarForm.value;
+  this.edit.Editartodo(this.editarUser, this.usertk.id, this.situacionS).subscribe( response => {
+    this.auth.updateToken();
+    this.share.var.next('data update');
+    this.router.navigateByUrl('/users/home');
+  });
+}
+
+optionsFn(it: any){
+  this.situacionS = it.situacion;
+  console.log(this.situacionS);
+}
 }

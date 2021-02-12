@@ -12,11 +12,16 @@ import { LoginService } from 'src/app/_services/login.service';
 })
 export class EstadisticasPage implements OnInit {
 
-  dataStats = [];
+  dataStats: any [];
 
   bars: any;
   colorArray: any;
-  usertk;
+  usertk = null;
+  emocional: number;
+  cognitivo: number;
+  conductual:number;
+  fortaleza:number;
+
   constructor(
     private auth: AuthService,
     private log: LoginService,
@@ -24,14 +29,19 @@ export class EstadisticasPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    /**this.auth.gettokenLog().then( dt => {
+    this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
         console.log(infoUser);
         this.usertk = infoUser;
-        this.dataStats = [infoUser.cognitivo, infoUser.emocional, infoUser.conductual, infoUser.fortaleza_mental];
-    
+         this.dataStats = [infoUser.emocional, infoUser.cognitivo, infoUser.conductual, infoUser.fortaleza_mental];
+         this.emocional = this.usertk.emocional;
+         this.cognitivo = this.usertk.cognitivo;
+         this.conductual = this.usertk.conductual;
+         this.fortaleza = this.usertk.fortaleza_mental; 
+         console.log(this.emocional);
+         
       });
-    });**/
+    });
     
   }
   
@@ -51,7 +61,7 @@ export class EstadisticasPage implements OnInit {
         labels: ['Emocional', 'Cognitivo', 'Conductual', 'Fortaleza mental'],
         datasets: [{
           label: 'Resultados',
-          data: [2.0, 1.0, 2.0, 3.0],
+          data:  this.dataStats,//[2.0, 1.0, 2.0, 3.0],//data db
           backgroundColor: [
             "rgba(255, 99, 132, 0.8)",
             "rgba(54, 162, 235, 0.8)",

@@ -14,44 +14,39 @@
   <div class="semi-circulo-2" style="background-color: {{color}};"></div>
   <br>
   <div *ngIf="info" class="divBack">
-    <ion-grid>
-      <ion-row>
-        <ion-title class="title-gen">
-          <h1 class="title-cat">
-            <strong>{{info.name}}</strong>
-          </h1>
-        </ion-title>
-      </ion-row>
-      <br>
 
-      <ion-row>
-        <ion-col size="2">
-          <!--<img class="imgStyle" src="http://venki.3utilities.com/{{info.photo}}">-->
-        </ion-col>
-        <ion-col size="7">
-          <ion-card-subtitle class="Subtitle-css"><strong>Curso:</strong> &nbsp;{{info.name}}
-          </ion-card-subtitle>
-          <ion-card-subtitle class="Subtitle-css">
-            <strong>Duracion:</strong>&nbsp;{{info.duration}} minutos por sesión
-          </ion-card-subtitle>
-        </ion-col>
-        <ion-col size="1">
-
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-card class="divBack">
-      <ion-card-header>
-        <span class="Subtitle-css"><b>Descripcion:</b>&nbsp;{{info.description}}</span><br>
-      </ion-card-header>
-      <ion-card-content>
-
-
-        <br>
+    <ion-card>
+      <ion-title class="title-gen">
+        <h1 class="title-cat" style="color:{{color}}">
+          <strong>{{info.name}}</strong>
+        </h1>
+      </ion-title>
+      <ion-card-content style="color: black; font-size: large !important; text-align: center;">
+        <ion-item>
+          <ion-icon name="time-outline" style="zoom: 1;"></ion-icon>
+          <p> &nbsp;&nbsp;{{info.duration}}&nbsp; minutos por sesión</p>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="book" style="zoom: 1;"></ion-icon>
+          <p>&nbsp;&nbsp; {{CourseLessonID}}&nbsp;&nbsp; Lecciones  </p>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="create" style="zoom:1.5; "></ion-icon>&nbsp;&nbsp; 
+          <br>
+          <p style="text-align: justify;"> {{info.description}}&nbsp;&nbsp;</p>
+        </ion-item>
+        <h3 class="title-cat" style="color:{{color}}">
+          <strong>Trailer</strong>
+        </h3>
         <iframe #playerVim [src]="info.trailer + '?playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
           webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
         <br>
+        
+      </ion-card-content>
+
+    </ion-card>
+    <!--<ion-card class="divBack">
+      <ion-card-content>
         <div *ngIf="progreso !== 0">
           <ion-item>
             <ion-range min="1" max="10" step="1" [(ngModel)]="calificacionVal" (ionChange)="calificacion($event)"
@@ -62,17 +57,19 @@
           </ion-item>
         </div>
       </ion-card-content>
-    </ion-card>
+    </ion-card>-->
   </div>
 
   <div *ngIf="courseID  === CourseLessonID">
 
     <ion-list *ngFor="let cur of cursos; let i = index;" class="accordion-list" lines="none" detail="false" no-padding>
 
-      <ion-item class="ion-item-css" tappable (click)="toggleSection(i, cur.pivot.progress)"
+      <ion-item style="align-items: flex-start;" class="ion-item-css" tappable (click)="toggleSection(i, cur.pivot.progress)"
         [ngClass]="{'section-active': cur.open, 'section': !cur.open}">
-        <ion-icon slot="start" class="icon-color" name="arrow-forward" style="background: {{color}};" *ngIf="!cur.open"></ion-icon>
-        <ion-icon slot="start" name="arrow-down" class="icon-color" style="background: {{color}};" *ngIf="cur.open"></ion-icon>
+        <ion-icon slot="start" class="icon-color" name="arrow-forward" style="background: {{color}};" *ngIf="!cur.open">
+        </ion-icon>
+        <ion-icon slot="start" name="arrow-down" class="icon-color" style="background: {{color}};" *ngIf="cur.open">
+        </ion-icon>
         <ion-label class="cursoName" style="border-bottom: {{color}} 10px solid;">
           Lecciones {{progesoVal}}%
         </ion-label>
@@ -81,16 +78,16 @@
 
       <div *ngIf="cur.lessons && cur.open">
         <ion-list *ngFor="let lections of cur.lessons;  let j = index;" lines="none" class="itemCssF list-md">
-          <ion-item class="ion-item-css" tappable (click)="toggleItem(i, j)"
+          <ion-button class="ion-item-css" tappable (click)="toggleItem(i, j)"
             [ngClass]="{'lecciones-active': lections.open, 'lecciones': !lections.open}">
             <ion-icon slot="start" name="checkmark-outline" style="color: {{color}};" *ngIf="!lections.open"></ion-icon>
-            <ion-icon slot="start" name="close"  style="color: {{color}};"  *ngIf="lections.open"></ion-icon>
+            <!--<ion-icon slot="start" name="close" style="color: {{color}};" *ngIf="lections.open"></ion-icon>-->
             <ion-label class="lessonName">
               <p class="color-text"> {{lections.name}}</p>
             </ion-label>
-          </ion-item>
+          </ion-button>
 
-          <ion-list *ngIf="lections && lections.open" class="contenido-list" lines="none">
+          <!--<ion-list *ngIf="lections && lections.open" class="contenido-list" lines="none">
             <div>
               <hr class="dashed">
               <ion-row class="rowcss">
@@ -104,32 +101,30 @@
                   </ion-row>
                   <ion-row>
                     <ion-col size=12>
-                      <div class="contentNamedesc">
-                        <p >
+                      <div style="text-align: justify;">
+                        <span>
                           {{lections.description}}
-                        </p>
+                        </span>
                       </div>
                     </ion-col>
                   </ion-row>
+                  <div class="card card-3">
+                    <h2 style="text-align: center;">Audio, video y examen. Así de sencillo. ¡Anímate!</h2>
+                  </div>
                 </ion-col>
-                <ion-col size="2" text-right *ngFor="let recursos of lections.resources" class="lesson-content">
+                <ion-col *ngFor="let recursos of lections.resources" align="center" >
+                  
+                  <div *ngIf="recursos.order === 1">
+                      <div *ngIf="recursos.audio">
+                        <ion-button fill="outline" class="button-start" 
+                          (click)="audioPlayer(lections.name,recursos.audio, recursos.order, lections.resources?.length)">
+                          <ion-icon name="play"></ion-icon>Iniciar Leccion
+                        </ion-button>
+                      </div>
 
-
-                  <div *ngIf="recursos.order === 1" align="center">
-                    <div *ngIf="recursos.audio">
-                      <ion-button fill="outline" class="button-lesson"
-                        (click)="audioPlayer(lections.name,recursos.audio, recursos.order, lections.resources?.length)">
-                        <ion-icon name="musical-notes-outline" style="color:#2a1139 ;"></ion-icon>
-                      </ion-button>
-                    </div>
-                    <div *ngIf="recursos.document">
-                      <ion-button fill="outline"  class="button-lesson"
-                        (click)="previewDocuments(lections.name,recursos.document,  recursos.order, lections.resources?.length)">
-                        <ion-icon name="book-outline" style="color:#6a0909;"></ion-icon>
-                      </ion-button>
-                    </div>
+                      
                     <div *ngIf="recursos.video">
-                      <ion-button fill="outline"  class="button-lesson"
+                      <ion-button fill="outline" class="button-lesson"
                         (click)="startVideo(lections.name,recursos.video, recursos.order, lections.resources?.length)">
                         <ion-icon name="videocam" style="color: #190643;"></ion-icon>
                       </ion-button>
@@ -177,6 +172,7 @@
                       </ion-button>
                     </div>
                   </div>
+                  
 
                 </ion-col>
                 <div *ngIf="exam !== 0">
@@ -188,8 +184,10 @@
                 </div>
 
               </ion-row>
+              
+              
             </div>
-          </ion-list>
+          </ion-list>-->
         </ion-list>
       </div>
 

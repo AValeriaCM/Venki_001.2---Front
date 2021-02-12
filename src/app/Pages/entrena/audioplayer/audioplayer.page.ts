@@ -118,4 +118,8 @@ export class AudioplayerPage implements OnInit {
     }, 1000);
   }
 
+  continue(){
+    this.router.navigate(['/users/entrena/vidplayer/']);
+  }
+
 }

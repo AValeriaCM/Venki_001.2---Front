@@ -7,11 +7,11 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 
 @Component({
-  selector: 'app-vercurso',
-  templateUrl: './vercurso.page.html',
-  styleUrls: ['./vercurso.page.scss'],
+  selector: 'app-verleccion',
+  templateUrl: './verleccion.page.html',
+  styleUrls: ['./verleccion.page.scss'],
 })
-export class VercursoPage implements OnInit {
+export class VerleccionPage implements OnInit {
 
   data: any;
   info;

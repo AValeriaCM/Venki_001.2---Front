@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/users/social/"></ion-back-button>
+      <ion-back-button (click)="volver()">Volver</ion-back-button>
     </ion-buttons>
     <ion-title class="tituloInfo">
       <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
@@ -42,7 +42,7 @@
           <ion-icon name="calendar"></ion-icon>
           <ion-label class="Subtitle-css">{{usuario.birthday}}</ion-label>
         </ion-item>
-        <ion-item class="ion-item-css">
+        <!--<ion-item class="ion-item-css">
           <ion-icon name="layers"></ion-icon>
           <ion-label class="Subtitle-css">Categoria: <br> {{usuario.profile.name}}</ion-label>
         </ion-item>
@@ -52,9 +52,9 @@
         </ion-item>
         <ion-item class="ion-item-css">
           <ion-icon name="chatbubble-ellipses" class="iconDesc"></ion-icon> &nbsp;
-          <ion-textarea [disabled]="true" rows="5" class="Subtitle-cs-desc">{{usuario.description}}
+          <ion-textarea [disabled]="true" rows="5" class="Subtitle-cs-desc" style="text-align: center;">{{usuario.description}}
           </ion-textarea>
-        </ion-item>
+        </ion-item>-->
         <ion-item class="ion-item-css"  *ngIf="usuario.institution === null || usuario.institution === ''">
           <ion-icon name="school"  class="iconDesc"></ion-icon> &nbsp;
           <ion-label class="Subtitle-css">Agrega Donde estudiaste</ion-label>

@@ -17,6 +17,7 @@ export class ShareserviceService {
   url2 = `/api/user`;
   urlCuros = `/api/courses`;
   basePath = `http://venki.3utilities.com`;
+  // basePath = `http://127.0.0.1:8000`;
 
   var = new Subject<string>();
   varorder = new Subject<string>();
@@ -213,7 +214,7 @@ export class ShareserviceService {
   }
 
   hayDiagnistico(){
-    let diag = this.storage.get(INFO_TEMP);
+    const diag = this.storage.get(INFO_TEMP);
 
     return diag.then(info => {
       console.log('diagnistico service', info);
@@ -270,18 +271,19 @@ export class ShareserviceService {
     formData.append('post', posttxt);
     formData.append('medias[]', media);
 
-    return this.http.post(this.basePath + `/api/posts`, formData, {
+    return this.http.put(this.basePath + `/api/posts`, formData, {
       headers: new HttpHeaders()
     });
   }
 
   actualizarpost(userid: any, countlike: any) {
     const body = new HttpParams()
-    .set('count_like', countlike);
-
-    return this.http.put(this.basePath + `/api/posts/${userid}`, body, {
+        .set('count_like', countlike);
+    console.log('datos en el servicio -> antes de enviar', userid, countlike);
+    return this.http.put(this.basePath + `/api/posts` + `/${userid}`, body, {
       headers: new HttpHeaders()
-        .set('X-Requested-With', 'XMLHttpRequest')
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 

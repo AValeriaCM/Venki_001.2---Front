@@ -112,35 +112,6 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
     this.content.scrollToBottom(100);
   }
 
-  /*enviarMsg() {
-    this.chatS.enviarMensajeChat(this.data.id, this.transmiterID, this.newMsg).subscribe((responseMsg: any) => {
-      console.log(responseMsg);
-      let chatid = responseMsg.data.chat_id;
-      let createat = responseMsg.data.created_at;
-      let idDT = responseMsg.data.id;
-      let msg = responseMsg.data.message;
-      let update = responseMsg.data.updated_at;
-      let userId = responseMsg.data.user_id;
-      let idparse: number = +userId;
-      let charparse: number = +chatid;
-
-      let dataObj = {
-        chat_id: charparse,
-        created_at: createat,
-        id: idDT,
-        message: msg,
-        updated_at: update,
-        user_id: idparse
-      };
-
-      // this.menjs.push(dataObj);
-      setTimeout(() => {
-        this.content.scrollToBottom(200);
-      });
-      this.newMsg = '';
-    });
-  }*/
-
   enviarMsg() {
     this.chatS.enviarMensajeChat(this.chatId, this.transmiterID, this.newMsg).subscribe( response => {
       this.chatS.getchatsMSGUser(this.chatId).subscribe( res => {

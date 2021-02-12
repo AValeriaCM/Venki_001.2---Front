@@ -60,6 +60,7 @@ export class ChatPage implements OnInit {
     });
     this.chatS.removeNotification();
     this.chatS.var.next('token remove');
+    console.log('lo que trae userlist', this.userList);
 
   }
 
@@ -96,6 +97,15 @@ export class ChatPage implements OnInit {
     };
     this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/chat/mensaje-busqueda/']);
+  }
+
+  verUser(userdt: any){
+    console.log('user enviado', userdt);
+    const dataObj = {
+      userinfo: userdt
+    };
+    this.pObjecto.setData(dataObj);
+    this.router.navigate(['/users/social/ver-usuario/']);
   }
 
   volverHome(){

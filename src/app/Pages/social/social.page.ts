@@ -9,6 +9,8 @@ import { LoginService } from 'src/app/_services/login.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import firebase from "firebase";
+import Item = firebase.analytics.Item;
 
 
 @Component({
@@ -52,6 +54,7 @@ export class SocialPage implements OnInit {
   LikeValue: number;
   contadorlike: number;
   idPost: any;
+  config: any;
 
   constructor(
 
@@ -189,13 +192,15 @@ export class SocialPage implements OnInit {
   }
 
   handleLike(valor: any, valorid: any){
+    this.LikeValue = valor;
     this.contadorlike = valor;
     this.contadorlike = this.contadorlike + 1;
     this.idPost = valorid;
     this.share.actualizarpost(this.idPost, this.contadorlike).subscribe( res => {
       console.log(res);
       this.share.varPostUpdate.next('update data');
-      this.route.navigate(['/users/social/']);
+      this.ngOnInit();
+      // location.reload();
     });
    }
 
@@ -267,7 +272,7 @@ export class SocialPage implements OnInit {
           });
           event.target.complete();
         });
-    }, 2000);
+    }, 5000);
   }
 
 }

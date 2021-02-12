@@ -28,8 +28,7 @@
         <img src="/assets/user.png" (click)="abrirMensajesBusqueda(userS)"/>
       </ion-avatar>
       <p class="user-list" (click)="abrirMensajesBusqueda(userS)">
-        <strong>{{userS.name}}&nbsp;{{userS.lastname}}</strong><br>
-        <span>{{userS.email}}</span>
+        <strong>{{userS.name}}&nbsp;{{userS.lastname}}</strong>
       </p>
     </ion-item>
   </ion-list>
@@ -56,7 +55,7 @@
                 </ion-avatar>
                 <p class="user-list" (click)="abrirDialogo(cont)">
                   <strong>{{cont.transmitter.name}}&nbsp;{{cont.transmitter.lastname}}</strong><br>
-                  <span>{{cont.receiver.email}}</span>
+                  <span>{{cont.receiver.city}}</span>
                 </p>
               </ion-item>
               <ion-item class="friend" *ngIf="idUser !== cont.receiver.id">
@@ -65,7 +64,7 @@
                 </ion-avatar>
                 <p class="user-list" (click)="abrirDialogo(cont)">
                   <strong>{{cont.receiver.name}}&nbsp;{{cont.receiver.lastname}}</strong><br>
-                  <span>{{cont.receiver.email}}</span>
+                  <span>{{cont.receiver.city}}</span>
                 </p>
               </ion-item>
             </ion-list>
@@ -89,18 +88,27 @@
         <ion-list *ngFor="let cont of userList">
           <ion-item *ngIf="idUser == cont.transmitter.id" class="friend">
             <ion-avatar slot="start" class="author-image">
-              <img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
+              <!--<img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />-->
+              <img class="avatar" src="../../../assets/avatar/{{cont.receiver.avatar}}.jpg" class="imagestyle" (click)="verUser(cont.receiver)">
             </ion-avatar>
-            <p class="user-list">
+            <p class="user-list" (click)="verUser(cont.receiver)">
               <strong>Agregaste a <span style="color: black; font-size: 13px;">{{cont.receiver.name}}&nbsp;{{cont.receiver.lastname}}</span> como amigo. </strong>
             </p>
           </ion-item>
           <ion-item *ngIf="idUser !== cont.transmitter.id" class="friend">
             <ion-avatar slot="start" class="author-image">
-              <img src="https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png" />
+              <img class="avatar" src="../../../assets/avatar/{{cont.transmitter.avatar}}.jpg" class="imagestyle" (click)="verUser(cont.transmitter)"/>
             </ion-avatar>
-            <p class="user-list">
+            <p class="user-list" (click)="verUser(cont.transmitter)">
               <strong>El usuario <span style="color: black; font-size: 13px;">{{cont.transmitter.name}}&nbsp;{{cont.transmitter.lastname}}</span> Te ha agregado como amigo. </strong>
+            </p>
+          </ion-item>
+          <ion-item *ngIf="idUser !== cont.transmitter.id" class="friend">
+            <ion-avatar slot="start" class="author-image">
+              <img class="avatar" src="../../../assets/avatar/{{cont.transmitter.avatar}}.jpg" class="imagestyle" (click)="verUser(cont.transmitter)"/>
+            </ion-avatar>
+            <p class="user-list" (click)="verUser(cont.transmitter)">
+              <strong>El usuario <span style="color: black; font-size: 13px;">{{cont.transmitter.name}}&nbsp;{{cont.transmitter.lastname}}</span> Te ha enviado un mensaje. </strong>
             </p>
           </ion-item>
         </ion-list>

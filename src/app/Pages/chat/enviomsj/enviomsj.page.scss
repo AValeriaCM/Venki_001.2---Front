@@ -41,16 +41,17 @@ span {
   color: black !important;
   border: 1px solid black;
   text-align: right;
-  margin-left: 100px !important;
+  margin-left: 50px !important;
 }
 
 .other-message.left {
   float: left;
-  background: #007AFF !important;
+  // background: #007AFF !important;
+  background-color: #4284c7 !important;
   color: white !important;
   border: 1px solid black;
   text-align: left;
-  margin-right: 100px !important;
+  margin-right: 50px !important;
 }
 
 .time {

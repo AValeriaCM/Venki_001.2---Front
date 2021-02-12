@@ -43,7 +43,7 @@
         <img src="/assets/social/im{{idAction}}.png">
       </ion-col>
       <ion-col size="9">
-        <textarea class="textArea" fill=clear [(ngModel)]="textareainput" placeholder="Escribe aquí..." rows="4"
+        <textarea class="textArea" fill=clear [(ngModel)]="textareainput" [placeholder]="vistaHolder(idAction)" rows="4"
           cols="150" maxlength="150"></textarea>
         <div *ngIf="photos">
           <ion-slides [options]="sliderImgOption">

@@ -71,6 +71,18 @@ export class CrearEntradaPage implements OnInit {
 
   }
 
+  vistaHolder(idAction: number) {
+    if (idAction === 1) {
+      return '¿Que está pasando?';
+    }
+    if (idAction === 2) {
+      return '¿Qué quieres socializar?';
+    }
+    if (idAction === 3) {
+      return '¡Reta a la Comunidad! ¡Crea un desafío!';
+    }
+  }
+
   async selccionImg(){
     const acctionSheet = await this.actionSheetcontroller.create({
       header: 'Selecciona Una Imagen',
@@ -140,13 +152,13 @@ export class CrearEntradaPage implements OnInit {
 
   Publicar(){
     console.log(this.textareainput, this.photos);
-    if (this.idAction == 1) {
+    if (this.idAction === 1) {
       this.textareainput = '!Informa: ' + this.textareainput;
     }
-    if (this.idAction == 2) {
+    if (this.idAction === 2) {
       this.textareainput = '@Comparte: ' + this.textareainput;
     }
-    if (this.idAction == 3) {
+    if (this.idAction === 3) {
       this.textareainput = '#Reto: ' + this.textareainput;
     }
     if (this.textareainput === undefined){

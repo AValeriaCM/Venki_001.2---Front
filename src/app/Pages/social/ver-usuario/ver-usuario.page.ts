@@ -2,6 +2,7 @@ import { Cursos } from './../../../_model/Cursos';
 import { Component, OnInit } from '@angular/core';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ver-usuario',
@@ -10,11 +11,12 @@ import { ShareserviceService } from 'src/app/_services/shareservice.service';
 })
 export class VerUsuarioPage implements OnInit {
 
-  usuario;
+  usuario: any;
   cursos: any;
   constructor(
     private pObjecto: PassObjectService,
-    private share: ShareserviceService
+    private share: ShareserviceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,6 +27,15 @@ export class VerUsuarioPage implements OnInit {
     this.share.getCursosUsuario(this.usuario.id).subscribe( info => {
       this.cursos = info.data;
     });
+  }
+
+  volver() {
+
+    if (this.usuario.profile.length === 0) {
+      this.router.navigate(['/users/chat']);
+    } else {
+      this.router.navigate(['/users/social']);
+    }
   }
 
 

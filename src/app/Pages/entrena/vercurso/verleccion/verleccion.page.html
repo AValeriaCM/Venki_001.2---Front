@@ -18,7 +18,7 @@
      
         <ion-list *ngFor="let lections of cur.lessons;  let j = index;" lines="none" class="itemCssF list-md">
           
-          <ion-card>
+          <ion-card *ngIf="lections.id">
             <ion-card-title align="center" style="color:{{color}}; text-transform: uppercase;"> {{lections.name}}</ion-card-title>
             <ion-card-content style="text-align: justify; color: black;">{{lections.description}}</ion-card-content>
             <div class="card card-3">
@@ -39,8 +39,8 @@
   
                     <div *ngIf="recursos.video">
                       <ion-button fill="outline" class="button-lesson"
-                        (click)="startVideo(lections.name,recursos.video, recursos.order, lections.resources?.length)">
-                        <ion-icon name="videocam" style="color: #190643;"></ion-icon>
+                        (click)="audioPlayer(lections.name,recursos.video, recursos.order, lections.resources?.length)">
+                        <ion-icon name="videocam"></ion-icon>
                       </ion-button>
                     </div>
                   </div>
@@ -87,15 +87,17 @@
                     </div>
                   </div>
   
-  
+                  
                 </ion-col>
-                <div *ngIf="exam !== 0">
-                  <div *ngIf="lections.exam">
-                    <ion-button fill="outline" (click)="examen(lections.exam)">
-                      <ion-icon name="ribbon"></ion-icon>
-                    </ion-button>
+                <ion-col>
+                  <div *ngIf="exam !== 0">
+                    <div *ngIf="lections.exam">
+                      <ion-button fill="outline" (click)="examen(lections.exam)">
+                        <ion-icon name="ribbon"></ion-icon>
+                      </ion-button>
+                    </div>
                   </div>
-                </div>
+                </ion-col>
   
               </ion-row>
   

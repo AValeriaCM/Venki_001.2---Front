@@ -191,7 +191,7 @@ export class VercursoPage implements OnInit {
       tm: tma
     };
     this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/entrena/audioplayer/']);
+    this.router.navigate(['/users/entrena//vercaudioplayer/']);
   }
 
   startVideo(lectionName: any, video: any,  order: any, tma: any) {

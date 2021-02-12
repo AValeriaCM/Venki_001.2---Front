@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/users/entrena/vercurso"></ion-back-button>
+      <ion-back-button defaultHref="/users/entrena/vercurso/"></ion-back-button>
     </ion-buttons>
     <ion-title class="tituloInfo">
       <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
@@ -35,7 +35,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -50,7 +50,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -65,7 +65,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -80,7 +80,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -95,7 +95,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -110,7 +110,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -125,7 +125,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -140,7 +140,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -155,12 +155,12 @@
           <div></div>
         </div>
       </div>
-    
+
     </div>
-  
-    
+
+
   </div>
-  
+
 
 </ion-content>
 
@@ -193,7 +193,15 @@
           <ion-icon slot="icon-only" style="color: black;" name="play-forward"></ion-icon>
         </ion-button>
       </ion-col>
-      <ion-button (click)="continue()">Continuar</ion-button>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="continue()">
+            Continuar
+          </ion-button>
+        </ion-col> 
+      </ion-row>
+
+
     </ion-row>
   </ion-toolbar>
 </ion-footer>

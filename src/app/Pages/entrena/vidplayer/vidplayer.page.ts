@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 
@@ -21,11 +22,12 @@ export class VidplayerPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private pObjecto: PassObjectService,
+    private pObjectoVideo: PassObjectVideoService,
     private share: ShareserviceService) {
   }
 
   ngOnInit() {
-    let info = this.pObjecto.getNavData();
+    let info = this.pObjectoVideo.getNavData();
     console.log(info);
     this.share.guardarLeccionActiva(info);
     this.data = info.vidInfo;

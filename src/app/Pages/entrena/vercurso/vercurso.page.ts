@@ -5,6 +5,7 @@ import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
 
 @Component({
   selector: 'app-vercurso',
@@ -39,12 +40,15 @@ export class VercursoPage implements OnInit {
     private share: ShareserviceService,
     public alertController: AlertController,
     private pObjecto: PassObjectService,
+    private pObjectoVideo: PassObjectVideoService,
     private previewAnyFile: PreviewAnyFile,
     private streaminmedia: StreamingMedia, ) {
   }
 
   ngOnInit() {
     const informacion = this.pObjecto.getNavData();
+    console.log('lo que necesito:', informacion);
+    this.pObjectoVideo.setData(informacion);
     this.color=informacion.color;
     this.data = informacion.infoCurso;
     this.userinfo = informacion.userInf;

@@ -43,7 +43,7 @@ export class CursosCategoriasPage implements OnInit {
   ngOnInit() {
 
     let informacion = this.pObjecto.getNavData();
-    console.log(informacion);
+    console.log(informacion,'trae entrena');
     this.color=informacion.color;
     this.usertk = informacion.userInf;
     this.userIDName  = informacion.userInf.id;
@@ -79,7 +79,7 @@ export class CursosCategoriasPage implements OnInit {
     console.log('curso', curso.id);
     console.log('id_user', this.usertk.id);
     this.share.agregarCurso(this.usertk.id, curso.id).subscribe(data => {
-          console.log(data);
+          console.log(data, 'info entrena ');
     });
 
   }

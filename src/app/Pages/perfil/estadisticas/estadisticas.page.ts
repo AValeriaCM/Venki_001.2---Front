@@ -39,8 +39,8 @@ export class EstadisticasPage implements OnInit {
          this.conductual = this.usertk.conductual;
          this.fortaleza = this.usertk.fortaleza_mental; 
          console.log(this.emocional);
-         
-      });
+         this.createBarChart();         
+      });   
     });
     
   }

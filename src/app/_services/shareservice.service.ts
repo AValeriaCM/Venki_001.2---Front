@@ -92,7 +92,7 @@ export class ShareserviceService {
   }
 
   getCursosCategorias(idCat: any, idUser: any){
-    console.log('id cat', idCat, 'idUser', idUser);
+    //console.log('id cat', idCat, 'idUser', idUser);
     return this.http.get<any>(this.basePath + `/api/categories/${idCat}/courses?user_id=${idUser}` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
@@ -137,7 +137,7 @@ export class ShareserviceService {
   }
 
   enviarComentarioIPutuacion(idCurso: any, idUser: any, comment: any, score: any){
-    console.log(idCurso, idUser, comment, score);
+    console.log('idcur'+idCurso, 'iduser'+idUser, 'coment'+comment, 'score'+score);
     const body = new HttpParams()
       .set('course_id', idCurso)
       .set('user_id', idUser)

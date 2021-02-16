@@ -90,7 +90,7 @@ export class EntrenaPage implements OnInit {
     this.share.getCategorias().subscribe(info => {
       this.cursos = info.data;
       this.cursosCargados=this.cursos;
-      console.log(this.cursos);
+      console.log('esta info es:',this.cursos);
     });
   }
 

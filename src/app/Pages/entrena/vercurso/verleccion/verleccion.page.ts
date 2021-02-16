@@ -40,7 +40,8 @@ export class VerleccionPage implements OnInit {
     public alertController: AlertController,
     private pObjecto: PassObjectService,
     private previewAnyFile: PreviewAnyFile,
-    private streaminmedia: StreamingMedia, ) {
+    private streaminmedia: StreamingMedia
+    ) {
   }
 
   ngOnInit() {
@@ -81,7 +82,7 @@ export class VerleccionPage implements OnInit {
               });
 
               this.cursos = dttemp;
-              console.log('cursos', this.cursos);
+              console.log('info del curso', this.cursos);
             });
       });
     });
@@ -167,7 +168,7 @@ export class VerleccionPage implements OnInit {
     this.share.verorder().then( rval => {
       console.log('SOY RVal',rval, tma);
       if (rval === tma){
-        console.log('entre lisgto para examen');
+        console.log('entre listo para examen');
         this.share.varExam.next('Listo para el examen');
       }else{
         this.share.updateorder(order);

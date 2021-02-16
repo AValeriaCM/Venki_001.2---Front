@@ -18,6 +18,8 @@
       </ion-label>
     </ion-item>
   </ion-list>
+
+
   <div class="coverBack">
     <div class="container">
 
@@ -35,7 +37,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -50,7 +52,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -65,7 +67,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -80,7 +82,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -95,7 +97,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -110,7 +112,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -125,7 +127,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -140,7 +142,7 @@
           <div></div>
         </div>
       </div>
-    
+
       <div class="rain">
         <div class="drop"></div>
         <div class="waves">
@@ -155,12 +157,12 @@
           <div></div>
         </div>
       </div>
-    
+
     </div>
-  
-    
+
+
   </div>
-  
+
 
 </ion-content>
 
@@ -193,7 +195,19 @@
           <ion-icon slot="icon-only" style="color: black;" name="play-forward"></ion-icon>
         </ion-button>
       </ion-col>
-      <ion-button (click)="continue()">Continuar</ion-button>
+
+      <div *ngFor="let cur of cursos; let i index">
+        <div *ngFor="let lens of cur.lessons; let j index">
+          <div *ngFor="let recursos of lens.resources">
+            <div *ngIf="recursos.order === 2">
+              <div *ngIf="recursos.video">
+                <ion-button (click)="startVideo(lens.name, recursos.video, recursos.order, lens.resources?.length)">
+                  Continuar</ion-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </ion-row>
   </ion-toolbar>
 </ion-footer>

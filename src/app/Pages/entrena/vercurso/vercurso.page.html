@@ -22,26 +22,14 @@
         </h1>
       </ion-title>
       <ion-card-content style="color: black; font-size: large !important; text-align: center;">
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-icon name="time-outline" style="zoom: 1;"></ion-icon>
-                <p> &nbsp;&nbsp;{{info.duration}}&nbsp; minutos por sesión</p>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-icon name="book" style="zoom: 1;"></ion-icon>
-                <p>&nbsp;&nbsp; {{CourseLessonID}}&nbsp;&nbsp; Lecciones  </p>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        
-        
+        <ion-item>
+          <ion-icon name="time-outline" style="zoom: 1;"></ion-icon>
+          <p> &nbsp;&nbsp;{{info.duration}}&nbsp; minutos por sesión</p>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="book" style="zoom: 1;"></ion-icon>
+          <p>&nbsp;&nbsp; {{CourseLessonID}}&nbsp;&nbsp; Lecciones  </p>
+        </ion-item>
         <ion-item>
           <ion-icon name="create" style="zoom:1.5; "></ion-icon>&nbsp;&nbsp; 
           <br>

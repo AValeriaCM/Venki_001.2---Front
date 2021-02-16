@@ -50,19 +50,13 @@ lectionName: any; video: any;  order: any; tma: any;
     private share: ShareserviceService,
     public alertController: AlertController,
     private pObjecto: PassObjectService,
-    private pObjectVideo: PassObjectService,
     private previewAnyFile: PreviewAnyFile,
-<<<<<<< HEAD
     private streaminmedia: StreamingMedia
     ) {
-=======
-    private streaminmedia: StreamingMedia ) {
->>>>>>> 687ce3ccac498b1cafb17c986f055ebd5b3bba98
   }
 
   ngOnInit() {
-
-      const informacion = this.pObjecto.getNavData();
+     const informacion = this.pObjecto.getNavData();
     this.color=informacion.color;
     this.data = informacion.infoCurso;
     this.userinfo = informacion.userInf;
@@ -209,11 +203,6 @@ lectionName: any; video: any;  order: any; tma: any;
       tm: tma
     };
     this.pObjecto.setData(dataObjVid);
-    //////////////////////////////////////////
-    this.pObjectVideo.setData(dataObjVid);
-
-    //////////////////////////////////////////
-
     console.log('es esto', dataObjVid);
     this.router.navigate(['/users/entrena/vercurso/verleccion/vidplayer/']);
 

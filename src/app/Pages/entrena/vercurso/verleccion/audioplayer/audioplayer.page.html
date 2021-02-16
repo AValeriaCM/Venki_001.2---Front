@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/users/entrena/vercurso"></ion-back-button>
+      <ion-back-button defaultHref="/users/entrena/vercurso/"></ion-back-button>
     </ion-buttons>
     <ion-title class="tituloInfo">
       <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
@@ -195,6 +195,7 @@
           <ion-icon slot="icon-only" style="color: black;" name="play-forward"></ion-icon>
         </ion-button>
       </ion-col>
+<<<<<<< HEAD:src/app/Pages/entrena/audioplayer/audioplayer.page.html
 
       <div *ngFor="let cur of cursos; let i index">
         <div *ngFor="let lens of cur.lessons; let j index">
@@ -208,6 +209,17 @@
           </div>
         </div>
       </div>
+=======
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="continue()">
+            Continuar
+          </ion-button>
+        </ion-col> 
+      </ion-row>
+
+
+>>>>>>> 687ce3ccac498b1cafb17c986f055ebd5b3bba98:src/app/Pages/entrena/vercurso/verleccion/audioplayer/audioplayer.page.html
     </ion-row>
   </ion-toolbar>
 </ion-footer>

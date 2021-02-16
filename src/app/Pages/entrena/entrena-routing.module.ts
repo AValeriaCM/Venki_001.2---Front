@@ -9,14 +9,6 @@ const routes: Routes = [
     component: EntrenaPage
   },
   {
-    path: 'audioplayer',
-    loadChildren: () => import('../../Pages/entrena/audioplayer/audioplayer.module').then( m => m.AudioplayerPageModule)
-  },
-  {
-    path: 'vidplayer',
-    loadChildren: () => import('../../Pages/entrena/vidplayer/vidplayer.module').then( m => m.VidplayerPageModule)
-  },
-  {
     path: 'vercurso',
     loadChildren: () => import('../../Pages/entrena/vercurso/vercurso.module').then( m => m.VercursoPageModule)
   },

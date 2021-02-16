@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonContent, AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-verleccion',
@@ -24,6 +25,8 @@ export class VerleccionPage implements OnInit {
   infomsg: any;
   autoClose = true;
   progesoVal;
+  objetoVideo: any;
+
   course: any;
   courseID: any;
   CourseLessonID: any;
@@ -32,20 +35,34 @@ export class VerleccionPage implements OnInit {
   exam = 0;
   color:string;
   progreso: any;
+
+lectionName: any; video: any;  order: any; tma: any;
+
   @ViewChild(IonContent) content: IonContent;
+
+  @Input() mensaje: any;
+  @Input()  
+  infoVideo = new EventEmitter();
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private share: ShareserviceService,
     public alertController: AlertController,
     private pObjecto: PassObjectService,
+    private pObjectVideo: PassObjectService,
     private previewAnyFile: PreviewAnyFile,
+<<<<<<< HEAD
     private streaminmedia: StreamingMedia
     ) {
+=======
+    private streaminmedia: StreamingMedia ) {
+>>>>>>> 687ce3ccac498b1cafb17c986f055ebd5b3bba98
   }
 
   ngOnInit() {
-    const informacion = this.pObjecto.getNavData();
+
+      const informacion = this.pObjecto.getNavData();
     this.color=informacion.color;
     this.data = informacion.infoCurso;
     this.userinfo = informacion.userInf;
@@ -54,6 +71,7 @@ export class VerleccionPage implements OnInit {
     this.share.guardarCursoActiva(informacion);
     this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
       this.info = infodt.data;
+      console.log('Informacion guardada' + infodt.data);
       this.share.getComentariosCurso(this.data.id).subscribe(info => {
         this.comentariosGeneral = info.data;
         this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
@@ -182,6 +200,25 @@ export class VerleccionPage implements OnInit {
     });
   }
 
+  startVideo(lectionName: any, video: any,  order: any, tma: any) {
+    
+    const dataObjVid = {
+      name: lectionName,
+      vidInfo: video,
+      orderid: order,
+      tm: tma
+    };
+    this.pObjecto.setData(dataObjVid);
+    //////////////////////////////////////////
+    this.pObjectVideo.setData(dataObjVid);
+
+    //////////////////////////////////////////
+
+    console.log('es esto', dataObjVid);
+    this.router.navigate(['/users/entrena/vercurso/verleccion/vidplayer/']);
+
+  }
+
   audioPlayer(lectionName: any, content: any, order: any, tma: any) {
     console.log('TAMAÑO', tma);
     const dataaud = 'http://venki.3utilities.com/' + content;
@@ -191,22 +228,13 @@ export class VerleccionPage implements OnInit {
       orderid: order,
       tm: tma
     };
+    
     this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/entrena/audioplayer/']);
+    //this.infoVideo.emit(lectionName, this.video, order,tma);
+    this.router.navigate(['/users/entrena/vercurso/verleccion/audioplayer']);
   }
 
-  startVideo(lectionName: any, video: any,  order: any, tma: any) {
-    console.log('TAMAÑO', tma);
-    const dataObj = {
-      name: lectionName,
-      vidInfo: video,
-      orderid: order,
-      tm: tma
-    };
-    this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/entrena/vidplayer/']);
-  }
-
+  
   toggleSection(index, progreso) {
     this.cursos[index].open = !this.cursos[index].open;
     this.progesoVal = progreso * 100;

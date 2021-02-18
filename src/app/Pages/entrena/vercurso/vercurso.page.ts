@@ -1,3 +1,5 @@
+import { PassObjectAuxService } from './../../../_services/pass-object-aux.service';
+import { PassObjectExamenService } from './../../../_services/pass-object-examen.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -41,14 +43,18 @@ export class VercursoPage implements OnInit {
     public alertController: AlertController,
     private pObjecto: PassObjectService,
     private pObjectoVideo: PassObjectVideoService,
+    private pObjectExamen: PassObjectExamenService,
+    private pObjetoAux: PassObjectAuxService,
     private previewAnyFile: PreviewAnyFile,
     private streaminmedia: StreamingMedia, ) {
   }
 
   ngOnInit() {
     const informacion = this.pObjecto.getNavData();
-    console.log('lo que necesito:', informacion);
+    console.log('info ver curso:', informacion);
     this.pObjectoVideo.setData(informacion);
+    this.pObjectExamen.setData(informacion);
+    this.pObjetoAux.setData(informacion);
     this.color=informacion.color;
     this.data = informacion.infoCurso;
     this.userinfo = informacion.userInf;

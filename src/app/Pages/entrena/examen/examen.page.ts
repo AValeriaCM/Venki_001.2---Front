@@ -1,3 +1,4 @@
+import { PassObjectExamenService } from './../../../_services/pass-object-examen.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -10,7 +11,7 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 })
 export class ExamenPage implements OnInit {
 
-  examenDT: any;
+  examenDT: any = null;
   valorChange: any;
   totalExam: Array<any>;
   dt: any[] = [];
@@ -18,6 +19,8 @@ export class ExamenPage implements OnInit {
   alert: any;
   constructor(
     private pObjecto: PassObjectService,
+    private pObjectExamen: PassObjectExamenService,
+    private pObjectAux: PassObjectExamenService,
     private  alertController: AlertController,
     private router: Router
   ) { }
@@ -25,7 +28,8 @@ export class ExamenPage implements OnInit {
   ngOnInit() {
     
     this.totalExam = [];
-    const informacion = this.pObjecto.getNavData();
+    const informacion = this.pObjectExamen.getNavData();
+    console.log('info examen', informacion);
     this.examenDT  = informacion.examen.exam;
     this.tama = this.examenDT.length;
   }
@@ -84,6 +88,7 @@ export class ExamenPage implements OnInit {
 
     console.log(correcto, incorrecto);
     this.alertDespuesTiempo(correcto, incorrecto);
+    this.pObjecto.setData(this.pObjectExamen);
     this.router.navigate(['/users/entrena/vercurso']);
   }
 

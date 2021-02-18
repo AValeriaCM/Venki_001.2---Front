@@ -1,3 +1,4 @@
+import { PassObjectAuxService } from './../../../../_services/pass-object-aux.service';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonContent, AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -50,13 +51,15 @@ lectionName: any; video: any;  order: any; tma: any;
     private share: ShareserviceService,
     public alertController: AlertController,
     private pObjecto: PassObjectService,
+    private pObjecAux: PassObjectAuxService,
     private previewAnyFile: PreviewAnyFile,
     private streaminmedia: StreamingMedia
     ) {
   }
 
   ngOnInit() {
-     const informacion = this.pObjecto.getNavData();
+    const informacion = this.pObjecto.getNavData();
+    console.log('info verleccion', informacion);
     this.color=informacion.color;
     this.data = informacion.infoCurso;
     this.userinfo = informacion.userInf;
@@ -194,7 +197,7 @@ lectionName: any; video: any;  order: any; tma: any;
     });
   }
 
-  startVideo(lectionName: any, video: any,  order: any, tma: any) {
+  /*startVideo(lectionName: any, video: any,  order: any, tma: any) {
     
     const dataObjVid = {
       name: lectionName,
@@ -206,7 +209,7 @@ lectionName: any; video: any;  order: any; tma: any;
     console.log('es esto', dataObjVid);
     this.router.navigate(['/users/entrena/vercurso/verleccion/vidplayer/']);
 
-  }
+  }*/
 
   audioPlayer(lectionName: any, content: any, order: any, tma: any) {
     console.log('TAMAÑO', tma);
@@ -219,7 +222,6 @@ lectionName: any; video: any;  order: any; tma: any;
     };
     
     this.pObjecto.setData(dataObj);
-    //this.infoVideo.emit(lectionName, this.video, order,tma);
     this.router.navigate(['/users/entrena/vercurso/verleccion/audioplayer']);
   }
 
@@ -238,13 +240,16 @@ lectionName: any; video: any;  order: any; tma: any;
     console.log(recursos);
   }
 
-  examen(exam: any){
+ /* examen(exam: any){
     console.log('EXAMEN', exam);
     const dataObj = {
       examen: exam,
     };
     this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/entrena/examen/']);
-  }
-
+  }*/
+ volver(){
+   this.pObjecto.setData(this.pObjecAux);
+   this.router.navigate(['/users/entrena/vercurso/']);
+ }
 }

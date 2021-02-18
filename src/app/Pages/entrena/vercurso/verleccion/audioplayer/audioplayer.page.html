@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/users/entrena/vercurso/"></ion-back-button>
+      <ion-back-button (click)="anterior()"></ion-back-button>
     </ion-buttons>
     <ion-title class="tituloInfo">
       <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
@@ -201,8 +201,8 @@
           <div *ngFor="let recursos of lens.resources">
             <div *ngIf="recursos.order === 2">
               <div *ngIf="recursos.video">
-                <ion-button (click)="startVideo(lens.name, recursos.video, recursos.order, lens.resources?.length)">
-                  Continuar</ion-button>
+                <ion-button fill="outline" color="dark" (click)="startVideo(lens.name, recursos.video, recursos.order, lens.resources?.length)">
+                  Continuar<ion-icon name="play-forward-outline"></ion-icon></ion-button>
               </div>
             </div>
           </div>

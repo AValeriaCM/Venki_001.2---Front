@@ -1,3 +1,4 @@
+import { PassObjectAuxService } from './../../../../../_services/pass-object-aux.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Howl } from 'howler';
@@ -50,6 +51,7 @@ export class AudioplayerPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private pObjecto: PassObjectService,
+    private PObjectAux: PassObjectAuxService,
     private share: ShareserviceService,
     private pObjectoVideo: PassObjectVideoService   
     ) {
@@ -190,10 +192,6 @@ export class AudioplayerPage implements OnInit {
     }, 1000);
   }
 
-  continue(){
-    //this.startVideo();
-    this.router.navigate(['/users/entrena/vidplayer/']);
-  }
   //new
   getcursos(userid: any) {
     this.share.getCursos().subscribe(info => {
@@ -213,5 +211,8 @@ export class AudioplayerPage implements OnInit {
     this.pObjectoVideo.setData(dataObj);
     this.router.navigate(['/users/entrena/vercurso/verleccion/vidplayer/']);
   }
-
+  anterior(){
+    this.pObjectoVideo.setData(this.PObjectAux);
+    this.router.navigate(['/users/entrena/vercurso/verleccion']);
+  }
 }

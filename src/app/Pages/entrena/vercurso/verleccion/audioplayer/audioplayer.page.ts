@@ -212,7 +212,9 @@ export class AudioplayerPage implements OnInit {
     this.router.navigate(['/users/entrena/vercurso/verleccion/vidplayer/']);
   }
   anterior(){
-    this.pObjectoVideo.setData(this.PObjectAux);
-    this.router.navigate(['/users/entrena/vercurso/verleccion']);
+    this.pObjecto.setData(this.PObjectAux.getNavData());
+    this.pObjectoVideo.setData(this.PObjectAux.getNavData());
+    console.log(this.pObjecto.getNavData());
+    this.router.navigate(['/users/entrena/vercurso/verleccion/']);
   }
 }

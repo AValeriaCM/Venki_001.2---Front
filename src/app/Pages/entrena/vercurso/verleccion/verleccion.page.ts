@@ -249,7 +249,7 @@ lectionName: any; video: any;  order: any; tma: any;
     this.router.navigate(['/users/entrena/examen/']);
   }*/
  volver(){
-   this.pObjecto.setData(this.pObjecAux);
+   this.pObjecto.setData(this.pObjecAux.getNavData());
    this.router.navigate(['/users/entrena/vercurso/']);
  }
 }

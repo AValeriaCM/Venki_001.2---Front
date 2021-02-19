@@ -22,11 +22,13 @@
             <ion-card-title align="center" style="color:{{color}}; text-transform: uppercase;"> {{lections.name}}</ion-card-title>
             <ion-card-content style="text-align: justify; color: black;">{{lections.description}}</ion-card-content>
             <div class="card card-3">
-              <h2 style="text-align: center; color: black;">Audio, video y examen. Así de sencillo. ¡Anímate!</h2>
+              <h2 style="text-align: center; color: black;">¡Anímate!</h2>
             </div>
             <ion-grid>
-              <ion-row>
-                <ion-col *ngFor="let recursos of lections.resources" align="center">
+              <ion-row >
+                <ion-col></ion-col>
+                <ion-col></ion-col>
+                <ion-col *ngFor="let recursos of lections.resources" >
   
                   <div *ngIf="recursos.order === 1">
                     <div *ngIf="recursos.audio">

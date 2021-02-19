@@ -56,18 +56,20 @@
         <ion-col size="1"></ion-col>
         <ion-col size="10">
           <ion-list>
-            <ion-list-header>
-              <strong class="title-list">Listado de cursos</strong>
+            <ion-list-header style="color: black;">
+              <strong>Listado de cursos</strong>
               <br>
             </ion-list-header>
             <div *ngFor="let curso of cursosUser;">
               <div *ngIf="curso.users.length !== 0">
                 <ion-item class="ion-item-css">
-                  <ion-avatar slot="start">
+                  <ion-card>
                     <img src="http://venki.3utilities.com/{{curso.photo}}" (click)="verCurso(curso)">
-                  </ion-avatar>
-                  <ion-label class="title-item-list" (click)="verCurso(curso)">{{curso.name}}</ion-label>
-                  <ion-icon name="add-circle-outline" (click)="agregarCurso(curso)"></ion-icon>
+                    <ion-card-subtitle style="color: black;" (click)="verCurso(curso)">{{curso.name}}</ion-card-subtitle>
+                    <ion-button expand="block" (click)="agregarCurso(curso)">
+                      <ion-icon name="add-circle"> Agregar Curso</ion-icon>
+                    </ion-button>
+                  </ion-card>
                 </ion-item>
               </div>
               <div *ngIf="curso.users.length === 0">

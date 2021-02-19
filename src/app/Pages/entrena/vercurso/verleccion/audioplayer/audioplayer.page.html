@@ -201,7 +201,7 @@
           <div *ngFor="let recursos of lens.resources">
             <div *ngIf="recursos.order === 2">
               <div *ngIf="recursos.video">
-                <ion-button fill="outline" color="dark" (click)="startVideo(lens.name, recursos.video, recursos.order, lens.resources?.length)">
+                <ion-button fill="outline" (click)="startVideo(lens.name, recursos.video, recursos.order, lens.resources?.length)">
                   Continuar<ion-icon name="play-forward-outline"></ion-icon></ion-button>
               </div>
             </div>

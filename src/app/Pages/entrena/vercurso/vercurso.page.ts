@@ -165,7 +165,7 @@ export class VercursoPage implements OnInit {
   toggleItem(index, leccionesIndex) {
     this.cursos[index].lessons[leccionesIndex].open = !this.cursos[index].lessons[leccionesIndex].open;
     this.PObjecIndex.setData(leccionesIndex);
-    this.router.navigate(['/users/entrena/vercurso/verleccion']);
+    this.router.navigate(['/users/entrena/vercurso/leccion-inicio']);
   }
 
   previewDocuments(lectionName: any, doc: any, order: any, tma: any) {

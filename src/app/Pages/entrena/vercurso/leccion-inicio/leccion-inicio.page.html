@@ -24,12 +24,10 @@
     <div class="confetti-piece"></div>
 
   <br>
-  <ion-card-content>
-    <div class="card card-3">
-      <h3>ETAPA N° {{etapa}}</h3>
-      <ion-label> !Felicitaciones! acabas de culminar con exito esta etapa</ion-label>
-    </div>
-  </ion-card-content>
+  <ion-card-title align="center">¡Bienvenido!</ion-card-title>
+  <ion-card-subtitle style="margin: 5%; color: black; text-align: justify;">En esta sección encontrarás diferentes recursos
+    que te ayudarán a desarrollar nuevas habilidades.
+  </ion-card-subtitle>
   <!--<ion-card-content>
     <canvas #doughnutChart></canvas>
   </ion-card-content>-->
@@ -39,8 +37,8 @@
     <ion-col>
     </ion-col>
     <ion-col>
-      <ion-button size="small" class="footer-dis-bot2" >
-        {{textButton}}
+      <ion-button class="footer-dis-bot2" (click)="leccionRedirect()">
+        Continuar
         <ion-icon name="caret-forward-outline"></ion-icon>
      </ion-button>
     </ion-col>

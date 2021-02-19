@@ -137,7 +137,7 @@ export class ShareserviceService {
   }
 
   enviarComentarioIPutuacion(idCurso: any, idUser: any, comment: any, score: any){
-    console.log('idcur'+idCurso, 'iduser'+idUser, 'coment'+comment, 'score'+score);
+    //console.log('idcur'+idCurso, 'iduser'+idUser, 'coment'+comment, 'score'+score);
     const body = new HttpParams()
       .set('course_id', idCurso)
       .set('user_id', idUser)

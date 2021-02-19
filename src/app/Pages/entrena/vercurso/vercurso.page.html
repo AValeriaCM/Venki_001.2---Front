@@ -22,26 +22,34 @@
         </h1>
       </ion-title>
       <ion-card-content style="color: black; font-size: large !important; text-align: center;">
-        <ion-item>
-          <ion-icon name="time-outline" style="zoom: 1;"></ion-icon>
-          <p> &nbsp;&nbsp;{{info.duration}}&nbsp; minutos por sesión</p>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="book" style="zoom: 1;"></ion-icon>
-          <p>&nbsp;&nbsp; {{CourseLessonID}}&nbsp;&nbsp; Lecciones  </p>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="create" style="zoom:1.5; "></ion-icon>&nbsp;&nbsp; 
-          <br>
-          <p style="text-align: justify;"> {{info.description}}&nbsp;&nbsp;</p>
-        </ion-item>
+        <div>
+          <ion-item>
+            <ion-icon name="time-outline" style="zoom: 1;"></ion-icon>
+            <p> &nbsp;&nbsp;{{info.duration}}&nbsp; minutos por sesión</p>
+          </ion-item>
+        </div>
+        <div>
+          <ion-item>
+            <ion-icon name="book" style="zoom: 1;"></ion-icon>
+            <p>&nbsp;&nbsp; {{CourseLessonID}}&nbsp;&nbsp; Lecciones </p>
+          </ion-item>
+        </div>
+        
+          <ion-item>
+            <div>
+            <ion-icon name="create" style="zoom: 1; height: 30px; width: 30px;"></ion-icon>&nbsp;&nbsp;
+          </div>
+            <br>
+            <p style="text-align: justify;"> {{info.description}}&nbsp;&nbsp;</p>
+          </ion-item>
+        
         <h3 class="title-cat" style="color:{{color}}">
           <strong>Trailer</strong>
         </h3>
         <iframe #playerVim [src]="info.trailer + '?playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
           webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         <br>
-        
+
       </ion-card-content>
 
     </ion-card>
@@ -64,8 +72,8 @@
 
     <ion-list *ngFor="let cur of cursos; let i = index;" class="accordion-list" lines="none" detail="false" no-padding>
 
-      <ion-item style="align-items: flex-start;" class="ion-item-css" tappable (click)="toggleSection(i, cur.pivot.progress)"
-        [ngClass]="{'section-active': cur.open, 'section': !cur.open}">
+      <ion-item style="align-items: flex-start;" class="ion-item-css" tappable
+        (click)="toggleSection(i, cur.pivot.progress)" [ngClass]="{'section-active': cur.open, 'section': !cur.open}">
         <ion-icon slot="start" class="icon-color" name="arrow-forward" style="background: {{color}};" *ngIf="!cur.open">
         </ion-icon>
         <ion-icon slot="start" name="arrow-down" class="icon-color" style="background: {{color}};" *ngIf="cur.open">
@@ -75,7 +83,7 @@
         </ion-label>
       </ion-item>
 
-
+      
       <div *ngIf="cur.lessons && cur.open">
         <ion-list *ngFor="let lections of cur.lessons;  let j = index;" lines="none" class="itemCssF list-md">
           <ion-button class="ion-item-css" tappable (click)="toggleItem(i, j)"

@@ -1,3 +1,4 @@
+import { Cursos } from './../../../../_model/Cursos';
 import { PassObjectAuxService } from './../../../../_services/pass-object-aux.service';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonContent, AlertController } from '@ionic/angular';
@@ -7,6 +8,7 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { EventEmitter } from 'events';
+import { PassNameLessonsService } from 'src/app/_services/pass-name-lessons.service';
 
 @Component({
   selector: 'app-verleccion',
@@ -36,6 +38,7 @@ export class VerleccionPage implements OnInit {
   exam = 0;
   color:string;
   progreso: any;
+  index: number;
 
 lectionName: any; video: any;  order: any; tma: any;
 
@@ -44,6 +47,7 @@ lectionName: any; video: any;  order: any; tma: any;
   @Input() mensaje: any;
   @Input()  
   infoVideo = new EventEmitter();
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -52,12 +56,14 @@ lectionName: any; video: any;  order: any; tma: any;
     public alertController: AlertController,
     private pObjecto: PassObjectService,
     private pObjecAux: PassObjectAuxService,
+    private pObjectIndex: PassNameLessonsService,
     private previewAnyFile: PreviewAnyFile,
     private streaminmedia: StreamingMedia
     ) {
   }
 
   ngOnInit() {
+     this.index = this.pObjectIndex.getData();
     const informacion = this.pObjecto.getNavData();
     console.log('info verleccion', informacion);
     this.color=informacion.color;

@@ -1,3 +1,4 @@
+import { PassObjectAuxService } from './../../../_services/pass-object-aux.service';
 import { PassObjectExamenService } from './../../../_services/pass-object-examen.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -20,7 +21,7 @@ export class ExamenPage implements OnInit {
   constructor(
     private pObjecto: PassObjectService,
     private pObjectExamen: PassObjectExamenService,
-    private pObjectAux: PassObjectExamenService,
+    private pObjectAux: PassObjectAuxService,
     private  alertController: AlertController,
     private router: Router
   ) { }
@@ -88,8 +89,8 @@ export class ExamenPage implements OnInit {
 
     console.log(correcto, incorrecto);
     this.alertDespuesTiempo(correcto, incorrecto);
-    this.pObjecto.setData(this.pObjectExamen);
-    this.router.navigate(['/users/entrena/vercurso']);
+    this.pObjecto.setData(this.pObjectAux.getNavData());
+    this.router.navigate(['/users/entrena/vercurso/']);
   }
 
   async alertDespuesTiempo(correcto: any, incorrecto: any) {

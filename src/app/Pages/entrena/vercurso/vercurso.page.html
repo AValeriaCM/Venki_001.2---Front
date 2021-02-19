@@ -16,7 +16,6 @@
   <div *ngIf="info" class="divBack">
 
     <ion-card>
-<<<<<<< HEAD
       <!---->
       <div class="video-responsive">
         <iframe #playerVim [src]="info.trailer + '?playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
@@ -48,44 +47,6 @@
           </ion-col>
           </ion-row>
       </ion-grid>
-=======
-      <ion-title class="title-gen">
-        <h1 class="title-cat" style="color:{{color}}">
-          <strong>{{info.name}}</strong>
-        </h1>
-      </ion-title>
-      <ion-card-content style="color: black; font-size: large !important; text-align: center;">
-        <div>
-          <ion-item>
-            <ion-icon name="time-outline" style="zoom: 1;"></ion-icon>
-            <p> &nbsp;&nbsp;{{info.duration}}&nbsp; minutos por sesión</p>
-          </ion-item>
-        </div>
-        <div>
-          <ion-item>
-            <ion-icon name="book" style="zoom: 1;"></ion-icon>
-            <p>&nbsp;&nbsp; {{CourseLessonID}}&nbsp;&nbsp; Lecciones </p>
-          </ion-item>
-        </div>
-        
-          <ion-item>
-            <div>
-            <ion-icon name="create" style="zoom: 1; height: 30px; width: 30px;"></ion-icon>&nbsp;&nbsp;
-          </div>
-            <br>
-            <p style="text-align: justify;"> {{info.description}}&nbsp;&nbsp;</p>
-          </ion-item>
-        
-        <h3 class="title-cat" style="color:{{color}}">
-          <strong>Trailer</strong>
-        </h3>
-        <iframe #playerVim [src]="info.trailer + '?playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
-          webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        <br>
-
-      </ion-card-content>
-
->>>>>>> 8732707d788daa0321e024d7168a711dc2405706
     </ion-card>
     <!--<ion-card class="divBack">
       <ion-card-content>
@@ -104,7 +65,6 @@
 
   <div *ngIf="courseID  === CourseLessonID">
 
-<<<<<<< HEAD
     <div *ngFor="let cur of cursos; let i = index;" class="accordion-list" lines="none" detail="false" no-padding>
       <ion-card>
         <ion-item tappable
@@ -179,51 +139,6 @@
                           (click)="startVideo(lections.name,recursos.video, recursos.order, lections.resources?.length)">
                           <ion-icon name="videocam" style="color: #190643;"></ion-icon>
                         </ion-button>
-=======
-    <ion-list *ngFor="let cur of cursos; let i = index;" class="accordion-list" lines="none" detail="false" no-padding>
-
-      <ion-item style="align-items: flex-start;" class="ion-item-css" tappable
-        (click)="toggleSection(i, cur.pivot.progress)" [ngClass]="{'section-active': cur.open, 'section': !cur.open}">
-        <ion-icon slot="start" class="icon-color" name="arrow-forward" style="background: {{color}};" *ngIf="!cur.open">
-        </ion-icon>
-        <ion-icon slot="start" name="arrow-down" class="icon-color" style="background: {{color}};" *ngIf="cur.open">
-        </ion-icon>
-        <ion-label class="cursoName" style="border-bottom: {{color}} 10px solid;">
-          Lecciones {{progesoVal}}%
-        </ion-label>
-      </ion-item>
-
-      
-      <div *ngIf="cur.lessons && cur.open">
-        <ion-list *ngFor="let lections of cur.lessons;  let j = index;" lines="none" class="itemCssF list-md">
-          <ion-button class="ion-item-css" tappable (click)="toggleItem(i, j)"
-            [ngClass]="{'lecciones-active': lections.open, 'lecciones': !lections.open}">
-            <ion-icon slot="start" name="checkmark-outline" style="color: {{color}};" *ngIf="!lections.open"></ion-icon>
-            <!--<ion-icon slot="start" name="close" style="color: {{color}};" *ngIf="lections.open"></ion-icon>-->
-            <ion-label class="lessonName">
-              <p class="color-text"> {{lections.name}}</p>
-            </ion-label>
-          </ion-button>
-
-          <!--<ion-list *ngIf="lections && lections.open" class="contenido-list" lines="none">
-            <div>
-              <hr class="dashed">
-              <ion-row class="rowcss">
-                <ion-col size="12">
-                  <ion-row no-padding>
-                    <ion-col size=12>
-                      <h6>
-                        <ion-label class="contentName">{{lections.name}}</ion-label>
-                      </h6>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col size=12>
-                      <div style="text-align: justify;">
-                        <span>
-                          {{lections.description}}
-                        </span>
->>>>>>> 8732707d788daa0321e024d7168a711dc2405706
                       </div>
                     </div>
   

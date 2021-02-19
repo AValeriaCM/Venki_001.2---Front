@@ -8,6 +8,7 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
+import { PassNameLessonsService } from 'src/app/_services/pass-name-lessons.service';
 
 @Component({
   selector: 'app-vercurso',
@@ -35,6 +36,8 @@ export class VercursoPage implements OnInit {
   exam = 0;
   color:string;
   progreso: any;
+
+
   @ViewChild(IonContent) content: IonContent;
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +48,7 @@ export class VercursoPage implements OnInit {
     private pObjectoVideo: PassObjectVideoService,
     private pObjectExamen: PassObjectExamenService,
     private pObjetoAux: PassObjectAuxService,
+    private PObjecIndex: PassNameLessonsService,
     private previewAnyFile: PreviewAnyFile,
     private streaminmedia: StreamingMedia, ) {
   }
@@ -160,6 +164,7 @@ export class VercursoPage implements OnInit {
 
   toggleItem(index, leccionesIndex) {
     this.cursos[index].lessons[leccionesIndex].open = !this.cursos[index].lessons[leccionesIndex].open;
+    this.PObjecIndex.setData(leccionesIndex);
     this.router.navigate(['/users/entrena/vercurso/verleccion']);
   }
 
@@ -177,7 +182,7 @@ export class VercursoPage implements OnInit {
     this.share.verorder().then( rval => {
       console.log('SOY RVal',rval, tma);
       if (rval === tma){
-        console.log('entre lisgto para examen');
+        console.log('entre listo para examen');
         this.share.varExam.next('Listo para el examen');
       }else{
         this.share.updateorder(order);
@@ -204,7 +209,7 @@ export class VercursoPage implements OnInit {
     this.router.navigate(['/users/entrena//vercaudioplayer/']);
   }
 
-  startVideo(lectionName: any, video: any,  order: any, tma: any) {
+  /*startVideo(lectionName: any, video: any,  order: any, tma: any) {
     console.log('TAMAÑO', tma);
     const dataObj = {
       name: lectionName,
@@ -214,7 +219,7 @@ export class VercursoPage implements OnInit {
     };
     this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/entrena/vidplayer/']);
-  }
+  }*/
 
   toggleSection(index, progreso) {
     this.cursos[index].open = !this.cursos[index].open;
@@ -230,13 +235,13 @@ export class VercursoPage implements OnInit {
     console.log(recursos);
   }
 
-  examen(exam: any){
+ /* examen(exam: any){
     console.log('EXAMEN', exam);
     const dataObj = {
       examen: exam,
     };
     this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/entrena/examen/']);
-  }
+  }*/
 
 }

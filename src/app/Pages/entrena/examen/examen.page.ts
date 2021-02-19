@@ -90,8 +90,12 @@ export class ExamenPage implements OnInit {
     console.log(correcto, incorrecto);
     this.alertDespuesTiempo(correcto, incorrecto);
     this.pObjecto.setData(this.pObjectAux.getNavData());
+<<<<<<< HEAD
     console.log('nav del examen' + this.pObjectExamen);
     this.router.navigate(['/users/entrena/vercurso']);
+=======
+    this.router.navigate(['/users/entrena/vercurso/']);
+>>>>>>> 8732707d788daa0321e024d7168a711dc2405706
   }
 
   async alertDespuesTiempo(correcto: any, incorrecto: any) {

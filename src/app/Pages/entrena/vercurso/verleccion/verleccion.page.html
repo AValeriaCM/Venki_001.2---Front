@@ -29,15 +29,16 @@
                 <ion-col></ion-col>
                 <ion-col></ion-col>
                 <ion-col *ngFor="let recursos of lections.resources" >
-  
-                  <div *ngIf="recursos.order === 1">
+                  
+                  <div>
+                  <div *ngIf="recursos.order === index + 1">
                     <div *ngIf="recursos.audio">
                       <ion-button fill="outline" class="button-start"
                         (click)="audioPlayer(lections.name,recursos.audio, recursos.order, lections.resources?.length)">
                         <ion-icon name="play"></ion-icon>Iniciar Leccion
                       </ion-button>
                     </div>
-
+                  </div>
                     <!--<div *ngIf="recursos.video">
                       <ion-button fill="outline" class="button-lesson"
                         (click)="startVideo(lections.name,recursos.video, recursos.order, lections.resources?.length)">
@@ -47,12 +48,12 @@
                   </div>
   
                   <div *ngIf="recursos.order <= orderStorage  && recursos.order !== 1">
-                    <div *ngIf="recursos.audio">
+                    <!--<div *ngIf="recursos.audio">
                       <ion-button fill="outline"
                         (click)="audioPlayer(lections.name,recursos.audio, recursos.order, lections.resources?.length)">
                         <ion-icon name="musical-notes-outline"></ion-icon>
                       </ion-button>
-                    </div>
+                    </div>-->
                     <div *ngIf="recursos.document">
                       <ion-button fill="outline"
                         (click)="previewDocuments(lections.name,recursos.document, recursos.order, lections.resources?.length)">
@@ -66,8 +67,17 @@
                       </ion-button>
                     </div>-->
                   </div>
-  
-                  <div *ngIf="recursos.order > orderStorage && recursos.order !== 1">
+                  <div>
+                  <div *ngIf="recursos.order > orderStorage ||  recursos.order <= index">
+                    <div *ngIf="recursos.video">
+                      <ion-button fill="outline" class="button-star"
+                      (click)="startVideo(lections.name,recursos.video, recursos.order, lections.resources?.length)">
+                      <ion-icon name="play"></ion-icon>Iniciar Leccion
+                    </ion-button>
+                    </div>
+                  </div>
+                </div>
+                  <!--<div *ngIf="recursos.order > orderStorage && recursos.order !== 1">
                     <div *ngIf="recursos.audio">
                       <ion-button fill="outline" 
                         (click)="audioPlayer(lections.name,recursos.audio, recursos.order, lections.resources?.length)">
@@ -79,14 +89,14 @@
                         (click)="previewDocuments(lections.name,recursos.document, recursos.order, lections.resources?.length)">
                         <ion-icon name="book-outline"></ion-icon>
                       </ion-button>
-                    </div>
+                    </div>-->
                     <!--<div *ngIf="recursos.video">
                       <ion-button fill="outline" 
                         (click)="startVideo(lections.name,recursos.video, recursos.order, lections.resources?.length)">
                         <ion-icon name="videocam"></ion-icon>
                       </ion-button>
-                    </div>-->
-                  </div>
+                    </div>
+                  </div>-->
   
                 </ion-col>
                 <ion-col></ion-col>

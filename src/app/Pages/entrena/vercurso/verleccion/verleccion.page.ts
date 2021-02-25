@@ -1,4 +1,4 @@
-import { Cursos } from './../../../../_model/Cursos';
+import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
 import { PassObjectAuxService } from './../../../../_services/pass-object-aux.service';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonContent, AlertController } from '@ionic/angular';
@@ -55,6 +55,7 @@ lectionName: any; video: any;  order: any; tma: any;
     private share: ShareserviceService,
     public alertController: AlertController,
     private pObjecto: PassObjectService,
+    private PobjectVideo: PassObjectVideoService,
     private pObjecAux: PassObjectAuxService,
     private pObjectIndex: PassNameLessonsService,
     private previewAnyFile: PreviewAnyFile,
@@ -94,7 +95,7 @@ lectionName: any; video: any;  order: any; tma: any;
                   console.log('entre true', val);
                   this.share.verorder().then( rval => {
                     this.orderStorage = rval;
-                    console.log(this.orderStorage, rval);
+                    console.log('storage y rval',this.orderStorage, rval);
                   });
                 }else{
                   console.log('entre false', val);
@@ -203,19 +204,18 @@ lectionName: any; video: any;  order: any; tma: any;
     });
   }
 
-  /*startVideo(lectionName: any, video: any,  order: any, tma: any) {
-    
+  startVideo(lectionName: any, video: any,  order: any, tma: any) {
     const dataObjVid = {
       name: lectionName,
       vidInfo: video,
       orderid: order,
       tm: tma
     };
-    this.pObjecto.setData(dataObjVid);
+    this.PobjectVideo.setData(dataObjVid);
     console.log('es esto', dataObjVid);
     this.router.navigate(['/users/entrena/vercurso/verleccion/vidplayer/']);
 
-  }*/
+  }
 
   audioPlayer(lectionName: any, content: any, order: any, tma: any) {
     console.log('TAMAÑO', tma);

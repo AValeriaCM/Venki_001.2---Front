@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
+import { PassObjectAuxService } from 'src/app/_services/pass-object-aux.service';
 
 @Component({
   selector: 'app-vidplayer',
@@ -44,11 +45,12 @@ export class VidplayerPage implements OnInit {
     private pObjecto: PassObjectService,
     private pObjectoVideo: PassObjectVideoService,
     private PObjectoExamen: PassObjectExamenService,
+    private PObjectoAuxiliar: PassObjectAuxService,
     private share: ShareserviceService) {
   }  
 
   ngOnInit() {
-     let info = this.pObjectoVideo.getNavData();
+    let info = this.pObjectoVideo.getNavData();
     console.log('info vidplayer',info);
     this.share.guardarLeccionActiva(info);
     this.data = info.vidInfo;
@@ -120,9 +122,10 @@ export class VidplayerPage implements OnInit {
   }
   
   volverAnterior(){
-    let object =this.pObjecto.getNavData();
-    this.pObjectoVideo.setData(object);
-    console.log('info pobject', object);
-    this.router.navigate(['/users/entrena/vercurso/verleccion/audioplayer/']);
+    this.pObjectoVideo.setData(this.PObjectoAuxiliar.getNavData());
+    this.PObjectoExamen.setData(this.PObjectoAuxiliar.getNavData());
+    this.pObjecto.setData(this.PObjectoAuxiliar.getNavData());
+    //this.share.iniciorder();
+    this.router.navigate(['/users/entrena/vercurso/verleccion/']);
   }
 }

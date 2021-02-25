@@ -53,9 +53,9 @@ export class EntrenaPage implements OnInit {
       this.log.logdataInfData(dt).subscribe(infoUser => {
         console.log(infoUser);
         this.usertk = infoUser;
-          this.modelcontroller.create({
+         /* this.modelcontroller.create({
             component: InfoInicioPage,
-          }).then(model => model.present());
+          }).then(model => model.present());*/
       });
     });
 
@@ -110,12 +110,12 @@ export class EntrenaPage implements OnInit {
   }
 
 
-  imageView() {
+  /*imageView() {
     console.log('entre en model dismiss');
     this.modelcontroller.create({
       component: InfoPremiumPage,
     }).then(model => model.present());
-  }
+  }*/
 
 
   async alertDespuesTiempo() {

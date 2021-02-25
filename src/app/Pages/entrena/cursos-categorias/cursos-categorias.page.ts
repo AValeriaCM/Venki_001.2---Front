@@ -14,7 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: './cursos-categorias.page.html',
   styleUrls: ['./cursos-categorias.page.scss'],
 })
-export class CursosCategoriasPage implements OnInit {
+export class CursosCategoriasPage implements OnInit{
 
   autoClose = true;
   progesoVal;
@@ -50,6 +50,7 @@ export class CursosCategoriasPage implements OnInit {
     this.coursetk = informacion.infoCurso;
     this.video=this.sanitizer.bypassSecurityTrustResourceUrl(this.coursetk.video);
     this.getcursos(this.usertk.id, this.coursetk.id);
+      
   }
 
   getcursos(userid: any, categoriaid: any) {
@@ -57,6 +58,8 @@ export class CursosCategoriasPage implements OnInit {
       this.share.getCursosCategorias(categoriaid, userid).subscribe(dataCurso => {
         this.cursosUser = dataCurso;
         this.cursosU=this.cursosUser;
+        console.log('curso de cognitivo',this.cursosUser);
+
       });
   }
 
@@ -72,16 +75,18 @@ export class CursosCategoriasPage implements OnInit {
       color: this.color,
     };
     this.pObjecto.setData(dataObj);
+    console.log(this.pObjecto.setData(dataObj));
     this.router.navigate(['/users/entrena/vercurso/']);
   }
 
-  agregarCurso(curso: any) {
-    console.log('curso', curso.id);
-    console.log('id_user', this.usertk.id);
-    this.share.agregarCurso(this.usertk.id, curso.id).subscribe(data => {
-          console.log(data, 'info entrena ');
-    });
-
+  agregarCurso(curso: any) { 
+      console.log('curso', curso.id);
+          console.log('id_user', this.usertk.id);
+          this.share.agregarCurso(this.usertk.id, curso.id).subscribe(data => {
+                console.log(data, 'info entrena ');
+                });      
+               this.router.navigate(['/users/entrena/']);
+               //window.location.reload();
   }
 
   async alertDespuesTiempo() {

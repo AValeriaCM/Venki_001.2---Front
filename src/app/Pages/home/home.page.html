@@ -16,47 +16,42 @@
     </ion-fab-button>
   </ion-fab>
 
+  <div class="card card-3">
+    <h3>¡Bienvenido nuevamente!</h3>
+    <ion-label *ngIf="usertk" style="font-size: 16px; font-family: url(../../../assets/fonts/proxima/proxima-nova.otf); color: #000; text-align: center;">
+      {{usertk.name}} {{usertk.lastname}}</ion-label>
+  </div>
+
+  
+  <ion-card>
+    <img src="../../../assets/icon/image1.jpg" (click)="imageView('../../../assets/icon/image1.jpg')" />
+    <ion-card-content>
+        <ion-label *ngIf="usertk" >
+          <ion-card-title>¡Empieza bien tu día!</ion-card-title>
+        </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+      <ion-card-title>Tu actividad de hoy</ion-card-title>
+       <label style="color: #000; font-size: medium; font-weight: bold;" *ngIf="actividadDiaria">{{actividadDiaria}}</label>
+       <ion-item-divider></ion-item-divider><br>
+      <p style="color: #000; font-size: medium; font-weight: bold;">&nbsp;&nbsp;&nbsp; ¡No olvides darnos tu opinión!</p>
+      <ion-button *ngIf="actividadDiaria !== null" shape="round" style="float: right; margin: 20px;"
+            (click)="opinarSobreActividad(actividadDiaria)">
+            Ir &nbsp;&nbsp;
+            <ion-icon name="arrow-forward">   </ion-icon>
+          </ion-button>
+  </ion-card>
+
+
   <ion-grid>
     <ion-row style="border-bottom: groove;">
-      <ion-col size="12">
-        <div class="card card-3">
-          <h3>¡Bienvenido nuevamente!</h3>
-          <ion-label *ngIf="usertk" style="font-size: 16px; font-family: url(../../../assets/fonts/proxima/proxima-nova.otf); color: #000; text-align: center;">
-            {{usertk.name}} {{usertk.lastname}}</ion-label>
-        </div>
-      </ion-col>
-      <ion-col size="12">
-        <br>
-        <div class="div-imagen h3" align="center">
-          <ion-label *ngIf="usertk" style=" font-size: 14px; font-family: url(../../../assets/fonts/proxima/proxima-nova.otf); color: #000;">
-            <h3>¡Empieza bien tu día!</h3>
-          </ion-label>
-          
-          <img src="../../../assets/icon/image1.jpg" (click)="imageView('../../../assets/icon/image1.jpg')" />
-        </div>
-        
-
-      </ion-col>
-      <ion-col size="12">
-        <div class="boderbox">
-          <br>
-          <br>
-          <h3>No olvides tu actividad de hoy</h3>
-          <label style="text-align: center;" *ngIf="actividadDiaria === null">No hay actividad Diaria Aprovecha nuestro contenido</label>
-          <ion-icon name="arrow-forward">   </ion-icon>
-          <label style="text-align: center; font-size: 17px;" *ngIf="actividadDiaria">    {{actividadDiaria}}</label>
-          <ion-button *ngIf="actividadDiaria !== null" shape="round" style="float: right; margin: 20px;font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
-            (click)="opinarSobreActividad(actividadDiaria)">
-            Opina!
-            <ion-icon name="heart" ></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
       <ion-col size="12">
        
         <div class="boderbox" *ngIf="leccionActiva ===  null">          
           <ion-label *ngIf="leccionActiva === null"
-            style=" font-size: 17px; font-family: url(../../../assets/fonts/proxima/proxima-nova.otf); color: #000;">
+            style=" font-size: 17px; color: #000;">
             <ion-icon name="information-circle"></ion-icon>
             No tienes una lección activa, puedes elegir
           </ion-label>
@@ -65,36 +60,61 @@
           <br>
           <h3 style="margin-top: 10px;">Tus cursos</h3>
           <br>
-          <ion-button *ngIf="leccionActiva !== null" shape="round" style="margin: 10px; width: 150px;
-          font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
+          <ion-label style="color: #000; font-weight: bold;"><br>{{leccionActiva.name}}</ion-label> 
+          <ion-button *ngIf="leccionActiva !== null" shape="round" style="align-items:flex-end; margin: 10px; width: 150px;"
            (click)="retomarleccion()">Retomar <br>
             </ion-button>
-            <ion-label style="color: #000; font-weight: bold;"><br>{{leccionActiva.name}}</ion-label>
+            
         </div>
       </ion-col>
-      <ion-col *ngIf="usertk" size="12">
-        <div class="boderbox" *ngIf="usertk.surveyed !== 1 || miactividad === 0 || usertk.premium === 0">
+      <ion-col *ngIf="usertk">
+        <ion-card>
+          <ion-list *ngIf="usertk.surveyed !== 1 || miactividad === 0 || usertk.premium === 0">
+            <ion-item>
+              <ion-button *ngIf="miactividad === 0" shape="round"  style="width: 150px;"
+            (click)="crearEntrada()">
+             <ion-icon name="people"></ion-icon>
+             Ir a la comunidad
+           </ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button *ngIf="usertk.surveyed === 0" shape="round" style="width: 150px;"
+              (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
+              <ion-icon name="bulb"></ion-icon>
+              Hacer Diagnostico
+            </ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button *ngIf="usertk.surveyed === 1" shape="round" style="width: 150px;"
+             (click)="recomedacionesRedirect(usertk.id)">
+             <ion-icon name="logo-usd"></ion-icon>
+              Comprar un paquete</ion-button>
+            </ion-item>
+          </ion-list>
+          <!--<div class="boderbox" *ngIf="usertk.surveyed !== 1 || miactividad === 0 || usertk.premium === 0">
+            <br>
+            <ion-button *ngIf="miactividad === 0" shape="round" style="margin: 20px; margin-top: 5%;"
+            (click)="crearEntrada()">
+             <ion-icon name="people"></ion-icon>
+             Ir a la comunidad
+           </ion-button>
+           <br>
+            <ion-button *ngIf="usertk.surveyed === 0" shape="round" style="margin: 20px; margin-bottom: 0%;"
+              (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
+              <ion-icon name="bulb"></ion-icon>
+              Hacer Diagnostico
+            </ion-button>
+           
+            <br>
+            <ion-button *ngIf="usertk.surveyed === 1" shape="round" style="margin: 20px; margin-top: 5%;"
+             (click)="recomedacionesRedirect(usertk.id)">
+              Comprar un paquete</ion-button>
+            <br>
+            <br>
+          </div>-->
           <br>
-          <ion-button *ngIf="miactividad === 0" shape="round" style="margin: 20px; margin-top: 5%;font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
-          (click)="crearEntrada()">
-           <ion-icon name="people"></ion-icon>
-           Ir a la comunidad
-         </ion-button>
-         <br>
-          <ion-button *ngIf="usertk.surveyed === 0" shape="round" style="margin: 20px; margin-bottom: 0%; font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
-            (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
-            <ion-icon name="bulb"></ion-icon>
-            Hacer Diagnostico
-          </ion-button>
-         
-          <br>
-          <ion-button *ngIf="usertk.surveyed === 1" shape="round" style="margin: 20px; margin-top: 5%;font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);"
-           (click)="recomedacionesRedirect(usertk.id)">
-            Comprar un paquete</ion-button>
-          <br>
-          <br>
-        </div>
-        <br>
+        </ion-card>
+        
       </ion-col>
       <br>
     </ion-row>

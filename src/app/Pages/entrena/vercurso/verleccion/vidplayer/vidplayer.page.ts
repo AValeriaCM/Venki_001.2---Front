@@ -5,6 +5,7 @@ import { PassObjectVideoService } from 'src/app/_services/pass-object-video.serv
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { PassObjectAuxService } from 'src/app/_services/pass-object-aux.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-vidplayer',
@@ -46,7 +47,8 @@ export class VidplayerPage implements OnInit {
     private pObjectoVideo: PassObjectVideoService,
     private PObjectoExamen: PassObjectExamenService,
     private PObjectoAuxiliar: PassObjectAuxService,
-    private share: ShareserviceService) {
+    private share: ShareserviceService,
+    private alertCtrl: AlertController) {
   }  
 
   ngOnInit() {
@@ -120,7 +122,7 @@ export class VidplayerPage implements OnInit {
     this.PObjectoExamen.setData(dataObj);
     this.router.navigate(['/users/entrena/examen/']);
   }
-  
+
   volverAnterior(){
     this.pObjectoVideo.setData(this.PObjectoAuxiliar.getNavData());
     this.PObjectoExamen.setData(this.PObjectoAuxiliar.getNavData());

@@ -11,19 +11,32 @@
 
 <ion-content>
   <br>
-  <div *ngFor="let item of vid">
-    <iframe #playerVim [src]="item + '?loop=1&muted=1&playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
-      class="styleVideo" width="100%" height="100%" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-    <div *ngFor="let cur of cursos">
-      <div *ngFor="let lections of cur.lessons">
-        <div *ngIf="lections.exam !== 0">
-          <div *ngIf="lections.exam">
-            <ion-button (click)="examen(lections.exam)">Continuar</ion-button>
+  <ion-card>
+
+    <ion-card-title style="text-align: center; color: darkblue">¡Sigue así, ya falta poco!</ion-card-title>
+    <ion-card-content>
+    <div *ngFor="let item of vid">
+      <div class="video-responsive">
+          <iframe #playerVim [src]="item + '?loop=1&muted=1&playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
+            class="styleVideo" width="100%" height="100%" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+      <ion-card-subtitle > En este video encontrarás la motivación que necesitas para continuar. ¡Presta atención...! </ion-card-subtitle>
+      <br><br>
+      <div *ngFor="let cur of cursos">
+        <div *ngFor="let lections of cur.lessons">
+          <div *ngIf="lections.exam !== 0">
+            <div *ngIf="lections.exam">
+              <ion-button class="footer-dis-bot2" (click)="examen(lections.exam)">Continuar
+                <ion-icon name="caret-forward-outline"></ion-icon></ion-button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </ion-card-content>
 
+    
+
+  </ion-card>
 
 </ion-content>

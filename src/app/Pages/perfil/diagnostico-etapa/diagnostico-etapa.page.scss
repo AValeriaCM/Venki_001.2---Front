@@ -3,7 +3,9 @@ $blue: #686891;
 $pink: #4ea1ff;
 
 $duration: 1000;
-
+*{
+  font-family: 'Proxima Nova' !important;
+}
 @function randomNum($min, $max) {
   $rand: random();
   $randomNum: $min + floor($rand * (($max - $min) + 1));
@@ -126,7 +128,6 @@ polygon{
 .card h3{
   font-weight: 600;
   color: #000000;
-  font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
   text-align: center;
   font-style: var(--background);
 }
@@ -134,7 +135,6 @@ polygon{
 h3{
     font-size: 23px;
     color: #000000;
-    font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
     text-align: center;
     font-style: var(--background);
   }

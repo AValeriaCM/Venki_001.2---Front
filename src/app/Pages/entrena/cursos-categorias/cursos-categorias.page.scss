@@ -1,3 +1,6 @@
+*{
+    font-family: 'Proxima Nova' !important;
+  }
 .msg-input{
     width: 100%;
     border: 1px solid var(--ion-color-medium);
@@ -42,7 +45,6 @@
 }
 
 .title-emb p:first-letter {
-    font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf); 
     text-transform: uppercase;
     font-size: 15px;
 }
@@ -70,7 +72,6 @@
 }
 
 .usernamecss{
-    font-family: times, Times New Roman, times-roman, georgia, serif;
     color: #444;
     margin: 0;
     padding: 0px 0px 6px 0px;
@@ -83,7 +84,6 @@
 }
 
 .mensajecss{
-    font-family: Gill Sans, Verdana;
     font-size: 7px;
     line-height: 12px;
     margin: 0;
@@ -104,7 +104,6 @@
 }
 
 .cursoName{
-    font-family: times, Times New Roman, times-roman, georgia, serif;
     color: #444;
     margin: 0;
     padding: 0px 6px 6px 0px;
@@ -116,7 +115,6 @@
 }
 
 .lessonName{
-    font-family: Gill Sans, Verdana;
     font-size: 7px;
     line-height: 12px;
     margin: 0;
@@ -127,7 +125,6 @@
 }
 
 .contentName{
-    font-family: Gill Sans, Verdana;
     font-size: 7px;
     line-height: 12px;
     margin: 0;
@@ -141,7 +138,6 @@ hr.dashed {
     border-top: 3px dotted #bbb;
 }
 .contentNamedesc{
-    font-family: Gill Sans, Verdana;
     font-size: 7px;
     line-height: 12px;
     margin: 0;
@@ -223,7 +219,6 @@ hr.dashed {
         }
 
     .title-css{
-        font-family: times, Times New Roman, times-roman, georgia, serif;
         color: rgb(8, 8, 8);
         margin: 0;
         padding: 0px 0px 6px 0px;
@@ -235,7 +230,6 @@ hr.dashed {
     }
     
     .Subtitle-css{
-        font-family: Gill Sans, Verdana;
         font-size: 7px;
         line-height: 12px;
         margin: 0;

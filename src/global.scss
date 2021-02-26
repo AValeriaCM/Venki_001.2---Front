@@ -30,6 +30,8 @@
   //--ion-background-color:linear-gradient(rgba(255,255,255), rgba(253,202,85) );
   //--ion-background-color: #002a68;
   //--ion-background-color: linear-gradient(123deg, #002a68 0%, #80b9f6 53%, #0041a2 100%);
+  font-family: url(../src/assets/fonts/proxima/proxima-nova.otf);
+  font-style: sans-serif;
   --background: url(/assets/magin-fondo.jpg) 0 0/100% 100% no-repeat;
 }
 
@@ -229,19 +231,10 @@
   font-size: 15px;
   text-align: justify;
 }
-@font-face{
-  //font-family: 'BebasNeue';
-  //font-family: 'BulletJournal';
-  //font-family: 'Revoxa';
-  font-family: url('../src/assets/fonts/proxima/proxima-nova.otf');
-  //font-family: 'BeriberuSweetie-Normal';
-  // src: url('../src/assets/fonts/bebas_nue/BebasNeue-Regular.woff2') format('woff2');
-  //src: url('../src/assets/fonts/bullet_journal/BulletJournal.ttf') format('ttf');
-  //src: url('../src/assets/fonts/revoxa/Revoxa.otf') format('otf');
-  src: url('../src/assets/fonts/proxima/proxima-nova.otf') format('otf');
-  //src: url('../src/assets/fonts/buburia/BeriberuSweetie-Normal.ttf') format('ttf');
-}
 
-*{
-  font-family: url('../src/assets/fonts/proxima/proxima-nova.otf');
+@font-face {
+  font-family: 'Proxima nova';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/proxima/proxima-nova.otf');
 }

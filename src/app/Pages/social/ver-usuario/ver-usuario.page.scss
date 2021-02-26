@@ -1,3 +1,6 @@
+*{
+  font-family: 'Proxima Nova' !important;
+}
 .expand-css {
   max-width: 900px;
   background-color: rgba(248, 249, 250, 0.527);
@@ -19,7 +22,6 @@
 }
 
 .title-css {
-  font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
   color: rgb(8, 8, 8);
   margin: 0;
   padding: 0px 0px 6px 0px;
@@ -32,7 +34,6 @@
 }
 
 .titilExpand {
-  font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
   color: rgb(8, 8, 8);
   margin: 0;
   padding: 0px 0px 6px 0px;
@@ -44,7 +45,6 @@
 }
 
 .titilExpandSub {
-  font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
   color: rgb(128, 125, 125);
   margin: 0;
   padding: 0px 0px 6px 0px;
@@ -74,7 +74,6 @@
 }
 
 .Subtitle-css {
-  font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
   font-size: 10px;
   line-height: 12px;
   margin: 0;
@@ -104,7 +103,6 @@
 }
 
 .Subtitle-cs-desc {
-  font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
   font-size: 7px;
   line-height: 12px;
   margin: 0;

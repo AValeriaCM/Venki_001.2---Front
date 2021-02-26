@@ -1,3 +1,6 @@
+*{
+    font-family: 'Proxima Nova' !important;
+  }
 .divBack{
     background-color: rgba(248, 249, 250, 0.651);
 }
@@ -25,7 +28,6 @@
 .button-css{
     -webkit-box-shadow : 0  10px  30px  0 rgba(95,186,233,0.4);
     box-shadow : 0  10px  30px  0 rgba(95,186,233,0.4);
-    font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
     font-size: 9px;
     letter-spacing: 1px;
     margin: 0px;
@@ -45,7 +47,6 @@
 .button-css-options{
     -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
     box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.151);
-    font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
     font-size: 12px;
     letter-spacing: 1px;
     margin: 0px;
@@ -64,7 +65,6 @@
 }
 
 .title-css{
-    font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
     color: rgb(8, 8, 8);
     margin: 0;
     padding: 0px 0px 6px 0px;
@@ -76,7 +76,6 @@
 }
 
 .Subtitle-css{
-    font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
     font-size: 7px;
     line-height: 12px;
     margin: 0;
@@ -128,13 +127,11 @@
 }
 
 .user-name{
-    font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
     font-size: 19px;
     letter-spacing: 1px;
 }
 
 .user-bio{
-    font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);
     font-size: 11px;
     letter-spacing: 1px;
     text-align: justify;

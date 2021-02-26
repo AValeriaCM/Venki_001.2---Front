@@ -1,3 +1,6 @@
+*{
+    font-family: 'Proxima Nova' !important;
+  }
 .textArea{
     width: 97%;
     max-width: 500px;
@@ -40,7 +43,6 @@
 }
 
 .form-text-error{
-    font-family: times, Times New Roman, times-roman, georgia, serif;
     font-size: 11px;
     letter-spacing: 1px;
     color: #721c24;
@@ -59,7 +61,6 @@
 .ion-item-css{
     background-color: #f6f6f679;
     border: none;
-    font-family: times, Times New Roman, times-roman, georgia, serif;
     font-size: 11px;
     letter-spacing: 1px;
     color: #000000;

@@ -1,7 +1,9 @@
+*{
+    font-family: 'Proxima Nova' !important;
+  }
 .boderbox{
     border-radius: 8px;
     -webkit-border-radius: 8px;
-    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     width: 98%;
     height: auto;
     color: #000;
@@ -31,7 +33,6 @@
 .card h3{
   font-weight: 600;
   color: #000000;
-  font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
   text-align: center;
   font-style: var(--background);
 }
@@ -39,7 +40,6 @@
 h3{
     font-size: 23px;
     color: #000000;
-    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     text-align: center;
     font-style: var(--background);
   }
@@ -139,7 +139,6 @@ video{
 }
 
 .title-css{
-    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     font-style: 'Proxima';
     text-transform: uppercase;
     color: rgb(8, 8, 8);
@@ -153,8 +152,6 @@ video{
 }
 
 .Subtitle-css{
-    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
-    font-style: 'Proxima';
     text-transform: uppercase;
     font-size: 7px;
     line-height: 12px;
@@ -168,8 +165,6 @@ video{
 
 
 .title-css-user{
-    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
-    font-style: 'Proxima';
     text-transform: uppercase;
     color: #444;
     margin: 0;
@@ -181,7 +176,6 @@ video{
 }
 
 .title-css-infoTitle{
-    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     margin-right: 20px;
     margin-left: 60px;
     color: rgb(255, 255, 255);
@@ -196,7 +190,6 @@ video{
 }
 
 .Subtitle-css-user{
-    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     font-size: 14px;
     line-height: 12px;
     margin: 0;
@@ -232,7 +225,6 @@ video{
   .button-css{
     -webkit-box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.24);
     box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.233);
-    font-family: url(../../../assets/fonts/proxima/proxima-nova.otf);
     font-size: 11px;
     letter-spacing: 1px;
     margin: 0 auto;

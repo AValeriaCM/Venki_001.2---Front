@@ -1,3 +1,6 @@
+*{
+  font-family: 'Proxima Nova' !important;
+}
 .coverBack{
   margin-top: 30%;
   height: 35%;
@@ -13,7 +16,6 @@ hr.solid {
 }
 
 .title-css{
-  font-family: times, Times New Roman, times-roman, georgia, serif;
   color: rgb(0, 0, 0);
   margin: 0;
   padding: 0px 0px 6px 0px;
@@ -25,7 +27,6 @@ hr.solid {
 }
 
 .Subtitle-css{
-  font-family: Gill Sans, Verdana;
   font-size: 11px;
   line-height: 12px;
   margin: 0;
@@ -39,7 +40,6 @@ hr.solid {
 
   
   .form-text-error{
-    font-family: times, Times New Roman, times-roman, georgia, serif;
     font-size: 11px;
     letter-spacing: 1px;
     color: #721c24;
@@ -59,7 +59,6 @@ hr.solid {
   .button-css{
     -webkit-box-shadow : 0  10px  30px  0 rgba(95,186,233,0.4);
     box-shadow : 0  10px  30px  0 rgba(95,186,233,0.4);
-    font-family: times, Times New Roman, times-roman, georgia, serif;
     font-size: 11px;
     letter-spacing: 1px;
     margin: 0px;
@@ -99,7 +98,6 @@ hr.solid {
   .loginBtn2 {
     box-sizing: border-box;
     position: relative;
-    font-family: times, Times New Roman, times-roman, georgia, serif;
     font-size: 11px;
     letter-spacing: 1px;
     margin: 0.2em;

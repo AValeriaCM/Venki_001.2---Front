@@ -35,7 +35,7 @@
   <ion-card>
       <ion-card-title>Tu actividad de hoy</ion-card-title>
        <label style="color: #000; font-size: medium; font-weight: bold;" *ngIf="actividadDiaria">{{actividadDiaria}}</label>
-       <ion-item-divider></ion-item-divider><br>
+       <br>
       <p style="color: #000; font-size: medium; font-weight: bold;">&nbsp;&nbsp;&nbsp; ¡No olvides darnos tu opinión!</p>
       <ion-button *ngIf="actividadDiaria !== null" shape="round" style="float: right; margin: 20px;"
             (click)="opinarSobreActividad(actividadDiaria)">

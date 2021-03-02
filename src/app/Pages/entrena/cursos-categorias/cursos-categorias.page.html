@@ -66,19 +66,21 @@
                   <ion-card>
                     <img src="http://venki.3utilities.com/{{curso.photo}}" (click)="verCurso(curso)">
                     <ion-card-subtitle style="color: black;" (click)="verCurso(curso)">{{curso.name}}</ion-card-subtitle>
-                    <!--<ion-button expand="block" (click)="agregarCurso(curso)">
+                    <ion-button expand="block" (click)="agregarCurso(curso)">
                       <ion-icon name="add-circle"> Agregar Curso</ion-icon>
-                    </ion-button>-->
+                    </ion-button>
                   </ion-card>
                 </ion-item>
               </div>
               <div *ngIf="curso.users.length === 0">
-                <ion-item class="ion-item-css2">
-                  <ion-avatar slot="start">
+                <ion-item class="ion-item-css">
+                  <ion-card>
                     <img src="http://venki.3utilities.com/{{curso.photo}}" (click)="verCurso(curso)">
-                  </ion-avatar>
-                  <ion-label class="Subtitle-css" (click)="verCurso(curso)">{{curso.name}}</ion-label>
-                  <ion-icon name="add-circle-outline" (click)="agregarCurso(curso)"></ion-icon>
+                    <ion-card-subtitle style="color: black;" (click)="verCurso(curso)">{{curso.name}}</ion-card-subtitle>
+                    <ion-button expand="block" (click)="agregarCurso(curso)">
+                      <ion-icon name="add-circle"> Agregar Curso</ion-icon>
+                    </ion-button>
+                  </ion-card>
                 </ion-item>
               </div>
             </div>

@@ -28,6 +28,8 @@ export class CursosCategoriasPage implements OnInit{
   cursosU: any[] = [];
   msj = [];
   alert: any;
+  cursoId: any[] =[];
+
   constructor(
     private router: Router,
     private share: ShareserviceService,
@@ -50,11 +52,11 @@ export class CursosCategoriasPage implements OnInit{
     this.coursetk = informacion.infoCurso;
     this.video=this.sanitizer.bypassSecurityTrustResourceUrl(this.coursetk.video);
     this.getcursos(this.usertk.id, this.coursetk.id);
-      
+    this.share.getCursosUsuario(this.userIDName);  
   }
 
   getcursos(userid: any, categoriaid: any) {
-      console.log(userid,  categoriaid);
+      console.log('id user:',userid,'categoria id:', categoriaid);
       this.share.getCursosCategorias(categoriaid, userid).subscribe(dataCurso => {
         this.cursosUser = dataCurso;
         this.cursosU=this.cursosUser;
@@ -79,14 +81,28 @@ export class CursosCategoriasPage implements OnInit{
     this.router.navigate(['/users/entrena/vercurso/']);
   }
 
-  agregarCurso(curso: any) { 
+  agregarCurso(curso: any) {
+  
+    this.share.getCursosUsuario(this.userIDName).subscribe(dataCurso =>{
+      let temid  = dataCurso.data;
+      temid.forEach(element => {
+        if(element.id == curso.id){
+          this.cursoId = element.id                   
+        }
+      });
+      if(this.cursoId != curso.id || this.cursoId.length == 0){
       console.log('curso', curso.id);
-          console.log('id_user', this.usertk.id);
-          this.share.agregarCurso(this.usertk.id, curso.id).subscribe(data => {
-                console.log(data, 'info entrena ');
-                });      
-               this.router.navigate(['/users/entrena/']);
-               //window.location.reload();
+        console.log('id_user', this.usertk.id);
+        this.share.agregarCurso(this.usertk.id, curso.id).subscribe(data => {
+              console.log(data, 'info entrena ');
+              });
+
+      }else{
+        this.alertDespuesTiempo();
+      }      
+  
+    });
+      
   }
 
   async alertDespuesTiempo() {

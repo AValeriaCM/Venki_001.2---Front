@@ -1,4 +1,4 @@
-import { InfoInicioPage } from './info-inicio/info-inicio.page';
+//import { InfoInicioPage } from './info-inicio/info-inicio.page';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
@@ -8,7 +8,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { ChatServiceService } from 'src/app/_services/chat-service.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { AlertController, ModalController } from '@ionic/angular';
-import { InfoPremiumPage } from './info-premium/info-premium.page';
+//import { InfoPremiumPage } from './info-premium/info-premium.page';
 import { LoginService } from 'src/app/_services/login.service';
 
 
@@ -45,7 +45,7 @@ export class EntrenaPage implements OnInit {
     private chatS: ChatServiceService,
     private pObjecto: PassObjectService,
     public alertController: AlertController,
-    private modelcontroller: ModalController,
+    //private modelcontroller: ModalController,
     private log: LoginService,) { }
 
   ngOnInit() {
@@ -118,7 +118,7 @@ export class EntrenaPage implements OnInit {
   }*/
 
 
-  async alertDespuesTiempo() {
+  /*async alertDespuesTiempo() {
     this.alert = await this.alertController.create({
       header: 'UPS!',
       subHeader:
@@ -128,10 +128,10 @@ export class EntrenaPage implements OnInit {
       buttons: ['Acepto'],
     });
     await this.alert.present();
-  }
+  }*/
 
 
-  async alertDespuesTiempoDescripcion(decrip: any) {
+  /*async alertDespuesTiempoDescripcion(decrip: any) {
     this.alert = await this.alertController.create({
       cssClass: 'my-custombackentrena',
       header: '',
@@ -139,7 +139,7 @@ export class EntrenaPage implements OnInit {
       buttons: ['Continuar'],
     });
     await this.alert.present();
-  }
+  }*/
 
    
 }

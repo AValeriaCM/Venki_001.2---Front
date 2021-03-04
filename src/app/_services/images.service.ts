@@ -7,7 +7,7 @@ import { Image } from '../_model/Image';
 })
 export class ImagesService {
 
-  urlServ = 'http://venki.3utilities.com';
+  urlServ = 'https://venki.inkdigital.co';
   constructor(private http: HttpClient) { }
 
 

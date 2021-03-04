@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class RegistroService {
 
   url2 = `/api/users`;
-  basePath = `http://venki.3utilities.com`;
+  basePath = `https://venki.inkdigital.co`;
 
   constructor(private http: HttpClient,
               private router: Router, ) { }

@@ -14,6 +14,7 @@ export class CondicionesPage implements OnInit {
   }
 
   ClosePopover(){
+    
     this.pop.dismiss();
   }
 

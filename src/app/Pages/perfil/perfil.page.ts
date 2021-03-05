@@ -119,7 +119,7 @@ export class PerfilPage implements OnInit {
             this.getcursos(this.usertk.id);
             this.getMiactividad(this.usertk.id);
           }else{
-            let pht = 'http://http://venki.3utilities.com/photos/' + this.usertk.photo;
+            let pht = 'https://venki.inkdigital.co/photos/' + this.usertk.photo;
             this.usertk.photo = pht;
             this.getcursos(this.usertk.id);
             this.getMiactividad(this.usertk.id);
@@ -138,7 +138,7 @@ export class PerfilPage implements OnInit {
           this.getcursos(this.usertk.id);
           this.getMiactividad(this.usertk.id);
         }else{
-          let pht = 'http://http://venki.3utilities.com/photos/' + this.usertk.photo;
+          let pht = 'https://venki.inkdigital.co/photos/' + this.usertk.photo;
           this.usertk.photo = pht;
           this.getcursos(this.usertk.id);
           this.getMiactividad(this.usertk.id);

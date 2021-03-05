@@ -1,3 +1,4 @@
+import { PassObjectVideoService } from './../../../_services/pass-object-video.service';
 import { PassObjectAuxService } from './../../../_services/pass-object-aux.service';
 import { PassObjectExamenService } from './../../../_services/pass-object-examen.service';
 import { Component, OnInit } from '@angular/core';
@@ -37,6 +38,7 @@ cursos: any[] = [];
     private pObjecto: PassObjectService,
     private pObjectExamen: PassObjectExamenService,
     private pObjectAux: PassObjectAuxService,
+    private pObjectVideo: PassObjectVideoService,
     private  alertController: AlertController,
     private router: Router
   ) { }
@@ -147,7 +149,8 @@ cursos: any[] = [];
     console.log(correcto, incorrecto);
     this.alertDespuesTiempo(correcto, incorrecto);
     this.pObjecto.setData(this.pObjectAux.getNavData());
-    console.log('nav del examen' + this.pObjectExamen);
+    this.pObjectVideo.setData(this.pObjectAux.getNavData());
+    console.log('nav del examen', this.pObjectExamen);
     this.router.navigate(['/users/entrena/vercurso']);
   }
 

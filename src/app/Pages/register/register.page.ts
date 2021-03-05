@@ -150,11 +150,11 @@ export class RegisterPage implements OnInit {
       this.nUsuario.birthday = bt;
       console.log(this.nUsuario.phone);
       this.auth.setPrimeraVez();
-      this.registro.registro(this.nUsuario).subscribe(() => {
-        this.mostrarmensaje('Registro Satisfactorio, revise su correo', 'Sucess');
-        this.inicializarFormulario();
-        this.router.navigateByUrl('/');
-      });
+        this.registro.registro(this.nUsuario).subscribe(() => { 
+          this.mostrarmensaje('Registro Satisfactorio, revise su correo', 'Sucess');
+          this.inicializarFormulario();
+          this.router.navigateByUrl('/');
+        });
     }
   }
 

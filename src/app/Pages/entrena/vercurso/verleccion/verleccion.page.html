@@ -31,7 +31,7 @@
                 <ion-col *ngFor="let recursos of lections.resources; let k = index" >
                   
                   <div>
-                  <div *ngIf="recursos.order ===  1">
+                  <div *ngIf="recursos.order ===  index + 1">
                     <div *ngIf="recursos.audio">
                       <ion-button fill="outline" class="button-start"
                         (click)="audioPlayer(lections.name,recursos.audio, recursos.order, lections.resources?.length)">

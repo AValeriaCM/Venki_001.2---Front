@@ -34,6 +34,7 @@ export class SlidesPage implements OnInit {
         value.selected  = false;
         return value;
       });
+      console.log(this.data,'dta slides');
       this.auth.gettokenLog().then( tkInf => {
         if (tkInf !==  null){
           this.log.logdataInfData(tkInf).subscribe( resTk => {
@@ -48,6 +49,7 @@ export class SlidesPage implements OnInit {
         }
       });
     });
+
   }
 
   obtenerVal(value: any){

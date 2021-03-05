@@ -82,7 +82,7 @@
       <h3>{{mensaje}}</h3>
       <div *ngFor="let dt of data">
         <ion-item class="itemback" style="padding-top: 0px;margin-bottom: 4px;margin-left: 10px;margin-right: 50px;">
-            <img src="http://venki.3utilities.com/medias/{{dt.photo}}" style="width: 120px; height: 120px; border-radius: 8px; margin-top: 12px;margin-bottom: 12px;"/>
+            <img src="http://venki.inkdigital.co/medias/{{dt.photo}}" style="width: 120px; height: 120px; border-radius: 8px; margin-top: 12px;margin-bottom: 12px;"/>
             <br>
             <ion-checkbox slot="end" color="primary" [(ngModel)]="dt.selected" (click)="obtenerVal(dt)"></ion-checkbox>
             <ion-label style=" text-transform: uppercase; font-family: 'Proxima'; font-style: 'Proxima'; margin-left: 20px; font-size: 10px;">{{dt.name}}</ion-label>

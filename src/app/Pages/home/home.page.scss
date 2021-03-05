@@ -11,6 +11,24 @@
     text-align: center;
 }
 
+.subtitulo-actividad{
+  margin-left: 15%;
+  color: #000;
+  font-size: medium;
+}
+
+ion-col > div {
+  background-size: contain; background-position: center;
+  background-color: rgba(255, 255, 255, 0.282);
+  background-blend-mode: lighten;
+  border-radius: 8px;
+  padding: 8%;
+  color: rgb(0, 0, 0) !important; font-weight: bold !important;
+  font-size: 18px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0);
+}
+
 .div-imagen{
     border-radius: 8px;
     

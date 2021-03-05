@@ -133,7 +133,7 @@ export class HomePage implements OnInit {
       for (const [name, image] of Object.entries(data)){
          if(i==0){
             console.log("Datos ",name, image[0]);
-            this.urlP="http://venki.3utilities.com/"+image[0].url;
+            this.urlP="https://venki.inkdigital.co/"+image[0].url;
             console.log("DatosIma ",this.urlP);
          }
          i=1;

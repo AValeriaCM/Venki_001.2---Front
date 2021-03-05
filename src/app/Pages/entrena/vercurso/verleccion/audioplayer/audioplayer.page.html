@@ -197,7 +197,8 @@
       </ion-col>
 
       <div *ngFor="let cur of cursos; let i index">
-        <div *ngFor="let lens of cur.lessons; let j index">
+        <div *ngFor="let lens of cur.lessons; let j = index">
+          <div *ngIf="j === indexLessons">
           <div *ngFor="let recursos of lens.resources">
             <div *ngIf="recursos.order === 2">
               <div *ngIf="recursos.video">
@@ -209,6 +210,7 @@
           </div>
         </div>
       </div>
+    </div>          
  </ion-row>
   </ion-toolbar>
 </ion-footer>

@@ -28,10 +28,11 @@ export class ServiceErrorInterceptorService implements HttpInterceptor{
                           }*/
       }
     })).pipe(catchError((err) => {
-      // console.log('Entro Error Filtro');
+      //console.log('Entro Error Filtro');
       console.log(err);
       // err.message
       // err.error.mensaje
+     
       if (err.status === 400) {
         this.snackBar.open("Proceso invalido, intenta nuevamente", 'ERROR 400', { duration: 5000 });
       } else if (err.status === 401) {
@@ -43,7 +44,14 @@ export class ServiceErrorInterceptorService implements HttpInterceptor{
           });
         });
         // this.router.navigate(['/login']);
-      } else if (err.status === 500) {
+      }else if(err.status === 422){
+          if(err.error.error.email){
+            this.snackBar.open(err.error.error.email[0], 'ERROR 422', { duration: 5000 });
+          }else if(err.error.error.phone){
+            this.snackBar.open(err.error.error.phone[0], 'ERROR 422', { duration: 5000 });
+          }
+  
+      }else if (err.status === 500) {
         this.snackBar.open(err.error.mensaje, 'ERROR 500', { duration: 5000 });
       } else {
         this.snackBar.open(`Error: ${err.status} Ha ocurrido un error, intente mas tarde`, 'ERROR', { duration: 5000 });

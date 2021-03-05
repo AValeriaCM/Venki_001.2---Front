@@ -1,3 +1,4 @@
+import { PassNameLessonsService } from './../../../../../_services/pass-name-lessons.service';
 import { PassObjectAuxService } from './../../../../../_services/pass-object-aux.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -45,6 +46,7 @@ export class AudioplayerPage implements OnInit {
   exam = 0;
   color:string;
   progreso: any;
+  indexLessons: number;
   
   @ViewChild('range', {static: false})  range: IonRange;
  constructor(
@@ -53,12 +55,14 @@ export class AudioplayerPage implements OnInit {
     private pObjecto: PassObjectService,
     private PObjectAux: PassObjectAuxService,
     private share: ShareserviceService,
-    private pObjectoVideo: PassObjectVideoService   
+    private pObjectoVideo: PassObjectVideoService,
+    private PObjecIndex: PassNameLessonsService   
     ) {
 }
 
 
   ngOnInit() {
+
     let info = this.pObjecto.getNavData();
     console.log('lo que nec',info);
     this.share.guardarLeccionActiva(info);
@@ -79,6 +83,8 @@ export class AudioplayerPage implements OnInit {
     });
     
     //----------------
+    this.indexLessons = this.PObjecIndex.getData();
+    console.log('index leccion', this.indexLessons);
     const informacion = this.pObjectoVideo.getNavData();
     console.log('info en audioplay',informacion);
     this.color=informacion.color;
@@ -110,7 +116,7 @@ export class AudioplayerPage implements OnInit {
                   console.log('entre true', val);
                   this.share.verorder().then( rval => {
                     this.orderStorage = rval;
-                    console.log(this.orderStorage, rval);
+                    console.log('storage',this.orderStorage, 'order en el que va',rval);
                   });
                 }else{
                   console.log('entre false', val);
@@ -211,8 +217,8 @@ export class AudioplayerPage implements OnInit {
     this.pObjectoVideo.setData(dataObj);
     this.router.navigate(['/users/entrena/vercurso/verleccion/vidplayer/']);
   }
+  
   anterior(){
-    
     this.pObjecto.setData(this.PObjectAux.getNavData());
     this.pObjectoVideo.setData(this.PObjectAux.getNavData());
     this.router.navigate(['/users/entrena/vercurso/verleccion/']);

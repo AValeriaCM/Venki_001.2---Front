@@ -95,7 +95,7 @@ lectionName: any; video: any;  order: any; tma: any;
                   console.log('entre true', val);
                   this.share.verorder().then( rval => {
                     this.orderStorage = rval;
-                    console.log('storage y rval',this.orderStorage, rval);
+                    console.log('storage:',this.orderStorage, 'rval',rval);
                   });
                 }else{
                   console.log('entre false', val);
@@ -115,7 +115,7 @@ lectionName: any; video: any;  order: any; tma: any;
           console.log('entre true', val);
           this.share.verorder().then( rval => {
             this.orderStorage = rval;
-            console.log(this.orderStorage, rval);
+            console.log('storeage',this.orderStorage, 'rval',rval);
           });
         }else{
           console.log('entre false', val);
@@ -166,7 +166,7 @@ lectionName: any; video: any;  order: any; tma: any;
 
   getcursos(userid: any) {
     this.share.getCursos().subscribe(info => {
-      console.log(info);
+      console.log('infogetCurso',info);
       this.cursos = info.data;
     });
   }
@@ -196,7 +196,7 @@ lectionName: any; video: any;  order: any; tma: any;
         this.share.updateorder(order);
       }
     });
-    let url = 'http://venki.3utilities.com/' + doc;
+    let url = 'https://venki.inkdigital.co/' + doc;
     this.previewAnyFile.preview(url).then(() => {
 
     }, (err) => {

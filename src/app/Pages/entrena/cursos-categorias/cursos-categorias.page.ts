@@ -119,7 +119,7 @@ export class CursosCategoriasPage implements OnInit{
 
 
   descargarPDF(){
-    window.open("http://venki.3utilities.com/"+this.coursetk.pdf, "_blank");
+    window.open("https://venki.inkdigital.co/"+this.coursetk.pdf, "_blank");
   }
 
   filtrar(event: Event) {

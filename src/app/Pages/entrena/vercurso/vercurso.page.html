@@ -90,7 +90,7 @@
                 <ion-button class="tema-css" expand="block" tappable (click)="toggleItem(i, j)"
                   [ngClass]="{'lecciones-active': lections.open, 'lecciones': !lections.open}">
                   <ion-icon slot="start" name="checkmark-outline" style="color: {{color}};" *ngIf="!lections.open"></ion-icon>
-                  <ion-icon slot="start" name="close" style="color: {{color}};" *ngIf="lections.open"></ion-icon>
+                  <ion-icon slot="start" name="checkmark-outline" style="color: {{color}};" *ngIf="lections.open"></ion-icon>
                   <ion-label >
                     <p class="color-text"> {{lections.name}}</p>
                   </ion-label>

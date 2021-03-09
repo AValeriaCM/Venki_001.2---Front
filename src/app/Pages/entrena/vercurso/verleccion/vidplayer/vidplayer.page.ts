@@ -97,7 +97,7 @@ export class VidplayerPage implements OnInit {
                   console.log('entre true', val);
                   this.share.verorder().then( rval => {
                     this.orderStorage = rval;
-                    console.log(this.orderStorage, rval);
+                    console.log('order storage',this.orderStorage,'rval', rval);
                   });
                 }else{
                   console.log('entre false', val);

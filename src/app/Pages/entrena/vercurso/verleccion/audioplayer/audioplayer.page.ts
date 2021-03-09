@@ -207,7 +207,7 @@ export class AudioplayerPage implements OnInit {
   }
 
   startVideo(lectionName: any, video: any,  order: any, tma: any) {
-    console.log('Video', lectionName);
+    console.log('Video orden', order);
     const dataObj = {
       name: lectionName,
       vidInfo: video,

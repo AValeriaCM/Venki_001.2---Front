@@ -20,14 +20,14 @@ const routes: Routes = [
     path: 'examen',
     loadChildren: () => import('../../Pages/entrena/examen/examen.module').then( m => m.ExamenPageModule)
   },
-  /*{
+  {
     path: 'info-premium',
     loadChildren: () => import('../../Pages/entrena/info-premium/info-premium.module').then( m => m.InfoPremiumPageModule)
   },
   {
     path: 'info-inicio',
     loadChildren: () => import('../../Pages/entrena/info-inicio/info-inicio.module').then( m => m.InfoInicioPageModule)
-  },*/
+  },
 ];
 
 @NgModule({

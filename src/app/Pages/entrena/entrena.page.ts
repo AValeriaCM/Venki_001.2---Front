@@ -1,4 +1,4 @@
-//import { InfoInicioPage } from './info-inicio/info-inicio.page';
+import { InfoInicioPage } from './info-inicio/info-inicio.page';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
@@ -45,7 +45,7 @@ export class EntrenaPage implements OnInit {
     private chatS: ChatServiceService,
     private pObjecto: PassObjectService,
     public alertController: AlertController,
-    //private modelcontroller: ModalController,
+    private modelcontroller: ModalController,
     private log: LoginService,) { }
 
   ngOnInit() {
@@ -53,9 +53,9 @@ export class EntrenaPage implements OnInit {
       this.log.logdataInfData(dt).subscribe(infoUser => {
         console.log(infoUser);
         this.usertk = infoUser;
-         /* this.modelcontroller.create({
+         this.modelcontroller.create({
             component: InfoInicioPage,
-          }).then(model => model.present());*/
+          }).then(model => model.present());
       });
     });
 

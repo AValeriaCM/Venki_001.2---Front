@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Registro } from './../../_model/Registro';
 import { RegistroService } from './../../_services/registro.service';
 import { Component, OnInit } from '@angular/core';
@@ -24,7 +25,8 @@ export class OlvidocPage implements OnInit {
   constructor(private router: Router,
               private snackbar: MatSnackBar,
               private registro: RegistroService,
-              private formBuilder: FormBuilder, ) { }
+              private formBuilder: FormBuilder,
+              private alertController:AlertController ) { }
 
   ngOnInit() {
     this.inicializarFormulario();
@@ -39,11 +41,25 @@ export class OlvidocPage implements OnInit {
 
   RecuperarEmail(){
     this.nUsuario = this.correoForm.value;
+    // servicio de recuperacion de contraseña  
     console.log(this.nUsuario);
+    this.presentAlert();
+    //volverLogin(); redireccion hacia el login 
   }
 
   volverLogin(){
     this.router.navigateByUrl('/');
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Cambio Contraseña',
+      subHeader: 'cambio de contraseña',
+      message: 'por favor revise su correo para cambiar a contraseña.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 }

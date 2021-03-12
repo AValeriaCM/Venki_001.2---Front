@@ -40,7 +40,11 @@ const routes: Routes = [
   {
     path: 'terminos-ninos',
     loadChildren: () => import('./Pages/terminos-ninos/terminos-ninos.module').then( m => m.TerminosNinosPageModule)
+  },  {
+    path: 'help',
+    loadChildren: () => import('./Pages/help/help.module').then( m => m.HelpPageModule)
   }
+
 
 
 

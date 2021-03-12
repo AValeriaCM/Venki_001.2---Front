@@ -124,6 +124,18 @@ export class ShareserviceService {
     });
   }
 
+  actualizarProgreso(idUser:number,idCurso:number, progreso:any){
+    console.log(idUser,idCurso,progreso);
+    const body = new HttpParams()
+      .set('progress', progreso);
+    return this.http.put(this.basePath  + `/api/users/${idUser}/courses/${idCurso}`, body, {
+      headers: new HttpHeaders()
+    .set('Content-Type', 'application/x-www-form-urlencoded')
+    .set('X-Requested-With', 'XMLHttpRequest')
+  });
+  
+  }
+
   getProducts() {
     return this.data;
   }
@@ -158,12 +170,11 @@ export class ShareserviceService {
   }
 
   actualizarPhoto(idUser: any, fotoUrl: any) {
-
-    const formData = new FormData();
-    formData.append('photo', fotoUrl);
-    formData.append('_method', 'PUT');
-
-    return this.http.post(this.basePath + `/api/users/${idUser}`, formData, {
+    const body = new HttpParams()
+    .set('avatar',fotoUrl);
+    //formData.append('avatar', fotoUrl);
+    //formData.append('_method', 'PUT');
+    return this.http.put(this.basePath + `/api/users/${idUser}`, body, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });

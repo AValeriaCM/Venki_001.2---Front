@@ -1,3 +1,6 @@
+
+import { PassNameLessonsService } from './../../../_services/pass-name-lessons.service';
+import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { PassObjectVideoService } from './../../../_services/pass-object-video.service';
 import { PassObjectAuxService } from './../../../_services/pass-object-aux.service';
 import { PassObjectExamenService } from './../../../_services/pass-object-examen.service';
@@ -5,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { UsuarioCurso } from 'src/app/_model/UsuarioCurso';
 
 @Component({
   selector: 'app-examen',
@@ -20,37 +25,49 @@ export class ExamenPage implements OnInit {
   tama: any;
   alert: any;
   //-new----
-  auxProgreso: number;
+auxProgreso: number;
  color: string;
  data: any;
  userinfo;
  course:string;
 courseID: number;
 progreso:number;
-share: any;
 info: string;
 comentariosGeneral: any;
 CourseLessonID: number;
 orderStorage: any;
 cursos: any[] = [];
+numLecciones: number;
+indexLection: number;
+newProgress: number;
+user: UsuarioCurso;
 
   constructor(
     private pObjecto: PassObjectService,
     private pObjectExamen: PassObjectExamenService,
     private pObjectAux: PassObjectAuxService,
     private pObjectVideo: PassObjectVideoService,
+    private pObjectIndex: PassNameLessonsService,
     private  alertController: AlertController,
+    private share: ShareserviceService,
     private router: Router
   ) { }
 
   ngOnInit() {
-   /* const infor = this.pObjectAux.getNavData();
-    console.log('info examen progreso:', infor);
+    this.totalExam = [];
+    const informacion = this.pObjectExamen.getNavData();
+    this.examenDT  = informacion.examen.exam;
+    this.tama = this.examenDT.length;
+    this.indexLection = this.pObjectIndex.getData();
+    
+    const infor = this.pObjectAux.getNavData();
+    //console.log('lo que necesito en vidplayer:', informacion);
     this.color=infor.color;
     this.data = infor.infoCurso;
     this.userinfo = infor.userInf;
     this.course = infor.course.name;
     this.courseID = infor.infoCurso.id;
+    this.share.guardarCursoActiva(infor);
     this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
       this.info = infodt.data;
       this.share.getComentariosCurso(this.data.id).subscribe(info => {
@@ -58,40 +75,26 @@ cursos: any[] = [];
         this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
               let temid  = dataCurso.data;
 
-
               let dttemp = temid.filter(r => r.id === this.courseID);
 
               dttemp.forEach(element => {
                 this.CourseLessonID = element.id;
                 this.progreso = element.pivot.progress;
-                console.log('data Temporal VER:', element.pivot.progress);
-              });
-              console.log('LEccion del curso',this.CourseLessonID);
-              this.share.hayorder().then( val => {
-                if (val){
-                  console.log('entre true', val);
-                  this.share.verorder().then( rval => {
-                    this.orderStorage = rval;
-                    console.log(this.orderStorage, rval);
-                  });
-                }else{
-                  console.log('entre false', val);
-                  this.share.iniciorder();
-                }
+                console.log('data progreso temp', this.progreso);
               });
 
               this.cursos = dttemp;
-              console.log('curso examen', this.cursos);
+              console.log('examen progress', this.cursos);
+              this.cursos.forEach(element => {
+                this.numLecciones = element.lessons.length;
+              });
+              console.log('lecciones',this.numLecciones);
+              
             });
       });
-    });*/
-
-
-    this.totalExam = [];
-    const informacion = this.pObjectExamen.getNavData();
-    console.log('info examen', informacion);
-    this.examenDT  = informacion.examen.exam;
-    this.tama = this.examenDT.length;
+    });
+      this.calificar();
+    
   }
 
   obtenerVal(nombre: any,value: any, correct: any){
@@ -145,12 +148,11 @@ cursos: any[] = [];
         incorrecto = incorrecto + 1;
       }
     });
-
-    console.log(correcto, incorrecto);
     this.alertDespuesTiempo(correcto, incorrecto);
     this.pObjecto.setData(this.pObjectAux.getNavData());
     this.pObjectVideo.setData(this.pObjectAux.getNavData());
-    console.log('nav del examen', this.pObjectExamen);
+    this.pObjectExamen.setData(this.pObjectAux.getNavData());
+    this.guardaProgreso(this.progreso);
     this.router.navigate(['/users/entrena/vercurso']);
   }
 
@@ -167,9 +169,49 @@ cursos: any[] = [];
     await this.alert.present();
   }
 
-  /*guardaProgreso(progreso){
-    if( progreso == 0 ){
-      const numLeccion = 1/numeroLecciones;
-      }
-  }*/
+  async alertProgreso() {
+    this.alert = await this.alertController.create({
+      header: 'Felicidades',
+      subHeader:
+        'Terminaste La Leccion',
+      message:
+        'Pasa a la siguiente Leccion para incrementar tu Progreso',
+      buttons: ['Acepto'],
+    });
+    await this.alert.present();
+  }
+  
+  guardaProgreso(progreso: number){
+    this.user = new UsuarioCurso;
+    let varProgreso = progreso;
+    console.log(varProgreso);
+    this.newProgress = 1/this.numLecciones;
+    if( varProgreso == 0 && varProgreso < 1){
+      console.log(this.newProgress.toFixed(2));
+      this.user.progress =  parseFloat(this.newProgress.toFixed(2));
+      //servicio que envia el progreso.
+      this.share.actualizarProgreso(this.userinfo.id,this.courseID,this.user.progress).subscribe(()=>{
+
+      });
+      this.alertProgreso();
+    }else if(varProgreso !== 0 && varProgreso < 1){  
+        if(varProgreso < 1 && varProgreso >= 0.97){
+          this.user.progress = 1;
+          this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress).subscribe(()=>{
+            this.alertProgreso();
+          });
+        }
+      let progress: number;  
+      console.log(this.newProgress,'progreso operacion');//mirar el acumulador
+      this.newProgress = this.newProgress + varProgreso;
+      console.log('entra acumula',this.newProgress.toFixed(2));
+      progress = parseFloat(this.newProgress.toFixed(2));
+      this.user.progress = progress; 
+      console.log(this.userinfo.id,this.courseID, this.user.progress);
+      this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress).subscribe(()=>{
+        this.alertProgreso();
+      });
+      
+    }
+  }
 }

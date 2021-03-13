@@ -93,7 +93,7 @@ user: UsuarioCurso;
             });
       });
     });
-      this.calificar();
+      //this.calificar();
     
   }
 
@@ -153,7 +153,7 @@ user: UsuarioCurso;
     this.pObjectVideo.setData(this.pObjectAux.getNavData());
     this.pObjectExamen.setData(this.pObjectAux.getNavData());
     this.guardaProgreso(this.progreso);
-    this.router.navigate(['/users/entrena/vercurso']);
+    this.router.navigateByUrl('/users/entrena/vercurso');
   }
 
   async alertDespuesTiempo(correcto: any, incorrecto: any) {
@@ -195,7 +195,7 @@ user: UsuarioCurso;
       });
       this.alertProgreso();
     }else if(varProgreso !== 0 && varProgreso < 1){  
-        if(varProgreso < 1 && varProgreso >= 0.97){
+        if( varProgreso >= 0.97 && varProgreso < 1 ){
           this.user.progress = 1;
           this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress).subscribe(()=>{
             this.alertProgreso();

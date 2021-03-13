@@ -1,3 +1,4 @@
+import { UsuariosF } from './../_model/_Usuario';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -170,16 +171,23 @@ export class ShareserviceService {
   }
 
   actualizarPhoto(idUser: any, fotoUrl: any) {
-    const body = new HttpParams()
-    .set('avatar',fotoUrl);
-    //formData.append('avatar', fotoUrl);
-    //formData.append('_method', 'PUT');
-    return this.http.put(this.basePath + `/api/users/${idUser}`, body, {
+    const formData = new FormData()
+    formData.append('avatar', fotoUrl);
+    formData.append('_method', 'PUT');
+    return this.http.post(this.basePath + `/api/users/${idUser}`, formData, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 
+  actualizarAvatar(idUser: any, imgUrl: UsuariosF) {
+    const body = new HttpParams()
+    .set('photo',imgUrl.avatar );
+    return this.http.put(this.basePath + `/api/users/${idUser}`, body, {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+    });
+  }
 
   getNetDiagnostico(idDiagnostico: any, idPage: any){
     return this.http.get<any[]>(this.basePath + `/api/surveys/${idDiagnostico}/questions?page=${idPage}&per_page=15`, {

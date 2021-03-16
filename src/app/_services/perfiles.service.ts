@@ -18,7 +18,7 @@ export class PerfilesService {
     });
   }
 
-  updateProfile(idUser: any, profileid: any){
+  updateProfile(idUser: any, profileid: any) {
 
     const body = new HttpParams()
     .set('profile_id', profileid);

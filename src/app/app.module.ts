@@ -39,8 +39,6 @@ import { AvatarPageModule } from './Pages/popup/avatar/avatar.module';
 import { CondicionesPageModule } from './Pages/condiciones/condiciones.module';
 import { TerminosNinosPageModule } from './Pages/terminos-ninos/terminos-ninos.module';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +65,6 @@ import { TerminosNinosPageModule } from './Pages/terminos-ninos/terminos-ninos.m
     AvatarPageModule,
     CondicionesPageModule,
     TerminosNinosPageModule
-    
   ],
   providers: [
     MatDatepickerModule,

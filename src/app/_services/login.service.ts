@@ -14,7 +14,7 @@ export class LoginService {
 
   clientsec = `${environment.CLIENT_SECRET}`;
   clientid = `${environment.CLIENT_ID}`;
-  constructor(private http: HttpClient, private AFauth: AngularFireAuth) // private router: Router,
+  constructor(private http: HttpClient, private AFauth: AngularFireAuth)
   {}
 
   login(usuario: string, contrasena: string) {
@@ -67,7 +67,6 @@ export class LoginService {
       'https://my-json-server.typicode.com/typicode/demo/posts'
     );
   }
-
 
   saveDevice(usuario: any, code: any) {
     console.log(usuario, code);

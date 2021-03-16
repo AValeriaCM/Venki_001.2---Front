@@ -1,9 +1,8 @@
 <ion-content class="ion-content-principal">
 
-  <ion-slides>
+    <ion-slides>
 
-    <ion-slide 
-    style="
+        <ion-slide style="
       background: url(../../../assets/slidesImg/Marca-la-Diferencia.jpeg) no-repeat center center; 
       min-width: 100%;
       min-height: 100%;
@@ -11,12 +10,10 @@
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: 100% 100%;
-      width: 100%;"
-      >
-    </ion-slide>
+      width: 100%;">
+        </ion-slide>
 
-    <ion-slide 
-    style="
+        <ion-slide style="
     background: url(../../../assets/slidesImg/Personalizacion.jpeg) no-repeat center center; 
     min-width: 100%;
     min-height: 100%;
@@ -24,12 +21,10 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: 100% 100%;
-    width: 100%;"
-    >
-    </ion-slide>
+    width: 100%;">
+        </ion-slide>
 
-    <ion-slide
-    style="
+        <ion-slide style="
     background: url(../../../assets/slidesImg/Interactividad.jpeg) no-repeat center center; 
     min-width: 100%;
     min-height: 100%;
@@ -37,12 +32,10 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: 100% 100%;
-    width: 100%;"
-    >
-    </ion-slide>
+    width: 100%;">
+        </ion-slide>
 
-    <ion-slide
-    style="
+        <ion-slide style="
     background: url(../../../assets/slidesImg/Perfil.jpeg) no-repeat center center; 
     min-width: 100%;
     min-height: 100%;
@@ -50,12 +43,10 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: 100% 100%;
-    width: 100%;"
-    >
-    </ion-slide>
+    width: 100%;">
+        </ion-slide>
 
-    <ion-slide
-    style="
+        <ion-slide style="
     background: url(../../../assets/slidesImg/Knowledge.jpeg) no-repeat center center; 
     min-width: 100%;
     min-height: 100%;
@@ -63,12 +54,10 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: 100% 100%;
-    width: 100%;"
-    >
-    </ion-slide>
+    width: 100%;">
+        </ion-slide>
 
-    <ion-slide 
-    style="
+        <ion-slide style="
     background: url(../../../assets/slidesImg/img1.jpg) no-repeat center center; 
     min-width: 100%;
     min-height: 100%;
@@ -76,24 +65,24 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: 100% 100%;
-    width: 100%;"
-    >
-      <h2 class="titulo">CON QUE PERFIL TE IDENTIFICAS</h2>
-      <h3>{{mensaje}}</h3>
-      <div *ngFor="let dt of data">
-        <ion-item class="itemback" style="padding-top: 0px;margin-bottom: 4px;margin-left: 10px;margin-right: 50px;
-        background-image: url(http://venki.inkdigital.co/medias/{{dt.photo}});">
-            <!--<img src="http://venki.inkdigital.co/medias/{{dt.photo}}" style="width: 120px; height: 120px; border-radius: 8px; margin-top: 12px;margin-bottom: 12px;"/>-->
-            <br>
-            <ion-checkbox slot="end" color="primary" [(ngModel)]="dt.selected" (click)="obtenerVal(dt)"></ion-checkbox>
-            <p style="color: darkblue; text-align: justify; text-transform: uppercase;
-              font-weight: bolder;">{{dt.name}}</p>
+    width: 100%;">
+            <form [formGroup]="form">
+                <h2 class="titulo">CON QUE PERFIL TE IDENTIFICAS</h2>
+                <h3>{{ mensaje }}</h3>
+                <div formArrayName="profiles" *ngFor="let profile of profilesArray.controls">
 
-        </ion-item>
-        </div>
-        <ion-button class="buttonCss" (click)="continuar()">Continuar <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
-    </ion-slide>
+                    <ion-item [formGroupName]="profile.value.index" class="itemback" style="padding-top: 0px;margin-bottom: 4px;margin-left: 10px;margin-right: 50px; background-image: url(http://venki.inkdigital.co/medias/{{profile.value.profile.photo}});">
+                        <br>
+                        <ion-checkbox slot="end" color="primary" formControlName="selected" (ngModelChange)="selectProfile($event, profile.value.index)"></ion-checkbox>
+                        <p style="color: darkblue; text-align: justify; text-transform: uppercase; font-weight: bolder;">{{profile.value.profile.name}}</p>
+                    </ion-item>
+                </div>
+                <ion-button class="buttonCss" (click)="continuar()" [disabled]="!form.valid">Continuar
+                    <ion-icon slot="end" name="arrow-forward"></ion-icon>
+                </ion-button>
+            </form>
+        </ion-slide>
 
-  </ion-slides>
+    </ion-slides>
 
 </ion-content>

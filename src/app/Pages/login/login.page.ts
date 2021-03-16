@@ -6,10 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from '../../_services/login.service';
-
-
-
-
+import { LoadingService } from 'src/app/_services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -38,27 +35,22 @@ export class LoginPage implements OnInit {
     private route: Router,
     private snackbar: MatSnackBar,
     private auth: AuthService,
-    private log: LoginService
+    private log: LoginService,
+    private loadingService: LoadingService
   ) {
+
     this.auth.gettokenLog().then(tkInf => {
-      console.log(tkInf);
       if (tkInf !== null) {
         this.log.logdataInfData(tkInf).subscribe(resTk => {
           this.auth.gettokenDevice().then(DeviceTk => {
             if (DeviceTk !== null) {
-              this.log.saveDevice(resTk.id, DeviceTk).subscribe(deviceUpdate => {
-                console.log(deviceUpdate);
-              });
+              this.log.saveDevice(resTk.id, DeviceTk);
             }
           });
           if (resTk) {
             this.route.navigateByUrl('/users/home');
-          } else {
-            console.log('falle');
           }
         });
-      } else {
-        console.log('falle');
       }
     });
   }
@@ -82,7 +74,6 @@ export class LoginPage implements OnInit {
 
   showpass(): void {
     this.showpassword = !this.showpassword;
-
     if (this.passwordToggleIcon === 'eye') {
       this.passwordToggleIcon = 'eye-off';
     } else {
@@ -97,18 +88,15 @@ export class LoginPage implements OnInit {
       return false;
     } else {
       this.loginData = this.loginForm.value;
+      this.loadingService.loadingPresent({message: "Por favor espere", spinner: "circles" });
+      console.log('entro');
       this.auth.login(this.loginData.correo, this.loginData.contrasena).subscribe(async res => {
-        console.log('Los datos', res);
         if (res) {
           this.log.logdataInfData(res).subscribe(resTk => {
-            console.log("Mi token",resTk.confirmation_code);
             this.token = resTk.confirmation_code;
             if (this.token == null) {
-              console.log(resTk.id);
               this.auth.gettokenDevice().then(DeviceTk => {
-                this.log.saveDevice(resTk.id, DeviceTk).subscribe(deviceUpdate => {
-                  console.log(deviceUpdate);
-                });
+                this.log.saveDevice(resTk.id, DeviceTk);
               });
               this.inicializarFormulario();
               this.auth.getPrimeraVez().then(data => {
@@ -122,14 +110,12 @@ export class LoginPage implements OnInit {
               });
             } else {
               this.mostrarmensaje('Verifique su correo', 'Error');
-              this.route.navigateByUrl('/login');
             }
           });
-         
-
         } else {
           this.mostrarmensaje('Ah ocurrido un error Intente más tarde o revise sus credenciales', 'Error');
         }
+        this.loadingService.loadingDismiss();
       });
       this.inicializarFormulario();
     }

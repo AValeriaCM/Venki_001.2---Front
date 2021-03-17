@@ -290,7 +290,7 @@ export class ShareserviceService {
     formData.append('post', posttxt);
     formData.append('medias[]', media);
 
-    return this.http.put(this.basePath + `/api/posts`, formData, {
+    return this.http.post(this.basePath + `/api/posts`, formData, {
       headers: new HttpHeaders()
     });
   }

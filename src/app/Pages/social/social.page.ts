@@ -179,18 +179,6 @@ export class SocialPage implements OnInit {
 
   }
 
-  Publicar(){
-    if (this.textareainputPiensa === undefined){
-      this.alertDespuesTiempo();
-    }else{
-      console.log('SFOTOS', this.photos);
-      this.share.guardarpost(this.usertk.id, this.textareainputPiensa, this.photos).subscribe(  res => {
-        console.log(res);
-        this.share.varPostUpdate.next('update data');
-      });
-    }
-  }
-
   handleLike(valor: any, valorid: any){
     this.LikeValue = valor;
     this.contadorlike = valor;

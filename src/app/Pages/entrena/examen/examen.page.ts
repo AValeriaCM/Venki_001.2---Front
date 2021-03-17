@@ -186,7 +186,13 @@ user: UsuarioCurso;
     let varProgreso = progreso;
     console.log(varProgreso);
     this.newProgress = 1/this.numLecciones;
-    if( varProgreso == 0 && varProgreso < 1){
+    
+    if( varProgreso >= 0.60 && varProgreso < 1 && this.numLecciones == 3){
+      this.user.progress = 1;
+      this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress).subscribe(()=>{
+        this.alertProgreso();
+      });
+    }else if( varProgreso == 0 && varProgreso < 1){
       console.log(this.newProgress.toFixed(2));
       this.user.progress =  parseFloat(this.newProgress.toFixed(2));
       //servicio que envia el progreso.
@@ -195,12 +201,7 @@ user: UsuarioCurso;
       });
       this.alertProgreso();
     }else if(varProgreso !== 0 && varProgreso < 1){  
-        if( varProgreso >= 0.97 && varProgreso < 1 ){
-          this.user.progress = 1;
-          this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress).subscribe(()=>{
-            this.alertProgreso();
-          });
-        }
+       
       let progress: number;  
       console.log(this.newProgress,'progreso operacion');//mirar el acumulador
       this.newProgress = this.newProgress + varProgreso;

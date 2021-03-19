@@ -2,6 +2,7 @@
 .user-list{
     color:darkblue;
     font-size: 16px;
+    width: 100%;
 }
 .ion-item-css{
     background-color: #ffffff;
@@ -46,9 +47,7 @@
 }
 
 .friend {
-    height: 70px;
-    border-bottom: 1px solid #e7ebee;
-    position: relative;
+    margin-bottom: 10px;
 }
 
 .friend:hover {
@@ -57,13 +56,13 @@
 }
 
 .friend img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     position: absolute;
-    top: 12px;
-    left: 12px;
-    border: 3px solid #fff;
+    top: 5px;
+    left: 10px;
+    border: 2px solid #fff;
 }
 
 .friend p {
@@ -90,26 +89,49 @@
 }
 
 .container {
-    height: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 0 30px;
+    padding: 0px;
 }
 
 .author-block {
     color: #717a84;
-    // display: flex;
-    // width: 100%;
-    // font-size: 12px;
 }
 
 .author-image {
-    // width: 30px;
-    // height: 30px;
     border-radius: 50%;
-    // background-image: url('https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-04-512.png');
 }
 
 *{
     font-family: 'Proxima Nova' !important;
-  }
+}
+
+.icon-search {
+    color: white;
+    margin: 5px 15px 0px 0px;
+}
+
+.label-user-chat {
+    text-transform: capitalize;
+    font-size: 16px;
+    width: 50%;
+}
+
+.label-date {
+    width: 50%;
+    text-align-last: end;
+    font-size: 11px;
+    color: #6b6b6b;
+}
+
+.label-message {
+    font-size: 13px;
+    color: #6b6b6b;
+}
+
+.mat-elevation-z4 {
+    box-shadow: none !important;
+}
+
+.label-results {
+    padding: 0px 25px;
+    font-weight: bold;
+}

@@ -1,25 +1,17 @@
 import { ImgPrevPage } from './img-prev/img-prev.page';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertController, ModalController } from '@ionic/angular';
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ViewChildren,
-  QueryList,
-  ElementRef,
-  Renderer2,
-} from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
-import { VimeoserviceService } from 'src/app/_services/vimeoservice.service';
-import { ChatServiceService } from 'src/app/_services/chat-service.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import * as shuffleArray from 'shuffle-array';
 import { LoginService } from 'src/app/_services/login.service';
-import { ImagesService } from 'src/app/_services/images.service';
 import { Image } from 'src/app/_model/Image';
+import { forkJoin, Observable } from 'rxjs';
+import { LoadingService } from 'src/app/_services/loading.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -37,112 +29,87 @@ export class HomePage implements OnInit {
   alert: any;
   urlP:string;
   user = 'user119572637';
-  videos;
-  albums;
-  private primeraves: boolean;
-  items = [];
-  slid = true;
-  msj = [];
-  images: Array<Image>=new Array();
-  usertk;
-  miactividad;
-
-  slideConfig = {
-    spaceBetween: 10,
-    centeredSlides: true,
-    slidesPerView: 1,
-  };
-
-  leccionActiva;
-  cursoActivo;
-  actividadDiaria;
+  usertk = null;
+  miactividad = 0;
+  cursoActivo = null;
+  actividadDiaria = null;
+  leccionActiva = null;
+  message_header: string;
+  basePath = `${environment.HOST}`;
 
   constructor(
     private router: Router,
     public alertController: AlertController,
     private auth: AuthService,
-    private imageS: ImagesService,
     private share: ShareserviceService,
-    private vimeoService: VimeoserviceService,
-    private chatS: ChatServiceService,
     private pObjecto: PassObjectService,
     private localN: LocalNotifications,
     private log: LoginService,
     private modelcontroller: ModalController,
+    private loadingService: LoadingService
   ) { }
 
-
-  
-
   ngOnInit() {
-    this.imageSelect=new Image();
-    this.share.getaactividadesDiaria().subscribe( res => {
-      console.log('Actividad Diairia', res);
-      this.actividadDiaria = res.data.activity;
-     
- 
-    });
 
-      
+    this.imageSelect = new Image();
+    this.getCurrentHour();
+    this.getActiveLesson();
+    this.getActiveCourse();
+    this.getDataInfo();
+    this.loadData();
+    this.localNotification();
+  }
 
-    this.share.getleccionActiva().then( res => {
-     
-      this.leccionActiva = res;
-    });
+  crearEntrada() {
+    this.router.navigate(['/users/social/crear-entrada/']);
+  }
 
-    this.share.getcursoActivo().then( info => {
-      console.log(info);
-      this.cursoActivo = info;
-    });
-
-    this.share.var.subscribe( res => {
-      this.auth.gettokenLog().then( dt => {
-        this.log.logdataInfData(dt).subscribe( infoUser => {
-          console.log(infoUser);
-          this.usertk = infoUser;
-          this.getMiactividad(this.usertk.id);
-        });
-        
-      });
-    });
-
+  getDataInfo() {
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
         this.getMiactividad(this.usertk.id);
       });
     });
-
-    this.videos = this.vimeoService.getVideos(this.user);
-    this.albums = this.vimeoService.getAlbums(this.user);
-    this.items = this.share.getProducts();
-    this.chatS.var.subscribe(chatMsg => {
-      console.log(chatMsg);
-      this.msj = this.chatS.getbadge();
-    });
-    this.msj = this.chatS.getbadge();
-    this.localNotification();
-    this.cargarImagenes();
   }
 
-   cargarImagenes(){
-    this.imageS.getImages().subscribe(data=>{
-      this.images=data;
-      let i=0;
-      for (const [name, image] of Object.entries(data)){
-         if(i==0){
-            console.log("Datos ",name, image[0]);
-            this.urlP="https://venki.inkdigital.co/"+image[0].url;
-            console.log("DatosIma ",this.urlP);
-         }
-         i=1;
-      }
+  getActiveCourse() {
+    this.share.getcursoActivo().then( info => {
+      this.cursoActivo = info;
     });
   }
 
-  addToCart(product) {
-    this.share.addProduct(product);
+  getActiveLesson() {
+    /*this.share.getleccionActiva().then( resp => {
+      this.leccionActiva = resp;
+    });*/ 
+  }
+
+  getData(): Observable<any> {
+    let activity = this.share.getaactividadesDiaria();
+    return forkJoin([activity]);
+  }
+
+  async loadData() {
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.getData().subscribe(res => {
+      this.actividadDiaria = res[0].data.activity;
+      this.loadingService.loadingDismiss();
+    }, err => {
+      this.loadingService.loadingDismiss();
+    }); 
+  }
+
+  getCurrentHour() {
+    var today = new Date()
+    var curHr = today.getHours()
+    if (curHr < 12) {
+      this.message_header = "Buenos días";
+    } else if (curHr < 18) {
+      this.message_header = "Buenas tardes";
+    } else {
+      this.message_header = "Buenas noches";
+    }
   }
 
   retomarleccion(){
@@ -150,25 +117,9 @@ export class HomePage implements OnInit {
     this.router.navigate(['/users/entrena/vercurso/']);
   }
 
-  seeMore(id: number, info: any) {
-    let dataObj = {
-      vidinfo: info
-    };
-    this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/home/vermas/']);
-  }
-
-  didScroll(e) {
-
-  }
-
-  openChat() {
-    this.router.navigate(['/users/chat']);
-  }
-
   localNotification() {
     let titleNotif = 'Mensaje de Venky';
-    shuffleArray(this.encourageMsg).forEach((message, index) => {
+    shuffleArray(this.encourageMsg).forEach((message: any, index: any) => {
       this.localN.schedule({
         id: index,
         title: titleNotif,
@@ -181,7 +132,6 @@ export class HomePage implements OnInit {
     });
   }
 
-
   imageView(imag: any){
     this.modelcontroller.create({
       component: ImgPrevPage,
@@ -193,47 +143,17 @@ export class HomePage implements OnInit {
 
   getMiactividad(userid: any) {
     this.share.getActividadUsuario(userid).subscribe(info => {
-      console.log(info);
       this.miactividad = info.data.length;
     });
   }
 
-  diagnosticoRedirect(info, id){
-    console.log(info);
+  diagnosticoRedirect(info: number, id: number) {
     let dataObj = {
       idprofile: info,
       idUser: id
     };
     this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/perfil/diagnostico-inicio/']);
-  }
-
-  async alertDespuesTiempo2(img: any) {
-    this.alert = await this.alertController.create({
-      cssClass: 'my-customback',
-      header: '',
-      buttons: [
-        {
-          text: '',
-          cssClass: 'secondaryClose',
-        }
-      ],
-    });
-    await this.alert.present();
-  }
-
-  async alertDespuesTiempo(img: any) {
-    this.alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: '',
-      message: `<img src="${img}" alt="g-maps" style="border-radius: 2px">`,
-      buttons: ['Adelante'],
-    });
-    await this.alert.present();
-  }
-
-  crearEntrada(){
-    this.router.navigate(['/users/social/crear-entrada/']);
+    this.router.navigate(['/users/perfil/diagnostico-inicio']);
   }
 
   recomedacionesRedirect(id: any){
@@ -244,13 +164,12 @@ export class HomePage implements OnInit {
     this.router.navigate(['/users/perfil/recomendaciones/']);
   }
 
-  opinarSobreActividad(act: any){
+  opinarSobreActividad(act: any) {
     let dataObj = {
       actividad: act
     };
     this.pObjecto.setData(dataObj);
     this.share.varDesafio.next('mostrar desafio');
-    this.router.navigate(['/users/social/']);
+    this.router.navigate(['/users/social']);
   }
-
 }

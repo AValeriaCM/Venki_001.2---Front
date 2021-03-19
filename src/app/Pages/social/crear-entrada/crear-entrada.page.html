@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start" style="font-size: 30px;" (click)="volver()">
+    <ion-buttons slot="start" style="font-size: 30px;color: white;" (click)="volver()">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title class="tituloInfo">
-      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,10 +12,9 @@
 
 <ion-content>
   
-  <div class="oval" style="background: {{colors[idAction-1]}};" ></div>
+  <div class="oval" [ngStyle]="{'background': colors[idAction-1]}" ></div>
   <div class="back">
     <br>
-
     <div *ngIf="idAction == 1">
       <div align="center"  class="title">
         INFORMAR
@@ -43,19 +42,18 @@
         <img src="/assets/social/im{{idAction}}.png">
       </ion-col>
       <ion-col size="9">
-        <textarea class="textArea" fill=clear [(ngModel)]="textareainput" [placeholder]="vistaHolder(idAction)" rows="4"
-          cols="150" maxlength="150"></textarea>
+        <textarea class="textArea" fill=clear [(ngModel)]="textareainput" [placeholder]="vistaHolder(idAction)" rows="4" cols="150" maxlength="150"></textarea>
         <div *ngIf="photos">
           <ion-slides [options]="sliderImgOption">
             <ion-slide *ngFor="let imag of photos">
-              <img class="image-cont" src="{{imag.imagen}}">
+              <img class="image-cont" src="{{ imag.imagen }}">
             </ion-slide>
           </ion-slides>
         </div>
-        <ion-button class="buttonUploadImg" style="color: {{colors[idAction-1]}};" fill=clear (click)="selccionImg()">
+        <ion-button class="buttonUploadImg" [ngStyle]="{'color': colors[idAction-1]}" fill=clear (click)="selccionImg()">
           <ion-icon name="cloud-upload"></ion-icon>
         </ion-button>
-        <ion-button class="buttonUploadImg2" style="color: {{colors[idAction-1]}};" fill=clear (click)="Publicar()">
+        <ion-button class="buttonUploadImg2" [ngStyle]="{'color': colors[idAction-1]}"  fill=clear (click)="Publicar()" [disabled]="!textareainput">
           <ion-icon name="send"></ion-icon>
         </ion-button>
       </ion-col>

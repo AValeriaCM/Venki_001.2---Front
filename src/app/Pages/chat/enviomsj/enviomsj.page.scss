@@ -1,9 +1,4 @@
-/*.mensaje{
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 4px;
-    white-space: pre-wrap;
-}*/
+
 *{
   font-family: 'Proxima Nova' !important;
 }
@@ -39,131 +34,48 @@ span {
 
 .my-message.right {
   float: right;
-  background-color: #C7C7CC !important;
+  background-color: #8bc34a !important;
   color: black !important;
-  border: 1px solid black;
-  text-align: right;
-  margin-left: 50px !important;
+  border: 1px solid #d6d6d6;
+  margin-left: 35% !important;
 }
 
 .other-message.left {
   float: left;
-  // background: #007AFF !important;
-  background-color: #4284c7 !important;
-  color: white !important;
-  border: 1px solid black;
-  text-align: left;
-  margin-right: 50px !important;
+  background-color: #2196f3 !important;
+  border: 1px solid #d4d4d4;
+  margin-right: 35% !important;
+  color: white;
 }
 
 .time {
   color: #dfdfdf;
   float: right;
   font-size: small;
+  margin-left: 15px;
 }
 
 .msg-input{
   width: 100%;
   border: 1px solid black;
   border-radius: 6px;
-  background: #fff;
+  border: 1px solid #dedede;
   resize: none;
   margin-top: 0px;
   --padding-start: 8px;
 }
 
-.msg-btn{
-  color: black;
-  --padding-start: 8.5em;
-  --padding-end: 0.5em;
-  text-align: center;
+.msg-btn {
   font-size: 30px;
+  color: white;
+  background-color: transparent;
+  margin: 5px 0px 0px 5px;
 }
 
-/*
-page-enviomsj {
-
-    .grid {
-      padding: 0;
-    }
-  
-    .sender, .me {
-      .friend-img {
-        position: absolute;
-        border-radius: 40px;
-        width: 40px;
-        height: 40px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      }
-      p {
-        border-radius: 5px;
-        margin: 0;
-      }
-    }
-  
-  
-    .sender {
-      p {
-        text-align: left;
-        background-color: #fff;
-        padding: 12px 10px;
-        border: 1px solid #d1d1d1;
-      }
-      .friend-img {
-        margin: 0 0;
-      }
-    }
-  
-  
-    .me {
-      .txt {
-        display: inline;
-        text-align: right;
-      }
-      .friend-img {
-        margin: 0 22px;
-      }
-      p {
-        background-color: #306dd8;
-        color: #fff;
-        padding: 12px 10px;
-      }
-    }
-  
-    .text-input {
-      background-color: #fff;
-      border-radius: 5px;
-      padding: 5px;
-    }
-  
-  }
-  */
-  
-
-  // Implementacion nueva
-  /*
-  .chat {
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .message {
-    border-radius: 5px;
-    margin: 0.2em 0;
-    padding: 00.5em;
-    max-width: 50%;
-  }
-
-  .mee {
-    align-self: flex-start;
-    background-color: blue;
-    color: white;
-  }
-
-  .you {
-    align-self: flex-end;
-    background-color: green;
-    color: white;
-  }
-  */
+.send {
+  background: #002a68;
+  text-align-last: center;
+  border-radius: 90%;
+  height: 50px;
+  max-width: 55px !important;
+}

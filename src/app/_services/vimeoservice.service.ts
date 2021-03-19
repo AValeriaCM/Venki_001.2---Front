@@ -10,16 +10,13 @@ export class VimeoserviceService {
 
   getVideos(user) {
     return this.http.get('https://vimeo.com/api/v2/' + user + '/videos.json');
+  }
 
-    // https://api.vimeo.com/users/{user_id}/videos
-}
+  getEmbedLink() {
+    return this.http.get('https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/76979871');
+  }
 
-getEmbedLink(url) {
-  return this.http.get('https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/76979871');
-
-}
-
-getAlbums(user) {
-    return this.http.get('https://vimeo.com/api/v2/' + user + '/albums.json');
-}
+  getAlbums(user: any) {
+      return this.http.get('https://vimeo.com/api/v2/' + user + '/albums.json');
+  }
 }

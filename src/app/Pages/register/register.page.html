@@ -26,7 +26,7 @@
       </ion-item>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.name.valid && (regisform.controls.name.touched || regisform.controls.name.dirty)">
-        <ion-label>El nombre Debe <br>tener minimo 5 Caracteres</ion-label>
+        <ion-label class="l-error">El nombre debe tener mínimo 5 caracteres</ion-label>
       </ion-item>
       <ion-item class="ion-item-css">
         <ion-input name="apellido" type="text" placeholder="Apellido" formControlName="lastname">
@@ -34,15 +34,15 @@
       </ion-item>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.lastname.valid && (regisform.controls.lastname.touched || regisform.controls.lastname.dirty)">
-        <ion-label>El Apellido Debe <br>tener minimo 5 Caracteres</ion-label>
+        <ion-label>El Apellido debe tener mínimo 5 caracteres</ion-label>
       </ion-item>
       <div>
-        <international-phone-number class="mystyle form-control form-control-sm"  [maxlength]="22" formControlName="phone" placeholder="Ingres Tu # De Contacto" [defaultCountry]="'co'"
+        <international-phone-number class="phone form-control form-control-sm"  [maxlength]="22" formControlName="phone" placeholder="Ingres Tu # De Contacto" [defaultCountry]="'co'"
           [required]="true" [allowDropdown]="true"></international-phone-number>
       </div>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.phone.valid && (regisform.controls.phone.touched || regisform.controls.phone.dirty)">
-        <ion-label>tu telefono Debe <br>tener minimo 8 Caracteres</ion-label>
+        <ion-label>El teléfono debe tener mínimo 10 caracteres</ion-label>
       </ion-item>
       <ion-item class="ion-item-css">
         <ion-input name="email" type="email" placeholder="Correo electrónico" formControlName="email">
@@ -50,11 +50,11 @@
       </ion-item>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.email.valid && (regisform.controls.email.touched || regisform.controls.email.dirty)">
-        <ion-label>Debe ser un correo <br> valido</ion-label>
+        <ion-label>El correo no es valido</ion-label>
       </ion-item>
       <ion-item class="ion-item-css">
-        <ion-datetime #myPicker placeholder="Fecha de Nacimiento"  (ionChange)="cambioFecha(myPicker.value)" displayFormat="YYYY/MM/DD" min="1980" max="2005"
-          formControlName="birthday"></ion-datetime>
+        <ion-datetime #myPicker placeholder="Fecha de Nacimiento" text-center (ionChange)="cambioFecha(myPicker.value)" displayFormat="YYYY/MM/DD" min="1980" max="2005"
+          formControlName="birthday" cancelText="Cancelar" doneText="Hecho" style="width: 100%;"></ion-datetime>
       </ion-item>
       <ion-item class="ion-item-css">
         <ion-input name="contrasena" [type]="showpassword ? 'text' : 'password'" placeholder="Contraseña"
@@ -64,8 +64,7 @@
       </ion-item>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.password.valid && (regisform.controls.password.touched || regisform.controls.password.dirty)">
-        <ion-label>La Contraseña debe tener: <br>1 numero <br> 1 letra Mayuscula <br> 1 letra minuscula <br> y 8 o más
-          caracteres</ion-label>
+        <ion-label>La Contraseña debe tener: <br>1 numero <br> 1 letra Mayuscula <br> 1 letra minuscula <br> y 8 o más caracteres</ion-label>
       </ion-item>
       <ion-item class="ion-item-css">
         <ion-input placeholder="Confirmar Contraseña" [type]="showpasswordConfirm ? 'text' : 'password'"
@@ -74,26 +73,23 @@
       </ion-item>
       <ion-item class='form-text-error'
         *ngIf="regisform.controls.password_confirmation.touched && regisform.hasError('mismatchedPasswords') && regisform.controls.password.valid">
-        <ion-label no-margin stacked>Las Contraseñas No Coinciden</ion-label>
+        <ion-label no-margin stacked>Las contraseñas no coinciden</ion-label>
       </ion-item>
     </form>
     <div *ngIf="edad<18">
     <ion-item  class="ion-item-css" *ngFor="let check of ischeckNino" (click)="checkvalNinos(check)">
-      <ion-checkbox color="dark" class="cb_color" checked slot="start"  ></ion-checkbox>
-      &nbsp;&nbsp;
+      <ion-checkbox color="dark" class="cb_color" checked slot="start" style="margin: 0px;"></ion-checkbox>
       <ion-button fill="clear" (click)="terminosMostrarNinos()">
-        <ion-label style="color: black;">Leer terminos y condiciones para niños</ion-label>
+        <ion-label style="color: black;border-bottom: 1px solid #025975;white-space: break-spaces;">Leer terminos y condiciones para niños</ion-label>
       </ion-button>
     </ion-item>
     </div>
     <ion-item class="ion-item-css" *ngFor="let check of ischeck" (click)="checkval(check)">
-      <ion-checkbox color="dark" class="cb_color" checked slot="start" [(ngModel)]="check.selected" ></ion-checkbox>
-      &nbsp;&nbsp;
-      <ion-button fill="clear" (click)="terminosMostrar()">
-        <ion-label style="color: black;">Aceptar términos y condiciones</ion-label>
+      <ion-checkbox color="dark" class="cb_color" checked slot="start" [(ngModel)]="check.selected" style="margin: 0px;"></ion-checkbox>
+      <ion-button fill="clear" (click)="terminosMostrar()" style="margin-top: 10px;">
+        <ion-label style="color: black;border-bottom: 1px solid #025975;">Aceptar términos y condiciones</ion-label>
       </ion-button>
     </ion-item>
-
     <div>
       <ion-button class="button-css" type="submit" (click)="Registrarce()" [disabled]="!regisform.valid" expand="block">
         Unete a nosotros</ion-button>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Subject } from 'rxjs';
 export class ChatServiceService {
 
   url = 'https://fcm.googleapis.com/fcm/send';
-  urlServ = 'https://venki.inkdigital.co';
+  urlServ = `${environment.HOST}`;
 
   private msjServ = [];
 
@@ -62,14 +63,14 @@ export class ChatServiceService {
 
 
   getAllUsers(correo: any) {
-    return this.http.get<any>(this.urlServ + `/api/users?query=name|=|${correo}`, {
+    return this.http.get<any>(this.urlServ + `api/users?query=name|=|${correo}`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 
   getchatsUser(idUser: any) {
-    return this.http.get<any[]>(this.urlServ + `/api/users/${idUser}/chats`, {
+    return this.http.get<any[]>(this.urlServ + `api/users/${idUser}/chats`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
     });
@@ -81,7 +82,7 @@ export class ChatServiceService {
       .set('receiver_id', reciberID);
 
 
-    return this.http.post(this.urlServ + `/api/chats`, body, {
+    return this.http.post(this.urlServ + `api/chats`, body, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
@@ -95,7 +96,7 @@ export class ChatServiceService {
       .set('user_id', userid)
       .set('message', msg);
 
-    return this.http.post(this.urlServ + `/api/messages`, body, {
+    return this.http.post(this.urlServ + `api/messages`, body, {
       headers: new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('X-Requested-With', 'XMLHttpRequest')
@@ -103,14 +104,14 @@ export class ChatServiceService {
   }
 
   getchatsMSGUser(idUser: any) {
-    return this.http.get<any[]>(this.urlServ + `/api/chats/${idUser}/messages?page=1&orber_by=created_at&direction=desc`, {
+    return this.http.get<any[]>(this.urlServ + `api/chats/${idUser}/messages?page=1&orber_by=created_at&direction=desc`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 
   getMessageOFPages(idChat: any, idPage: any){
-    return this.http.get<any[]>(this.urlServ + `/api/chats/${idChat}/messages?page=${idPage}&orber_by=created_at&direction=desc`, {
+    return this.http.get<any[]>(this.urlServ + `api/chats/${idChat}/messages?page=${idPage}&orber_by=created_at&direction=desc`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
     });

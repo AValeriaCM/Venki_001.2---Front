@@ -1,17 +1,13 @@
 import { ShareserviceService } from './../../_services/shareservice.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import { ChatServiceService } from 'src/app/_services/chat-service.service';
-import { ActionSheetController, AlertController, IonInfiniteScroll, LoadingController, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, LoadingController, ModalController } from '@ionic/angular';
 import { ImageModalPage } from './image-modal/image-modal.page';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { LoginService } from 'src/app/_services/login.service';
 import { AuthService } from 'src/app/_services/auth.service';
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import { Camera } from '@ionic-native/camera/ngx';
-import firebase from "firebase";
-import Item = firebase.analytics.Item;
-
+import { LoadingService } from 'src/app/_services/loading.service';
 
 @Component({
   selector: 'app-social',
@@ -21,6 +17,8 @@ import Item = firebase.analytics.Item;
 export class SocialPage implements OnInit {
 
   miactividad: any;
+
+  message_header: string;
 
   sliderImgOption = {
     zoom: false,
@@ -57,83 +55,68 @@ export class SocialPage implements OnInit {
   config: any;
 
   constructor(
-
     private route: Router,
     private chatS: ChatServiceService,
     private modelcontroller: ModalController,
     private share: ShareserviceService,
     private pObjecto: PassObjectService,
-    private camara: Camera,
-    private actionSheetcontroller: ActionSheetController,
     private log: LoginService,
     private loadingCtrl: LoadingController,
     private auth: AuthService,
-    private imagePick: ImagePicker,
-    private alertController: AlertController
+    private loadingService: LoadingService
     ) {
       this.LikeValue = 0;
-     }
+      this.getCurrentHour();
+      this.getPosts();
+  }
 
   ngOnInit() {
     this.chatS.var.subscribe( chatMsg => {
       this.msj = this.chatS.getbadge();
     });
+
     this.msj = this.chatS.getbadge();
-
-    this.share.getpost().subscribe( res => {
-      this.miactividad = res.data;
-      this.paginaActual = res.meta.current_page;
-      this.ultimaPage = res.meta.first_page;
-      this.totalDt = res.meta.total;
-      console.log('esta es mi actividad: ', this.miactividad);
-    });
-
+    
     this.share.varPostUpdate.subscribe( res => {
-      console.log(res);
       this.infonitescroll.disabled  = false;
+      this.getPosts();
     });
 
     this.share.varDesafio.subscribe( res => {
       const informacion = this.pObjecto.getNavData();
-      console.log('esta es la actividad', informacion);
       this.actividad = informacion.actividad;
-      console.log('El objeto de la actividad  es', this.actividad);
     });
 
     this.sFotos = [];
     this.photos = [];
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
       });
     });
   }
 
-  async selccionImg(){
-
-    const acctionSheet = await this.actionSheetcontroller.create({
-      header: 'Selecciona Una Imagen',
-      buttons: [
-        {
-          text: 'Galeria',
-          handler: () => {
-            this.usarGaleria();
-          }
-        },
-        {
-          text: 'Camara',
-          handler: () => {
-            this.usarCamara();
-          }
-        },
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        }
-      ]
+  getPosts() {
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.share.getpost().subscribe( res => {
+      this.miactividad = res.data.sort((a: any,b: any) => 0 - (a > b ? -1 : 1));
+      this.paginaActual = res.meta.current_page;
+      this.ultimaPage = res.meta.first_page;
+      this.totalDt = res.meta.total;
+      this.loadingService.loadingDismiss();
     });
-    await acctionSheet.present();
+  }
+
+  getCurrentHour() {
+    var today = new Date()
+    var curHr = today.getHours()
+    if (curHr < 12) {
+      this.message_header = "Buenos días";
+    } else if (curHr < 18) {
+      this.message_header = "Buenas tardes";
+    } else {
+      this.message_header = "Buenas noches";
+    }
   }
 
   async presentLoading() {
@@ -143,85 +126,19 @@ export class SocialPage implements OnInit {
     return this.loading.present();
   }
 
-  usarCamara() {
-    this.camara.getPicture({
-      sourceType: this.camara.PictureSourceType.CAMERA,
-      destinationType: this.camara.DestinationType.DATA_URL,
-      correctOrientation: true,
-      mediaType: this.camara.MediaType.PICTURE,
-      encodingType: this.camara.EncodingType.JPEG,
-      targetWidth: 100,
-      targetHeight: 100,
-    }).then((res) => {
-      const imgsend = 'data:image/jpeg;base64,' + res;
-      this.photos.push({imagen: imgsend});
-    }).catch(e => {
-      console.log(e);
-    });
-  }
-
-  usarGaleria() {
-    this.camara.getPicture({
-      sourceType: this.camara.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camara.DestinationType.DATA_URL,
-      mediaType: this.camara.MediaType.PICTURE,
-      encodingType: this.camara.EncodingType.JPEG,
-      targetWidth: 100,
-      targetHeight: 100,
-      correctOrientation: true,
-    }).then((results) => {
-        const imgsend = 'data:image/jpeg;base64,' + results;
-        this.photos.push({imagen: imgsend});
-    });
-  }
-
-  subirVideo() {
-
-  }
-
-  Publicar(){
-    if (this.textareainputPiensa === undefined){
-      this.alertDespuesTiempo();
-    }else{
-      console.log('SFOTOS', this.photos);
-      this.share.guardarpost(this.usertk.id, this.textareainputPiensa, this.photos).subscribe(  res => {
-        console.log(res);
-        this.share.varPostUpdate.next('update data');
-      });
-    }
-  }
-
   handleLike(valor: any, valorid: any){
     this.LikeValue = valor;
     this.contadorlike = valor;
     this.contadorlike = this.contadorlike + 1;
     this.idPost = valorid;
     this.share.actualizarpost(this.idPost, this.contadorlike).subscribe( res => {
-      console.log(res);
       this.share.varPostUpdate.next('update data');
       this.ngOnInit();
-      // location.reload();
     });
-   }
-
-  async alertDespuesTiempo() {
-    this.alert = await this.alertController.create({
-      header: 'HEY!',
-      subHeader:
-        'Debes Escribir algo',
-      message:
-        'No puedes publicar algo vacío',
-      buttons: ['Entendido'],
-    });
-    await this.alert.present();
   }
 
   verUser(userdt: any){
-    console.log('user enviado', userdt);
-    const dataObj = {
-      userinfo: userdt
-    };
-    this.pObjecto.setData(dataObj);
+    this.pObjecto.setData({userinfo: userdt});
     this.route.navigate(['/users/social/ver-usuario/']);
   }
 
@@ -242,7 +159,6 @@ export class SocialPage implements OnInit {
     };
     this.pObjecto.setData(dataObj);
     this.route.navigate(['/users/chat/mensaje-busqueda/']);
-    // this.route.navigate(['/users/chat']);
   }
 
   crearEntrada(id: number){
@@ -254,19 +170,14 @@ export class SocialPage implements OnInit {
   }
 
   loadData(event){
-    console.log('evento', event);
     this.paginaActual = this.paginaActual + 1;
     setTimeout(() => {
-        console.log(this.miactividad.length);
-
         if (this.miactividad.length >= this.totalDt){
           event.target.complete();
           this.infonitescroll.disabled  = true;
           return;
         }
         this.share.getpostNextPage(this.paginaActual).subscribe( resPg => {
-          console.log('Respuesta pagina', resPg);
-          console.log('Respuesta pagina', resPg.data);
           resPg.data.forEach(element => {
             this.miactividad.unshift(element);
           });
@@ -274,6 +185,5 @@ export class SocialPage implements OnInit {
         });
     }, 5000);
   }
-
 }
 

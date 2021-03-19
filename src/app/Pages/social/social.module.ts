@@ -8,6 +8,7 @@ import { SocialPageRoutingModule } from './social-routing.module';
 
 import { SocialPage } from './social.page';
 import { SharedDirectivesModule } from 'src/app/directives/shared-directives.module';
+import { PipesModule } from 'src/app/Pipe/pipes.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedDirectivesModule } from 'src/app/directives/shared-directives.mod
     FormsModule,
     IonicModule,
     SocialPageRoutingModule,
-    SharedDirectivesModule
+    SharedDirectivesModule,
+    PipesModule
   ],
   declarations: [SocialPage]
 })

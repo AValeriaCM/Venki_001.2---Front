@@ -1,10 +1,8 @@
-import { catchError } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ChatServiceService } from 'src/app/_services/chat-service.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-mensaje-busqueda',
@@ -22,11 +20,10 @@ export class MensajeBusquedaPage implements OnInit {
   idChat: any;
   menjs: any;
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private chatS: ChatServiceService,
-    private pObjecto: PassObjectService) {
-  }
+    private pObjecto: PassObjectService
+  ) {}
 
   ngOnInit() {
     let info = this.pObjecto.getNavData();
@@ -35,8 +32,6 @@ export class MensajeBusquedaPage implements OnInit {
     this.usuarioActual = info.useractual;
 
     this.chatS.var.subscribe( updateTk =>  {
-      console.log(updateTk);
-      console.log(this.idChat);
       this.chatS.getchatsMSGUser(this.idChat).subscribe( (msgServ: any) => {
         this.menjs = msgServ.data;
         setTimeout(() => {
@@ -61,7 +56,6 @@ export class MensajeBusquedaPage implements OnInit {
   }
 
   volver() {
-    // this.chatS.var.next('update');
     this.router.navigate(['/users/chat']);
   }
 }

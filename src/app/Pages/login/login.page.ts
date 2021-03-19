@@ -47,7 +47,9 @@ export class LoginPage implements OnInit {
               this.log.saveDevice(resTk.id, DeviceTk);
             }
           });
-          if (resTk) {
+          if (resTk.profile_id == null) {
+            this.route.navigateByUrl('/slides');
+          } else {
             this.route.navigateByUrl('/users/home');
           }
         });
@@ -84,38 +86,37 @@ export class LoginPage implements OnInit {
   login() {
     this.isSubmitted = true;
     if (!this.loginForm.valid) {
-      this.mostrarmensaje('Los Datos Ingresados no son validos', 'Error');
+      this.mostrarmensaje('Los Datos Ingresados no son validos', 'Error', 'red-snackbar');
       return false;
     } else {
       this.loginData = this.loginForm.value;
       this.loadingService.loadingPresent({message: "Por favor espere", spinner: "circles" });
-      console.log('entro');
       this.auth.login(this.loginData.correo, this.loginData.contrasena).subscribe(async res => {
         if (res) {
           this.log.logdataInfData(res).subscribe(resTk => {
             this.token = resTk.confirmation_code;
+            this.loadingService.loadingDismiss();
             if (this.token == null) {
               this.auth.gettokenDevice().then(DeviceTk => {
                 this.log.saveDevice(resTk.id, DeviceTk);
               });
               this.inicializarFormulario();
-              this.auth.getPrimeraVez().then(data => {
-                if (data === 'true') {
-                  this.route.navigateByUrl('/slides');
-                } else if (data === 'false') {
-                  this.route.navigateByUrl('/users/home');
-                } else if (data === null) {
-                  this.auth.setPrimeraVez();
-                }
-              });
+              if(resTk.profile_id === null) {
+                this.route.navigateByUrl('/slides');
+              } else{ 
+                this.route.navigateByUrl('/users/home');
+              }
             } else {
-              this.mostrarmensaje('Verifique su correo', 'Error');
+              this.auth.settokenLog(null);
+              this.mostrarmensaje('Verifique su correo', 'Error', 'red-snackbar');
             }
+          }, error => {
+            this.loadingService.loadingDismiss();
           });
         } else {
-          this.mostrarmensaje('Ah ocurrido un error Intente más tarde o revise sus credenciales', 'Error');
+          this.loadingService.loadingDismiss();
+          this.mostrarmensaje('Ah ocurrido un error Intente más tarde o revise sus credenciales', 'Error', 'red-snackbar');
         }
-        this.loadingService.loadingDismiss();
       });
       this.inicializarFormulario();
     }
@@ -129,9 +130,10 @@ export class LoginPage implements OnInit {
     this.route.navigateByUrl('/olvidoc');
   }
 
-  mostrarmensaje(message: string, action: string) {
+  mostrarmensaje(message: string, action: string, type: string) {
     this.snackbar.open(message, action, {
       duration: 2000,
+      panelClass: [type],
     });
   }
 }

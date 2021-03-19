@@ -11,14 +11,13 @@ export const environment = {
 };
 
 export  const firebaseConfig = {
-  apiKey: 'AIzaSyAvt5gQyhLaBkQ7TRRfQp08oRF2jruR-s8',
-  authDomain: 'magin-148fa.firebaseapp.com',
-  databaseURL: 'https://magin-148fa.firebaseio.com',
-  projectId: 'magin-148fa',
-  storageBucket: 'magin-148fa.appspot.com',
-  messagingSenderId: '1055244002105',
-  appId: '1:1055244002105:web:2f4b10976817e44395bee8',
-  measurementId: 'G-795L90FGRP'
+  apiKey: "AIzaSyA167FgeMkIhwtifuZX7szrfNWcx-FlPRo",
+  authDomain: "magin-login.firebaseapp.com",
+  projectId: "magin-login",
+  storageBucket: "magin-login.appspot.com",
+  messagingSenderId: "672643384150",
+  appId: "1:672643384150:web:c2c98a04d8cee600cf4cf7",
+  measurementId: "G-9QJ53SZ7SL"
 }
 
 /*

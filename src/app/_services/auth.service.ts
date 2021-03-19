@@ -70,8 +70,7 @@ export class AuthService {
         let decode = helper.decodeToken(token);
         this.getDataToken(token);
         this.userData.next(decode);
-        let storageObs = from(this.storage.set(TOKEN_KEY, token));
-
+        let storageObs = from( this.storage.set(TOKEN_KEY, token));
         return storageObs;
       })
     );
@@ -97,6 +96,10 @@ export class AuthService {
       this.storage.set(USER_INFO, this.Encriptar(res));
       this.DataFinal.next(res);
     });
+  }
+
+  settokenLog(token: any) {
+    this.storage.set(TOKEN_KEY, token); 
   }
 
   gettokenLog(){

@@ -1,8 +1,9 @@
 import { UsuariosF } from './../_model/_Usuario';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { environment } from 'src/environments/environment';
 
 
 const INFO_TEMP = 'diagnostico';
@@ -15,10 +16,9 @@ const CURSOCONTROLNAME = 'CursoName';
 })
 export class ShareserviceService {
 
-  url2 = `/api/user`;
-  urlCuros = `/api/courses`;
-  basePath = `https://venki.inkdigital.co`;
-  // basePath = `http://127.0.0.1:8000`;
+  url2 = `api/user`;
+  urlCuros = `api/courses`;
+  basePath = `${environment.HOST}`;
 
   var = new Subject<string>();
   varorder = new Subject<string>();
@@ -27,33 +27,6 @@ export class ShareserviceService {
   varDesafio  = new Subject<string>();
   varObjetivos = new Subject<string>();
   varTotalPreguntas = new Subject<string>();
-
-  private data = [
-    {
-      category: 'Ejercicio',
-      products: [
-        { id: 0, name: 'Fisico', price: '80.000' },
-        { id: 1, name: 'Calistenia', price: '50.000' },
-        { id: 2, name: 'Rutina', price: '90.000' },
-        { id: 3, name: 'Rutina 2', price: '70.000' }
-      ]
-    },
-    {
-      category: 'Ayuda tu mente',
-      products: [
-        { id: 4, name: 'Hablame', price: '80.000' },
-        { id: 5, name: 'Escuchame', price: '60.000' }
-      ]
-    },
-    {
-      category: 'Salud',
-      products: [
-        { id: 6, name: 'Estadisticas salud', price: '80.000' },
-        { id: 7, name: 'Dietas', price: '50.000' },
-        { id: 8, name: 'Rutinas', price: '90.000' }
-      ]
-    }
-  ];
 
   private cart = [];
 
@@ -79,14 +52,14 @@ export class ShareserviceService {
   }
 
   getCategorias(){
-    return this.http.get<any>(this.basePath + '/api/categories', {
+    return this.http.get<any>(this.basePath + 'api/categories', {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
   });
   }
 
   getCursosUsuario(idUser: any){
-    return this.http.get<any>(this.basePath + `/api/users/${idUser}/courses` , {
+    return this.http.get<any>(this.basePath + `api/users/${idUser}/courses` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
@@ -94,14 +67,14 @@ export class ShareserviceService {
 
   getCursosCategorias(idCat: any, idUser: any){
     //console.log('id cat', idCat, 'idUser', idUser);
-    return this.http.get<any>(this.basePath + `/api/categories/${idCat}/courses?user_id=${idUser}` , {
+    return this.http.get<any>(this.basePath + `api/categories/${idCat}/courses?user_id=${idUser}` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 
   deleteCursoUsuario(idUser: any, idCurso: any){
-    return this.http.delete(this.basePath + `/api/users/${idUser}/courses/${idCurso}`, {
+    return this.http.delete(this.basePath + `api/users/${idUser}/courses/${idCurso}`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
@@ -118,7 +91,7 @@ export class ShareserviceService {
   agregarCurso(idUser: any, curso: any){
     const body = new HttpParams()
       .set('course_id', curso);
-    return this.http.post(this.basePath  + `/api/users/${idUser}/courses`, body, {
+    return this.http.post(this.basePath  + `api/users/${idUser}/courses`, body, {
       headers: new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('X-Requested-With', 'XMLHttpRequest'),
@@ -129,7 +102,7 @@ export class ShareserviceService {
     console.log(idUser,idCurso,progreso);
     const body = new HttpParams()
       .set('progress', progreso);
-    return this.http.put(this.basePath  + `/api/users/${idUser}/courses/${idCurso}`, body, {
+    return this.http.put(this.basePath  + `api/users/${idUser}/courses/${idCurso}`, body, {
       headers: new HttpHeaders()
     .set('Content-Type', 'application/x-www-form-urlencoded')
     .set('X-Requested-With', 'XMLHttpRequest')
@@ -137,9 +110,6 @@ export class ShareserviceService {
   
   }
 
-  getProducts() {
-    return this.data;
-  }
 
   getCart() {
     return this.cart;
@@ -156,7 +126,7 @@ export class ShareserviceService {
       .set('user_id', idUser)
       .set('comment', comment)
       .set('score', score);
-    return this.http.post(this.basePath  + `/api/scores`, body, {
+    return this.http.post(this.basePath  + `api/scores`, body, {
       headers: new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('X-Requested-With', 'XMLHttpRequest'),
@@ -164,7 +134,7 @@ export class ShareserviceService {
   }
 
   getComentariosCurso(idCurso: any){
-    return this.http.get<any>(this.basePath + `/api/courses/${idCurso}/scores`, {
+    return this.http.get<any>(this.basePath + `api/courses/${idCurso}/scores`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
   });
@@ -174,7 +144,7 @@ export class ShareserviceService {
     const formData = new FormData()
     formData.append('avatar', fotoUrl);
     formData.append('_method', 'PUT');
-    return this.http.post(this.basePath + `/api/users/${idUser}`, formData, {
+    return this.http.post(this.basePath + `api/users/${idUser}`, formData, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
@@ -183,14 +153,14 @@ export class ShareserviceService {
   actualizarAvatar(idUser: any, imgUrl: UsuariosF) {
     const body = new HttpParams()
     .set('photo',imgUrl.avatar );
-    return this.http.put(this.basePath + `/api/users/${idUser}`, body, {
+    return this.http.put(this.basePath + `api/users/${idUser}`, body, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 
   getNetDiagnostico(idDiagnostico: any, idPage: any){
-    return this.http.get<any[]>(this.basePath + `/api/surveys/${idDiagnostico}/questions?page=${idPage}&per_page=15`, {
+    return this.http.get<any[]>(this.basePath + `api/surveys/${idDiagnostico}/questions?page=${idPage}&per_page=15`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
     });
@@ -281,16 +251,12 @@ export class ShareserviceService {
     this.varorder.next('update order');
   }
 
-  guardarpost(userid: any, posttxt: any, media: any){
-
-    console.log('user_id', userid, 'post', posttxt, 'medias[]', media);
-
+  guardarpost(userid: any, posttxt: any, media: any) {
     const formData = new FormData();
     formData.append('user_id', userid);
     formData.append('post', posttxt);
     formData.append('medias[]', media);
-
-    return this.http.post(this.basePath + `/api/posts`, formData, {
+    return this.http.post(this.basePath + `api/posts`, formData, {
       headers: new HttpHeaders()
     });
   }
@@ -299,7 +265,7 @@ export class ShareserviceService {
     const body = new HttpParams()
         .set('count_like', countlike);
     console.log('datos en el servicio -> antes de enviar', userid, countlike);
-    return this.http.put(this.basePath + `/api/posts` + `/${userid}`, body, {
+    return this.http.put(this.basePath + `api/posts` + `/${userid}`, body, {
       headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
           .set('X-Requested-With', 'XMLHttpRequest')
@@ -307,35 +273,35 @@ export class ShareserviceService {
   }
 
   getrecomendation(idUser: any){
-    return this.http.get<any>(this.basePath + `/api/users/${idUser}/recomendations`, {
+    return this.http.get<any>(this.basePath + `api/users/${idUser}/recomendations`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
   });
   }
 
   getTimeline(idUser: any){
-    return this.http.get<any>(this.basePath + `/api/users/${idUser}/timelines`, {
+    return this.http.get<any>(this.basePath + `api/users/${idUser}/timelines`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 
   getpost(){
-    return this.http.get<any>(this.basePath + `/api/posts`, {
+    return this.http.get<any>(this.basePath + `api/posts`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 
   getpostNextPage(page: any){
-    return this.http.get<any>(this.basePath + `/api/posts?page=${page}`, {
+    return this.http.get<any>(this.basePath + `api/posts?page=${page}`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
 
   getActividadUsuario(idUser: any){
-    return this.http.get<any>(this.basePath + `/api/users/${idUser}/posts` , {
+    return this.http.get<any>(this.basePath + `api/users/${idUser}/posts` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });
@@ -346,7 +312,7 @@ export class ShareserviceService {
     const body = new HttpParams()
       .set('premium', premNum);
 
-    return this.http.put(this.basePath + `/api/users` + `/${id}`, body, {
+    return this.http.put(this.basePath + `api/users` + `/${id}`, body, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
@@ -359,7 +325,7 @@ export class ShareserviceService {
     const body = new HttpParams()
       .set('surveyed', surveyedNum);
 
-    return this.http.put(this.basePath + `/api/users` + `/${id}`, body, {
+    return this.http.put(this.basePath + `api/users` + `/${id}`, body, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
@@ -373,7 +339,7 @@ export class ShareserviceService {
       .set('surveyed', surveyedNum)
       .set('premium', surveyedNum);
 
-    return this.http.put(this.basePath + `/api/users` + `/${id}`, body, {
+    return this.http.put(this.basePath + `api/users` + `/${id}`, body, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
@@ -382,7 +348,7 @@ export class ShareserviceService {
 
 
   obtenerObhetivos(id: any){
-    return this.http.get(this.basePath + `/api/users/${id}/achievements`, {
+    return this.http.get(this.basePath + `api/users/${id}/achievements`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
@@ -396,7 +362,7 @@ export class ShareserviceService {
       .set('achievement', objetivos)
       .set('user_id', idUser);
 
-    return this.http.post(this.basePath + `/api/achievements`, body, {
+    return this.http.post(this.basePath + `api/achievements`, body, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
@@ -404,7 +370,7 @@ export class ShareserviceService {
   }
 
   getaactividadesDiaria(){
-    return this.http.get<any>(this.basePath + `/api/dailyactivities?today=1` , {
+    return this.http.get<any>(this.basePath + `api/dailyactivities?today=1` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
     });

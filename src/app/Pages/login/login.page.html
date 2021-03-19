@@ -10,7 +10,7 @@
 
 <ion-content class="ion-content-login" style="font-family: url(../src/assets/fonts/proxima/proxima-nova.otf);">
     <img src="/assets/1024-solo-logo.png" >
-    <div class="centrado">
+    <div>
           <form [formGroup]="loginForm">
             <ion-item class="ion-item-css">
               <ion-icon name="people-sharp"></ion-icon>
@@ -22,7 +22,7 @@
                 formControlName="correo"></ion-input>
             </ion-item>
             <ion-item class='form-text-error' *ngIf="!loginForm.controls.correo.valid && (loginForm.controls.correo.touched || loginForm.controls.correo.dirty)">
-              <ion-label >Debe ser un correo <br> valido</ion-label>
+              <ion-label class="l-error">El correo no es valido</ion-label>
             </ion-item>
             <ion-item class="ion-item-css">
               <ion-icon name="lock-open-sharp"></ion-icon>
@@ -35,7 +35,7 @@
                 <ion-icon slot="end" [name]="passwordToggleIcon" (click)="showpass()"></ion-icon>
             </ion-item>
             <ion-item class='form-text-error' *ngIf="!loginForm.controls.contrasena.valid && (loginForm.controls.contrasena.touched || loginForm.controls.contrasena.dirty)">
-              <ion-label >La Contraseña debe tener: <br>1 numero <br> 1 letra Mayuscula <br> 1 letra minuscula <br> y 8 o más caracteres</ion-label>
+              <ion-label class="l-error">La Contraseña debe tener: <br>1 numero <br> 1 letra Mayuscula <br> 1 letra minuscula <br> y 8 o más caracteres</ion-label>
             </ion-item>
             <div class="center">
 

@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" style="color: white">
       <ion-button (click)="volver()">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="tituloInfo">
-      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white">MAGIN</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,8 +16,8 @@
   <ion-header>
     <div *ngIf="data">
       <ion-item *ngIf="transmiterID !== data.id">
-        <ion-icon name="people-circle-outline"></ion-icon>
-        <ion-label style="text-align: center;">{{data.name}}&nbsp;{{data.lastname}}</ion-label>
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-label style="margin-left: 5px;;text-transform: capitalize;font-size: 20px;">{{data.name}}&nbsp;{{data.lastname}}</ion-label>
       </ion-item>
     </div>
   </ion-header>
@@ -50,7 +50,7 @@
         <textarea autosize maxRow="4" placeholder="Escribe un mensaje" [(ngModel)]="newMsg"
           class="msg-input"></textarea>
       </ion-col>
-      <ion-col size="2">
+      <ion-col size="2" class="send">
         <button expand="block" [disabled]="newMsg === ''" class="msg-btn" (click)="enviarMsg()">
           <ion-icon name="send-outline"></ion-icon>
         </button>

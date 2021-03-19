@@ -1,6 +1,6 @@
 import { LoginService } from 'src/app/_services/login.service';
-import { Component, OnInit, ViewChild, AfterViewChecked, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 import { ChatServiceService } from 'src/app/_services/chat-service.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -30,7 +30,6 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   usertk = null;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private chatS: ChatServiceService,
     private auth: AuthService,
@@ -46,7 +45,6 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
 
   scrollToBottom() {
     if (this.menjs.length === 15) {
-      console.log('entre ');
       this.content.scrollToBottom(100);
       this.scrollBottom = false;
     }
@@ -54,32 +52,29 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     const info = this.pObjecto.getNavData();
-    console.log('esta es la info', info);
-    this.data = info.infoDt;
-    this.chatId = info.infoDt.id;
-    this.transmiterID = info.transferID;
-    this.usuarioActual = info.useractual;
-    console.log('datos', this.chatId, this.transmiterID, this.usuarioActual, this.data);
-    this.pusher.channelsuscribe(this.data.id);
-
-    const channel = this.pusher.init();
-    channel.bind('chat_event', data => {
-      console.log('recepcion evento', data);
-      this.updateMsg(data);
-    });
-
-    this.chatS.getchatsMSGUser(this.data.id).subscribe((msgServ: any) => {
-      console.log('mensajes del chat', msgServ);
-      this.total = msgServ.meta;
-      this.menjs = msgServ.data.reverse();
-      const currentPage = this.total.current_page;
-      this.page = currentPage + 1;
-    });
-    this.userList = this.data;
+    if(info) {
+      this.data = info.infoDt;
+      this.chatId = info.infoDt.id;
+      this.transmiterID = info.transferID;
+      this.usuarioActual = info.useractual;
+      this.pusher.channelsuscribe(this.data.id);
+  
+      const channel = this.pusher.init();
+      channel.bind('chat_event', data => {
+        this.updateMsg(data);
+      });
+  
+      this.chatS.getchatsMSGUser(this.data.id).subscribe((msgServ: any) => {
+        this.total = msgServ.meta;
+        this.menjs = msgServ.data.reverse();
+        const currentPage = this.total.current_page;
+        this.page = currentPage + 1;
+      });
+      this.userList = this.data;
+    }
 
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
       });
     });
@@ -94,9 +89,7 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
           chatMsg.data.forEach(element => {
             this.menjs.unshift(element);
           });
-          //this.page = this.page + 1;
           event.target.complete();
-          console.log(this.menjs);
         })
       } else if (this.menjs.length === nuevoArra) {
         event.target.disabled = true;
@@ -107,7 +100,6 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   }
 
   updateMsg(data: any) {
-    console.log('mensaje de pusher', data);
     this.menjs.push(data.message);
     this.content.scrollToBottom(100);
   }
@@ -125,7 +117,6 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   }
 
   volver() {
-    // this.chatS.var.next('update');
     this.router.navigate(['/users/chat']);
   }
 }

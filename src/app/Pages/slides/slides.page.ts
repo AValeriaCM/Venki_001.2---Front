@@ -34,17 +34,36 @@ export class SlidesPage implements OnInit {
     private log: LoginService,
     private loadingService: LoadingService,
     private formBuilder: FormBuilder,
-    ) {}
+    private route: Router
+  ) {}
 
   ngOnInit() {
+    this.validateProfileUserAuth();
     this.loadForm();
     this.getProfiles();
   }
 
+  validateProfileUserAuth() {
+    this.auth.gettokenLog().then(tkInf => {
+      if (tkInf !== null) {
+        this.log.logdataInfData(tkInf).subscribe(resTk => {
+          this.auth.gettokenDevice().then(DeviceTk => {
+            if (DeviceTk !== null) {
+              this.log.saveDevice(resTk.id, DeviceTk);
+            }
+          });
+          if (resTk.profile_id == null) {
+            this.route.navigateByUrl('/slides');
+          } else {
+            this.route.navigateByUrl('/users/home');
+          }
+        });
+      }
+    });
+  }
+
   getProfiles() {
-
     this.loadingService.loadingPresent({message: "Por favor espere", spinner: "circles" });
-
     this.porfiles.getProfiles().subscribe( (resp: any) => {
       this.loadProfiles(resp);
       this.auth.gettokenLog().then( tkInf => {
@@ -57,6 +76,8 @@ export class SlidesPage implements OnInit {
         }
         this.loadingService.loadingDismiss();
       });
+    }, error => {
+      this.loadingService.loadingDismiss();
     });
   }
 
@@ -103,6 +124,8 @@ export class SlidesPage implements OnInit {
           this.auth.setNomolestarP();
           this.loadingService.loadingDismiss();
           this.router.navigateByUrl('/users/home');
+        }, error => {
+          this.loadingService.loadingDismiss();
         });
       }
     }

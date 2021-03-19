@@ -2,18 +2,17 @@ import { Registro } from './../_model/Registro';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistroService {
 
-  url2 = `/api/users`;
-  basePath = `https://venki.inkdigital.co`;
+  url2 = `api/users`;
+  basePath = `${environment.HOST}`;
 
-  constructor(private http: HttpClient,
-              private router: Router, ) { }
+  constructor(private http: HttpClient ) { }
 
   registro(regist: Registro) {
 

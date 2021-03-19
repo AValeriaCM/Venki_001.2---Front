@@ -1,5 +1,4 @@
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
-import { AuthService } from './../../_services/auth.service';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { RegistroService } from './../../_services/registro.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -12,6 +11,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { CondicionesPage } from '../condiciones/condiciones.page';
 import { TerminosNinosPage } from '../terminos-ninos/terminos-ninos.page';
+import { LoadingService } from 'src/app/_services/loading.service';
 
 @Component({
   selector: 'app-register',
@@ -19,9 +19,6 @@ import { TerminosNinosPage } from '../terminos-ninos/terminos-ninos.page';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-
-
- 
 
   // ----------Pattern-----------
 
@@ -48,7 +45,6 @@ export class RegisterPage implements OnInit {
   ];
   termSelect = false;
 
-
   ischeckNino = [
     {
       selected: false
@@ -61,11 +57,12 @@ export class RegisterPage implements OnInit {
     private snackbar: MatSnackBar,
     private registro: RegistroService,
     public alertController: AlertController,
-    private auth: AuthService,
     private previewAnyFile: PreviewAnyFile,
     private googlePlus: GooglePlus,
     private fb: Facebook,
-    private pop:PopoverController) {
+    private pop:PopoverController,
+    private loadingService: LoadingService
+    ) {
     }
 
   ngOnInit() {
@@ -134,9 +131,7 @@ export class RegisterPage implements OnInit {
   leerterminos() {
     var url = 'http://api.vigiaelectronic.com.co/tratamiento_de_datos.pdf';
     this.previewAnyFile.preview(url).then(() => {
-
     }, (err) => {
-      console.log(JSON.stringify(err));
     });
   }
 
@@ -145,15 +140,18 @@ export class RegisterPage implements OnInit {
     if (this.termSelect === false) {
       this.mesnajeAlert();
     } else {
-      this.nUsuario = this.regisform.value;
-      const bt = format(new Date(this.nUsuario.birthday), 'yyyy-MM-dd');
-      this.nUsuario.birthday = bt;
-      console.log(this.nUsuario.phone);
-      this.auth.setPrimeraVez();
-        this.registro.registro(this.nUsuario).subscribe(() => { 
-          this.mostrarmensaje('Registro Satisfactorio, revise su correo', 'Sucess');
-          this.inicializarFormulario();
-          this.router.navigateByUrl('/');
+        this.nUsuario = this.regisform.value;
+        const bt = format(new Date(this.nUsuario.birthday), 'yyyy-MM-dd');
+        this.nUsuario.birthday = bt;
+        this.loadingService.loadingPresent({message: "Por favor espere", spinner: "circles" });
+        this.registro.registro(this.nUsuario).subscribe(() => {
+            this.loadingService.loadingDismiss();
+            this.mostrarmensaje('Registro satisfactorio, hemos enviado un correo electrónico de verificación a la dirección registrada', 'OK');
+            this.inicializarFormulario();
+            this.volverLogin();
+        }, error => {
+          console.log('error');
+          this.loadingService.loadingDismiss();
         });
     }
   }
@@ -164,7 +162,8 @@ export class RegisterPage implements OnInit {
 
   mostrarmensaje(message: string, action: string) {
     this.snackbar.open(message, action, {
-      duration: 2000,
+      duration: 5000,
+      panelClass: ['green-snackbar'],
     });
   }
 
@@ -195,36 +194,22 @@ export class RegisterPage implements OnInit {
 
     await alert.present();
   }
+
   cambioFecha($event){
     const convertAge = new Date($event);
     const timeDiff = Math.abs(Date.now() - convertAge.getTime());
     this.edad = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
-    console.log (this.edad);
   }
-  hasError(e){
-    console.log(e);
-  }
-  getNumber(e){
-    console.log(e);
-  }
-  telInputObject(e){
-    console.log(e);
-  }
-  onCountryChange(e){
-    console.log(e);
-  }
+
 
   loginGoogle(){
     this.googlePlus.login({}).then( res => console.log('respuesta: ', res)).catch( err  => console.log('error: ',err));
   }
 
   loginFacebook(){
-    this.fb.login(['public_profile', 'user_friends', 'email'])
-    .then((res: FacebookLoginResponse) => console.log('Logged into Facebook!', res))
-    .catch(e => console.log('Error logging into Facebook', e));
-
-
+    this.fb.login(['email']).then((res: FacebookLoginResponse) => {
+    }
+    ).catch(e => console.log('Error logging into Facebook', e));
     this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
   }
-
 }

@@ -1,8 +1,9 @@
 *{
-    font-family: 'Proxima Nova' !important;
+    font-family: Geneva,Tahoma,Verdana,sans-serif !important;
   }
 .contenido{
     text-align: justify;
+    font-size: 15px;
 }
 .footer-dis-bot1{
     display:list-item;
@@ -22,4 +23,8 @@ iframe {
     position: relative;
     height: 100%;
     width: 100%;
+}
+
+.title-css{
+    padding: 0px 10px;
 }

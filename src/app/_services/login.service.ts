@@ -1,5 +1,4 @@
 import { environment } from './../../environments/environment';
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -8,12 +7,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root',
 })
 export class LoginService {
-  url = `/api/oauth/token`;
-  url2 = `/api/users`;
-  basePath = `https://venki.inkdigital.co`;
-
+  url = `api/oauth/token`;
+  url2 = `api/users`;
+  basePath = `${environment.HOST}`;
   clientsec = `${environment.CLIENT_SECRET}`;
   clientid = `${environment.CLIENT_ID}`;
+
+
   constructor(private http: HttpClient, private AFauth: AngularFireAuth)
   {}
 
@@ -47,7 +47,7 @@ export class LoginService {
   }
 
   logdataInfData(infoUser: any){
-    return this.http.get<any>(this.basePath + `/api/user`, {
+    return this.http.get<any>(this.basePath + `api/user`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
         .set('Authorization', 'Bearer ' + infoUser)
@@ -69,12 +69,11 @@ export class LoginService {
   }
 
   saveDevice(usuario: any, code: any) {
-    console.log(usuario, code);
     const body = new HttpParams()
       .set('user_id', usuario)
       .set('code', code);
 
-    return this.http.post(this.basePath + `/api/devices`, body, {
+    return this.http.post(this.basePath + `api/devices`, body, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest'),

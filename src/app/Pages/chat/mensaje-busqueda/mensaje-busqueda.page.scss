@@ -23,7 +23,7 @@
 
 .msg-input{
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid #d4d4d4;
     border-radius: 6px;
     background: #fff;
     resize: none;
@@ -32,13 +32,20 @@
   }
 
 .msg-btn{
-  color: black;
-  --padding-start: 8.5em;
-  --padding-end: 0.5em;
-  text-align: center;
   font-size: 30px;
+  color: white;
+  background-color: transparent;
+  margin: 5px 0px 0px 5px;
 }
 
 *{
-    font-family: 'Proxima Nova' !important;
-  }
+  font-family: 'Proxima Nova' !important;
+}
+
+.send {
+  background: #002a68;
+  text-align-last: center;
+  border-radius: 90%;
+  height: 50px;
+  max-width: 55px !important;
+}

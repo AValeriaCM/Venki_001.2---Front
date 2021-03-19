@@ -1,104 +1,117 @@
 <ion-header #header>
   <ion-toolbar #toolbar class="ion-toolbar-ccs">
-    <div align="center">
+    <div>
       <ion-toolbar>
-        <img src="/assets/FINAL-LOGO-MAGIN-PNG.png" width="170" height="100">
+        <ion-row class="logo">
+          <ion-col size="4">
+            <div class="icon-header">
+              <img src="/assets/finallogo.png" width="120" height="70">
+            </div>
+          </ion-col>
+          <ion-col size="8" style="align-self: flex-end">
+            <div class="info-header">
+              <ion-label *ngIf="usertk" style="font-size: 14px;color: #fff;margin-right: 5px;">{{message_header }}.</ion-label>
+              <ion-label *ngIf="usertk" style="font-size: 14px;color: #fff;text-transform: capitalize;">{{usertk.name}} {{usertk.lastname}}</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
       </ion-toolbar>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true">
-
-  <label *ngIf="actividad"
-    style="text-align: center;  margin-left: 35%; font-size: 18px; font-family: url(../../../../assets/fonts/proxima/proxima-nova.otf);">Actividad:
-    {{actividad}}</label>
-  <br>
   <div class="back">
-    <ion-header>
+    <ion-header style="text-align-last: center;">
       <ion-toolbar style="display: inline;">
         <ion-title style="text-align: center;">
-          ¿Que deseas hacer hoy?
+          ¿Que estas pensando?
         </ion-title>
       </ion-toolbar>
+      <ion-badge class="badge-activity" *ngIf="actividad" color="primary">{{actividad}}</ion-badge>
     </ion-header>
-    <ion-grid style="display: inline; margin-top: 0px; margin-bottom: 0px;">
-      <ion-row>
+    <ion-grid style="display: inline;">
+      <ion-row style="text-align: -webkit-center;">
         <ion-col>
           <ion-fab-button color="secondary" class="fab-buttons" (click)="crearEntrada(1)">
             <ion-icon name="bulb" size="large"></ion-icon>
           </ion-fab-button>
-          <br>
           <ion-label class="label-fab">Informar</ion-label>
         </ion-col>
         <ion-col>
           <ion-fab-button class="fab-buttons" (click)="crearEntrada(2)">
             <ion-icon name="megaphone" size="large"></ion-icon>
           </ion-fab-button>
-          <br>
           <ion-label class="label-fab">Compartir</ion-label>
         </ion-col>
         <ion-col>
           <ion-fab-button color="danger" class="fab-buttons" (click)="crearEntrada(3)">
             <ion-icon name="flash" size="large"></ion-icon>
           </ion-fab-button>
-          <br>
-          <ion-label class="label-fab" style="padding-left: 15px;">Retar</ion-label>
+          <ion-label class="label-fab">Retar</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 
   <br>
-  <ion-title style="text-align: center;">Posts</ion-title>
+  <ion-title style="text-align: center;">Publicaciones</ion-title>
   <ion-list *ngFor="let pst of miactividad" style="background-color: transparent !important;" class="itemCssFActividad  list-mdActividad">
-    <ion-card class="border-post" [ngClass]="{
-      'border-post-retar': pst.post[0] == '#',
-      'border-post-informar': pst.post[0] == '!',
-      'border-post-compartir': pst.post[0] == '@'}">
+    <ion-card class="border-post">
       <div class="boder">
-        <ion-item class="ion-item-css-" style="background-color: transparent;">
-          <ion-avatar item-left>
-            <img class="avatar" src="../../../assets/avatar/{{pst.user.avatar}}.jpg" class="imagestyle"
-              (click)="verUser(pst.user)">
+        <ion-item class="border-bottom: 1px solid #e8e7e7;">
+          <ion-avatar slot="start" class="avatar-user">
+            <img src="assets/avatar/{{pst.user.avatar}}.jpg" (click)="verUser(pst.user)">
           </ion-avatar>
-          <ion-label class="author" (click)="verUser(pst.user)">{{pst.user.name}} {{pst.user.lastname}}</ion-label>
+          <ion-label (click)="verUser(pst.user)">
+            <h3 class="name-user">{{pst.user.name}} {{pst.user.lastname}}</h3>
+            <p style="margin: 0;font-size: 12px;">{{pst.created_at | date:'short'}}</p>
+          </ion-label>
         </ion-item>
-        <div style="background-color: transparent;" *ngIf="pst.medias.length === 0" class="labelContent">
-          <label class="content">{{pst.post}}</label>
-          <div class="time" class="ion-text-right"><br>
-            {{pst.created_at | date:'short'}}
-          </div>
+
+        <div *ngIf="pst.post[0] == '@'" style="margin: 10px;">
+          <label class="content content-share">{{ pst.post | slice:0:10 }}</label>
+          <label class="content-post">{{ pst.post | slice:10:pst.post.length | title }}</label>
         </div>
-        <br>
+
+        <div *ngIf="pst.post[0] == '#'" style="margin: 10px;">
+          <label class="content content-challenge">{{ pst.post | slice:0:6 }}</label>
+          <label class="content-post">{{ pst.post | slice:6:pst.post.length | title }}</label>
+        </div>
+
+        <div *ngIf="pst.post[0] == '!'" style="margin: 10px;">
+          <label class="content content-inform">{{ pst.post | slice:0:9 }}</label>
+          <label class="content-post">{{ pst.post | slice:9:pst.post.length | title }}</label>
+        </div>
+
         <div *ngIf="pst.medias.length !== 0" class="labelContent">
-          <label class="content">{{pst.post}}</label>
           <ion-slides [options]="sliderImgOption">
             <ion-slide *ngFor="let imag of pst.medias">
-              <img class="image-cont" src="https://venki.inkdigital.co/medias/{{imag.media}}"
-                (click)="imageView(imag.media)">
+              <img class="image-cont" src="https://venki.inkdigital.co/medias/{{imag.media}}" (click)="imageView(imag.media)">
             </ion-slide>
           </ion-slides>
-          <div class="time" class="ion-text-right"><br>
-            {{pst.created_at | date:'short'}}
-          </div>
-          <ion-grid class="footer">
-            <ion-row>
-              <ion-col size="6" style="text-align: center; font-size: 25px;">
-                <button ion-button icon-only style="color: white; font-size: 20px; background-color: transparent;"
-                  (click)="handleLike(pst.count_like, pst.id)" clear> {{pst.count_like}}
-                  <ion-icon name="thumbs-up"></ion-icon>
-                </button>
-              </ion-col>
-              <ion-col size="6" style="text-align: center;">
-                <button ion-button icon-only style="color: white; font-size: 25px; background-color: transparent;"
-                  (click)="openChat(pst.user)" clear>
-                  <ion-icon name="chatbubbles"></ion-icon>
-                </button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </div>   
+        </div>
+
+        <ion-grid class="footer" [ngClass]="{
+          'content-challenge': pst.post[0] == '#',
+          'content-inform': pst.post[0] == '!',
+          'content-share': pst.post[0] == '@'}">
+          <ion-row>
+            <ion-col size="6" style="text-align: center; font-size: 25px;">
+              <button ion-button icon-only style="color: white; font-size: 20px; background-color: transparent;"
+                (click)="handleLike(pst.count_like, pst.id)" clear> {{pst.count_like}}
+                <ion-icon name="thumbs-up" style="margin-top: 2px;"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col size="6" style="text-align: center;">
+              <button ion-button icon-only style="color: white; font-size: 25px; background-color: transparent;"
+                (click)="openChat(pst.user)" clear>
+                <ion-icon name="chatbubbles"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  
       </div>
     </ion-card>
   </ion-list>

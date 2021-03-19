@@ -1,6 +1,14 @@
 *{
-    font-family: 'Proxima Nova' !important;
-  }
+  font-family: 'Proxima Nova' !important;
+}
+
+:host {
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  --padding-start: 0px;
+  --padding-end: 0px;
+}
+
 .boderbox{
     border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -23,7 +31,8 @@ ion-col > div {
   background-blend-mode: lighten;
   border-radius: 8px;
   padding: 8%;
-  color: rgb(0, 0, 0) !important; font-weight: bold !important;
+  color: rgb(0, 0, 0) !important; 
+  font-weight: bold;
   font-size: 18px;
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0);
@@ -35,12 +44,12 @@ ion-col > div {
 }
 
 .card{
-    border-radius: 8px;
+    border-radius: 0px;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-  padding: 14px 80px 18px 36px;
-  cursor: pointer;
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    padding: 14px 80px 18px 36px;
+    cursor: pointer;
 }
 
 .card:hover{
@@ -294,4 +303,41 @@ video{
     padding-top: 8px;
     padding-bottom: 8px;
     background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
+}
+
+.badge-lesson {
+  padding: 5px;
+  margin: 15px 25px 0px 25px;
+  text-transform: uppercase;
+  white-space: break-spaces;
+}
+
+ion-col > .actions {
+  box-shadow: none !important;
+  text-align-last: center !important;
+  font-weight: 500;
+  border: 1px solid #bbbbbb;
+  border-radius: 100%;
+  height: 80px;
+  width: 100px;
+  font-size: 13px;
+  padding: 20px 5px;
+}
+
+.card-primary {
+  border-left: 4px solid #5260ff !important;
+}
+.card-success {
+  border-left: 4px solid #7cb342 !important;
+}
+.card-warning {
+  border-left: 4px solid #ffa000 !important;
+}
+.div-activity {
+  background: rgb(255 255 255 / 56%);
+  border-radius: 5px;
+}
+.img-activities {
+  width: 40% !important;
+  height: 40% !important;
 }

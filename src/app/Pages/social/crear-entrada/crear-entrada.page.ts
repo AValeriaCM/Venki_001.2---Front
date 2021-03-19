@@ -4,10 +4,10 @@ import { LoginService } from 'src/app/_services/login.service';
 import { Camera } from '@ionic-native/camera/ngx';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/_services/loading.service';
 
 
 @Component({
@@ -40,23 +40,18 @@ export class CrearEntradaPage implements OnInit {
     private auth: AuthService,
     private share: ShareserviceService,
     private imagePick: ImagePicker,
-    private file: File,
     private alertController: AlertController,
     private pObjecto: PassObjectService,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit() {
-
-    // this.textareainput = ;
     const informacion = this.pObjecto.getNavData();
     this.idAction = informacion.idAction;
-    console.log(informacion);
     this.actividad = informacion.actividad;
-    console.log('Actividad', this.actividad );
     this.share.varDesafio.subscribe( res => {
       const informacion = this.pObjecto.getNavData();
-      console.log('Informacion ->', informacion);
       this.actividad = informacion.actividad;
     });
 
@@ -64,7 +59,6 @@ export class CrearEntradaPage implements OnInit {
     this.photos = [];
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
       });
     });
@@ -89,18 +83,21 @@ export class CrearEntradaPage implements OnInit {
       buttons: [
         {
           text: 'Galeria',
+          icon: 'image-outline',
           handler: () => {
             this.usarGaleria();
           }
         },
         {
           text: 'Camara',
+          icon: 'camera-outline',
           handler: () => {
             this.usarCamara();
           }
         },
         {
           text: 'Cancelar',
+          icon: 'close-outline',
           role: 'cancel'
         }
       ]
@@ -118,58 +115,54 @@ export class CrearEntradaPage implements OnInit {
   usarCamara() {
     this.camara.getPicture({
       sourceType: this.camara.PictureSourceType.CAMERA,
-      destinationType: this.camara.DestinationType.DATA_URL,
+      destinationType: this.camara.DestinationType.FILE_URI,
       correctOrientation: true,
       mediaType: this.camara.MediaType.PICTURE,
       encodingType: this.camara.EncodingType.JPEG,
-      targetWidth: 100,
-      targetHeight: 100,
+      targetWidth: 1024,
+      targetHeight: 768,
     }).then((res) => {
       const imgsend = 'data:image/jpeg;base64,' + res;
       this.photos.push({imagen: imgsend});
-    }).catch(e => {
-      console.log(e);
     });
   }
 
   usarGaleria() {
     this.imagePick.getPictures({
       maximumImagesCount: 5,
-      width: 100,
-      height: 100,
+      width: 1024,
+      height: 768,
       outputType: 1
     }).then((results) => {
-      results.forEach(element => {
-        console.log('elemento', element);
-        this.photos.push({imagen:  'data:image/jpeg;base64,' +  element});
-      });
+      for (var i = 0; i < results.length; i++) {
+        const imgsend = 'data:image/jpeg;base64,' + results[i];
+        this.photos.push({imagen: imgsend});
+      }
     });
   }
 
-  subirVideo() {
-
-  }
-
   Publicar(){
-    console.log(this.textareainput, this.photos);
-    if (this.idAction === 1) {
-      this.textareainput = '!Informa: ' + this.textareainput;
-    }
-    if (this.idAction === 2) {
-      this.textareainput = '@Comparte: ' + this.textareainput;
-    }
-    if (this.idAction === 3) {
-      this.textareainput = '#Reto: ' + this.textareainput;
-    }
-    if (this.textareainput === undefined){
-      this.alertDespuesTiempo();
-    }else{
-      console.log('SFOTOS', this.photos);
+
+    if(this.textareainput) {
+      this.loadingService.loadingPresent({spinner: "circles" });
+      if (this.idAction === 1) {
+        this.textareainput = '!Informa: ' + this.textareainput;
+      }
+      if (this.idAction === 2) {
+        this.textareainput = '@Comparte: ' + this.textareainput;
+      }
+      if (this.idAction === 3) {
+        this.textareainput = '#Reto: ' + this.textareainput;
+      }
       this.share.guardarpost(this.usertk.id, this.textareainput, this.photos).subscribe(  res => {
-        console.log(res);
+        this.loadingService.loadingDismiss();
         this.share.varPostUpdate.next('update data');
-        this.router.navigate(['/users/social/']);
+        this.router.navigate(['/users/social']);
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
+    } else {
+      this.alertDespuesTiempo();
     }
   }
 
@@ -187,6 +180,6 @@ export class CrearEntradaPage implements OnInit {
 
   volver(){
     this.actividad = '';
-    this.router.navigate(['/users/social/']);
+    this.router.navigate(['/users/social']);
   }
 }

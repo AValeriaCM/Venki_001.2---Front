@@ -139,8 +139,8 @@
       "cordova-plugin-preview-any-file": {},
       "cordova-plugin-streaming-media": {},
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "151721332422-gepq4m73nkm7ietaup06c9igehitaq2e.apps.googleusercontent.com",
-        "PLAY_SERVICES_VERSION": "15.0.1"
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.672643384150-vg21d5i85ca0e0164h4m5jk7b62jt02a",
+        "WEB_APPLICATION_CLIENT_ID": "672643384150-iurrhs1cu5ae2k4kllmck9bd5gtd73jq.apps.googleusercontent.com"
       },
       "cordova-plugin-facebook4": {
         "APP_ID": "294968951800905",

@@ -13,6 +13,9 @@ import { CondicionesPage } from '../condiciones/condiciones.page';
 import { TerminosNinosPage } from '../terminos-ninos/terminos-ninos.page';
 import { LoadingService } from 'src/app/_services/loading.service';
 
+import { AngularFireAuth } from '@angular/fire/auth';
+import  auth  from 'firebase/app';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -61,7 +64,8 @@ export class RegisterPage implements OnInit {
     private googlePlus: GooglePlus,
     private fb: Facebook,
     private pop:PopoverController,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private AFauth: AngularFireAuth
     ) {
     }
 
@@ -206,10 +210,13 @@ export class RegisterPage implements OnInit {
     this.googlePlus.login({}).then( res => console.log('respuesta: ', res)).catch( err  => console.log('error: ',err));
   }
 
-  loginFacebook(){
-    this.fb.login(['email']).then((res: FacebookLoginResponse) => {
-    }
-    ).catch(e => console.log('Error logging into Facebook', e));
-    this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
-  }
+  // servicio de logueo de facebook
+ loginWhitFacebook(){
+  return this.fb.login(['public_profile', 'email'])
+   .then((res: FacebookLoginResponse) =>{ 
+     console.log('data', res);
+     const credential_fb = auth.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+    return this.AFauth.signInWithCredential(credential_fb);
+   })
+ }
 }

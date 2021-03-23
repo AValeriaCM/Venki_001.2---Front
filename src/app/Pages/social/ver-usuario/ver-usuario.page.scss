@@ -4,6 +4,7 @@
 .expand-css {
   max-width: 900px;
   background-color: rgba(248, 249, 250, 0.527);
+  box-shadow: none;
 }
 
 .iconDesc {
@@ -22,66 +23,53 @@
 }
 
 .title-css {
-  color: rgb(8, 8, 8);
+  color: #080808;
   margin: 0;
-  padding: 0px 0px 6px 0px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.titilExpand {
+  color: #080808;
   font-size: 15px;
   line-height: 44px;
   letter-spacing: 1px;
   font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.titilExpand {
-  color: rgb(8, 8, 8);
-  margin: 0;
-  padding: 0px 0px 6px 0px;
-  font-size: 10px;
-  line-height: 44px;
-  letter-spacing: 1px;
-  font-weight: bold;
-  text-align: center;
 }
 
 .titilExpandSub {
-  color: rgb(128, 125, 125);
-  margin: 0;
-  padding: 0px 0px 6px 0px;
-  font-size: 9px;
+  olor: #807d7d;
+  font-size: 12px;
   line-height: 44px;
   letter-spacing: 1px;
   font-weight: bold;
-  text-align: center;
 }
 
 .ion-item-css {
-  background-color: #f6f6f685;
   border: none;
   color: #000000;
   text-decoration: none;
   font-size: 13px;
   margin: 5px;
-  width: 85%;
-  border: 2px solid #ffffff79;
+  width: 100%;
   transition: all 0.3s ease-in-out;
-  height: 55px;
   text-align: center;
-  margin: 0 auto;
+  margin: 0;
   margin-bottom: 10px;
-  border-radius: 8px;
   --background: rgba(255, 255, 255, 0.562) !important;
 }
 
 .Subtitle-css {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 12px;
   margin: 0;
-  padding: 7px 7px 7px 7px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 1px;
   font-weight: bold;
-  color: rgb(8, 8, 8);
+  color: #080808;
 }
 
 .example-action-buttons {

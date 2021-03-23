@@ -1,7 +1,8 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { AlertController, IonContent } from '@ionic/angular';
+import { LoadingService } from 'src/app/_services/loading.service';
 
 @Component({
   selector: 'app-vercurso',
@@ -10,6 +11,8 @@ import { AlertController, IonContent } from '@ionic/angular';
 })
 export class VercursoPage implements OnInit {
 
+  @ViewChild(IonContent) content: IonContent;
+
   data: any;
   prueba: any;
   info;
@@ -17,14 +20,15 @@ export class VercursoPage implements OnInit {
   menajeNuevo = '';
   userinfo;
   alert: any;
-  img = 'https://www.travelcontinuously.com/wp-content/uploads/2018/04/empty-avatar.png';
   comentariosGeneral: any[] = [];
   infomsg: any;
-  @ViewChild(IonContent) content: IonContent;
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private share: ShareserviceService,
-              public alertController: AlertController,) {
+  
+  constructor(
+    private route: ActivatedRoute,
+    private share: ShareserviceService,
+    public alertController: AlertController,
+    private loadingService: LoadingService
+    ) {
     this.route.queryParams.subscribe( params => {
       if ( params && params.info  && params.userinf) {
         this.data = params.info;
@@ -35,11 +39,21 @@ export class VercursoPage implements OnInit {
 
   ngOnInit() {
     this.prueba = JSON.parse(this.data);
+    this.getCourse();
+  }
+
+  getCourse() {
+    this.loadingService.loadingPresent({spinner: "circles" });
     this.share.getCursoEspecifico(this.prueba).subscribe( async infodt => {
       this.info = infodt.data;
       this.share.getComentariosCurso(this.prueba).subscribe( info =>  {
         this.comentariosGeneral = info.data;
+        this.loadingService.loadingDismiss();
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
+    }, error => {
+      this.loadingService.loadingDismiss();
     });
   }
 

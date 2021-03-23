@@ -24,12 +24,11 @@
     padding-bottom: 89px;
 }
 
-.image-cont{
-    width: 200px;
-    height: 200px;
-    margin-left: 12px;
-    margin-right: 12px;
-    border-radius: 25px;
+.image-cont {
+    width: 100%;
+    height: 168px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
 
 .time{
@@ -39,13 +38,10 @@
 }
 
 .boder{
-    border: 2px solid;
-    border-radius: 20px;
-    margin-left: 12px;
-    margin-right: 12px;
-    margin-top: 2px;
-    margin-bottom: 2px;
-}
+    margin-left: 0%;
+    margin-right: 0%;
+    padding-bottom: 0px;
+  }
 
 
 hr.solid {
@@ -95,21 +91,15 @@ hr.solid {
     color: #ffffff;
 }
 
-.button-css-options{
-    -webkit-box-shadow : 0  10px  30px  0 rgba(255, 255, 255, 0.288);
-    box-shadow : 0  10px  30px  0 rgb(252, 252, 252);
+.button-css-options {
+    box-shadow: 0 10px 30px 0 #fcfcfc;
     font-size: 13px;
     letter-spacing: 1px;
     margin: 0px;
-    margin-top: 13px;
-    margin-left: 5%;
-    text-align: center;
-    border: rgb(254, 255, 255);;
-    text-decoration: none;
     display: table-cell;
     text-transform: uppercase;
     transition: all 0.3s ease-in-out;
-    width: 85%;
+    width: 100%;
     height: 35px;
     color: #002a68;
     --background: #ffffff !important;
@@ -187,15 +177,13 @@ hr.solid {
     text-align: center;
 }
 
-.title-css2{
-    color: rgb(0, 0, 0);
-    margin: 0;
-    padding: 0px 0px 6px 0px;
-    font-size: 11px;
+.title-css2 {
+    color: black;
+    font-size: 12px;
     line-height: 44px;
     letter-spacing: 1px;
     font-weight: bold;
-    text-align: center;
+    text-transform: uppercase;
 }
 
 .expacionCss{
@@ -203,15 +191,18 @@ hr.solid {
 }
 
 .Subtitle-css{
-    font-size: 12px;
+    font-size: 14px;
     line-height: 12px;
     margin: 0;
     padding: 7px 7px 7px 7px;
     text-transform: capitalize;
     letter-spacing: 1px;
     font-weight: bold;
-    color: rgb(8, 8, 8);
+    color: #080808;
     text-align: left;
+    width: 100%;
+    max-width: 100%;
+    white-space: break-spaces;
 }
 
 .Subtitle-css-label{
@@ -236,26 +227,23 @@ hr.solid {
     color: rgb(255, 255, 255);
 }
 
-.Subtitle-css-expansive{
-    font-size: 10px;
-    line-height: 12px;
-    margin: 0;
-    padding: 7px 7px 7px 7px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-weight: bold;
-    color: rgb(2, 0, 0);
-}
-
-.Subtitle-cs-desc{
-    font-size: 10px;
-    line-height: 12px;
-    margin: 0;
-    padding: 7px 7px 7px 7px;
-    text-transform: uppercase;
+.Subtitle-css-expansive {
+    font-size: 12px;
+    text-transform: capitalize;
     letter-spacing: 1px;
     font-weight: bold;
-    color: rgb(8, 8, 8);
+    color: #020000;
+}
+
+.Subtitle-cs-desc {
+    font-size: 13px;
+    line-height: 12px;
+    margin: 10px;
+    padding: 7px 7px 7px 7px;
+    text-transform: inherit;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #080808;
     text-align: justify;
 }
 
@@ -267,22 +255,12 @@ hr.solid {
 }
 
 .labelContent{
-    margin-bottom: 10px;
-    font-size: 10px;
-    letter-spacing: 1px;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-left: 12px;
-    margin-right: 10px;
-    margin-top: -15px;
-    padding-left: 12px;
-    text-align: center;
-    color: black;
-}
-
-.itemCssFActividad{
-    --background: var(--ion-item-background, var(--ion-background-color, #0e0e0ebe)) !important;
-    border: 2px solid  #00000000;
+    font-size: 11px;
+    background-color: #fffefe91;
+    color: #000000;
+    margin: 10px 0px;
+    white-space: break-spaces;
+    margin-bottom: 0px;
 }
 
 .list-mdActividad{
@@ -335,10 +313,10 @@ hr.solid {
 }
 
 .profile-photo{
-    border-radius:50%;
-    margin-top: 10px;
-    width: 8em !important;
-    height: 8em !important;
+    border-radius: 50%;
+    margin-top: 5px;
+    width: 5em !important;
+    height: 5em !important;
 }
 
 .larger{
@@ -348,27 +326,21 @@ hr.solid {
     color: #002a68  !important;
 }
 
-.expand-css{
+.expand-css {
     max-width: 900px;
     max-height: max-content;
+    box-shadow: none;
 }
 
-.expand-css2{
+.expand-css2 {
     max-width: 900px;
     background: #ffffff;
-}
-
-.profile-info{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
+    box-shadow: none;
 }
 
 .info-square{
     text-align: center;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .follow-button{
@@ -377,15 +349,9 @@ hr.solid {
     background-color: #3E99ED;
 }
 
-.more-details{
-    padding-left: 10px;
-}
-
-.user-name{
+.user-name {
     font-size: 23px;
-    letter-spacing: -1px;
-    text-align: justify;
-    margin-right: 30px;margin-top: 12px;
+    letter-spacing: 1px;
 }
 
 .user-bio{
@@ -409,30 +375,13 @@ hr.solid {
 }
 
 .ion-item-css{
-    background-color: #f6f6f685;
-    border: none;
-    color: #1b4078 !important;
-    text-decoration: none;
-    font-size: 15px;
-    margin: 5px;
-    width: 85%;
-    border: 2px solid  #ffffff79;
-    transition: all 0.3s ease-in-out;
-    height: 55px;
-    text-align: left;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    --background: rgba(255, 255, 255, 0.562) !important;
-    }
+    margin-bottom: 5px;
+}
 
 .expansionCsss{
   background-color: rgba(248, 249, 250, 0.527);
 }
 
-.itemCssF{
-    --background: var(--ion-item-background, var(--ion-background-color, #f3f2f279)) !important;
-}
 
 .list-md {
     margin-left: 0;
@@ -487,4 +436,131 @@ hr.solid {
     }
 }
 
+.profile-intro {
+    padding: 0;
+}
 
+.logout {
+    float: right;
+    margin-right: 5px;
+    font-size: 15px;
+}
+
+.label-edit-info {
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+}
+
+.label-error {
+    color: #f44336;
+    font-size: 12px;
+    white-space: break-spaces;
+}
+
+:host{
+    ::ng-deep{
+        .phone .dropbtn {
+            background: #eee5e5e7;
+            color: white ;
+            border: none;
+            height: 45px;
+            border-radius: 8px;
+            padding-left: 0px;
+            border-left-width: 0px;
+            border-left-style: solid;
+            margin-left: 0px;
+        }
+        .phone .form-control {
+            background-color: #ffffff;
+            border: 1.5px;
+            border-color: #535353;
+            border-radius: 8px;
+            color: #535353;
+            text-decoration: none;
+            font-size: 15px;
+            margin: 5px 0px;
+            width: 85%;
+            transition: all 0.3s ease-in-out;
+            height: 45px;
+            text-align: center;
+            padding-left: 0px;
+            border-left-width: 0px;
+            border-right-width: 2px;
+        }
+        .swiper-wrapper {
+            place-content: center !important;
+        }
+    }
+  }
+
+.content-share {
+    background-color: #3880ff;
+}
+
+.content-inform {
+    background-color: #3dc2ff;
+}
+
+.content-challenge {
+    background-color: #eb445a;
+}
+
+.card-share {
+    border-left: 4px solid #3880ff !important;
+}
+
+.card-inform {
+    border-left: 4px solid #3dc2ff !important;
+}
+
+.card-challenge {
+    border-left: 4px solid #eb445a !important;
+}
+
+.content {
+    word-break: break-all;
+    text-align: justify;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 13px;
+}
+.author {
+    display: inline-block;
+    overflow: hidden;
+    width: 8em;
+    text-transform: capitalize;
+}
+
+.name-user {
+    font-size: 17px;
+    text-transform: capitalize;
+    margin-bottom: 0px;
+}
+
+.content-post {
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 5px;
+    color: black;
+}
+
+ion-slides {
+    background: rgba(104, 103, 103, 0.151);
+}
+
+ion-slides{
+    width: 90%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.card-posts {
+    margin: 5px 10px;
+    border-radius: 15px;
+    box-shadow: none;
+    border: 1px solid #dadada;
+}

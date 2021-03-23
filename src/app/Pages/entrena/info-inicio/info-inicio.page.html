@@ -13,35 +13,7 @@
       comunidad o al contexto donde se desenvuelva...</p>
     <p class="ocultar p2" id="p2">
       En esta sección encontrarás categorías como: <br><br>
-      <li>Cognitivo<br></li>
-
-     <!-- - Actividades de la mente que tiene un efecto identificable en función de cómo el cerebro responde a la necesidad
-      humana. <br>
-      - Consecuencia de la voluntad de las personas por entender la realidad y desempeñarse en sociedad.<br>
-      - Capacidad natural que tienen los seres humanos para adaptarse e integrarse a su ambiente.<br>
-      - Reorganización progresiva de los procesos mentales.<br><br>-->
-
-      <li>Emocional<br></li>
-
-      <!---Procesos neuroquímicos y cognitivos relacionados con la arquitectura de la mente (toma de decisiones, memoria,
-      atención, percepción, imaginación).<br>
-      -Interacción de los contextos sociales.<br>
-      -Procesos cognitivos que decodifican la información que recibe el organismo.<br>
-      -Procesos de adaptación y existen en todos los seres humanos.<br><br>-->
-
-      <li>Conductual<br></li>
-
-      <!---Expresión de las necesidades, motivaciones, valores, ideales e intereses de un individuo en el desarrollo de una
-      actividad.<br>
-      -Presencia de aspectos como la conciencia, el lenguaje, la inteligencia y procesos cognitivos, lo que lleva a
-      -pensar en la intención de interrelacionar los procesos psicológicos.<br>
-      -Expresión individualizada de lo instintivo, lo inconsciente y lo persono-lógico.<br><br>-->
-
-      <li>Fortaleza mental<br></li>
-      <!---Capacidad de gestionar nuestros pensamientos, emociones y acciones.<br>
-      -Entregar lo mejor de nosotros.<br>
-      -Contar con Confianza en cualquier situación.<br>
-      -Marcar la diferencia.<br>-->
+      <li *ngFor="let course of courses">{{ course.name.split(':')[0]}}<br></li>
     </p>
     <button class="button-css" *ngIf="oculto === false" (click)="verMas()">Ver más</button>
     <button class="button-css" *ngIf="oculto === true" (click)="vermenos()">Ver Menos</button>

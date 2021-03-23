@@ -9,6 +9,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
 import { PassNameLessonsService } from 'src/app/_services/pass-name-lessons.service';
+import { LoadingService } from 'src/app/_services/loading.service';
 
 @Component({
   selector: 'app-vercurso',
@@ -50,12 +51,13 @@ export class VercursoPage implements OnInit {
     private pObjetoAux: PassObjectAuxService,
     private PObjecIndex: PassNameLessonsService,
     private previewAnyFile: PreviewAnyFile,
-    private streaminmedia: StreamingMedia, ) {
+    private streaminmedia: StreamingMedia,
+    private loadingService: LoadingService
+    ) {
   }
 
   ngOnInit() {
     const informacion = this.pObjecto.getNavData();
-    console.log('info ver curso:', informacion);
     this.pObjectoVideo.setData(informacion);
     this.pObjectExamen.setData(informacion);
     this.pObjetoAux.setData(informacion);
@@ -64,59 +66,51 @@ export class VercursoPage implements OnInit {
     this.userinfo = informacion.userInf;
     this.course = informacion.course.name;
     this.courseID = informacion.infoCurso.id;
-    this.share.guardarCursoActiva(informacion);
+
+    this.loadingService.loadingPresent({spinner: "circles" });
     this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
       this.info = infodt.data;
       this.share.getComentariosCurso(this.data.id).subscribe(info => {
         this.comentariosGeneral = info.data;
         this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
-              let temid  = dataCurso.data;
-
-
-              let dttemp = temid.filter(r => r.id === this.courseID);
-
-              dttemp.forEach(element => {
-                this.CourseLessonID = element.id;
-                this.progreso = element.pivot.progress;
-                console.log('data Temporal VER:', element.pivot.progress);
+          let temid  = dataCurso.data;
+          let dttemp = temid.filter(r => r.id === this.courseID);
+          dttemp.forEach(element => {
+            this.CourseLessonID = element.id;
+            this.progreso = element.pivot.progress;
+          });
+          this.share.hayorder().then( val => {
+            if (val){
+              this.share.verorder().then( rval => {
+                this.orderStorage = rval;
               });
-              console.log('LEccion del curso',this.CourseLessonID);
-              this.share.hayorder().then( val => {
-                if (val){
-                  console.log('entre true', val);
-                  this.share.verorder().then( rval => {
-                    this.orderStorage = rval;
-                    console.log(this.orderStorage, rval);
-                  });
-                }else{
-                  console.log('entre false', val);
-                  this.share.iniciorder();
-                }
-              });
-
-              this.cursos = dttemp;
-              console.log('cursos', this.cursos);
-            });
+            }else{
+              this.share.iniciorder();
+            }
+          });
+          this.cursos = dttemp;
+          this.loadingService.loadingDismiss();
+        }, error => {
+          this.loadingService.loadingDismiss();
+        });
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
     });
 
     this.share.varorder.subscribe( res  =>  {
       this.share.hayorder().then( val => {
         if (val){
-          console.log('entre true', val);
           this.share.verorder().then( rval => {
             this.orderStorage = rval;
-            console.log(this.orderStorage, rval);
           });
         }else{
-          console.log('entre false', val);
           this.share.iniciorder();
         }
       });
     });
 
     this.share.varExam.subscribe( res => {
-      console.log('SOY LA RESPUESTA',res);
       this.exam = 1;
     });
 
@@ -157,7 +151,6 @@ export class VercursoPage implements OnInit {
 
   getcursos(userid: any) {
     this.share.getCursos().subscribe(info => {
-      console.log(info);
       this.cursos = info.data;
     });
   }
@@ -180,9 +173,7 @@ export class VercursoPage implements OnInit {
     this.share.guardarLeccionActiva(dataObj);
 
     this.share.verorder().then( rval => {
-      console.log('SOY RVal',rval, tma);
       if (rval === tma){
-        console.log('entre listo para examen');
         this.share.varExam.next('Listo para el examen');
       }else{
         this.share.updateorder(order);
@@ -192,12 +183,10 @@ export class VercursoPage implements OnInit {
     this.previewAnyFile.preview(url).then(() => {
 
     }, (err) => {
-      console.log(JSON.stringify(err));
     });
   }
 
   audioPlayer(lectionName: any, content: any, order: any, tma: any) {
-    console.log('TAMAÑO', tma);
     const dataaud = 'http://venki.3utilities.com/' + content;
     const dataObj = {
       name: lectionName,
@@ -208,18 +197,6 @@ export class VercursoPage implements OnInit {
     this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/entrena//vercaudioplayer/']);
   }
-
-  /*startVideo(lectionName: any, video: any,  order: any, tma: any) {
-    console.log('TAMAÑO', tma);
-    const dataObj = {
-      name: lectionName,
-      vidInfo: video,
-      orderid: order,
-      tm: tma
-    };
-    this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/entrena/vidplayer/']);
-  }*/
 
   toggleSection(index, progreso) {
     this.cursos[index].open = !this.cursos[index].open;
@@ -232,16 +209,6 @@ export class VercursoPage implements OnInit {
   }
 
   verRecursos(recursos: any){
-    console.log(recursos);
   }
-
- /* examen(exam: any){
-    console.log('EXAMEN', exam);
-    const dataObj = {
-      examen: exam,
-    };
-    this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/entrena/examen/']);
-  }*/
 
 }

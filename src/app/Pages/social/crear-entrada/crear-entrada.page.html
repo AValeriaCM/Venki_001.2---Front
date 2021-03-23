@@ -43,24 +43,25 @@
       </ion-col>
       <ion-col size="9">
         <textarea class="textArea" fill=clear [(ngModel)]="textareainput" [placeholder]="vistaHolder(idAction)" rows="4" cols="150" maxlength="150"></textarea>
-        <div *ngIf="photos">
-          <ion-slides [options]="sliderImgOption">
-            <ion-slide *ngFor="let imag of photos">
-              <img class="image-cont" src="{{ imag.imagen }}">
-            </ion-slide>
-          </ion-slides>
-        </div>
-        <ion-button class="buttonUploadImg" [ngStyle]="{'color': colors[idAction-1]}" fill=clear (click)="selccionImg()">
-          <ion-icon name="cloud-upload"></ion-icon>
+        <ion-button [ngStyle]="{'color': colors[idAction-1]}" fill=clear (click)="selccionImg()" style="margin: 0">
+          <ion-icon name="cloud-upload" style="margin-right: 5px;"></ion-icon>
+          Cargar Imagen
         </ion-button>
-        <ion-button class="buttonUploadImg2" [ngStyle]="{'color': colors[idAction-1]}"  fill=clear (click)="Publicar()" [disabled]="!textareainput">
-          <ion-icon name="send"></ion-icon>
+        <ion-button [ngStyle]="{'color': colors[idAction-1]}"  fill=clear (click)="Publicar()" [disabled]="!textareainput" style="margin: 0">
+          <ion-icon name="send" style="margin-right: 5px;"></ion-icon>
+          Compartir
         </ion-button>
       </ion-col>
-      <ion-col size="1"></ion-col>
     </ion-row>
-    <br>
-
+    <ion-row>
+      <ion-col style="padding-top: 0px;">
+        <div *ngIf="photos" style="padding: 0px 30px 0px 60px;">
+          <ion-row *ngFor="let imag of photos" style="place-content: flex-end;margin-bottom: 10px;">
+            <ion-icon name="close-outline" class="remove-image" (click)="removeImagen(imag)"></ion-icon>
+            <img class="img-content" [src]="imag">
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
   </div>
-
 </ion-content>

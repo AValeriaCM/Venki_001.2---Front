@@ -70,25 +70,25 @@
         <ion-list *ngFor="let cont of userList">
           <ion-item *ngIf="idUser == cont.transmitter.id" class="friend">
             <ion-avatar slot="start" class="author-image">
-              <img class="avatar" src="../../../assets/avatar/{{cont.receiver.avatar}}.jpg" class="imagestyle" (click)="verUser(cont.receiver)">
+              <img class="avatar" src="../../../assets/avatar/{{cont.receiver.avatar}}.jpg" class="imagestyle">
             </ion-avatar>
-            <p class="user-list" (click)="verUser(cont.receiver)">
+            <p class="user-list">
               <strong>Agregaste a <span style="color: black; font-size: 15px;text-transform:capitalize;">{{cont.receiver.name}}&nbsp;{{cont.receiver.lastname}}</span> como amigo.</strong>
             </p>
           </ion-item>
           <ion-item *ngIf="idUser !== cont.transmitter.id" class="friend">
             <ion-avatar slot="start" class="author-image">
-              <img class="avatar" src="../../../assets/avatar/{{cont.transmitter.avatar}}.jpg" class="imagestyle" (click)="verUser(cont.transmitter)"/>
+              <img class="avatar" src="../../../assets/avatar/{{cont.transmitter.avatar}}.jpg" class="imagestyle"/>
             </ion-avatar>
-            <p class="user-list" (click)="verUser(cont.transmitter)">
+            <p class="user-list">
               <strong>El usuario <span style="color: black; font-size: 15px;text-transform:capitalize;">{{cont.transmitter.name}}&nbsp;{{cont.transmitter.lastname}}</span> te ha agregado como amigo. </strong>
             </p>
           </ion-item>
           <ion-item *ngIf="idUser !== cont.transmitter.id" class="friend">
             <ion-avatar slot="start" class="author-image">
-              <img class="avatar" src="../../../assets/avatar/{{cont.transmitter.avatar}}.jpg" class="imagestyle" (click)="verUser(cont.transmitter)"/>
+              <img class="avatar" src="../../../assets/avatar/{{cont.transmitter.avatar}}.jpg" class="imagestyle"/>
             </ion-avatar>
-            <p class="user-list" (click)="verUser(cont.transmitter)">
+            <p class="user-list">
               <strong>El usuario <span style="color: black; font-size: 15px;text-transform:capitalize;">{{cont.transmitter.name}}&nbsp;{{cont.transmitter.lastname}}</span> te ha enviado un mensaje. </strong>
             </p>
           </ion-item>

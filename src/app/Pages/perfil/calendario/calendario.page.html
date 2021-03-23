@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" style="color: white;">
       <ion-back-button defaultHref="/users/perfil"></ion-back-button>
     </ion-buttons>
-    <ion-title class="tituloInfo">
-      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,20 +14,30 @@
 
   <ion-segment [(ngModel)]="calendar.mode">
     <ion-segment-button value="month">
-      <ion-label>Mes</ion-label>
+      <div style="font-size: 16px;">
+        <ion-icon name="calendar-outline" style="margin-right: 5px;margin-top: 3px;"></ion-icon>
+        <ion-label>Mes</ion-label>
+      </div>
     </ion-segment-button>
     <ion-segment-button value="week">
-      <ion-label>Semana</ion-label>
+      <div style="font-size: 16px;">
+        <ion-icon name="calendar-outline" style="margin-right: 5px;margin-top: 3px;"></ion-icon>
+        <ion-label>Semana</ion-label>
+      </div>
     </ion-segment-button>
     <ion-segment-button value="day">
-      <ion-label>Día</ion-label>
+      <div style="font-size: 16px;">
+        <ion-icon name="today-outline" style="margin-right: 5px;margin-top: 3px;"></ion-icon>
+        <ion-label>Día</ion-label>
+      </div>
     </ion-segment-button>
   </ion-segment>
 
-  <ion-button (click)="loadEvents()">Añadir Eventos</ion-button>
+  <div class="btn-add-event">
+    <ion-button (click)="loadEvents()">Añadir Eventos</ion-button>
+  </div>
 
   <ion-row>
-
       <ion-col size="2">
         <ion-button fill="clear" (click)="calendarBack()">
           <ion-icon name="arrow-back" slot="icon-only"></ion-icon>

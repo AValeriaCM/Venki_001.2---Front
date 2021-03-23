@@ -1,7 +1,21 @@
 <ion-header #header>
   <ion-toolbar #toolbar class="ion-toolbar-ccs">
-    <div align="center" class="logo">
-        <img src="/assets/finallogo.png" width="120" height="70"> 
+    <div>
+      <ion-toolbar>
+        <ion-row class="logo">
+          <ion-col size="4">
+            <div class="icon-header">
+              <img src="/assets/finallogo.png" width="120" height="70">
+            </div>
+          </ion-col>
+          <ion-col size="8" style="align-self: flex-end">
+            <div class="info-header">
+              <ion-label *ngIf="usertk" style="font-size: 14px;color: #fff;margin-right: 5px;">{{ message_header }}</ion-label>
+              <ion-label *ngIf="usertk" style="font-size: 14px;color: #fff;text-transform: capitalize;">{{usertk.name}}</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-toolbar>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -20,8 +34,8 @@
         </div>
         <div class="card__body">
           <div class="card__category" style="background:{{colores[i]}}"><label>Categoria</label></div>
-          <div class="card__title"><ion-label  (click)="verCurso(curso, curso.description, colores[curso.id-1])"><u>{{curso.name.split(':')[0]}}</u></ion-label></div>
-          <p class="card__description">{{curso.name.split(':')[1]}}</p>
+          <div class="card__title"><ion-label  (click)="verCurso(curso, curso.description, colores[curso.id-1])"><u>{{ curso.name.split(':')[0]}}</u></ion-label></div>
+          <p class="card__description">{{curso.name.split(':')[1] | title }}</p>
         </div>
       </article>
     </ion-row>

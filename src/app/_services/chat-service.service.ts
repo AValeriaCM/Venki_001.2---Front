@@ -90,7 +90,6 @@ export class ChatServiceService {
   }
 
   enviarMensajeChat(chatid: any, userid: any, msg: any) {
-    console.log('en el servicio', 'chatid', chatid, 'userid', userid, 'msg', msg);
     const body = new HttpParams()
       .set('chat_id', chatid)
       .set('user_id', userid)

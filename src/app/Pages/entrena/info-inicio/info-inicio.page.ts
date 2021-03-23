@@ -1,9 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController, ModalController, NavParams } from '@ionic/angular';
-import { AuthService } from 'src/app/_services/auth.service';
-import { LoginService } from 'src/app/_services/login.service';
-import { PassObjectService } from 'src/app/_services/pass-object.service';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ShareserviceService } from 'src/app/_services/shareservice.service';
 
 @Component({
   selector: 'app-info-inicio',
@@ -16,19 +13,17 @@ export class InfoInicioPage implements OnInit {
 
   oculto = false;
 
+  courses = [];
+
   constructor(
-    private navParams: NavParams,
+    private share: ShareserviceService,
     private modalCRTL: ModalController,
-    private auth: AuthService,
-    private log: LoginService,
-    private pObjecto: PassObjectService,
     public alertController: AlertController,
-    private router: Router,
     private renderer: Renderer2
-    ) { }
+  ) { }
 
   ngOnInit() {
-    
+    this.getcourses();
   }
 
   verMas(){
@@ -56,5 +51,9 @@ export class InfoInicioPage implements OnInit {
     this.modalCRTL.dismiss();
   }
 
-
+  getcourses() {
+    this.share.getCategorias().subscribe(info => {
+      this.courses = info.data;
+    });
+  }
 }

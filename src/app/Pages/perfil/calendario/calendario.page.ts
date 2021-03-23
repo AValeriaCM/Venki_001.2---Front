@@ -76,6 +76,5 @@ export class CalendarioPage implements OnInit {
         }
     }
     return events;
-}
-
+  }
 }

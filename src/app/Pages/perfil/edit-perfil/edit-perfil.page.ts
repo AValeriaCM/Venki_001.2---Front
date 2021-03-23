@@ -6,6 +6,7 @@ import { Registro } from 'src/app/_model/Registro';
 import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { LoginService } from 'src/app/_services/login.service';
+import { LoadingService } from 'src/app/_services/loading.service';
 
 @Component({
   selector: 'app-edit-perfil',
@@ -39,14 +40,23 @@ export class EditPerfilPage implements OnInit {
     private edit: RegistroService,
     private router: Router,
     private share: ShareserviceService,
-    private log: LoginService) { }
+    private log: LoginService,
+    private loadingService: LoadingService 
+    ) { }
 
   ngOnInit() {
+    this.loadAuthUser();
+  }
+
+  loadAuthUser() {
+    this.loadingService.loadingPresent({spinner: "circles" });
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
+        this.loadingService.loadingDismiss();
         this.inicializarFormulario(this.usertk);
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
     });
   }
@@ -73,7 +83,6 @@ export class EditPerfilPage implements OnInit {
   }
 
   editar(){
-    console.log(this.editarForm.value, this.usertk.id);
     this.editarUser = this.editarForm.value;
     this.edit.Editartodo(this.editarUser, this.usertk.id, this.situacionS).subscribe( response => {
       this.auth.updateToken();
@@ -84,7 +93,5 @@ export class EditPerfilPage implements OnInit {
 
   optionsFn(it: any){
     this.situacionS = it.situacion;
-    console.log(this.situacionS);
   }
-
 }

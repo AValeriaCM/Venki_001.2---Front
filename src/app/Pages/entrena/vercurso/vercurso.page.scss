@@ -16,42 +16,37 @@
 }
 
 .video-responsive {
-    position: relative;
-    padding-bottom: 56.25%; /* 16/9 ratio */
-    padding-top: 30px; /* IE6 workaround*/
-    height: 0;
+    padding-top: 0;
     overflow: hidden;
-    }
-    
-    .video-responsive iframe,
-    .video-responsive object,
-    .video-responsive embed {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    }
-
-    ion-card-subtitle{
-        text-align: justify;
-        margin-top: 8%;
-        margin-left: 8%;
-        margin-right: 8%;
-        color: black;
-    }
-
-    .icono-card{
-        zoom: 2 !important;
-    }
-.msg-btn{
-
-    --padding-start: 8.5em;
-    --padding-end: 0.5em;
-
+    margin-bottom: 10px;
+}
+    
+.video-responsive iframe,
+.video-responsive object,
+.video-responsive embed {
+    width: 100%;
+    height: 100%;
 }
 
-.imgStyle{
+ion-card-subtitle {
+    margin-top: 10px;
+    color: black;
+    text-align: center;
+    padding: 0px 25px;
+}
+
+.icono-card {
+    zoom: 2 !important;
+}
+
+.msg-btn{
+    --padding-start: 8.5em;
+    --padding-end: 0.5em;
+}
+
+.imgStyle {
     width: 100%;
     height: 100%;
     border-radius: 8px;
@@ -59,10 +54,12 @@
     margin-left: 10px;
     margin-right: auto;
 }
+
 .icon-color{
     color:white;
 }
-.divBack{
+
+.divBack {
     background-color:#ffffff;
     margin-top:0px ;
 }
@@ -72,10 +69,9 @@
     margin-top: 10px;
     height: 1.7em !important;
     width: 1.7em !important;
-}
+} 
 
-.usernamecss{
-
+.usernamecss {
     color: #444;
     margin: 0;
     padding: 0px 0px 6px 0px;
@@ -139,9 +135,12 @@
 }
 .color-text{
     color: black;
-    text-transform: lowercase !important;    text-align: left !important;
-    align-items: left !important;
-    padding-left: 6px; font-weight: bold; font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    margin: 0;
+    white-space: break-spaces;
+    margin: 10px 5px;
 }
 .contentName{
     font-size: 14px;
@@ -187,16 +186,15 @@ hr.dashed {
 }
 
 .section-active{
-    --ion-item-background: linear-gradient(162deg, rgba(114, 150, 247, 0.836) 20%, rgba(33, 65, 153, 0.712) 100%),url(/assets/img-back.jpg) 0 0/100% 100% no-repeat;;
-    --padding-start:  8px;
+    --ion-item-background: #d8d8d8;
+    --padding-start: 8px;
     --inner-padding-end: 8px;
     margin-bottom: 2px;
 }
 
 .lecciones-active{
-    --ion-item-background: linear-gradient(162deg, rgba(114, 150, 247, 0.541) 20%, rgba(33, 65, 153, 0.589) 100%),url(/assets/img-back.jpg) 0 0/100% 100% no-repeat;;
-    --padding-start:  8px;
-    --inner-padding-end: 8px;
+    --ion-item-background: #eaeaea;
+    --padding-start: 8px;
     margin-bottom: 2px;
 }
 
@@ -213,27 +211,17 @@ hr.dashed {
     border-radius: 0 100px 100px 0;
 }
 
-.list-md {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
-}
 .title-gen{
     display: contents;
 }
 
-.tema-css{
-    text-transform: capitalize !important;
-    white-space: normal;
-    --background: rgba(255, 255, 255, 0.562) !important;
-    margin-top: 5%;
-    text-align: justify;
+.tema-css {
+    width: 100%;
+    border-left: 4px solid #3880ff !important;
+    border-radius: 10px;
+    display: flex;
+    background-color: transparent;
+    border: 1px solid #cac6c6;
 }
 
 .ion-item-css{
@@ -253,54 +241,90 @@ hr.dashed {
     --background: rgba(255, 255, 255, 0.562) !important;
     }
 
-    .title-css{
-        text-align: center;
-        color: rgb(8, 8, 8);
-        padding: 0px 0px 6px 0px;
-        font-size: 16px;
-        line-height: 44px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-    
-    .Subtitle-css{
-        font-size: 14px;
-        line-height: 14px;
-        margin: 0;
-        letter-spacing: 1px;
-        color: rgb(8, 8, 8);
-        text-align: justify;
-        text-transform: capitalize;
-        font-weight: normal;
-    }
+.title-css {
+    text-align: center;
+    color: rgb(8, 8, 8);
+    padding: 0px 0px 6px 0px;
+    font-size: 16px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
 
-    .card-3{
-        background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
-        background-repeat: no-repeat;
-        background-position: right;
-        background-size: 80px;
-        border: white 2px outset;
-        margin: 10px;
-     }
+.Subtitle-css {
+    font-size: 14px;
+    line-height: 14px;
+    margin: 0;
+    letter-spacing: 1px;
+    color: rgb(8, 8, 8);
+    text-align: justify;
+    text-transform: capitalize;
+    font-weight: normal;
+}
+
+.card-3 {
+    background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80px;
+    border: white 2px outset;
+    margin: 10px;
+}
      
-     @media(max-width: 990px){
-       .card{
-        
-       }
-     } 
+.title-gen {
+    display: contents;
+}
 
-    .title-gen{
-        display: contents;
-    }
-    .title-cat{
-        text-transform: uppercase;
-        text-align:center;
-        margin:0 0 1px;
-       
-    }
-    .title-emb p{
-        text-transform: lowercase;
-        text-align:center;
-        font-size: 16px;
-        
-    }
+.title-cat {
+    text-transform: uppercase;
+    text-align:center;
+    margin:0 0 1px;
+    
+}
+.title-emb p {
+    text-transform: lowercase;
+    text-align:center;
+    font-size: 16px;
+}
+
+
+.title-course {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.title-content {
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.label-progress {
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.send {
+    background: #002a68;
+    text-align-last: center;
+    border-radius: 90%;
+    height: 50px;
+    max-width: 50px !important;
+}
+
+.msg-btn {
+    font-size: 25px;
+    color: white;
+    background-color: transparent;
+    margin: 7px 0px 0px 4px;
+}
+
+.icon-content {
+    color: black;
+    margin-top: 5px;
+    font-size: 20px;
+
+}

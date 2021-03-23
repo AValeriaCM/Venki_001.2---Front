@@ -3,14 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { AuthService } from 'src/app/_services/auth.service';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
-import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { ChatServiceService } from 'src/app/_services/chat-service.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { AlertController, ModalController } from '@ionic/angular';
-//import { InfoPremiumPage } from './info-premium/info-premium.page';
 import { LoginService } from 'src/app/_services/login.service';
-
+import { LoadingService } from 'src/app/_services/loading.service';
 
 @Component({
   selector: 'app-entrena',
@@ -21,7 +18,6 @@ export class EntrenaPage implements OnInit {
 
   colores=['#175fa2','#581845','#283747','#FF5733','#943126', '#64797f', '#191f63']
   autoClose = true;
-  progesoVal;
   usertk = null;
   cursosCargados: any[] = [];
   cursos: any[] = [];
@@ -35,38 +31,59 @@ export class EntrenaPage implements OnInit {
     spaceBetween: 20
   };
 
+  message_header: string;
 
   constructor(
     private router: Router,
     private share: ShareserviceService,
     private auth: AuthService,
-    private previewAnyFile: PreviewAnyFile,
-    private streaminmedia: StreamingMedia,
     private chatS: ChatServiceService,
     private pObjecto: PassObjectService,
     public alertController: AlertController,
     private modelcontroller: ModalController,
-    private log: LoginService,) { }
+    private log: LoginService,
+    private loadingService: LoadingService 
+    ) { }
 
   ngOnInit() {
+
+    this.getCurrentHour();
+
+    this.getAuthUser();
+
+    this.chatS.var.subscribe(chatMsg => {
+      this.msj = this.chatS.getbadge();
+    });
+    this.msj = this.chatS.getbadge();
+
+    this.auth.getUserData().then(dt => {
+      this.usertk = dt;
+      this.getcursos();
+    });
+
+  }
+
+  getAuthUser() {
     this.auth.gettokenLog().then(dt => {
       this.log.logdataInfData(dt).subscribe(infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
          this.modelcontroller.create({
             component: InfoInicioPage,
           }).then(model => model.present());
       });
     });
+  }
 
-    this.chatS.var.subscribe(chatMsg => {
-      this.msj = this.chatS.getbadge();
-    });
-    this.msj = this.chatS.getbadge();
-    this.auth.getUserData().then(dt => {
-      this.usertk = dt;
-      this.getcursos(this.usertk.id);
-    });
+  getCurrentHour() {
+    var today = new Date()
+    var curHr = today.getHours()
+    if (curHr < 12) {
+      this.message_header = "Buenos días";
+    } else if (curHr < 18) {
+      this.message_header = "Buenas tardes";
+    } else {
+      this.message_header = "Buenas noches";
+    }
   }
 
   async alertDespuesTiempoimg1() {
@@ -86,60 +103,25 @@ export class EntrenaPage implements OnInit {
   }
 
 
-  getcursos(userid: any) {
+  getcursos() {
+    this.loadingService.loadingPresent({spinner: "circles" });
     this.share.getCategorias().subscribe(info => {
       this.cursos = info.data;
-      this.cursosCargados=this.cursos;
-      console.log('esta info es:',this.cursos);
+      this.cursosCargados = info.data;
+      this.loadingService.loadingDismiss();
+    }, error => {
+      this.loadingService.loadingDismiss();
     });
   }
 
-  openChat() {
-    this.router.navigate(['/users/chat']);
-  }
-
   verCurso(info: any, desc: any, color:any) {
-    console.log(info);
     let dataObj = {
       infoCurso: info,
       userInf: this.usertk,
       color:color,
     };
     this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/entrena/cursos-categorias/']);
+    this.router.navigate(['/users/entrena/cursos-categorias']);
   }
 
-
-  /*imageView() {
-    console.log('entre en model dismiss');
-    this.modelcontroller.create({
-      component: InfoPremiumPage,
-    }).then(model => model.present());
-  }*/
-
-
-  /*async alertDespuesTiempo() {
-    this.alert = await this.alertController.create({
-      header: 'UPS!',
-      subHeader:
-        'Ya tienes ese curso agregado prueba con otro',
-      message:
-        'No puedes agregar varias veces un mismo curso',
-      buttons: ['Acepto'],
-    });
-    await this.alert.present();
-  }*/
-
-
-  /*async alertDespuesTiempoDescripcion(decrip: any) {
-    this.alert = await this.alertController.create({
-      cssClass: 'my-custombackentrena',
-      header: '',
-      message: decrip,
-      buttons: ['Continuar'],
-    });
-    await this.alert.present();
-  }*/
-
-   
 }

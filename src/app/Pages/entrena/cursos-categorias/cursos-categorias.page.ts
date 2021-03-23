@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
-import { AuthService } from 'src/app/_services/auth.service';
-import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
-import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
-import { ChatServiceService } from 'src/app/_services/chat-service.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { AlertController } from '@ionic/angular';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
+import { LoadingService } from 'src/app/_services/loading.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cursos-categorias',
@@ -17,7 +16,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CursosCategoriasPage implements OnInit{
 
   autoClose = true;
-  progesoVal;
   video: any;
   usertk = null;
   userIDName: any; 
@@ -29,39 +27,42 @@ export class CursosCategoriasPage implements OnInit{
   msj = [];
   alert: any;
   cursoId: any[] =[];
+  basePath = `${environment.HOST}`;
 
   constructor(
     private router: Router,
     private share: ShareserviceService,
-    private auth: AuthService,
-    private previewAnyFile: PreviewAnyFile,
-    private streaminmedia: StreamingMedia,
-    private chatS: ChatServiceService,
     private pObjecto: PassObjectService,
     public alertController: AlertController,
     private sanitizer: DomSanitizer,
+    private loadingService: LoadingService,
+    private snackbar: MatSnackBar 
     ) { }
 
   ngOnInit() {
 
     let informacion = this.pObjecto.getNavData();
-    console.log(informacion,'trae entrena');
     this.color=informacion.color;
     this.usertk = informacion.userInf;
     this.userIDName  = informacion.userInf.id;
     this.coursetk = informacion.infoCurso;
-    this.video=this.sanitizer.bypassSecurityTrustResourceUrl(this.coursetk.video);
+    if(this.coursetk.video) {
+      this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.coursetk.video);
+    } else {
+      this.video = null;
+    }
     this.getcursos(this.usertk.id, this.coursetk.id);
     this.share.getCursosUsuario(this.userIDName);  
   }
 
   getcursos(userid: any, categoriaid: any) {
-      console.log('id user:',userid,'categoria id:', categoriaid);
+    this.loadingService.loadingPresent({spinner: "circles" });
       this.share.getCursosCategorias(categoriaid, userid).subscribe(dataCurso => {
         this.cursosUser = dataCurso;
         this.cursosU=this.cursosUser;
-        console.log('curso de cognitivo',this.cursosUser);
-
+        this.loadingService.loadingDismiss();
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
   }
 
@@ -77,12 +78,10 @@ export class CursosCategoriasPage implements OnInit{
       color: this.color,
     };
     this.pObjecto.setData(dataObj);
-    console.log(this.pObjecto.setData(dataObj));
-    this.router.navigate(['/users/entrena/vercurso/']);
+    this.router.navigate(['/users/entrena/vercurso']);
   }
 
   agregarCurso(curso: any) {
-  
     this.share.getCursosUsuario(this.userIDName).subscribe(dataCurso =>{
       let temid  = dataCurso.data;
       temid.forEach(element => {
@@ -91,25 +90,19 @@ export class CursosCategoriasPage implements OnInit{
         }
       });
       if(this.cursoId != curso.id || this.cursoId.length == 0){
-      console.log('curso', curso.id);
-        console.log('id_user', this.usertk.id);
         this.share.agregarCurso(this.usertk.id, curso.id).subscribe(data => {
-              console.log(data, 'info entrena ');
-              });
-
+        });
       }else{
         this.alertDespuesTiempo();
       }      
-  
     });
-      
   }
 
   async alertDespuesTiempo() {
     this.alert = await this.alertController.create({
       header: 'UPS!',
       subHeader:
-        'Ya tienes ese curso agregado prueba con otro',
+        'Ya tienes el curso agregado',
       message:
         'No puedes agregar varias veces un mismo curso',
       buttons: ['Acepto'],
@@ -117,9 +110,12 @@ export class CursosCategoriasPage implements OnInit{
     await this.alert.present();
   }
 
-
   descargarPDF(){
-    window.open("https://venki.inkdigital.co/"+this.coursetk.pdf, "_blank");
+    if(this.coursetk.pdf) {
+      window.open(this.basePath+this.coursetk.pdf, "_blank");
+    } else {
+      this.mostrarmensaje('La categoria no tiene mas información', 'Error', 'red-snackbar');
+    }
   }
 
   filtrar(event: Event) {
@@ -128,5 +124,12 @@ export class CursosCategoriasPage implements OnInit{
       return (item.name.indexOf(filtro) > -1);
     });
   } 
+
+  mostrarmensaje(message: string, action: string, type: string) {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+      panelClass: [type],
+    });
+  }
 
 }

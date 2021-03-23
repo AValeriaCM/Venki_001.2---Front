@@ -47,10 +47,14 @@ export class ChatPage implements OnInit {
   getUserAuth() {
     this.auth.gettokenLog().then( tkInf => {
       this.userTk = tkInf;
+      this.loadingService.loadingPresent({spinner: "circles" });
       this.log.logdataInfData(tkInf).subscribe( resTk => {
+        this.loadingService.loadingDismiss();
         this.idUser = resTk.id;
         this.nameUser = resTk.name;
         this.getUsersChats();
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
     });
   }
@@ -150,14 +154,6 @@ export class ChatPage implements OnInit {
     };
     this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/chat/mensaje-busqueda']);
-  }
-
-  verUser(userdt: any){
-    const dataObj = {
-      userinfo: userdt
-    };
-    this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/social/ver-usuario']);
   }
 
   volverHome() {

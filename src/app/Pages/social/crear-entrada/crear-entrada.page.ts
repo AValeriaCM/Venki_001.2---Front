@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ActionSheetController, AlertController } from '@ionic/angular';
 import { LoginService } from 'src/app/_services/login.service';
-import { Camera } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/_services/loading.service';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-crear-entrada',
@@ -43,7 +43,8 @@ export class CrearEntradaPage implements OnInit {
     private alertController: AlertController,
     private pObjecto: PassObjectService,
     private router: Router,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -64,13 +65,12 @@ export class CrearEntradaPage implements OnInit {
     });
 
   }
-
   vistaHolder(idAction: number) {
     if (idAction === 1) {
-      return '¿Que está pasando?';
+      return '¿Como estás entrenando?';
     }
     if (idAction === 2) {
-      return '¿Qué quieres socializar?';
+      return ' Muestra cómo compites';
     }
     if (idAction === 3) {
       return '¡Reta a la Comunidad! ¡Crea un desafío!';
@@ -79,7 +79,8 @@ export class CrearEntradaPage implements OnInit {
 
   async selccionImg(){
     const acctionSheet = await this.actionSheetcontroller.create({
-      header: 'Selecciona Una Imagen',
+      header: 'Seleccione una imagen',
+      cssClass: 'match-item-action-sheet',
       buttons: [
         {
           text: 'Galeria',
@@ -112,32 +113,63 @@ export class CrearEntradaPage implements OnInit {
     return this.loading.present();
   }
 
-  usarCamara() {
-    this.camara.getPicture({
-      sourceType: this.camara.PictureSourceType.CAMERA,
-      destinationType: this.camara.DestinationType.FILE_URI,
-      correctOrientation: true,
-      mediaType: this.camara.MediaType.PICTURE,
-      encodingType: this.camara.EncodingType.JPEG,
-      targetWidth: 1024,
-      targetHeight: 768,
-    }).then((res) => {
-      const imgsend = 'data:image/jpeg;base64,' + res;
-      this.photos.push({imagen: imgsend});
-    });
+  async usarCamara() {
+    if(this.photos.length < 5) {
+      const options: CameraOptions = {
+        quality: 100,
+        correctOrientation: true,
+        destinationType: this.camara.DestinationType.DATA_URL,
+        encodingType: this.camara.EncodingType.JPEG,
+        mediaType: this.camara.MediaType.PICTURE
+      }
+      await this.camara.getPicture(options).then( (res) => {
+          this.photos.push('data:image/jpeg;base64,' + res); 
+      }).catch( (error) => {
+        if(error == 'No Image Selected') {
+          this.mostrarmensaje('No se seleccionó ninguna imagen', 'Error', 'red-snackbar');
+        }
+      });
+    } else {
+      this.mostrarmensaje('El máximo de imágenes adjuntas es de 5', 'Error', 'red-snackbar');
+    }
   }
 
   usarGaleria() {
-    this.imagePick.getPictures({
-      maximumImagesCount: 5,
-      width: 1024,
-      height: 768,
-      outputType: 1
-    }).then((results) => {
-      for (var i = 0; i < results.length; i++) {
-        const imgsend = 'data:image/jpeg;base64,' + results[i];
-        this.photos.push({imagen: imgsend});
-      }
+    if(this.photos.length < 5) {
+      this.imagePick.hasReadPermission().then( (result) => {
+        if( result == false) {
+          this.imagePick.requestReadPermission();
+        } else if( result == true) {
+          this.imagePick.getPictures({
+            maximumImagesCount: 5 - this.photos.length,
+            quality: 100,
+            outputType: 1
+          }).then((results) => {
+            for (var i = 0; i < results.length; i++) {
+              const imgsend = 'data:image/jpeg;base64,' + results[i];
+              this.photos.push(imgsend);
+            }
+          }).catch( (error) => {
+            this.mostrarmensaje('Se presento un error al cargar las imágenes, por favor comuníquese con el administrador.', 'Error', 'red-snackbar');
+          });
+        }
+      });
+    } else {
+      this.mostrarmensaje('El máximo de imágenes adjuntas es de 5', 'Error', 'red-snackbar');
+    }
+  }
+
+  removeImagen(imagen: any) {
+    const index = this.photos.findIndex(img => img === imagen);
+    if(index >= 0) {
+      this.photos.splice(index, 1);
+    }
+  }
+
+  mostrarmensaje(message: string, action: string, type: string) {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+      panelClass: [type],
     });
   }
 
@@ -178,7 +210,7 @@ export class CrearEntradaPage implements OnInit {
     await this.alert.present();
   }
 
-  volver(){
+  volver() {
     this.actividad = '';
     this.router.navigate(['/users/social']);
   }

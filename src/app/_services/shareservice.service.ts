@@ -66,7 +66,6 @@ export class ShareserviceService {
   }
 
   getCursosCategorias(idCat: any, idUser: any){
-    //console.log('id cat', idCat, 'idUser', idUser);
     return this.http.get<any>(this.basePath + `api/categories/${idCat}/courses?user_id=${idUser}` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
@@ -99,15 +98,13 @@ export class ShareserviceService {
   }
 
   actualizarProgreso(idUser:number,idCurso:number, progreso:any){
-    console.log(idUser,idCurso,progreso);
     const body = new HttpParams()
       .set('progress', progreso);
     return this.http.put(this.basePath  + `api/users/${idUser}/courses/${idCurso}`, body, {
       headers: new HttpHeaders()
-    .set('Content-Type', 'application/x-www-form-urlencoded')
-    .set('X-Requested-With', 'XMLHttpRequest')
-  });
-  
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('X-Requested-With', 'XMLHttpRequest')
+    });
   }
 
 
@@ -120,8 +117,7 @@ export class ShareserviceService {
   }
 
   enviarComentarioIPutuacion(idCurso: any, idUser: any, comment: any, score: any){
-    //console.log('idcur'+idCurso, 'iduser'+idUser, 'coment'+comment, 'score'+score);
-    const body = new HttpParams()
+      const body = new HttpParams()
       .set('course_id', idCurso)
       .set('user_id', idUser)
       .set('comment', comment)
@@ -204,9 +200,7 @@ export class ShareserviceService {
 
   hayDiagnistico(){
     const diag = this.storage.get(INFO_TEMP);
-
     return diag.then(info => {
-      console.log('diagnistico service', info);
       return info;
     });
   }
@@ -246,7 +240,6 @@ export class ShareserviceService {
   updateorder(order: any){
     let inc = 1;
     inc =  order + inc;
-    console.log('Order incrementado', inc);
     this.storage.set(ORDERSTRG, inc);
     this.varorder.next('update order');
   }
@@ -264,7 +257,6 @@ export class ShareserviceService {
   actualizarpost(userid: any, countlike: any) {
     const body = new HttpParams()
         .set('count_like', countlike);
-    console.log('datos en el servicio -> antes de enviar', userid, countlike);
     return this.http.put(this.basePath + `api/posts` + `/${userid}`, body, {
       headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')

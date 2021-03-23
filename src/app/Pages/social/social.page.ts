@@ -139,7 +139,7 @@ export class SocialPage implements OnInit {
 
   verUser(userdt: any){
     this.pObjecto.setData({userinfo: userdt});
-    this.route.navigate(['/users/social/ver-usuario/']);
+    this.route.navigate(['/users/social/ver-usuario']);
   }
 
   imageView(imag: any){

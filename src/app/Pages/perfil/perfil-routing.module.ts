@@ -41,10 +41,6 @@ const routes: Routes = [
     loadChildren: () => import('../../Pages/perfil/vercursos-general/vercursos-general.module').then( m => m.VercursosGeneralPageModule)
   },
   {
-    path: 'opciones',
-    loadChildren: () => import('../../Pages/perfil/opciones/opciones.module').then( m => m.OpcionesPageModule)
-  },
-  {
     path: 'mis-objetivos',
     loadChildren: () => import('../../Pages/perfil/mis-objetivos/mis-objetivos.module').then( m => m.MisObjetivosPageModule)
   },

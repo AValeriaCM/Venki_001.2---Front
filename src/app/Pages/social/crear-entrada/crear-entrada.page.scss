@@ -1,25 +1,23 @@
 *{
     font-family: 'Proxima Nova' !important;
   }
-.textArea{
-    width: 97%;
+.textArea {
+    width: 100%;
     max-width: 500px;
     height: 150px;
     display: block;
     margin: 0 auto;
     resize: none;
-    border-bottom: 1px solid ;
-    border-top: 1px solid;
-    border-right: 1px solid;
-    border-left: 1px solid;
     padding: 10px;
     outline: 0;
-    border-radius: 8px;
-    margin-top: 10%;
+    border-radius: 10px;
+    border: 1px solid #d2d2d2;
+    margin-top: 0%;
     background-color: white;
     text-align: center;
-    color: #0d0d0d;
+    color: #000000;
 }
+
 .title{
     font-size: 18px;;
     position: relative;
@@ -38,14 +36,6 @@
     border-radius: 0 0 100px 100px;
     position: absolute;
 }
-.image-cont{
-    width: 150px;
-    height: 150px;
-    margin-left: 16px;
-    margin-top: 7.5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
 
 ion-slides{
     background: rgba(104, 103, 103, 0.151);
@@ -58,21 +48,47 @@ ion-slides{
     background-color: rgba(255, 255, 255, 0.555);
 }
 
-.buttonUploadImg{
-    margin-left: 0px;
-    margin-right: 0px;
-    border-radius: 8px;
-    padding-left: 15px;
-    padding-right: 15px;
-    left: 20px;
+::ng-deep .match-item-action-sheet .action-sheet-group.sc-ion-action-sheet-md{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    background-color: white;
+}
+    
+::ng-deep .match-item-action-sheet .action-sheet-title.sc-ion-action-sheet-md {
+    color: black;
 }
 
-.buttonUploadImg2{
-    margin-left: 0px;
-    margin-right: 0px;
-    border-radius: 8px;
-    padding-left: 15px;
-    padding-right: 15px;
-    float: right;
-    right: 20px;
+::ng-deep .match-item-action-sheet .action-sheet-icon.sc-ion-action-sheet-md {
+    color: black;
+}
+
+::ng-deep .match-item-action-sheet  .action-sheet-button-inner.sc-ion-action-sheet-md {
+    color: black;
+}
+
+.img-content {
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #e8e8e8;
+    background-color: #e8e8e8;
+    width: 100%;
+}
+
+::ng-deep .match-item-action-sheet .action-sheet-group-cancel .action-sheet-button-inner.sc-ion-action-sheet-md {
+    color: #f44336;
+}
+
+::ng-deep .match-item-action-sheet .action-sheet-group-cancel .action-sheet-icon.sc-ion-action-sheet-md {
+    color: #f44336;
+}
+
+.remove-image {
+    position: absolute;
+    padding: 0px 1px;
+    margin: 20px;
+    font-size: 22px;
+    background-color: #ff4b4b;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
 }

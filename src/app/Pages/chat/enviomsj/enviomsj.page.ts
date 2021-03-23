@@ -6,6 +6,7 @@ import { ChatServiceService } from 'src/app/_services/chat-service.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { PusherServiceService } from 'src/app/_providers/pusher-service.service';
+import { LoadingService } from 'src/app/_services/loading.service';
 
 @Component({
   selector: 'app-enviomsj',
@@ -35,9 +36,9 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
     private auth: AuthService,
     private log: LoginService,
     private pObjecto: PassObjectService,
-    private pusher: PusherServiceService) {
-
-  }
+    private pusher: PusherServiceService,
+    private loadingService: LoadingService
+    ) {}
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -51,6 +52,7 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
+    this.getAuhUser();
     const info = this.pObjecto.getNavData();
     if(info) {
       this.data = info.infoDt;
@@ -60,25 +62,33 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
       this.pusher.channelsuscribe(this.data.id);
   
       const channel = this.pusher.init();
-      channel.bind('chat_event', data => {
+      channel.bind('chat_event', (data: any) => {
         this.updateMsg(data);
       });
-  
-      this.chatS.getchatsMSGUser(this.data.id).subscribe((msgServ: any) => {
-        this.total = msgServ.meta;
-        this.menjs = msgServ.data.reverse();
-        const currentPage = this.total.current_page;
-        this.page = currentPage + 1;
-      });
+      this.loadMessages();
       this.userList = this.data;
     }
+  }
 
+  getAuhUser() {
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
         this.usertk = infoUser;
       });
     });
+  }
 
+  loadMessages() {
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.chatS.getchatsMSGUser(this.data.id).subscribe((msgServ: any) => {
+      this.total = msgServ.meta;
+      this.menjs = msgServ.data.reverse();
+      const currentPage = this.total.current_page;
+      this.page = currentPage + 1;
+      this.loadingService.loadingDismiss();
+    }, error => {
+      this.loadingService.loadingDismiss();
+    });
   }
 
   loadData(event) {

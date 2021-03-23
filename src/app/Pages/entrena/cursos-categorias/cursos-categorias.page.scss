@@ -154,11 +154,6 @@ hr.dashed {
     margin-bottom: 2px;
 }
 
-.download{
-    margin-left: 40%;
-    color:#002a68;
-}
-
 .section{
     --ion-item-background: #f3f2f1;
     --padding-start:  8px;
@@ -185,57 +180,57 @@ hr.dashed {
 }
 
 .list-md {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
+    background: transparent;
 }
 
-    .ion-item-css{
-        border-bottom:1px solid #002a68;
+.ion-item-css2{
+    background-color: #f6f6f685;
+    border: none;
+    color: #000000;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid  #ffffff79;
+    transition: all 0.3s ease-in-out;
+    height: 55px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    --background: rgba(255, 255, 255, 0.562) !important;
     }
 
-    .ion-item-css2{
-        background-color: #f6f6f685;
-        border: none;
-        color: #000000;
-        text-decoration: none;
-        font-size: 13px;
-        margin: 5px;
-        width: 85%;
-        border: 2px solid  #ffffff79;
-        transition: all 0.3s ease-in-out;
-        height: 55px;
-        text-align: center;
-        margin: 0 auto;
-        margin-bottom: 10px;
-        border-radius: 8px;
-        --background: rgba(255, 255, 255, 0.562) !important;
-        }
+.title-css{
+    color: rgb(8, 8, 8);
+    margin: 0;
+    padding: 0px 0px 6px 0px;
+    font-size: 11px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
 
-    .title-css{
-        color: rgb(8, 8, 8);
-        margin: 0;
-        padding: 0px 0px 6px 0px;
-        font-size: 11px;
-        line-height: 44px;
-        letter-spacing: 1px;
-        font-weight: bold;
-        text-align: center;
-    }
-    
-    .Subtitle-css{
-        font-size: 7px;
-        line-height: 12px;
-        margin: 0;
-        padding: 7px 7px 7px 7px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: bold;
-        color: rgb(8, 8, 8);
-    }
+.Subtitle-css{
+    font-size: 7px;
+    line-height: 12px;
+    margin: 0;
+    padding: 7px 7px 7px 7px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: rgb(8, 8, 8);
+}
+
+.title-courses {
+    font-size: 15px;
+    padding: 5px 10px;
+}
+
+.description-course {
+    color: black;
+    padding: 5px 10px;
+    font-size: 16px;
+    white-space: break-spaces;
+}

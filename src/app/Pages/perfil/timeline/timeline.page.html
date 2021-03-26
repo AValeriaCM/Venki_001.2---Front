@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/users/perfil"></ion-back-button>
     </ion-buttons>
-    <ion-title class="tituloInfo">
+    <ion-title>
       <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
     </ion-title>
   </ion-toolbar>
@@ -11,137 +11,46 @@
 
 
 <ion-content>
-<ion-card>
-  <ion-card-content style="color: black;">
-    <h1 align="center">Mi timeline</h1>
-
   <div>
-    <ul class="timeline">
-  
-      <li class="timeline__item">
-        <div class="timeline__step">
-          <div class="timeline__step__marker timeline__step__marker--red"></div>
-        </div>
-        <div class="timeline__time">
-          5pm
-        </div>
-        <div class="timeline__content">
-          <div class="timeline__title">
-            New Icons
-          </div>
-          <ul class="timeline__points">
-            <li>Mobile App</li>
-          </ul>
-        </div>
-      </li>
-  
-      <li class="timeline__item">
-        <div class="timeline__step">
-          <div class="timeline__step__marker timeline__step__marker--blue"></div>
-        </div>
-        <div class="timeline__time">
-          4pm
-        </div>
-        <div class="timeline__content">
-          <div class="timeline__title">
-            Design Stand Up
-          </div>
-          <ul class="timeline__points">
-            <li>Hangouts</li>
-          </ul>
-        </div>
-      </li>
-  
-      <li class="timeline__item">
-        <div class="timeline__step">
-          <div class="timeline__step__marker timeline__step__marker--salmon"></div>
-        </div>
-        <div class="timeline__time">
-          9am
-        </div>
-        <div class="timeline__content">
-          <div class="timeline__title">
-            Break
-          </div>
-        </div>
-      </li>
-  
-      <li class="timeline__item">
-        <div class="timeline__step">
-          <div class="timeline__step__marker timeline__step__marker--blue"></div>
-        </div>
-        <div class="timeline__time">
-          2pm
-        </div>
-        <div class="timeline__content">
-          <div class="timeline__title">
-            Home Screen
-          </div>
-          <ul class="timeline__points">
-            <li>Web App</li>
-          </ul>
-        </div>
-      </li>
-  
-    </ul>
-  </div>
-  </ion-card-content>
-</ion-card>
-  
-<!--
-  <ion-card>
-    <div *ngIf="usertk !== null">
-      <ion-grid class="profile-intro">
-        <ion-row>
-          <ion-col col-2>
-            <img class="profile-photo" src="../../../assets/avatar/{{usertk.avatar}}.jpg">
-          </ion-col>
-          <ion-col col-10>
-            <div class="profile-info">
-              <div class="info-square">
-                <ion-card-header class="title-timeline">
-                  <h2>Timeline</h2>
-                  <h3>{{currentUser}}</h3>
-                </ion-card-header>
-              </div>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      
-    </div>
-  
-    <ion-card-content>
+    <div style="color: black;">
+      <br><br><br>
+      <h1 align="center">My timeline</h1>
+
       <div>
-      <ul class="timeline">
-        <div *ngFor="let info of infoTimeline">
-          <li>
-            <div class="direction-r">
-              <div class="flag-wrapper">
-                <span class="flag">{{info.event}}</span>
-                <br>
-                <span class="time-wrapper"><span class="time">{{info.created_at | date:'short'}}</span></span>
-              </div> 
+        <ul class="timeline">
+          <div *ngFor="let contenido of miactividad">
+            <li class="timeline__item">
+              <div class="timeline__step">
+                <div class="timeline__step__marker timeline__step__marker--red"></div>
+              </div>
+              <div class="timeline__time">
+                {{contenido.created_at | date:'short'}}
+              </div>
+              <div class="timeline__content">
+                <div class="timeline__title">
+                  {{contenido.post}}
+                </div>
+              </div>
+            </li>
+          </div>
+
+          <li class="timeline__item">
+            <div class="timeline__step">
+              <div class="timeline__step__marker timeline__step__marker--blue"></div>
             </div>
-          </li>
-        </div>
-        <div *ngFor="let contenido of miactividad">
-          <li>
-            <div class="direction-r">
-              <div class="flag-wrapper">
-                <span class="flag">{{contenido.post}}</span>
-                <br>
-                <span class="time-wrapper"><span class="time">{{contenido.created_at | date:'short'}}</span></span>
+            <div *ngFor="let info of infoTimeline">
+              <div class="timeline__time">
+                {{info.created_at | date:'short'}}
+              </div>
+              <div class="timeline__content">
+                <div class="timeline__title">
+                  {{info.event}}
+                </div>
               </div>
             </div>
           </li>
-        </div>
-        <ion-infinite-scroll threshold="100px"  position="bottom" (ionInfinite)="loadData($event)">
-          <ion-infinite-scroll-content loadingSpinner="bubbles"  loadingText="Cargando post...">
-          </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-      </ul>
+        </ul>
+      </div>
     </div>
-    </ion-card-content>
-  </ion-card>-->
+  </div>
 </ion-content>

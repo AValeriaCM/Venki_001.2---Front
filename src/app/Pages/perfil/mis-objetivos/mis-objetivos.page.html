@@ -10,13 +10,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <!--<ion-card>
     <ion-card-header>
-      <ion-card-title class="title-css" style="text-align: center;">Mis Objetivos</ion-card-title>
+      <ion-card-title class="title-css" style="text-align: center; color: white;">Mis Objetivos</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <div>
-        <ion-button fill="clear"  class="larger" (click)="onDetalles()">
+        <ion-button fill="clear" class="larger" (click)="onDetalles()">
           <ion-icon name="add-outline"></ion-icon>
         </ion-button>
         <ion-button fill="clear" class="larger" (click)="onClear()">
@@ -30,7 +30,8 @@
             <div [formGroup]="detalle">
               <div>
                 <ion-item class="ion-item-css">
-                  <textarea class="textArea" name="item" formControlName="item" pattern="^[A-Za-z0-9]*$" placeholder="¿Cual es mi Objetivo?" rows="4" cols="150" maxlength="150" required></textarea>
+                  <textarea class="textArea" name="item" formControlName="item" pattern="^[A-Za-z0-9]*$"
+                    placeholder="¿Cual es mi Objetivo?" rows="4" cols="150" maxlength="150" required></textarea>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <ion-button fill="clear" class="larger" (click)="onReset(i)">
                     <ion-icon slot="icon-only" name="close-outline"></ion-icon>
@@ -44,20 +45,28 @@
         </form>
       </div>
       <div>
-        <ion-button class="button-css-options" [disabled]="t.length === 0" (click)="operar()">Agregar Objetivos</ion-button>
+        <ion-button class="button-css-options" [disabled]="t.length === 0" (click)="operar()">Agregar Objetivos
+        </ion-button>
       </div>
     </ion-card-content>
-  </ion-card>
-  <br>
-  <br>
-
-  <div  *ngIf="objetivosList" class="expansionCsss2">
+  </ion-card>-->
+ 
+  <div *ngIf="objetivosList" class="expansionCsss2">
     <br>
-    <p style="text-align: center; font-family: 'Proxima'; text-transform: uppercase; font-size: 18px;">Mis Objetivos</p>
+    <p style="text-align: center; font-family: 'Proxima'; text-transform: uppercase; font-size: 18px;color: white;">Mis Objetivos</p>
     <br>
-    <ion-list *ngFor="let  obj of objetivosList" style="text-align: center;">
-      <label style="text-align: center; font-family: 'Proxima'; font-size: 10px; text-transform: uppercase;">{{obj.achievement}}</label>
+    <ion-list>
+      <ion-reorder-group [disabled]="false" (ionItemReorder)=" reorder($event) ">
+  
+        <ion-item *ngFor=" let item of objetivosList">
+          <ion-label> {{item.achievement}} </ion-label>
+          <ion-reorder slot="start">
+            <ion-icon name="medal-outline"></ion-icon>
+          </ion-reorder>
+        </ion-item>  
+      </ion-reorder-group>  
     </ion-list>
+
   </div>
   
 

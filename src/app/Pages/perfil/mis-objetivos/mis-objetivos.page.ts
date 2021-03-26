@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { eventFromMessage } from '@sentry/browser';
 import { AuthService } from 'src/app/_services/auth.service';
 import { LoginService } from 'src/app/_services/login.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
@@ -13,7 +14,7 @@ import { ShareserviceService } from 'src/app/_services/shareservice.service';
 })
 export class MisObjetivosPage implements OnInit {
 
-
+    arreglo= ['quiero tener mayor agilidad','quiero controlar mis emociones','quiero tener mas motivacion','quiero mejorar mis habitos de bienestar','quiero tener mas confianza'];
   // ----------Pattern-----------
 
   emailPattern: any = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/;
@@ -59,7 +60,7 @@ export class MisObjetivosPage implements OnInit {
     });
 
     this.share.varObjetivos.subscribe(st => {
-      console.log(st);
+      console.log(st,'esto es st');
       this.auth.gettokenLog().then(dt => {
         this.log.logdataInfData(dt).subscribe(infoUser => {
           console.log(infoUser);
@@ -132,5 +133,12 @@ export class MisObjetivosPage implements OnInit {
   volver() {
     this.route.navigateByUrl('/users/perfil');
   }
-
+  
+  reorder(event){  
+      const itemMover = this.objetivosList.splice(event.detail.from ,1)[0];
+      this.objetivosList.splice(event.detail.to, 0, itemMover);
+      event.detail.complete(true);
+      
+  } 
+  
 }

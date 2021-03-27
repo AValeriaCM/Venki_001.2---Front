@@ -47,7 +47,8 @@ export class AvatarPage implements OnInit {
     if(urlImagen){
     this.user.id = this.idUser;
     this.user.avatar = urlImagen;
-    this.share.actualizarPhoto(this.idUser,this.user.avatar).subscribe(()=> {
+    this.share.actualizarAvatar(this.idUser,this.user).subscribe(()=> {
+
     });
     this.ClosePopover();
     }

@@ -8,7 +8,7 @@
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  padding: 0 62px;
+  padding: 0 22px;
   margin: 0;
   list-style: none;
 }
@@ -16,7 +16,7 @@
   position: fixed;
   top: 0;
   height: 100%;
-  padding-right: 11px;
+  padding-right: 8px;
   border-right: 2px solid #666666;
   content: "";
 }
@@ -25,10 +25,11 @@
   display: flex;
   -webkit-align-items: stretch;
   align-items: stretch;
-  padding: 62px 0;
+  padding: 8px 0;
+  text-align: center;
 }
 .timeline__step {
-  padding-right: 62px;
+  padding-right: 8px;
 }
 .timeline__step__marker {
   position: relative;
@@ -45,7 +46,7 @@
   z-index: 0;
 }
 .timeline__step__marker--red {
-  border-color: #FF3467;
+  border-color: #262bac;
 }
 .timeline__step__marker--blue {
   border-color: #18D0BF;
@@ -57,12 +58,13 @@
   border-color: #C178FA;
 }
 .timeline__time {
-  padding-right: 126px;
-  font-size: 26px;
+  padding-right: 6px;
+  font-size: 10px;
 }
 .timeline__title {
-  padding-bottom: 26px;
+  padding-bottom: 6px;
   font-size: 32px;
+  text-align: center;
 }
 .timeline__points {
   padding: 0;
@@ -88,10 +90,10 @@
     padding-right: 6.28571px;
   }
   .timeline__item {
-    padding: 35.42857px 0;
+    padding: 25px 0;
   }
   .timeline__step {
-    padding-right: 35.42857px;
+    padding-right: 25px;
   }
   .timeline__step__marker {
     height: 13.71429px;
@@ -102,11 +104,11 @@
   }
   .timeline__time {
     padding-right: 72px;
-    font-size: 14.85714px;
+    font-size: 13px;
   }
   .timeline__title {
     padding-bottom: 14.85714px;
-    font-size: 18.28571px;
+    font-size: 15px;
   }
   .timeline__points {
     font-size: 13.71429px;

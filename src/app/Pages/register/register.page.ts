@@ -1,5 +1,5 @@
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, PopoverController, Platform } from '@ionic/angular';
 import { RegistroService } from './../../_services/registro.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Registro } from './../../_model/Registro';
@@ -12,10 +12,9 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { CondicionesPage } from '../condiciones/condiciones.page';
 import { TerminosNinosPage } from '../terminos-ninos/terminos-ninos.page';
 import { LoadingService } from 'src/app/_services/loading.service';
-
 import { AngularFireAuth } from '@angular/fire/auth';
 import  auth  from 'firebase/app';
-import { profile } from 'console';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-register',
@@ -24,11 +23,19 @@ import { profile } from 'console';
 })
 export class RegisterPage implements OnInit {
 
+  /**
+   * Variables
+   */
+
+  picture;
+  email;
+  name;
+
   // ----------Pattern-----------
 
   emailPattern: any = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/;
-  nombrePattern: any = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
-  contrasenaPattern: any = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+  nombrePattern: any = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1])[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
+  contrasenaPattern: any = /(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}/;
   adressPattern: any = /^[#.0-9a-zA-Z\s,-]+$/;
   phonePatten: any = /^[ +0-9 +]+$/;
   // ----------Pattern-----------
@@ -63,6 +70,7 @@ export class RegisterPage implements OnInit {
     public alertController: AlertController,
     private previewAnyFile: PreviewAnyFile,
     private googlePlus: GooglePlus,
+    private platform: Platform,
     private fb: Facebook,
     private pop:PopoverController,
     private loadingService: LoadingService,
@@ -205,17 +213,51 @@ export class RegisterPage implements OnInit {
     this.edad = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
   }
 
+/**
+ * Metodo de login con google
+ */
 
-  loginGoogle(){
-    this.googlePlus.login({}).then( res => console.log('respuesta: ', res)).catch( err  => console.log('error: ',err));
+loginGoogle() {
+  if (this.platform.is('android')) {
+    this.loginGoogleAndroid();
+  } else {
+    this.loginGoogleWeb();
   }
+}
+/**
+ * Metodo login google para Android
+ */
+async loginGoogleAndroid() {
+  const res = await this.googlePlus.login({
+    'webClientId': "1055244002105-dnqjjrtmq6is8ctf683ffv2q8ihd0l3o.apps.googleusercontent.com",
+    'offline': true
+  });
+  const resConfirmed = await this.AFauth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken));
+  const user = resConfirmed.user;
+  alert('user '+ user);
+  this.picture = user.photoURL;
+  this.name = user.displayName;
+  this.email = user.email;
+
+}
+
+/**
+ * Metodo login google para Web
+ */
+async loginGoogleWeb() {
+  const res = await this.AFauth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  const user = res.user;
+  alert('user '+ user);
+  this.picture = user.photoURL;
+  this.name = user.displayName;
+  this.email = user.email;
+}
 
   // servicio de logueo de facebook
   loginWhitFacebook() {
     return this.fb.login(['public_profile', 'email'])
       .then( (res: FacebookLoginResponse) => {
         let params = new Array<string>();
-
         this.fb.api('/me?fields=id,email,name,gender,birthday,password', params).then(profile => {
           alert('profile' + JSON.stringify(profile));
         }).catch( e => alert('eroor profile '+ JSON.stringify(e))); 

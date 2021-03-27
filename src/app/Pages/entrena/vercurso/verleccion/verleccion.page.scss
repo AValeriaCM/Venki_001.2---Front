@@ -182,16 +182,11 @@ hr.dashed {
 }
 
 .list-md {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     background: var(--ion-item-background, var(--ion-background-color, #f9f9f900));
 }
+
 .title-gen{
     display: contents;
 }
@@ -234,22 +229,7 @@ hr.dashed {
         text-transform: capitalize;
         font-weight: normal;
     }
-
-    .card-3{
-        background-image: url(https://ionicframework.com/img/getting-started/theming-card.png);
-        background-repeat: no-repeat;
-        background-position: right;
-        background-size: 80px;
-        border: white 2px outset;
-        margin: 10px;
-     }
      
-     @media(max-width: 990px){
-       .card{
-        
-       }
-     } 
-
     .title-gen{
         display: contents;
     }
@@ -265,3 +245,10 @@ hr.dashed {
         font-size: 16px;
         
     }
+
+.badge-go {
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 9px;
+    font-weight: 500;
+}

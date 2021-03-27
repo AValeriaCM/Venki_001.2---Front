@@ -7,10 +7,6 @@
 	background-color:  rgba(33, 65, 153, 0.623);
 }
 
-.listColor{
-    --ion-background-color: rgba(33, 65, 153, 0.623);
-}
-
 .toolbarColor{
     --ion-background-color: linear-gradient(162deg, rgba(114, 150, 247, 0.603) 20%, rgba(33, 65, 153, 0.623) 100%);
 }
@@ -288,9 +284,22 @@
 }
 
 .footer-dis-bot2{
-    --background:#0c1626;
-    display:list-item;
+    --background: #002a68;
+    display: list-item;
 }
 *{
   font-family: 'Proxima Nova' !important;
+}
+
+.title {
+	white-space: break-spaces;
+	font-weight: 500;
+    padding: 5px;
+    font-size: 14px;
+	width: 100%;
+}
+
+.list-md {
+    padding-top: 0px !important; 
+    padding-bottom: 0px !important;
 }

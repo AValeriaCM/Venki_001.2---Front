@@ -310,6 +310,7 @@ video{
   margin: 15px 25px 0px 25px;
   text-transform: uppercase;
   white-space: break-spaces;
+  font-weight: 500;
 }
 
 ion-col > .actions {
@@ -325,7 +326,7 @@ ion-col > .actions {
 }
 
 .card-primary {
-  border-left: 4px solid #5260ff !important;
+  border-left: 3px solid #002a68 !important;
 }
 .card-success {
   border-left: 4px solid #7cb342 !important;

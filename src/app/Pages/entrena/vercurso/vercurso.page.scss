@@ -55,10 +55,6 @@ ion-card-subtitle {
     margin-right: auto;
 }
 
-.icon-color{
-    color:white;
-}
-
 .divBack {
     background-color:#ffffff;
     margin-top:0px ;
@@ -179,17 +175,10 @@ hr.dashed {
 }
 
 .section{
-    --ion-item-background: #f3f2f1;
     --padding-start:  8px;
     --inner-padding-end: 8px;
     margin-bottom: 2px;
-}
-
-.section-active{
-    --ion-item-background: #d8d8d8;
-    --padding-start: 8px;
-    --inner-padding-end: 8px;
-    margin-bottom: 2px;
+    --ion-item-background: #002a68;
 }
 
 .lecciones-active{
@@ -217,7 +206,7 @@ hr.dashed {
 
 .tema-css {
     width: 100%;
-    border-left: 4px solid #3880ff !important;
+    border-left: 4px solid #002a68 !important;
     border-radius: 10px;
     display: flex;
     background-color: transparent;
@@ -296,7 +285,9 @@ hr.dashed {
 .title-content {
     font-size: 18px;
     letter-spacing: 1px;
-    font-weight: bold;
+    font-weight: 500;
+    color: white;
+    margin-top: 3px;
 }
 
 .label-progress {
@@ -305,6 +296,7 @@ hr.dashed {
     font-weight: 400;
     padding: 5px 10px;
     border-radius: 5px;
+    background: #002a68;
 }
 
 .send {
@@ -326,5 +318,22 @@ hr.dashed {
     color: black;
     margin-top: 5px;
     font-size: 20px;
+}
 
+.card-description {
+    border-radius: 15px;
+    border-left: 4px solid;
+}
+
+.icon-description {
+    margin-right: 5px;
+    background: rgb(255 255 255);
+    color: #002a68;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+ion-progress-bar {
+    --buffer-background: #e4e4e4;
+    --progress-background: #002a68;
 }

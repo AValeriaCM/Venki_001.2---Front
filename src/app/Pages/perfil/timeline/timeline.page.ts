@@ -29,10 +29,8 @@ export class TimelinePage implements OnInit {
   ngOnInit() {
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.currentUser = infoUser.name + ' ' + infoUser.lastname;
         this.share.getTimeline(infoUser.id).subscribe( Res => {
-          console.log(Res);
           this.infoTimeline = Res.data;
           this.paginaActual = Res.meta.current_page;
           this.ultimaPage = Res.meta.last_page;
@@ -55,19 +53,14 @@ export class TimelinePage implements OnInit {
   }
 
   loadData(event: any){
-    console.log('evento', event);
     this.paginaActual = this.paginaActual + 1;
     setTimeout(() => {
-        console.log(this.infoTimeline.length);
-
         if (this.infoTimeline.length >= this.totalDt){
           event.target.complete();
           this.infonitescroll.disabled  = true;
           return;
         }
-
         this.share.getpostNextPage(this.paginaActual).subscribe( resPg => {
-          console.log('Respuesta paguina', resPg);
           resPg.data.forEach(element => {
             this.infoTimeline.push(element);
           });

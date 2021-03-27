@@ -68,7 +68,7 @@ export class PerfilPage implements OnInit {
   basePath = `${environment.HOST}`;
   coursesProgress = [];
   coursesCompleted = [];
-
+  
   constructor(
     private auth: AuthService,
     private router: Router,

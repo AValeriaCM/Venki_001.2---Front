@@ -32,12 +32,16 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 import * as Sentry from "@sentry/angular";
 import { APP_INITIALIZER } from "@angular/core";
 import { Router } from "@angular/router";
 import { AvatarPageModule } from './Pages/popup/avatar/avatar.module';
 import { CondicionesPageModule } from './Pages/condiciones/condiciones.module';
 import { TerminosNinosPageModule } from './Pages/terminos-ninos/terminos-ninos.module';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+
 
 @NgModule({
   declarations: [
@@ -81,6 +85,9 @@ import { TerminosNinosPageModule } from './Pages/terminos-ninos/terminos-ninos.m
     Camera,
     ImagePicker,
     File,
+    FileOpener,
+    Diagnostic,
+    FileTransfer,
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({

@@ -1,16 +1,16 @@
 *{
     font-family: Geneva,Tahoma,Verdana,sans-serif !important;
   }
-.contenido{
+.contenido {
     text-align: justify;
     font-size: 15px;
 }
-.footer-dis-bot1{
+.footer-dis-bot1 {
     display:list-item;
-    --background:#35538f;
+    --background: #9e9e9e;
 }
-.footer-dis-bot2{
-    --background:#252632;
+.footer-dis-bot2 {
+    --background: #002a68;
     display:list-item;
 }
 
@@ -25,6 +25,10 @@ iframe {
     width: 100%;
 }
 
-.title-css{
-    padding: 0px 10px;
+.title-css { 
+    background-color: #002a68;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
 }

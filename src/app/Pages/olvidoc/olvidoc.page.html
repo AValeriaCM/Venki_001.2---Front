@@ -17,22 +17,17 @@
     <div>
       <form [formGroup]="correoForm">
         <ion-item class="ion-item-css">
-          <ion-input name="email" type="email" placeholder="Ingresa Tu Correo" formControlName="correo"></ion-input>
+          <ion-input name="email" type="email" placeholder="Digita tu correo" formControlName="correo"></ion-input>
         </ion-item>
         <ion-item class='form-text-error'
           *ngIf="!correoForm.controls.correo.valid && (correoForm.controls.correo.touched || correoForm.controls.correo.dirty)">
-          <ion-label>Debe ser un correo <br> valido</ion-label>
+          <ion-label style="color: #ff5722;font-size: 12px;">Debe ser un correo valido</ion-label>
         </ion-item>
         <div padding>
-          <ion-button class="button-css" type="submit" (click)="RecuperarEmail()" [disabled]="!correoForm.valid" expand="block">Recupera
-            Tu Cuenta</ion-button>
+          <ion-button class="button-css" type="submit" (click)="RecuperarEmail()" [disabled]="!correoForm.valid" expand="block">Recupera Tu Cuenta</ion-button>
         </div>
       </form>
     </div>
     <hr class="solid">
-
   </div>
-
-
-
 </ion-content>

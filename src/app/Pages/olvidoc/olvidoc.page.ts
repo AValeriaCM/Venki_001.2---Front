@@ -41,10 +41,7 @@ export class OlvidocPage implements OnInit {
 
   RecuperarEmail(){
     this.nUsuario = this.correoForm.value;
-    // servicio de recuperacion de contraseña  
-    console.log(this.nUsuario);
     this.presentAlert();
-    //volverLogin(); redireccion hacia el login 
   }
 
   volverLogin(){

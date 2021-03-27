@@ -1,42 +1,39 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" style="color: white;">
       <ion-back-button (click)="volverAnterior()"></ion-back-button>
     </ion-buttons>
-    <ion-title class="tituloInfo">
-      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <br>
-  <ion-card>
-
-    <ion-card-title style="text-align: center; color: darkblue">¡Sigue así, ya falta poco!</ion-card-title>
+  <ion-card style="margin: 0;box-shadow: none;">
+    <div style="margin: 15px 0px 0px 0px;text-align-last: center;">
+      <ion-badge color="primary" class="badge-title">¡Sigue así, ya falta poco!</ion-badge>
+    </div>
     <ion-card-content>
-    <div *ngFor="let item of vid">
-      <div class="video-responsive">
-          <iframe #playerVim [src]="item + '?loop=1&muted=1&playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
-            class="styleVideo" width="100%" height="100%" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      </div>
-      <ion-card-subtitle > En este video encontrarás la motivación que necesitas para continuar. ¡Presta atención...! </ion-card-subtitle>
-      <br><br>
-      <div *ngFor="let cur of cursos">
-        <div *ngFor="let lections of cur.lessons">
-          <div *ngIf="lections.exam !== 0">
-            <div *ngIf="lections.exam">
-              <ion-button class="footer-dis-bot2" (click)="examen(lections.exam)">Continuar
-                <ion-icon name="caret-forward-outline"></ion-icon></ion-button>
+      <ion-card-subtitle>En este video encontrarás la motivación que necesitas para continuar. ¡Presta atención...! </ion-card-subtitle>
+      <div *ngFor="let item of vid">
+        <div class="video-responsive" *ngIf="item !== '(NULL)'">
+            <iframe #playerVim [src]="item + '?loop=1&muted=1&playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;" class="styleVideo" width="100%" height="100%" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+        <ion-row *ngIf="item === '(NULL)'" style="place-content: center;padding: 10px;">
+          <ion-badge color="danger" style="font-size: 14px;">No existe video para la lección</ion-badge>
+        </ion-row>
+        <div *ngFor="let cur of cursos">
+          <div *ngFor="let lections of cur.lessons">
+            <div *ngIf="lections.exam !== 0">
+              <div *ngIf="lections.exam">
+                <ion-button class="footer-dis-bot2" (click)="examen(lections.exam)">Continuar
+                  <ion-icon name="caret-forward-outline"></ion-icon>
+                </ion-button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </ion-card-content>
-
-    
-
+    </ion-card-content>
   </ion-card>
-
 </ion-content>

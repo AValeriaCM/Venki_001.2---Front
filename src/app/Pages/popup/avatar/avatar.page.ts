@@ -32,9 +32,7 @@ export class AvatarPage implements OnInit {
   ngOnInit() {
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        this.idUser = infoUser.id;
-        console.log('id user:',this.idUser);
-   
+        this.idUser = infoUser.id;   
       });
     });
   }
@@ -47,15 +45,11 @@ export class AvatarPage implements OnInit {
   cambiarAvatar( urlImagen:string){
     this.user = new UsuariosF;
     if(urlImagen){
-    console.log('llega Avatar', urlImagen, this.idUser);
-    //servicio para actualizar avatar.
     this.user.id = this.idUser;
     this.user.avatar = urlImagen;
     this.share.actualizarPhoto(this.idUser,this.user.avatar).subscribe(()=> {
-
     });
     this.ClosePopover();
-    //this.router.navigateByUrl('/users/perfil'); renderizar para ver actualizacion
     }
   }
 } 

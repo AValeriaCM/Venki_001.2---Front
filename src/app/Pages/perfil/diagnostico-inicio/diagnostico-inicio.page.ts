@@ -42,7 +42,6 @@ export class DiagnosticoInicioPage implements OnInit {
   }
 
   async diagnosticoRedirect(){
-    console.log(this.informacion);
     this.pObjecto.setData(this.informacion);
     this.router.navigate(['/users/perfil/diagnostico/']);
   }
@@ -50,7 +49,6 @@ export class DiagnosticoInicioPage implements OnInit {
   getcursos() {
     this.share.getCategorias().subscribe(info => {
       this.cursos = info.data;
-      console.log(this.cursos);
     });
   }
 

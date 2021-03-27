@@ -1,21 +1,21 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" style="color: white;">
       <ion-back-button (click)="anterior()"></ion-back-button>
     </ion-buttons>
-    <ion-title class="tituloInfo">
-      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-list class="listColor">
-    <ion-item class="listColor" button *ngFor="let track of aud" (click)="start(track)">
-      <ion-label [color]="track === activetrack ?  'success': 'dark'">
-        {{audioname}}
-      </ion-label>
+  <ion-list lines="none">
+    <ion-item button *ngFor="let track of aud" (click)="start(track)">
+      <div style="width: 100%;">
+        <ion-badge class="title" [color]="track === activetrack ?  'info': 'medium'">{{ audioname }}</ion-badge>
+      </div>
     </ion-item>
   </ion-list>
 

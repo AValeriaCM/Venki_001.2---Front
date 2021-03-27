@@ -14,7 +14,6 @@ export class PusherServiceService {
   }
 
   channelsuscribe(id: any){
-    console.log('entre');
     let pusher = new Pusher('873f1f375dc423a66f84', {
       cluster: 'us2',
       encrypted: true,
@@ -25,5 +24,4 @@ export class PusherServiceService {
   init(){
     return this.channel;
   }
-
 }

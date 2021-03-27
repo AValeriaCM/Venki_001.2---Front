@@ -25,7 +25,6 @@ export class TabsPage implements OnInit {
 
   ngOnInit() {
     this.chatS.var.subscribe(chatMsg => {
-      console.log(chatMsg);
       this.msj = this.chatS.getbadge();
     });
     this.msj = this.chatS.getbadge();
@@ -35,9 +34,7 @@ export class TabsPage implements OnInit {
 
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
-
         if (this.usertk.premium === 0){
             this.imageView();
         }

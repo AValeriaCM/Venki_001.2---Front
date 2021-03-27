@@ -61,6 +61,10 @@ export class HomePage implements OnInit {
   }
 
   crearEntrada() {
+    const dataObj = {
+      idAction: 1
+    };
+    this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/social/crear-entrada/']);
   }
 
@@ -80,9 +84,9 @@ export class HomePage implements OnInit {
   }
 
   getActiveLesson() {
-    /*this.share.getleccionActiva().then( resp => {
+    this.share.getleccionActiva().then( resp => {
       this.leccionActiva = resp;
-    });*/ 
+    });
   }
 
   getData(): Observable<any> {

@@ -22,13 +22,13 @@
       <ion-grid style="color: black; margin-top: 0%;">
         <ion-row>
           <ion-col style="text-align-last: center;">
-            <ion-card>
+            <ion-card class="card-description" [ngStyle]="{'border-color': color}">
               <ion-icon class="icono-card" [ngStyle]="{'color': color}" name="time-outline"></ion-icon><br>
               <p style="color: black;">{{info.duration}}&nbsp; Minutos</p>
             </ion-card>
           </ion-col>
           <ion-col style="text-align-last: center;">
-            <ion-card>
+            <ion-card class="card-description" [ngStyle]="{'border-color': color}">
               <ion-icon class="icono-card" [ngStyle]="{'color': color}" name="book"></ion-icon>
               <p *ngFor="let cur of cursos;" style="color: black;">{{cur.lessons.length}}&nbsp;&nbsp; Lecciones </p>
             </ion-card>  
@@ -43,18 +43,18 @@
     </ion-card>
   </div>
 
-  <div *ngIf="courseID  === CourseLessonID">
+  <div *ngIf="courseID  === CourseLessonID" style="padding: 0px 10px;">
     <div *ngFor="let cur of cursos; let i = index;" class="accordion-list" lines="none" detail="false" no-padding>
-      <ion-card style="margin: 10px 0px;">
-        <ion-item tappable (click)="toggleSection(i, cur.pivot.progress)" [ngClass]="{'section-active': cur.open, 'section': !cur.open}">
-          <ion-icon slot="start" class="icon-color" name="arrow-forward" [ngStyle]="{'background': color}" *ngIf="!cur.open" style="margin-right: 5px;"></ion-icon>
-          <ion-icon slot="start" name="arrow-down" class="icon-color" [ngStyle]="{'background': color}" *ngIf="cur.open" style="margin-right: 5px;"></ion-icon>
+      <ion-card style="margin: 10px 0px;border-radius: 10px;">
+        <ion-item tappable (click)="toggleSection(i, cur.pivot.progress)" class="section">
+          <ion-icon slot="start" class="icon-description" name="arrow-forward" *ngIf="!cur.open"></ion-icon>
+          <ion-icon slot="start" name="arrow-down" class="icon-description" *ngIf="cur.open"></ion-icon>
           <ion-card-title class="title-content">Contenido</ion-card-title>
         </ion-item>
         <div>
           <ion-card-subtitle style="font-size: medium;margin-bottom: 15px;">
             <ion-badge color="primary" class="label-progress">Tu progreso {{progreso*100}}%</ion-badge>
-            <ion-progress-bar color="primary" value= {{progreso}}></ion-progress-bar>
+            <ion-progress-bar color="primary" [ngStyle]="{'background-color': color}" value= {{progreso}}></ion-progress-bar>
           </ion-card-subtitle>
         </div>
         

@@ -7,6 +7,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+
+declare let cordova: any;
 
 @Component({
   selector: 'app-cursos-categorias',
@@ -28,7 +33,6 @@ export class CursosCategoriasPage implements OnInit{
   alert: any;
   cursoId: any[] =[];
   basePath = `${environment.HOST}`;
-
   constructor(
     private router: Router,
     private share: ShareserviceService,
@@ -36,7 +40,10 @@ export class CursosCategoriasPage implements OnInit{
     public alertController: AlertController,
     private sanitizer: DomSanitizer,
     private loadingService: LoadingService,
-    private snackbar: MatSnackBar 
+    private snackbar: MatSnackBar,
+    private fileOpener: FileOpener,
+    private diagnostic: Diagnostic,
+    private transfer: FileTransfer 
     ) { }
 
   ngOnInit() {
@@ -112,7 +119,24 @@ export class CursosCategoriasPage implements OnInit{
 
   descargarPDF(){
     if(this.coursetk.pdf) {
-      window.open(this.basePath+this.coursetk.pdf, "_blank");
+      var extension = this.coursetk.pdf.substr(this.coursetk.pdf.length - 4);
+      if (extension == '.pdf') {
+        const url = this.basePath+this.coursetk.pdf
+        this.diagnostic.requestExternalStorageAuthorization().then(e =>{
+          const fileTransfer: FileTransferObject = this.transfer.create();  
+              fileTransfer.download(url,  cordova.file.externalDataDirectory + "MAGIN.pdf").then((entry) => {
+                this.fileOpener.open(entry.toURL(), 'application/pdf')
+                .then(() => false)
+                .catch(e => this.mostrarmensaje('Error descargando el archivo', 'Error', 'red-snackbar'));
+              }, (error) => {
+                this.mostrarmensaje('Error descargando el archivo', 'Error', 'red-snackbar')              
+              });
+        }).catch(e => {
+          this.mostrarmensaje('Error descargando el archivo', 'Error', 'red-snackbar')        
+        })
+      } else {
+        this.mostrarmensaje('El archivo no es un pdf', 'Error', 'red-snackbar');
+      }
     } else {
       this.mostrarmensaje('La categoria no tiene mas información', 'Error', 'red-snackbar');
     }

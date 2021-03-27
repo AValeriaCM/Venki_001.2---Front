@@ -26,7 +26,6 @@ export class ImgPrevPage implements OnInit {
 
   zoom(zoomIn: boolean){
     let zoom = this.slider.nativeElement.swiper.zoom;
-    console.log(zoom);
     if (zoomIn){
       zoom.in();
     } else {

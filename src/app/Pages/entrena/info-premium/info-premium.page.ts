@@ -39,7 +39,6 @@ export class InfoPremiumPage implements OnInit {
 
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
       });
     });
@@ -84,7 +83,6 @@ export class InfoPremiumPage implements OnInit {
 
   zoom(zoomIn: boolean){
     let zoom = this.slider.nativeElement.swiper.zoom;
-    console.log(zoom);
     if (zoomIn){
       zoom.in();
     } else {

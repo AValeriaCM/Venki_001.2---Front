@@ -8,6 +8,7 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { LoginService } from 'src/app/_services/login.service';
 import { LoadingService } from 'src/app/_services/loading.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-entrena',
@@ -32,6 +33,7 @@ export class EntrenaPage implements OnInit {
   };
 
   message_header: string;
+  basePath = `${environment.HOST}`;
 
   constructor(
     private router: Router,

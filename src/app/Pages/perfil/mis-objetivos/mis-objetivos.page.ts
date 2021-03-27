@@ -49,23 +49,18 @@ export class MisObjetivosPage implements OnInit {
 
     this.auth.gettokenLog().then(dt => {
       this.log.logdataInfData(dt).subscribe(infoUser => {
-        console.log(infoUser);
         this.userId = infoUser.id;
         this.share.obtenerObhetivos(this.userId).subscribe((res: any) => {
-          console.log('objetivos', res);
           this.objetivosList = res.data;
         });
       });
     });
 
     this.share.varObjetivos.subscribe(st => {
-      console.log(st);
       this.auth.gettokenLog().then(dt => {
         this.log.logdataInfData(dt).subscribe(infoUser => {
-          console.log(infoUser);
           this.userId = infoUser.id;
           this.share.obtenerObhetivos(this.userId).subscribe((res: any) => {
-            console.log('objetivos', res);
             this.objetivosList = res.data;
           });
         });
@@ -108,7 +103,6 @@ export class MisObjetivosPage implements OnInit {
     } else if (correct === this.list.length) {
       this.list.forEach(dt => {
         this.share.agregarObjetivos(dt.item, this.userId).subscribe(res => {
-          console.log('Objetivo agregado', res);
         });
       });
       this.share.varObjetivos.next('objetivos agregados');

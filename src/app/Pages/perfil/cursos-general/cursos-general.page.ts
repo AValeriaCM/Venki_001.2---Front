@@ -39,11 +39,7 @@ export class CursosGeneralPage implements OnInit {
   }
 
   agregarCurso(curso: any){
-    console.log('curso', curso.id);
-    console.log('id_user', this.prueba);
     this.share.agregarCurso(this.prueba, curso.id).subscribe( data =>  {
-      console.log(data);
     });
   }
-
 }

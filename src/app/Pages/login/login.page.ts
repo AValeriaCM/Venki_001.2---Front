@@ -86,7 +86,7 @@ export class LoginPage implements OnInit {
   login() {
     this.isSubmitted = true;
     if (!this.loginForm.valid) {
-      this.mostrarmensaje('Los Datos Ingresados no son validos', 'Error', 'red-snackbar');
+      this.mostrarmensaje('Los datos ingresados no son validos', 'Error', 'red-snackbar');
       return false;
     } else {
       this.loginData = this.loginForm.value;

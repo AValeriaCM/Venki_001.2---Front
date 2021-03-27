@@ -115,6 +115,7 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   }
 
   enviarMsg() {
+    this.loadingService.loadingPresent({spinner: "circles" });
     this.chatS.enviarMensajeChat(this.chatId, this.transmiterID, this.newMsg).subscribe( response => {
       this.chatS.getchatsMSGUser(this.chatId).subscribe( res => {
         this.chatS.var.next('update messages');
@@ -123,6 +124,9 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
         });
       });
       this.newMsg = '';
+      this.loadingService.loadingDismiss();
+    }, error => {
+      this.loadingService.loadingDismiss();
     });
   }
 

@@ -9,11 +9,8 @@ export class FiltroPipe implements PipeTransform {
     if ( texto === ''){
       return array;
     }
-
     texto = texto.toLowerCase();
-
     return array.filter(item => {
-      console.log(item[colum]);
       return item[colum].toLowerCase().includes(texto);
     });
   }

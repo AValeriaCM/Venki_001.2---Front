@@ -38,8 +38,8 @@
               </div>
           </ion-col>
 
-          <ion-col size="4" *ngIf="usertk.surveyed !== 1 || miactividad === 0 || usertk.premium === 0" style="text-align: -webkit-center;">
-            <div class="actions card-primary" *ngIf="miactividad === 0" (click)="crearEntrada()">
+          <ion-col size="4" style="text-align: -webkit-center;">
+            <div class="actions card-primary" (click)="crearEntrada()">
               Ir a la comunidad
             </div>
           </ion-col>
@@ -57,7 +57,7 @@
 
   <hr style="background-color: #d8d8d8;margin: 0px;">
 
-  <ion-badge class="badge-lesson" *ngIf="leccionActiva ===  null" color="warning" >No tienes lecciones activas</ion-badge>
+  <ion-badge class="badge-lesson" *ngIf="!leccionActiva" color="warning" >No tienes lecciones activas</ion-badge>
 
   <ion-badge class="badge-lesson" *ngIf="leccionActiva" color="tertiary" (click)="retomarleccion()" >Retomar: {{leccionActiva.name}}</ion-badge>
 

@@ -1,13 +1,14 @@
 import { PassNameLessonsService } from './../../../../../_services/pass-name-lessons.service';
 import { PassObjectAuxService } from './../../../../../_services/pass-object-aux.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Howl } from 'howler';
 import { IonRange } from '@ionic/angular';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
-
+import { LoadingService } from 'src/app/_services/loading.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-audioplayer',
@@ -50,29 +51,29 @@ export class AudioplayerPage implements OnInit {
   
   @ViewChild('range', {static: false})  range: IonRange;
  constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private pObjecto: PassObjectService,
     private PObjectAux: PassObjectAuxService,
     private share: ShareserviceService,
     private pObjectoVideo: PassObjectVideoService,
-    private PObjecIndex: PassNameLessonsService   
-    ) {
-}
+    private PObjecIndex: PassNameLessonsService,
+    private loadingService: LoadingService   ,
+    private snackbar: MatSnackBar
+    ) { }
 
 
   ngOnInit() {
 
     let info = this.pObjecto.getNavData();
-    console.log('lo que nec',info);
-    this.share.guardarLeccionActiva(info);
-    this.data = info.audioInfo;
-    this.audioname = info.name;
-    this.orderID = info.orderid;
-    this.tam = info.tm;
-    this.aud = [];
-    this.aud.push(this.data);
-    //console.log(info.toString(),' entro al audio player');
+    if(info) {
+      this.share.guardarLeccionActiva(info);
+      this.data = info.audioInfo;
+      this.audioname = info.name;
+      this.orderID = info.orderid;
+      this.tam = info.tm;
+      this.aud = [];
+      this.aud.push(this.data);
+    }
     this.activetrack =  this.aud;
     this.share.verorder().then( rval => {
       if (rval === this.tam){
@@ -82,57 +83,54 @@ export class AudioplayerPage implements OnInit {
       }
     });
     
-    //----------------
     this.indexLessons = this.PObjecIndex.getData();
-    console.log('index leccion', this.indexLessons);
     const informacion = this.pObjectoVideo.getNavData();
-    console.log('info en audioplay',informacion);
     this.color=informacion.color;
     this.data = informacion.infoCurso;
     this.userinfo = informacion.userInf;
     this.course = informacion.course.name;
     this.courseID = informacion.infoCurso.id;
-    console.log('info curso',this.data);
-    this.share.guardarCursoActiva(informacion);
+
+    this.getCourse();
+  }
+
+  getCourse() {
+    this.loadingService.loadingPresent({spinner: "circles" });
     this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
       this.info = infodt.data;
-      console.log(this.info,'trae la info del curso especifico');
       this.share.getComentariosCurso(this.data.id).subscribe(info => {
         this.comentariosGeneral = info.data;
         this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
-              let temid  = dataCurso.data;
-
-
-              let dttemp = temid.filter(r => r.id === this.courseID);
-
-              dttemp.forEach(element => {
-                this.CourseLessonID = element.id;
-                this.progreso = element.pivot.progress;
-                console.log('data Temporal VER:', element.pivot.progress);
+          this.loadingService.loadingDismiss();
+          let temid  = dataCurso.data;
+          let dttemp = temid.filter(r => r.id === this.courseID);
+          dttemp.forEach(element => {
+            this.CourseLessonID = element.id;
+            this.progreso = element.pivot.progress;
+          });
+          this.share.hayorder().then( val => {
+            if (val){
+              this.share.verorder().then( rval => {
+                this.orderStorage = rval;
               });
-              console.log('LEccion del curso',this.CourseLessonID);
-              this.share.hayorder().then( val => {
-                if (val){
-                  console.log('entre true', val);
-                  this.share.verorder().then( rval => {
-                    this.orderStorage = rval;
-                    console.log('storage',this.orderStorage, 'order en el que va',rval);
-                  });
-                }else{
-                  console.log('entre false', val);
-                  this.share.iniciorder();
-                }
-              });
-
-              this.cursos = dttemp;
-              console.log('info curso audioplay:', this.cursos);
-
-            });
+            }else{
+              this.share.iniciorder();
+            }
+          });
+          this.cursos = dttemp;
+        }, error => {
+          this.loadingService.loadingDismiss();
+        });
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
+    }, error => {
+      this.loadingService.loadingDismiss();
     });
   }
 
   start(track: any) {
+    const that = this;
     if (this.player) {
       this.player.stop()
     }
@@ -146,23 +144,29 @@ export class AudioplayerPage implements OnInit {
       },
       onend: () => {
         this.player.stop();
+      },
+      onloaderror: function() {
+        that.mostrarmensaje('Error al cargar el audio', 'Error', 'red-snackbar');
       }
     });
     this.player.play();
   }
 
   toggleplayer(pause, active) {
-    this.isPlaying = !pause;
-    if (pause) {
-      this.player.pause();
-    } else {
-      if (this.player === null) {
-        console.group(active);
-        this.start(active);
+    if (this.player) {
+      this.isPlaying = !pause;
+      if (pause) {
+        this.player.pause();
       } else {
-        this.player.play();
+        if (this.player === null) {
+          console.group(active);
+          this.start(active);
+        } else {
+          this.player.play();
+        }
       }
-
+    } else {
+      this.mostrarmensaje('Error al cargar el audio', 'Error', 'red-snackbar');
     }
   }
 
@@ -198,16 +202,7 @@ export class AudioplayerPage implements OnInit {
     }, 1000);
   }
 
-  //new
-  getcursos(userid: any) {
-    this.share.getCursos().subscribe(info => {
-      console.log(info + ' info que necesito');
-      this.cursos = info.data;
-    });
-  }
-
   startVideo(lectionName: any, video: any,  order: any, tma: any) {
-    console.log('Video orden', order);
     const dataObj = {
       name: lectionName,
       vidInfo: video,
@@ -222,5 +217,12 @@ export class AudioplayerPage implements OnInit {
     this.pObjecto.setData(this.PObjectAux.getNavData());
     this.pObjectoVideo.setData(this.PObjectAux.getNavData());
     this.router.navigate(['/users/entrena/vercurso/verleccion/']);
+  }
+
+  mostrarmensaje(message: string, action: string, type: string) {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+      panelClass: [type],
+    });
   }
 }

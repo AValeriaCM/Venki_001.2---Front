@@ -87,7 +87,7 @@
         <div *ngIf="pst.medias.length !== 0" class="labelContent">
           <ion-slides [options]="sliderImgOption">
             <ion-slide *ngFor="let imag of pst.medias">
-              <img class="image-cont" src="https://venki.inkdigital.co/medias/{{imag.media}}" (click)="imageView(imag.media)">
+              <img class="image-cont" src="{{basePath}}medias/{{imag.media}}" (click)="imageView(imag.media)">
             </ion-slide>
           </ion-slides>
         </div>

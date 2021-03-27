@@ -2,13 +2,14 @@ import { PassObjectVideoService } from 'src/app/_services/pass-object-video.serv
 import { PassObjectAuxService } from './../../../../_services/pass-object-aux.service';
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IonContent, AlertController } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
-import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { EventEmitter } from 'events';
 import { PassNameLessonsService } from 'src/app/_services/pass-name-lessons.service';
+import { LoadingService } from 'src/app/_services/loading.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-verleccion',
@@ -43,14 +44,13 @@ export class VerleccionPage implements OnInit {
 lectionName: any; video: any;  order: any; tma: any;
 
   @ViewChild(IonContent) content: IonContent;
-
   @Input() mensaje: any;
   @Input()  
   infoVideo = new EventEmitter();
-  
 
+  basePath = `${environment.HOST}`;
+  
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private share: ShareserviceService,
     public alertController: AlertController,
@@ -59,76 +59,69 @@ lectionName: any; video: any;  order: any; tma: any;
     private pObjecAux: PassObjectAuxService,
     private pObjectIndex: PassNameLessonsService,
     private previewAnyFile: PreviewAnyFile,
-    private streaminmedia: StreamingMedia
-    ) {
-  }
+    private loadingService: LoadingService
+    ) { }
 
   ngOnInit() {
-     this.index = this.pObjectIndex.getData();
+    this.index = this.pObjectIndex.getData();
     const informacion = this.pObjecto.getNavData();
-    console.log('info verleccion', informacion);
     this.color=informacion.color;
     this.data = informacion.infoCurso;
     this.userinfo = informacion.userInf;
     this.course = informacion.course.name;
     this.courseID = informacion.infoCurso.id;
     this.share.guardarCursoActiva(informacion);
-    this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
-      this.info = infodt.data;
-      console.log('Informacion guardada' + infodt.data);
-      this.share.getComentariosCurso(this.data.id).subscribe(info => {
-        this.comentariosGeneral = info.data;
-        this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
-              let temid  = dataCurso.data;
-
-
-              let dttemp = temid.filter(r => r.id === this.courseID);
-
-              dttemp.forEach(element => {
-                this.CourseLessonID = element.id;
-                this.progreso = element.pivot.progress;
-                console.log('data Temporal VER:', element.pivot.progress);
-              });
-              console.log('LEccion del curso',this.CourseLessonID);
-              this.share.hayorder().then( val => {
-                if (val){
-                  console.log('entre true', val);
-                  this.share.verorder().then( rval => {
-                    this.orderStorage = rval;
-                    console.log('storage:',this.orderStorage, 'rval',rval);
-                  });
-                }else{
-                  console.log('entre false', val);
-                  this.share.iniciorder();
-                }
-              });
-
-              this.cursos = dttemp;
-              console.log('info del curso', this.cursos);
-            });
-      });
-    });
-
+    this.getCourse();
     this.share.varorder.subscribe( res  =>  {
       this.share.hayorder().then( val => {
         if (val){
-          console.log('entre true', val);
           this.share.verorder().then( rval => {
             this.orderStorage = rval;
-            console.log('storeage',this.orderStorage, 'rval',rval);
           });
         }else{
-          console.log('entre false', val);
           this.share.iniciorder();
         }
       });
     });
 
     this.share.varExam.subscribe( res => {
-      console.log('SOY LA RESPUESTA',res);
       this.exam = 1;
     });
+  }
 
+  getCourse() {
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
+      this.info = infodt.data;
+      this.share.getComentariosCurso(this.data.id).subscribe(info => {
+        this.comentariosGeneral = info.data;
+        this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
+          this.loadingService.loadingDismiss();
+          let temid  = dataCurso.data;
+          let dttemp = temid.filter(r => r.id === this.courseID);
+          dttemp.forEach(element => {
+            this.CourseLessonID = element.id;
+            this.progreso = element.pivot.progress;
+          });
+          this.share.hayorder().then( val => {
+            if (val) {
+              this.share.verorder().then( rval => {
+                this.orderStorage = rval;
+              });
+            }else{
+              this.share.iniciorder();
+            }
+          });
+          this.cursos = dttemp;
+        }, error=> {
+          this.loadingService.loadingDismiss();
+        });
+      }, error=> {
+        this.loadingService.loadingDismiss();
+      });
+    }, error => {
+      this.loadingService.loadingDismiss();
+    });
   }
 
   calificacion(event) {
@@ -166,7 +159,6 @@ lectionName: any; video: any;  order: any; tma: any;
 
   getcursos(userid: any) {
     this.share.getCursos().subscribe(info => {
-      console.log('infogetCurso',info);
       this.cursos = info.data;
     });
   }
@@ -186,21 +178,15 @@ lectionName: any; video: any;  order: any; tma: any;
     };
 
     this.share.guardarLeccionActiva(dataObj);
-
     this.share.verorder().then( rval => {
-      console.log('SOY RVal',rval, tma);
       if (rval === tma){
-        console.log('entre listo para examen');
         this.share.varExam.next('Listo para el examen');
       }else{
         this.share.updateorder(order);
       }
     });
-    let url = 'https://venki.inkdigital.co/' + doc;
+    let url = this.basePath + doc;
     this.previewAnyFile.preview(url).then(() => {
-
-    }, (err) => {
-      console.log(JSON.stringify(err));
     });
   }
 
@@ -212,13 +198,11 @@ lectionName: any; video: any;  order: any; tma: any;
       tm: tma
     };
     this.PobjectVideo.setData(dataObjVid);
-    console.log('es esto', dataObjVid);
     this.router.navigate(['/users/entrena/vercurso/verleccion/vidplayer/']);
 
   }
 
   audioPlayer(lectionName: any, content: any, order: any, tma: any) {
-    console.log('TAMAÑO', tma);
     const dataaud = 'http://venki.3utilities.com/' + content;
     const dataObj = {
       name: lectionName,
@@ -226,7 +210,6 @@ lectionName: any; video: any;  order: any; tma: any;
       orderid: order,
       tm: tma
     };
-    
     this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/entrena/vercurso/verleccion/audioplayer']);
   }
@@ -242,20 +225,8 @@ lectionName: any; video: any;  order: any; tma: any;
     }
   }
 
-  verRecursos(recursos: any){
-    console.log(recursos);
+  volver() {
+    this.pObjecto.setData(this.pObjecAux.getNavData());
+    this.router.navigate(['/users/entrena/vercurso']);
   }
-
- /* examen(exam: any){
-    console.log('EXAMEN', exam);
-    const dataObj = {
-      examen: exam,
-    };
-    this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/entrena/examen/']);
-  }*/
- volver(){
-   this.pObjecto.setData(this.pObjecAux.getNavData());
-   this.router.navigate(['/users/entrena/vercurso/']);
- }
 }

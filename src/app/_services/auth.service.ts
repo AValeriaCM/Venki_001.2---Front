@@ -160,6 +160,7 @@ export class AuthService {
 
   logout(){
     this.storage.remove(USER_INFO);
+    this.shareSercie.guardarLeccionActiva(null);
     this.storage.remove(TOKEN_KEY).then( ()  => {
       this.router.navigateByUrl('/');
       this.userData.next(null);

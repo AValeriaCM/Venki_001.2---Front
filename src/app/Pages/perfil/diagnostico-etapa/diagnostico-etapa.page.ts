@@ -24,9 +24,7 @@ export class DiagnosticoEtapaPage implements OnInit {
     this.textButton="Continuar";
 
     this.info= this.pEtapa.getNavData();
-    console.log(this.info);
     this.etapa=this.info.page;
-    console.log(this.info);
     if(this.etapa==4){
       this.textButton="Ver resultados";
     }
@@ -39,14 +37,7 @@ export class DiagnosticoEtapaPage implements OnInit {
   }
 
   continue(){
-    console.log(this.etapa);
-    console.log(this.info.status);
-    /*if(this.etapa == 3){
-      this.etapa = this.etapa + 1;
-      this.router.navigate(['/users/perfil/diagnostico-etapa/']);
-    }*/
     if (this.etapa==4){
-      console.log('entro al if de la cuarta etapa');
       this.router.navigate(['/users/perfil/estadisticas']);
     }else{
     if(this.info.status == 1){

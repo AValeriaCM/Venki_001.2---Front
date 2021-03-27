@@ -28,10 +28,5 @@ export class SentryService implements ErrorHandler{
     // ask user to report error if error not server related
     Sentry.showReportDialog({ eventId });
     }
-    // navigate to error page
-    // router.navigate(['error']);
-
-    // return error;
-    // pass the error if needed
   }
 }

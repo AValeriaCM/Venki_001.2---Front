@@ -15,6 +15,7 @@ import { LoadingService } from 'src/app/_services/loading.service';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import  auth  from 'firebase/app';
+import { profile } from 'console';
 
 @Component({
   selector: 'app-register',
@@ -154,7 +155,6 @@ export class RegisterPage implements OnInit {
             this.inicializarFormulario();
             this.volverLogin();
         }, error => {
-          console.log('error');
           this.loadingService.loadingDismiss();
         });
     }
@@ -211,12 +211,18 @@ export class RegisterPage implements OnInit {
   }
 
   // servicio de logueo de facebook
- loginWhitFacebook(){
-  return this.fb.login(['public_profile', 'email'])
-   .then((res: FacebookLoginResponse) =>{ 
-     console.log('data', res);
-     const credential_fb = auth.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-    return this.AFauth.signInWithCredential(credential_fb);
-   })
- }
+  loginWhitFacebook() {
+    return this.fb.login(['public_profile', 'email'])
+      .then( (res: FacebookLoginResponse) => {
+        let params = new Array<string>();
+
+        this.fb.api('/me?fields=id,email,name,gender,birthday,password', params).then(profile => {
+          alert('profile' + JSON.stringify(profile));
+        }).catch( e => alert('eroor profile '+ JSON.stringify(e))); 
+        alert('res '+ JSON.stringify(res));
+        const credential_fb = auth.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+        alert('res '+ JSON.stringify(credential_fb));
+        return this.AFauth.signInWithCredential(credential_fb);
+      }).catch( e => alert('eroor '+ JSON.stringify(e)));
+  }
 }

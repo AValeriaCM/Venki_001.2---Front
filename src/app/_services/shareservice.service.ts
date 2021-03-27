@@ -80,7 +80,6 @@ export class ShareserviceService {
   }
 
   getCursoEspecifico(id: number){
-
     return this.http.get<any>(this.basePath + this.urlCuros + `/${id}`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')

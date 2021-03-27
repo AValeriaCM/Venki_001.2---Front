@@ -27,7 +27,7 @@ export class ServiceErrorInterceptorService implements HttpInterceptor{
     })).pipe(catchError((err) => {
       this.loadingService.loadingDismiss();
       if (err.status === 400) {
-        this.snackBar.open("Proceso invalido, intenta nuevamente", 'ERROR', { 
+        this.snackBar.open('Credenciales incorrectas. Vuelve a intentarlo o selecciona "¿Olvidaste tu contraseña?" para cambiarla.', 'ERROR', { 
           duration: 5000, 
           panelClass: ['red-snackbar'] 
         });

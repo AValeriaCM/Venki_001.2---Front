@@ -153,7 +153,7 @@
                     <div *ngIf="pst.medias.length !== 0" class="labelContent">
                       <ion-slides [options]="sliderImgOption">
                         <ion-slide *ngFor="let imag of pst.medias">
-                          <img class="image-cont" src="https://venki.inkdigital.co/medias/{{imag.media}}" (click)="imageView(imag.media)">
+                          <img class="image-cont" src="{{basePath}}medias/{{imag.media}}" (click)="imageView(imag.media)">
                         </ion-slide>
                       </ion-slides>
                     </div>
@@ -223,7 +223,7 @@
                       <div *ngIf="curso.pivot.progress != 1">
                         <ion-item class="ion-item-css">
                           <ion-avatar slot="start">
-                            <img src="https://venki.inkdigital.co/{{curso.photo}}" (click)="verCurso()">
+                            <img src="{{basePath}}{{curso.photo}}" (click)="verCurso()">
                           </ion-avatar>
                           <ion-label class="Subtitle-css" (click)="verCurso()" style="font-size: 12px;">{{curso.name}}</ion-label>
                           <div>
@@ -236,7 +236,7 @@
                       </div>
                     </div>
                   </ion-list>
-                  <ion-row *ngIf="coursesProgress.length === 0">
+                  <ion-row *ngIf="coursesProgress.length === 0" style="padding: 10px;place-content: center;">
                     <ion-badge color="warning">No tienes cursos actualmente</ion-badge>
                   </ion-row>
                 </mat-tab>
@@ -249,7 +249,7 @@
                       <div *ngIf="curso.pivot.progress == 1">
                         <ion-item class="ion-item-css">
                           <ion-avatar slot="start">
-                            <img src="https://venki.inkdigital.co/{{curso.photo}}" (click)="verCurso()">
+                            <img src="{{basePath}}{{curso.photo}}" (click)="verCurso()">
                           </ion-avatar>
                           <ion-label class="Subtitle-css" (click)="verCurso()" style="font-size: 12px;">{{ curso.name }}</ion-label>
                           <div>

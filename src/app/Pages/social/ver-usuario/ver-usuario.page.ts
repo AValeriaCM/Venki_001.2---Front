@@ -16,9 +16,7 @@ export class VerUsuarioPage implements OnInit {
     private pObjecto: PassObjectService,
     private share: ShareserviceService,
     private router: Router
-  ) { 
-    console.log('entro a constructor');
-  }
+  ) { }
 
   ngOnInit() {
     let data = this.pObjecto.getNavData();

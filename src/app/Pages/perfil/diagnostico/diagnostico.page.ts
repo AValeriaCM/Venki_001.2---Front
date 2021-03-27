@@ -73,7 +73,6 @@ export class DiagnosticoPage implements OnInit {
     this.slidefromHtml.lockSwipeToPrev(true);
 
     this.perfile.getPreguntasPerfil(this.profileid).subscribe((profileQ: any) => {
-      console.log('tamaño', profileQ);
       this.preguntot = profileQ.data.length;
       this.preguntat = profileQ.data.length;
       this.totallenght  = profileQ.meta.total;
@@ -82,7 +81,6 @@ export class DiagnosticoPage implements OnInit {
         let tempP = rest;
         this.pagina=tempP;
         this.color=this.colors[this.pagina-1];
-        console.log('Pagina', tempP);
         if (tempP === null){
           this.currentPage = profileQ.meta.current_page;
           this.existe = false;
@@ -95,7 +93,6 @@ export class DiagnosticoPage implements OnInit {
       this.pagina=this.currentPage;
       this.share.retornarDiagnosticoLastpage().then( restt  => {
         let tempL = restt;
-        console.log('Pagina', tempL);
         if (tempL === null){
           this.lastPage = profileQ.meta.last_page;
           this.existe = false;
@@ -112,7 +109,6 @@ export class DiagnosticoPage implements OnInit {
 
       this.share.retornarDiagnostico().then( diag => {
         let result01;
-        console.log('El diagnistico guardado01', diag);
         if (diag !== null){
           this.cacheArray = diag;
         }
@@ -121,7 +117,6 @@ export class DiagnosticoPage implements OnInit {
             result01 = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))]
           });
           this.arrayFEnv = result01;
-          console.log('union final 01', this.arrayFEnv.length, this.totallenght);
         }
       });
 
@@ -146,7 +141,6 @@ export class DiagnosticoPage implements OnInit {
                     result01 = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))];
                   });
                   this.arrayFEnv = result01;
-                  console.log('union final 03', this.arrayFEnv, this.totallenght);
                 }
               });
             } else {
@@ -157,13 +151,10 @@ export class DiagnosticoPage implements OnInit {
       });
 
     });
-
-
   }
 
 
   validadExistencia(existe: any){
-    console.log('valida existencias',  existe);
     if (existe === true){
       const nuevoArra = this.totallenght;
       this.cantidad = [];
@@ -175,7 +166,6 @@ export class DiagnosticoPage implements OnInit {
             value.calificacionVal = 0;
             return value;
           });
-          console.log('cantidad Final si existe', this.cantidad);
         });
       }
     }
@@ -185,8 +175,6 @@ export class DiagnosticoPage implements OnInit {
 
     const res = [];
     const listemp = [];
-    // console.log(event.detail.value, id, index);
-
     if (this.cuestionario.length === 0) {
       this.cuestionario.push(index);
       this.slidefromHtml.lockSwipeToNext(false);
@@ -241,9 +229,7 @@ export class DiagnosticoPage implements OnInit {
     this.cuestionario = [];
     this.cantidad = [];
     this.etapa = false;
-    console.log( this.currentPage);
     this.terminarEtapa();
-  //  this.router.navigate(['/users/perfil']);
   }
 
   Continuar(){
@@ -261,7 +247,6 @@ export class DiagnosticoPage implements OnInit {
             return value;
           });
           this.cacheArray.push({myPropArray: this.finalDta});
-          console.log('Resultado a guardar', this.cacheArray);
           this.share.guardarDiagnostico(this.cacheArray);
           this.share.guardarDiagnosticoCurrenpage(this.currentPage);
           this.share.guardarDiagnosticoLastpage(this.lastPage);
@@ -274,17 +259,14 @@ export class DiagnosticoPage implements OnInit {
         });
       }
     }, 1000);
-    console.log( this.currentPage);
     this.terminarEtapa();
   }
 
   enviarQuestion() {
     const infoConvert = JSON.stringify(this.arrayFEnv);
     this.perfile.SendSurveyInfo(infoConvert, this.surveyID, this.userID).subscribe(surveyResponse => {
-      console.log(surveyResponse);
       let surveyed = 1;
       this.share.editSurveyed(surveyed, this.userID).subscribe( res => {
-        console.log(res);
         this.share.removerDiagnostico();
         this.share.removerDiagnosticoCurrenpage();
         this.share.removerDiagnosticoLastpage();

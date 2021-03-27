@@ -2,10 +2,9 @@ import { PassObjectAuxService } from './../../../_services/pass-object-aux.servi
 import { PassObjectExamenService } from './../../../_services/pass-object-examen.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, AlertController } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
-import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
 import { PassNameLessonsService } from 'src/app/_services/pass-name-lessons.service';
@@ -41,7 +40,6 @@ export class VercursoPage implements OnInit {
 
   @ViewChild(IonContent) content: IonContent;
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private share: ShareserviceService,
     public alertController: AlertController,
@@ -51,7 +49,6 @@ export class VercursoPage implements OnInit {
     private pObjetoAux: PassObjectAuxService,
     private PObjecIndex: PassNameLessonsService,
     private previewAnyFile: PreviewAnyFile,
-    private streaminmedia: StreamingMedia,
     private loadingService: LoadingService
     ) {
   }

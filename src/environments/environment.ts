@@ -28,3 +28,8 @@ export  const firebaseConfig = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+/*Credenciales FB Developers
+maginapp@gmail.com
+Aplicacion2020
+*/

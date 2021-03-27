@@ -15,7 +15,7 @@
             <ion-item class="ion-item-css">
               <ion-icon name="people-sharp"></ion-icon>
               &nbsp;&nbsp;
-              <ion-input name="email" type="email" placeholder="Correo" formControlName="correo"></ion-input>
+              <ion-input name="email" type="email" placeholder="Correo" formControlName="correo" style="margin-right: 40px;"></ion-input>
             </ion-item>
             <ion-item class='form-text-error' *ngIf="!loginForm.controls.correo.valid && (loginForm.controls.correo.touched || loginForm.controls.correo.dirty)">
               <ion-label class="l-error">El correo no es valido</ion-label>

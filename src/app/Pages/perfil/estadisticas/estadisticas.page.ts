@@ -31,14 +31,12 @@ export class EstadisticasPage implements OnInit {
   ngOnInit() {
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
          this.dataStats = [infoUser.emocional, infoUser.cognitivo, infoUser.conductual, infoUser.fortaleza_mental];
          this.emocional = this.usertk.emocional;
          this.cognitivo = this.usertk.cognitivo;
          this.conductual = this.usertk.conductual;
          this.fortaleza = this.usertk.fortaleza_mental; 
-         console.log(this.emocional);
          this.createBarChart();         
       });   
     });

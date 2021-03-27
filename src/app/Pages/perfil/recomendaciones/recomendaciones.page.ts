@@ -24,10 +24,8 @@ export class RecomendacionesPage implements OnInit {
   ngOnInit() {
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
-        console.log(infoUser);
         this.usertk = infoUser;
         this.share.getrecomendation(infoUser.id).subscribe( res => {
-          console.log(res.data.courses);
           this.recomen  = res.data.courses;
         });
       });
@@ -37,7 +35,6 @@ export class RecomendacionesPage implements OnInit {
   hacerpremium(){
     let num = 1;
     this.share.editpremium( num , this.usertk.id ).subscribe( res => {
-      console.log(res);
       this.share.var.next('update');
       this.router.navigate(['/users/perfil']);
     });

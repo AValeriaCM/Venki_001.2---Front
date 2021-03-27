@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Platform, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { AuthService } from './_services/auth.service';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
@@ -53,13 +52,11 @@ export class AppComponent {
     this.hasPermission = await this.fcm.requestPushPermission();
 
     this.token = await this.fcm.getToken();
-    console.log('CHECK getToken: ' + this.token);
     this.authS.setTokenMovile(this.token);
 
     this.fcm
       .onTokenRefresh()
       .subscribe((newToken) => {
-        console.log('NEW TOKEN:', newToken);
         this.authS.setTokenMovile(newToken);
       });
     this.fcm
@@ -67,7 +64,6 @@ export class AppComponent {
       .subscribe(payload =>  {
         if (payload.wasTapped){
           if ( payload.id === 'mensaje'){
-            console.log('entre');
             this.localNotification(payload.title, payload.body);
             this.chatS.setbadgeMsg();
             this.chatS.var.next('msg update');
@@ -76,10 +72,7 @@ export class AppComponent {
             this.localNotification(payload.title, payload.body);
           }
         }else{
-        console.log(payload.title);
-        console.log(payload);
         if ( payload.id === 'mensaje'){
-          console.log('entre');
           this.localNotification(payload.title, payload.body);
           this.chatS.setbadgeMsg();
           this.chatS.var.next('msg update');
@@ -96,10 +89,8 @@ export class AppComponent {
       title: titleNotif,
       text: bodyNotif,
       trigger: {
-        //at: new Date(new Date().getTime())
         in: seconds,
         unit: ELocalNotificationTriggerUnit.SECOND,
-
       }
     });
   }

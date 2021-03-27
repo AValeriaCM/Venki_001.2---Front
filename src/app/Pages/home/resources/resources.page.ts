@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { VimeoserviceService } from 'src/app/_services/vimeoservice.service';
 
@@ -40,15 +39,12 @@ export class ResourcesPage implements OnInit {
 
   seeVideo(info :any){
     let dateVideo=info.url;
-    console.log(dateVideo);
     let result=dateVideo.replace('vimeo.com','player.vimeo.com/video')
-    console.log(result);
     this.video=this.sanitizer.bypassSecurityTrustResourceUrl(result);
   }
 
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;
-    console.log(this.videosOriginal);
   }  
 
 }

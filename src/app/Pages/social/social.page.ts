@@ -8,6 +8,7 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { LoginService } from 'src/app/_services/login.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { LoadingService } from 'src/app/_services/loading.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-social',
@@ -53,6 +54,8 @@ export class SocialPage implements OnInit {
   contadorlike: number;
   idPost: any;
   config: any;
+
+  basePath = `${environment.HOST}`;
 
   constructor(
     private route: Router,

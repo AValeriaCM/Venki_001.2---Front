@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" style="color: white;">
       <ion-back-button defaultHref="/users/perfil"></ion-back-button>
     </ion-buttons>
-    <ion-title class="tituloInfo">
-      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -35,10 +35,10 @@
       *ngFor="let dt of cantidad; let i of index;">
       <ion-grid class="questions">
         <ion-row>
-          <ion-col size="12"><label style="background-color: {{color}};" class="circulo">
+          <ion-col size="12"><label [ngStyle]="{'background-color': color}" class="circulo">
               {{preguntat}}/{{preguntot}}</label></ion-col>
           <ion-col size="12">
-            <ion-card class="question-st" style="border: {{color}} 2px solid;">
+            <ion-card class="question-st"  style="border: 2px solid;" [ngStyle]="{'border-color': color}">
               <ion-card-content>
                 {{dt.question}}
               </ion-card-content>
@@ -81,11 +81,11 @@
    
   </ion-slides>
   <ion-fab vertical="center" horizontal="start" slot="fixed">
-    <ion-icon class="icono-lateral" style="color: {{color}};" name="caret-back-outline"></ion-icon>
+    <ion-icon class="icono-lateral" [ngStyle]="{'color': color}" name="caret-back-outline"></ion-icon>
   </ion-fab>
 
   <ion-fab vertical="center" horizontal="end" slot="fixed">
-    <ion-icon class="icono-lateral" style="color: {{color}};" name="caret-forward-outline"></ion-icon>
+    <ion-icon class="icono-lateral" [ngStyle]="{'color': color}" name="caret-forward-outline"></ion-icon>
   </ion-fab>
 
 

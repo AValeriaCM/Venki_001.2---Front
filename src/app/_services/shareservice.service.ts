@@ -360,6 +360,20 @@ export class ShareserviceService {
         .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
+/*
+* servicio que se utiliza para actualizar la lista de objetivos
+*creado el 26/03/2021
+*/
+    actualizarObjetivos( objetivos:any, idUser:any){
+      const body = new HttpParams()
+      .set('achievement', objetivos)
+      .set('user_id', idUser);
+      return this.http.put(this.basePath + `api/achievements`, body, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+          .set('X-Requested-With', 'XMLHttpRequest')
+        });
+    }
 
   getaactividadesDiaria(){
     return this.http.get<any>(this.basePath + `api/dailyactivities?today=1` , {

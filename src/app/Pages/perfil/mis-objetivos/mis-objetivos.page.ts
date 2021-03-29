@@ -55,6 +55,7 @@ export class MisObjetivosPage implements OnInit {
         this.share.obtenerObhetivos(this.userId).subscribe((res: any) => {
           console.log('objetivos', res);
           this.objetivosList = res.data;
+          console.log(this.objetivosList, 'object list res');
         });
       });
     });
@@ -108,6 +109,7 @@ export class MisObjetivosPage implements OnInit {
       this.alerta();
     } else if (correct === this.list.length) {
       this.list.forEach(dt => {
+        console.log(dt, 'lista dt');
         this.share.agregarObjetivos(dt.item, this.userId).subscribe(res => {
           console.log('Objetivo agregado', res);
         });
@@ -134,19 +136,20 @@ export class MisObjetivosPage implements OnInit {
     this.route.navigateByUrl('/users/perfil');
   }
 /*
-*funcion de manejo para el reordenar el vector de los objetivos.
+*funcion de manejo para reordenar el vector de los objetivos.
 */
   reorder(event){  
       const itemMover = this.objetivosList.splice(event.detail.from ,1)[0];
       this.objetivosList.splice(event.detail.to, 0, itemMover);
       event.detail.complete(true);
-      console.log(this.objetivosList,'lista objet');
+      console.log(this.objetivosList,'lista object');
         this.objetivosList.forEach(obj=>{
-          console.log(obj);
-        this.share.actualizarObjetivos(obj, this.userId).subscribe(() =>{ 
-      });
+          console.log(obj.achievement);
+        
         });
-      
+        /*this.share.actualizarObjetivos(this.objetivosList, this.userId).subscribe(vec =>{ 
+          console.log(vec,'vector guarda objetivos');
+      });*/
       } 
   
 }

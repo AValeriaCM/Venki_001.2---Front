@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TimelinePageRoutingModule } from './timeline-routing.module';
 
 import { TimelinePage } from './timeline.page';
+import { PipesModule } from 'src/app/Pipe/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TimelinePageRoutingModule
+    TimelinePageRoutingModule,
+    PipesModule
   ],
   declarations: [TimelinePage]
 })

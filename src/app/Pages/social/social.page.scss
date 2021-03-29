@@ -185,11 +185,9 @@ img.avatar {
   }
 }
 
-.image-cont{
-  width: 225px;
-  height: 168px;
-  padding: 5px;
-  margin-bottom: 10px;
+.image-cont {
+  width: 60%;
+  padding: 10px 0px;
 }
 
 .solid {
@@ -242,15 +240,6 @@ ion-slides{
   padding-right: 15px;
   float: right;
   right: 20px;
-}
-
-.labelContent{
-  font-size: 11px;
-  background-color: #fffefe91;
-  color: #000000;
-  margin: 10px 0px;
-  white-space: break-spaces;
-  margin-bottom: 0px;
 }
 
 ion-slides{

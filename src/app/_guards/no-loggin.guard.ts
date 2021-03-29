@@ -17,17 +17,10 @@ export class NoLogginGuard implements CanActivate {
     return this.auth.user.pipe(
       take(1),
       map(user => {
-        if (!user) {
-          this.router.navigateByUrl('/');
-          return false;
-        } else if (user) {
-          this.router.navigateByUrl('/users/home');
+        if(!user) {
           return true;
-        }else if (user === null){
-          this.router.navigateByUrl('/');
-          return false;
-        }else{
-          this.router.navigateByUrl('/');
+        } else {
+          this.router.navigateByUrl('/users/home');
           return false;
         }
       })

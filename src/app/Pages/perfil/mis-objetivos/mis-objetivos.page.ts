@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { eventFromMessage } from '@sentry/browser';
 import { AuthService } from 'src/app/_services/auth.service';
+import { LoadingService } from 'src/app/_services/loading.service';
 import { LoginService } from 'src/app/_services/login.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 
@@ -14,31 +14,22 @@ import { ShareserviceService } from 'src/app/_services/shareservice.service';
 })
 export class MisObjetivosPage implements OnInit {
 
-    arreglo= ['quiero tener mayor agilidad','quiero controlar mis emociones','quiero tener mas motivacion','quiero mejorar mis habitos de bienestar','quiero tener mas confianza'];
-  // ----------Pattern-----------
-
-  emailPattern: any = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/;
-  nombrePattern: any = /^[A-Za-z0-9]*$/;
-  contrasenaPattern: any = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-  adressPattern: any = /^[#.0-9a-zA-Z\s,-]+$/;
-  phonePatten: any = /^[0-9]+$/;
-  // ----------Pattern-----------
 
   dynamicForm: FormGroup;
   submitted = false;
   list: any[] = [];
   alert: any;
   userId: any;
-  objetivosList: any;
+  objetivosList =  [];
 
   constructor(
     private route: Router,
-    private router: ActivatedRoute,
     private formBuilder: FormBuilder,
     public alertController: AlertController,
     private share: ShareserviceService,
     private log: LoginService,
-    private auth: AuthService
+    private auth: AuthService,
+    private loadingService: LoadingService
   ) { }
 
   get f() { return this.dynamicForm.controls; }
@@ -48,27 +39,24 @@ export class MisObjetivosPage implements OnInit {
       item: new FormArray([])
     });
 
+    this.getTargets();
+  }
+
+  getTargets() {
+    this.loadingService.loadingPresent({spinner: "circles" });
     this.auth.gettokenLog().then(dt => {
       this.log.logdataInfData(dt).subscribe(infoUser => {
         this.userId = infoUser.id;
         this.share.obtenerObhetivos(this.userId).subscribe((res: any) => {
           this.objetivosList = res.data;
+          this.loadingService.loadingDismiss();
+        }, error => {
+          this.loadingService.loadingDismiss();
         });
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
     });
-
-    this.share.varObjetivos.subscribe(st => {
-      console.log(st,'esto es st');
-      this.auth.gettokenLog().then(dt => {
-        this.log.logdataInfData(dt).subscribe(infoUser => {
-          this.userId = infoUser.id;
-          this.share.obtenerObhetivos(this.userId).subscribe((res: any) => {
-            this.objetivosList = res.data;
-          });
-        });
-      });
-    });
-
   }
 
 

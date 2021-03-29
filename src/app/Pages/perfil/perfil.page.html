@@ -77,10 +77,10 @@
                   </ion-item>
                   <ion-item class="itemDec ion-item-css">
                     <ion-icon name="call" style="color:  #002a68"></ion-icon>
-                    <ion-input name="celular" type="text" placeholder="Teléfono" formControlName="phone"></ion-input>
+                    <ion-input name="celular" type="text" clearInput placeholder="Teléfono" formControlName="phone"></ion-input>
                   </ion-item>
                   <ion-item class='form-text-error' *ngIf="!editarForm.controls.phone.valid && (editarForm.controls.phone.touched || editarForm.controls.phone.dirty)">
-                    <ion-label class="label-error">El teléfono supera el mínimo de caracteres permitido</ion-label>
+                    <ion-label class="Subtitle-css" class="label-error">El teléfono supera el mínimo de caracteres permitido</ion-label>
                   </ion-item>
                   <ion-item>
                     <ion-icon name="calendar" style="color:  #002a68"></ion-icon>
@@ -89,11 +89,11 @@
                   </ion-item>
                   <ion-item>
                     <ion-icon name="chatbubble-ellipses" class="iconDesc" style="color:  #002a68"></ion-icon> &nbsp;
-                    <ion-textarea formControlName="description" [disabled]="false" rows="5" class="Subtitle-cs-desc">Descripción</ion-textarea>
+                    <ion-textarea formControlName="description" clearInput [disabled]="false" rows="5" class="Subtitle-cs-desc">Descripción</ion-textarea>
                   </ion-item>
                   <ion-item>
                     <ion-icon name="school" class="iconDesc" style="color:  #002a68"></ion-icon> &nbsp;
-                    <ion-input class="Subtitle-css" name="institution" type="text" placeholder="¿Dónde estudiaste?" formControlName="institution"></ion-input>
+                    <ion-input class="Subtitle-css" clearInput name="institution" type="text" placeholder="¿Dónde estudiaste?" formControlName="institution"></ion-input>
                   </ion-item>
                   <ion-item class='form-text-error' *ngIf="!editarForm.controls.institution.valid && (editarForm.controls.institution.touched || editarForm.controls.institution.dirty)">
                     <ion-label class="label-error">La institución es incorrecta.</ion-label>
@@ -106,7 +106,7 @@
                   </ion-item>
                   <ion-item>
                     <ion-icon name="location" style="color:  #002a68"></ion-icon> &nbsp;
-                    <ion-input class="Subtitle-css" name="city" type="text" placeholder="Dónde vives?" formControlName="city"></ion-input>
+                    <ion-input class="Subtitle-css" clearInput name="city" type="text" placeholder="Dónde vives?" formControlName="city"></ion-input>
                   </ion-item>
                   <div style="margin-top: 15px;"> 
                     <ion-button type="submit" (click)="editar()" [disabled]="!editarForm.valid || situacionS === null" expand="block" style="  margin: 0;">Editar</ion-button>

@@ -80,15 +80,17 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
 
   loadMessages() {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.chatS.getchatsMSGUser(this.data.id).subscribe((msgServ: any) => {
-      this.total = msgServ.meta;
-      this.menjs = msgServ.data.reverse();
-      const currentPage = this.total.current_page;
-      this.page = currentPage + 1;
-      this.loadingService.loadingDismiss();
-    }, error => {
-      this.loadingService.loadingDismiss();
-    });
+    if(this.data.id) {
+      this.chatS.getchatsMSGUser(this.data.id).subscribe((msgServ: any) => {
+        this.total = msgServ.meta;
+        this.menjs = msgServ.data.reverse();
+        const currentPage = this.total.current_page;
+        this.page = currentPage + 1;
+        this.loadingService.loadingDismiss();
+      }, error => {
+        this.loadingService.loadingDismiss();
+      });
+    }
   }
 
   loadData(event) {
@@ -115,19 +117,21 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   }
 
   enviarMsg() {
-    this.loadingService.loadingPresent({spinner: "circles" });
-    this.chatS.enviarMensajeChat(this.chatId, this.transmiterID, this.newMsg).subscribe( response => {
-      this.chatS.getchatsMSGUser(this.chatId).subscribe( res => {
-        this.chatS.var.next('update messages');
-        setTimeout(() => {
-          this.content.scrollToBottom(200);
+    if(this.chatId) {
+      this.loadingService.loadingPresent({spinner: "circles" });
+      this.chatS.enviarMensajeChat(this.chatId, this.transmiterID, this.newMsg).subscribe( response => {
+        this.chatS.getchatsMSGUser(this.chatId).subscribe( res => {
+          this.chatS.var.next('update messages');
+          setTimeout(() => {
+            this.content.scrollToBottom(200);
+          });
         });
+        this.newMsg = '';
+        this.loadingService.loadingDismiss();
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
-      this.newMsg = '';
-      this.loadingService.loadingDismiss();
-    }, error => {
-      this.loadingService.loadingDismiss();
-    });
+    }
   }
 
   volver() {

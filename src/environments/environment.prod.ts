@@ -12,6 +12,6 @@ export  const firebaseConfig = {
   projectId: "magin-login",
   storageBucket: "magin-login.appspot.com",
   messagingSenderId: "672643384150",
-  appId: "1:672643384150:web:c2c98a04d8cee600cf4cf7",
-  measurementId: "G-9QJ53SZ7SL"
+  appId: "1:672643384150:web:66a9f58899ceb063cf4cf7",
+  measurementId: "G-ERZ4FP684T"
 }

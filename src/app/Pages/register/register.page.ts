@@ -9,12 +9,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { format } from 'date-fns';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-import { CondicionesPage } from '../condiciones/condiciones.page';
 import { TerminosNinosPage } from '../terminos-ninos/terminos-ninos.page';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import  auth  from 'firebase/app';
 import firebase from 'firebase/app';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+
+declare let cordova: any;
 
 @Component({
   selector: 'app-register',
@@ -26,11 +30,9 @@ export class RegisterPage implements OnInit {
   /**
    * Variables
    */
-
   picture;
   email;
   name;
-
   // ----------Pattern-----------
 
   emailPattern: any = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/;
@@ -74,7 +76,10 @@ export class RegisterPage implements OnInit {
     private fb: Facebook,
     private pop:PopoverController,
     private loadingService: LoadingService,
-    private AFauth: AngularFireAuth
+    private AFauth: AngularFireAuth,
+    private fileOpener: FileOpener,
+    private diagnostic: Diagnostic,
+    private transfer: FileTransfer
     ) {
     }
 
@@ -159,7 +164,7 @@ export class RegisterPage implements OnInit {
         this.loadingService.loadingPresent({message: "Por favor espere", spinner: "circles" });
         this.registro.registro(this.nUsuario).subscribe(() => {
             this.loadingService.loadingDismiss();
-            this.mostrarmensaje('Registro satisfactorio, hemos enviado un correo electrónico de verificación a la dirección registrada', 'OK');
+            this.mostrarmensaje('Registro satisfactorio, hemos enviado un correo electrónico de verificación a la dirección registrada', 'OK', 'green-snackbar');
             this.inicializarFormulario();
             this.volverLogin();
         }, error => {
@@ -172,18 +177,27 @@ export class RegisterPage implements OnInit {
     this.router.navigateByUrl('/');
   }
 
-  mostrarmensaje(message: string, action: string) {
+  mostrarmensaje(message: string, action: string, type: string) {
     this.snackbar.open(message, action, {
-      duration: 5000,
-      panelClass: ['green-snackbar'],
+      duration: 2000,
+      panelClass: [type],
     });
   }
 
   terminosMostrar()
   {
-    this.pop.create({component:CondicionesPage,
-    showBackdrop:false}).then((popoverElement)=>{
-      popoverElement.present();
+    const url = 'assets/terminos.pdf';
+    this.diagnostic.requestExternalStorageAuthorization().then(e =>{
+      const fileTransfer: FileTransferObject = this.transfer.create();  
+          fileTransfer.download(url,  cordova.file.externalDataDirectory + "TERMINOS_Y_CONDICIONES_MAGIN.pdf").then((entry) => {
+            this.fileOpener.open(entry.toURL(), 'application/pdf')
+            .then(() => false)
+            .catch(e => this.mostrarmensaje('Error descargando el archivo', 'Error', 'red-snackbar'));
+          }, (error) => {
+            this.mostrarmensaje('Error descargando el archivo', 'Error', 'red-snackbar')              
+          });
+    }).catch(e => {
+      this.mostrarmensaje('Error descargando el archivo', 'Error', 'red-snackbar')        
     })
   }
 
@@ -229,15 +243,16 @@ loginGoogle() {
  */
 async loginGoogleAndroid() {
   const res = await this.googlePlus.login({
-    'webClientId': "1055244002105-dnqjjrtmq6is8ctf683ffv2q8ihd0l3o.apps.googleusercontent.com",
+    'webClientId': "672643384150-iurrhs1cu5ae2k4kllmck9bd5gtd73jq.apps.googleusercontent.com",
     'offline': true
-  });
-  const resConfirmed = await this.AFauth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken));
-  const user = resConfirmed.user;
-  alert('user '+ user);
-  this.picture = user.photoURL;
-  this.name = user.displayName;
-  this.email = user.email;
+  }).then( res => alert('res then '+ JSON.stringify(res)))
+  .catch( err => alert('err '+ JSON.stringify(err))); 
+  // const resConfirmed = await this.AFauth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken));
+  // const user = resConfirmed.user;
+  // alert('user '+ user);
+  // this.picture = user.photoURL;
+  // this.name = user.displayName;
+  // this.email = user.email;
 
 }
 
@@ -258,7 +273,7 @@ async loginGoogleWeb() {
     return this.fb.login(['public_profile', 'email'])
       .then( (res: FacebookLoginResponse) => {
         let params = new Array<string>();
-        this.fb.api('/me?fields=id,email,name,gender,birthday,password', params).then(profile => {
+        this.fb.api('/me?fields=id,email,name,gender,birthday', params).then(profile => {
           alert('profile' + JSON.stringify(profile));
         }).catch( e => alert('eroor profile '+ JSON.stringify(e))); 
         alert('res '+ JSON.stringify(res));

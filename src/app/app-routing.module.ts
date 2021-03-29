@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NoLogginGuard } from './_guards/no-loggin.guard';
 
 
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./Pages/login/login.module').then(m => m.LoginPageModule),
+    canActivate: [ NoLogginGuard ]
   },
   {
     path: 'olvidoc',
@@ -43,6 +45,10 @@ const routes: Routes = [
   {
     path: 'help',
     loadChildren: () => import('./Pages/help/help.module').then( m => m.HelpPageModule)
+  },
+  {
+    path: 'target',
+    loadChildren: () => import('./Pages/target/target.module').then( m => m.TargetPageModule)
   }
 ];
 

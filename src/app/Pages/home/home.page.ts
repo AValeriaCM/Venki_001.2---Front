@@ -21,9 +21,9 @@ import { environment } from 'src/environments/environment';
 export class HomePage implements OnInit {
 
   encourageMsg = [
-    'Es un placer tenerte de vuelta Te extrañamos',
-    'Recuerda que puedes hacer uso del Diagnostico si aun no lo haces',
-    'No te rindas con tus cursos Recuerda Siempre culminarlos  es la meta'
+    'Es un placer tenerte de vuelta te extrañamos',
+    'Recuerda que puedes hacer uso del diagnostico si aun no lo haces',
+    'No te rindas con tus cursos, recuerda siempre culminarlos. ¡Esa la meta!'
   ];
   imageSelect: Image;
   alert: any;
@@ -36,6 +36,8 @@ export class HomePage implements OnInit {
   leccionActiva = null;
   message_header: string;
   basePath = `${environment.HOST}`;
+
+  emotion = 0;
 
   constructor(
     private router: Router,
@@ -50,7 +52,6 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.imageSelect = new Image();
     this.getCurrentHour();
     this.getActiveLesson();
@@ -78,12 +79,14 @@ export class HomePage implements OnInit {
   }
 
   getActiveCourse() {
+    console.log('entro getActiveCourse');
     this.share.getcursoActivo().then( info => {
       this.cursoActivo = info;
     });
   }
 
   getActiveLesson() {
+    console.log('entro getActiveLesson');
     this.share.getleccionActiva().then( resp => {
       this.leccionActiva = resp;
     });

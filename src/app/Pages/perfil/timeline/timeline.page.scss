@@ -17,7 +17,7 @@
   top: 0;
   height: 100%;
   padding-right: 8px;
-  border-right: 2px solid #666666;
+  border-right: 2px solid #c3c3c3;
   content: "";
 }
 .timeline__item {
@@ -46,16 +46,12 @@
   z-index: 0;
 }
 .timeline__step__marker--red {
-  border-color: #262bac;
+  border-color: #002a68;
+  background-color: #002a68;
 }
 .timeline__step__marker--blue {
-  border-color: #18D0BF;
-}
-.timeline__step__marker--salmon {
-  border-color: #F48A6D;
-}
-.timeline__step__marker--purple {
-  border-color: #C178FA;
+  border-color: #002a68;
+  background-color: #002a68;
 }
 .timeline__time {
   padding-right: 6px;
@@ -82,25 +78,21 @@
   .card {
     max-width: 375;
   }
-
   .timeline {
-    padding: 0 35.42857px;
+    padding: 0 15px;
   }
   .timeline::before {
-    padding-right: 6.28571px;
+    padding-right: 23px;
   }
   .timeline__item {
     padding: 25px 0;
   }
   .timeline__step {
-    padding-right: 25px;
+    padding-right: 15px;
   }
   .timeline__step__marker {
-    height: 13.71429px;
-    min-hieght: 13.71429px;
-    width: 13.71429px;
-    min-width: 13.71429px;
-    border-width: 2.28571px;
+    min-width: 50px;
+    border-width: 2px;
   }
   .timeline__time {
     padding-right: 72px;
@@ -136,10 +128,6 @@ html, body {
   height: 100%;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 .card {
   background-color: white;
   max-width: 750px;
@@ -149,4 +137,65 @@ html, body {
   -webkit-box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
   display: table;
+}
+
+
+.title {
+  background-color: #002a68;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.content-share {
+  border-left: 4px solid #3880ff !important;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  padding: 10px;
+  width: 135px;
+}
+
+.content-inform {
+  border-left: 4px solid #3dc2ff !important;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  padding: 10px;
+  width: 135px;
+}
+
+.content-challenge {
+  border-left: 4px solid #eb445a !important;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  padding: 10px;
+  width: 135px;
+}
+
+.label-share {
+  background-color: #3880ff !important;
+}
+
+.label-inform {
+  background-color: #3dc2ff !important;
+}
+
+.label-challenge {
+  background-color: #eb445a !important;
+}
+
+.content-timeline {
+  border: 1px solid #eaeaea;
+  margin-left: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 150px;
+}
+
+.content {
+  color: white;
+  padding: 3px 5px;
+  margin-right: 4px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 13px;
 }

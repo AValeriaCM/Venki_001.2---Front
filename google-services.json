@@ -1,41 +1,92 @@
 {
   "project_info": {
-    "project_number": "1055244002105",
-    "firebase_url": "https://magin-148fa.firebaseio.com",
-    "project_id": "magin-148fa",
-    "storage_bucket": "magin-148fa.appspot.com"
+    "project_number": "672643384150",
+    "project_id": "magin-login",
+    "storage_bucket": "magin-login.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1055244002105:android:445c284e20729a6395bee8",
+        "mobilesdk_app_id": "1:672643384150:android:7baf6b31ddf236cdcf4cf7",
         "android_client_info": {
-          "package_name": "io.ionic.starter"
+          "package_name": "com.inkdigital.magin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1055244002105-dnqjjrtmq6is8ctf683ffv2q8ihd0l3o.apps.googleusercontent.com",
+          "client_id": "672643384150-5cs5vi2epenur5fsa7mvnihef4bb1pvp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inkdigital.magin",
+            "certificate_hash": "8741bdc4cbacd329ca755d6e456f80d93477b4f8"
+          }
+        },
+        {
+          "client_id": "672643384150-hlc5u8qeu14jjr1lhj0r54irhcfvcct4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inkdigital.magin",
+            "certificate_hash": "f68d2ad89ec5e41abae6bc0f24e1a0dc8334beea"
+          }
+        },
+        {
+          "client_id": "672643384150-iurrhs1cu5ae2k4kllmck9bd5gtd73jq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCFx3yKsTH8Hzuwh8couPlLqmdG0NrVOSA"
+          "current_key": "AIzaSyCgoSByK0-zXS_tttL_sjWzqNXaxsC6uMo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1055244002105-dnqjjrtmq6is8ctf683ffv2q8ihd0l3o.apps.googleusercontent.com",
+              "client_id": "672643384150-iurrhs1cu5ae2k4kllmck9bd5gtd73jq.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "1055244002105-db8l380bnjljbmgl9j5djaiup1o0gfpq.apps.googleusercontent.com",
+              "client_id": "672643384150-vg21d5i85ca0e0164h4m5jk7b62jt02a.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "io.ionic.starter"
+                "bundle_id": "com.inkdigital.magin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672643384150:android:c17852a9bff1094acf4cf7",
+        "android_client_info": {
+          "package_name": "com.magin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "672643384150-iurrhs1cu5ae2k4kllmck9bd5gtd73jq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgoSByK0-zXS_tttL_sjWzqNXaxsC6uMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "672643384150-iurrhs1cu5ae2k4kllmck9bd5gtd73jq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "672643384150-vg21d5i85ca0e0164h4m5jk7b62jt02a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.inkdigital.magin"
               }
             }
           ]

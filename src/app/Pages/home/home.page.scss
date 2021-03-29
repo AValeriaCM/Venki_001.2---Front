@@ -307,7 +307,7 @@ video{
 
 .badge-lesson {
   padding: 5px;
-  margin: 15px 25px 0px 25px;
+  margin: 15px 25px 10px 25px;
   text-transform: uppercase;
   white-space: break-spaces;
   font-weight: 500;
@@ -341,4 +341,26 @@ ion-col > .actions {
 .img-activities {
   width: 40% !important;
   height: 40% !important;
+}
+
+.col-emotions {
+  text-align: center;
+    text-align-last: center;
+}
+
+.badge-emotions {
+  color: black;
+  padding: 0px 10px;
+  font-weight: bold;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.wid-70 {
+  width: 70%;
+}
+
+.col-active {
+  background: #03a9f4;
+  border-radius: 10px;
 }

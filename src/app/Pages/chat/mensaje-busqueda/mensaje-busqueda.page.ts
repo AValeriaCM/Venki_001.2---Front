@@ -30,15 +30,17 @@ export class MensajeBusquedaPage implements OnInit {
     this.data = info.infoDt;
     this.transmiterID = info.transferID;
     this.usuarioActual = info.useractual;
-
-    this.chatS.var.subscribe( updateTk =>  {
-      this.chatS.getchatsMSGUser(this.idChat).subscribe( (msgServ: any) => {
-        this.menjs = msgServ.data;
-        setTimeout(() => {
-          this.content.scrollToBottom(200);
+    if(this.idChat) {
+      this.chatS.var.subscribe( updateTk =>  {
+        this.chatS.getchatsMSGUser(this.idChat).subscribe( (msgServ: any) => {
+          this.menjs = msgServ.data;
+          setTimeout(() => {
+            this.content.scrollToBottom(200);
+          });
         });
       });
-    });
+    }
+
   }
 
   enviarMsg() {

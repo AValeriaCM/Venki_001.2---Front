@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" style="color: white;">
       <ion-back-button defaultHref="/users/perfil"></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,30 +13,46 @@
 <ion-content>
   <div>
     <div style="color: black;">
-      <br><br><br>
-      <h1 align="center">My timeline</h1>
-
-      <div>
+      <div style="margin-top: 10px;text-align: center;">
+        <ion-badge class="title">My timeline</ion-badge>
+      </div>
+      <div *ngIf="miactividad.length > 0">
         <ul class="timeline">
           <div *ngFor="let contenido of miactividad">
             <li class="timeline__item">
               <div class="timeline__step">
-                <div class="timeline__step__marker timeline__step__marker--red"></div>
+                <div class="timeline__step__marker timeline__step__marker--red">
+                  <ion-icon name="chatbox-outline" style="width: 30px;height: 46px;color: white;margin-bottom: -8px;"></ion-icon>
+                </div>
               </div>
-              <div class="timeline__time">
+              <div class="timeline__time" [ngClass]="{
+                'content-challenge': contenido.post[0] == '#',
+                'content-inform': contenido.post[0] == '!',
+                'content-share': contenido.post[0] == '@'}">
                 {{contenido.created_at | date:'short'}}
               </div>
               <div class="timeline__content">
-                <div class="timeline__title">
-                  {{contenido.post}}
+                <div *ngIf="contenido.post[0] == '@'" class="timeline__title content-timeline">
+                  <label class="content label-share">{{ contenido.post | slice:0:10 }}</label>
+                  <label class="">{{ contenido.post | slice:10:contenido.post.length | title }}</label>
+                </div>       
+                <div *ngIf="contenido.post[0] == '#'" class="timeline__title content-timeline">
+                  <label class="content label-challenge">{{ contenido.post | slice:0:6 }}</label>
+                  <label>{{ contenido.post | slice:6:contenido.post.length | title }}</label>
+                </div>
+                <div *ngIf="contenido.post[0] == '!'" class="timeline__title content-timeline">
+                  <label class="content label-inform">{{ contenido.post | slice:0:9 }}</label>
+                  <label>{{ contenido.post | slice:9:contenido.post.length | title }}</label>
                 </div>
               </div>
             </li>
           </div>
 
-          <li class="timeline__item">
+          <li class="timeline__item" *ngIf="infoTimeline.length > 0">
             <div class="timeline__step">
-              <div class="timeline__step__marker timeline__step__marker--blue"></div>
+              <div class="timeline__step__marker timeline__step__marker--blue">
+                <ion-icon name="time-outline" style="width: 30px;height: 46px;color: white;margin-bottom: -8px;"></ion-icon>
+              </div>
             </div>
             <div *ngFor="let info of infoTimeline">
               <div class="timeline__time">

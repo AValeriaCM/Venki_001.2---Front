@@ -1,8 +1,5 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start" style="color: white;">
-      <ion-back-button defaultHref="/users/perfil"></ion-back-button>
-    </ion-buttons>
     <ion-title class="tituloInfo logo">
       <label style="color: white;">MAGIN</label>
     </ion-title>
@@ -11,9 +8,9 @@
 
 <ion-content>
 
-  <div class="expansionCsss2">
-    <p class="title">Mis Objetivos</p>
-    <ion-list *ngIf="objetivosList.length > 0" >
+  <div class="text-align-last-center">
+    <ion-badge class="title">Mis Objetivos</ion-badge>
+    <!--<ion-list *ngIf="objetivosList.length > 0" >
       <ion-reorder-group [disabled]="false" (ionItemReorder)=" reorder($event) ">
         <ion-item *ngFor=" let item of objetivosList">
           <ion-label> {{item.achievement}} </ion-label>
@@ -22,11 +19,11 @@
           </ion-reorder>
         </ion-item>  
       </ion-reorder-group>  
-    </ion-list>
+    </ion-list>-->
   </div>
 
-  <ion-row *ngIf="objetivosList.length === 0" style="place-content: center;margin-top: 10px;">
-    <ion-badge color="danger" style="font-size: 14px;padding: 5px 10px;border-radius: 5px;">No existen objetivos</ion-badge>
+  <ion-row class="no-content" *ngIf="targets.length === 0">
+    <ion-badge color="danger" class="badge-no-content">No existen objetivos</ion-badge>
   </ion-row>
 
 </ion-content>

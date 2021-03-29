@@ -84,9 +84,7 @@
 }
 
 .expansionCsss2{
-  background: rgba(11, 105, 199, 0.644);
-  border: 15px black;
-  border-radius: 8px;
+  background: rgb(0 42 104);
 }
 
 .larger{
@@ -94,4 +92,13 @@
     display: inline-block;
     font-size: 20px;
     color: #002a68 !important;
+}
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: white;
+  margin: 15px 0px 0px 0px;
+  padding: 10px;
 }

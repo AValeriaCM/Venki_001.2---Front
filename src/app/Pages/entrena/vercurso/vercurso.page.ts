@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { PassObjectAuxService } from './../../../_services/pass-object-aux.service';
 import { PassObjectExamenService } from './../../../_services/pass-object-examen.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -10,6 +11,7 @@ import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
 import { PassNameLessonsService } from 'src/app/_services/pass-name-lessons.service';
 import { LoadingService } from 'src/app/_services/loading.service';
+
 
 @Component({
   selector: 'app-vercurso',
@@ -134,7 +136,6 @@ export class VercursoPage implements OnInit {
   enviarMensaje() {
     if (this.calificacionVal) {
       this.share.enviarComentarioIPutuacion(this.data.id, this.userinfo.id, this.menajeNuevo, this.calificacionVal).subscribe(data => {
-        console.log('trae serv puntuacion',data);
         this.share.getComentariosCurso(this.data.id).subscribe(info => {
           this.menajeNuevo = '';
           this.calificacionVal = 1;
@@ -191,7 +192,7 @@ export class VercursoPage implements OnInit {
         this.share.updateorder(order);
       }
     });
-    let url = 'http://venki.3utilities.com/' + doc;
+    let url = environment.HOST + doc;
     this.previewAnyFile.preview(url).then(() => {
 
     }, (err) => {
@@ -199,7 +200,7 @@ export class VercursoPage implements OnInit {
   }
 
   audioPlayer(lectionName: any, content: any, order: any, tma: any) {
-    const dataaud = 'http://venki.3utilities.com/' + content;
+    const dataaud = environment.HOST + content;
     const dataObj = {
       name: lectionName,
       audioInfo: dataaud,
@@ -218,10 +219,5 @@ export class VercursoPage implements OnInit {
         .filter((item, itemIndex) => itemIndex !== index)
         .map(item => item.open = false);
     }
-  }
-
-  verRecursos(recursos: any){
-  }
-
- 
+  } 
 }

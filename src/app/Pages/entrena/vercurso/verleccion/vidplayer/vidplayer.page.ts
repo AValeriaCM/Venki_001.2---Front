@@ -53,7 +53,6 @@ export class VidplayerPage implements OnInit {
 
   ngOnInit() {
     let info = this.pObjectoVideo.getNavData();
-    console.log('info vidplayer',info);
     this.share.guardarLeccionActiva(info);
     this.data = info.vidInfo;
     this.orderID = info.orderid;
@@ -62,14 +61,12 @@ export class VidplayerPage implements OnInit {
     this.vid.push(this.data);
     this.share.verorder().then( rval => {
       if (rval === this.tam){
-        this.share.varExam.next('Listo para el examen');
       }else{
         this.share.updateorder(this.orderID);
       }
     });
    
     const informacion = this.PObjectoExamen.getNavData();
-    console.log('lo que necesito en vidplayer:', informacion);
     this.color=informacion.color;
     this.data = informacion.infoCurso;
     this.userinfo = informacion.userInf;
@@ -89,24 +86,18 @@ export class VidplayerPage implements OnInit {
               dttemp.forEach(element => {
                 this.CourseLessonID = element.id;
                 this.progreso = element.pivot.progress;
-                console.log('data Temporal VER:', element.pivot.progress);
               });
-              console.log('LEccion del curso',this.CourseLessonID);
               this.share.hayorder().then( val => {
                 if (val){
-                  console.log('entre true', val);
                   this.share.verorder().then( rval => {
                     this.orderStorage = rval;
-                    console.log('order storage',this.orderStorage,'rval', rval);
                   });
                 }else{
-                  console.log('entre false', val);
                   this.share.iniciorder();
                 }
               });
 
               this.cursos = dttemp;
-              console.log('curso vidplay', this.cursos);
             });
       });
     });
@@ -115,7 +106,6 @@ export class VidplayerPage implements OnInit {
   }
 
   examen(exam: any){
-    console.log('EXAMEN vidplay', exam);
     const dataObj = {
       examen: exam,
     };
@@ -127,7 +117,6 @@ export class VidplayerPage implements OnInit {
     this.pObjectoVideo.setData(this.PObjectoAuxiliar.getNavData());
     this.PObjectoExamen.setData(this.PObjectoAuxiliar.getNavData());
     this.pObjecto.setData(this.PObjectoAuxiliar.getNavData());
-    //this.share.iniciorder();
     this.router.navigate(['/users/entrena/vercurso/verleccion/']);
   }
 }

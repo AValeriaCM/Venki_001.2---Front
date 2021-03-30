@@ -108,24 +108,19 @@ export class AudioplayerPage implements OnInit {
               dttemp.forEach(element => {
                 this.CourseLessonID = element.id;
                 this.progreso = element.pivot.progress;
-                console.log('data Temporal VER:', element.pivot.progress);
               });
-              console.log('LEccion del curso',this.CourseLessonID);
               this.share.hayorder().then( val => {
                 if (val){
                   console.log('entre true', val);
                   this.share.verorder().then( rval => {
                     this.orderStorage = rval;
-                    console.log('storage',this.orderStorage, 'order en el que va',rval);
                   });
                 }else{
-                  console.log('entre false', val);
                   this.share.iniciorder();
                 }
               });
 
               this.cursos = dttemp;
-              console.log('info curso audioplay:', this.cursos);
 
             });
       });
@@ -201,13 +196,11 @@ export class AudioplayerPage implements OnInit {
   //new
   getcursos(userid: any) {
     this.share.getCursos().subscribe(info => {
-      console.log(info + ' info que necesito');
       this.cursos = info.data;
     });
   }
 
   startVideo(lectionName: any, video: any,  order: any, tma: any) {
-    console.log('Video orden', order);
     const dataObj = {
       name: lectionName,
       vidInfo: video,

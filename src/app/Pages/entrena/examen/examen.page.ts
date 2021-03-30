@@ -58,10 +58,8 @@ user: UsuarioCurso;
     const informacion = this.pObjectExamen.getNavData();
     this.examenDT  = informacion.examen.exam;
     this.tama = this.examenDT.length;
-    this.indexLection = this.pObjectIndex.getData();
-    
+    this.indexLection = this.pObjectIndex.getData();    
     const infor = this.pObjectAux.getNavData();
-    //console.log('lo que necesito en vidplayer:', informacion);
     this.color=infor.color;
     this.data = infor.infoCurso;
     this.userinfo = infor.userInf;
@@ -80,21 +78,16 @@ user: UsuarioCurso;
               dttemp.forEach(element => {
                 this.CourseLessonID = element.id;
                 this.progreso = element.pivot.progress;
-                console.log('data progreso temp', this.progreso);
               });
 
               this.cursos = dttemp;
-              console.log('examen progress', this.cursos);
               this.cursos.forEach(element => {
                 this.numLecciones = element.lessons.length;
               });
-              console.log('lecciones',this.numLecciones);
               
             });
       });
-    });
-      //this.calificar();
-    
+    });    
   }
 
   obtenerVal(nombre: any,value: any, correct: any){
@@ -203,7 +196,6 @@ user: UsuarioCurso;
     }else if(varProgreso !== 0 && varProgreso < 1){  
        
       let progress: number;  
-      console.log(this.newProgress,'progreso operacion');//mirar el acumulador
       this.newProgress = this.newProgress + varProgreso;
       console.log('entra acumula',this.newProgress.toFixed(2));
       progress = parseFloat(this.newProgress.toFixed(2));

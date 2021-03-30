@@ -102,6 +102,18 @@
 </ion-content>
 
 <ion-footer *ngIf="progreso !== 0">
+  
+  <div class="row">
+    <div class="col-sm-12">
+        <ul class="list-inline rating-list" 
+            *ngFor="let star of stars" style="display: inline-block" >
+              <li (click)="countStar(star)"
+                  [ngClass]="{'selected': (star <= selectedValue)}">★
+              </li> 
+        </ul>
+    </div>
+  </div>
+
   <ion-toolbar>
     <ion-row class="ion-align-items-center ion-no-padding">
       <ion-col size="10">

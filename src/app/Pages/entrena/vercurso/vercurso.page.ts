@@ -18,6 +18,9 @@ import { LoadingService } from 'src/app/_services/loading.service';
 })
 export class VercursoPage implements OnInit {
 
+  stars: number[] = [1, 2, 3, 4, 5];
+  selectedValue: number;
+
   data: any;
   info;
   calificacionVal;
@@ -119,10 +122,19 @@ export class VercursoPage implements OnInit {
   calificacion(event) {
     this.calificacionVal = event.detail.value;
   }
+/*
+*funcion que cuenta el puntaje de las estrellas de 1 a 5.
+*creada 30/03/2021
+*/
+  countStar(star) {
+    this.selectedValue = star;
+    return this.calificacionVal = this.selectedValue;
+  }
 
   enviarMensaje() {
     if (this.calificacionVal) {
-      this.share.enviarComentarioIPutuacion(this.data.id, this.userinfo, this.menajeNuevo, this.calificacionVal).subscribe(data => {
+      this.share.enviarComentarioIPutuacion(this.data.id, this.userinfo.id, this.menajeNuevo, this.calificacionVal).subscribe(data => {
+        console.log('trae serv puntuacion',data);
         this.share.getComentariosCurso(this.data.id).subscribe(info => {
           this.menajeNuevo = '';
           this.calificacionVal = 1;
@@ -143,7 +155,7 @@ export class VercursoPage implements OnInit {
       subHeader:
         'Por favor califica nuestros cursos, es importante',
       message:
-        'Puedes calificar desplazandote y seleccionando un valor entre 1 y 10 ',
+        'Puedes calificar desplazandote y seleccionando las estrellas para la calificacion de 1 a 5.',
       buttons: ['Acepto'],
     });
     await this.alert.present();
@@ -211,4 +223,5 @@ export class VercursoPage implements OnInit {
   verRecursos(recursos: any){
   }
 
+ 
 }

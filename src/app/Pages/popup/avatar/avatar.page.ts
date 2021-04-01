@@ -1,6 +1,5 @@
 import { UsuariosF } from './../../../_model/_Usuario';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
-import { Router } from '@angular/router';
 import { LoginService } from './../../../_services/login.service';
 import { AuthService } from './../../../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,20 +13,70 @@ import { PopoverController } from '@ionic/angular';
 })
 export class AvatarPage implements OnInit {
 
-  urlImg1: string = "avatar-nuts1";
-  urlImg2: string = "avatar-nuts2";
-  urlImg3: string = "avatar-nuts3";
-  urlImg4: string = "avatar-nuts4";
-  urlImg5: string = "avatar-nuts5";
-  urlImg6: string = "avatar-nuts6";
+  avatars = [
+    {
+      'name': "Gimnasta",
+      'photo': "avatar-nuts1"
+    },
+    {
+      'name': "Gimnasta",
+      'photo': "avatar-nuts2"
+    },
+    {
+      'name': "Ciclista",
+      'photo': "avatar-nuts3"
+    },
+    {
+      'name': "Basquetbolista",
+      'photo': "basketball-player"
+    },
+    {
+      'name': "Boxeador",
+      'photo': "boxer"
+    },
+    {
+      'name': "Buceador",
+      'photo': "diver"
+    },
+    {
+      'name': "Futbolista",
+      'photo': "football"
+    },
+    {
+      'name': "Ping Pong",
+      'photo': "ping-pong"
+    },
+    {
+      'name': "Rugby",
+      'photo': "rugby"
+    },
+    {
+      'name': "Esquiador",
+      'photo': "skier"
+    },
+    {
+      'name': "Nadador",
+      'photo': "swimmer"
+    },
+    {
+      'name': "Tenista",
+      'photo': "tennis"
+    },
+    {
+      'name': "Tenista",
+      'photo': "tennis-player"
+    }
+  ]
+
   idUser:number;
   user: UsuariosF;
 
-  constructor(private popover:PopoverController,
-              private auth: AuthService,
-              private log: LoginService,
-              private share: ShareserviceService,
-              private router: Router){} 
+  constructor(
+    private popover:PopoverController,
+    private auth: AuthService,
+    private log: LoginService,
+    private share: ShareserviceService
+  ){} 
   
   ngOnInit() {
     this.auth.gettokenLog().then( dt => {

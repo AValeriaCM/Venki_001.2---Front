@@ -40,7 +40,6 @@ export class SlidesPage implements OnInit {
   ngOnInit() {
     this.validateProfileUserAuth();
     this.loadForm();
-    this.getProfiles();
   }
 
   validateProfileUserAuth() {
@@ -53,7 +52,7 @@ export class SlidesPage implements OnInit {
             }
           });
           if (resTk.profile_id == null) {
-            this.route.navigateByUrl('/slides');
+            this.getProfiles();
           } else {
             this.route.navigateByUrl('/users/home');
           }

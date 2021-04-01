@@ -49,7 +49,11 @@ const routes: Routes = [
   {
     path: 'target',
     loadChildren: () => import('./Pages/target/target.module').then( m => m.TargetPageModule)
+  },  {
+    path: 'change-password',
+    loadChildren: () => import('./Pages/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
   }
+
 ];
 
 @NgModule({

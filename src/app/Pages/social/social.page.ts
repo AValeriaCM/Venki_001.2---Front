@@ -102,7 +102,6 @@ export class SocialPage implements OnInit {
   getPosts() {
     this.loadingService.loadingPresent({spinner: "circles" });
     this.share.getpost().subscribe( res => {
-      // this.miactividad = res.data.sort((a: any,b: any) => 0 - (a > b ? -1 : 1));
       this.miactividad = res.data;
       this.paginaActual = res.meta.current_page;
       this.ultimaPage = res.meta.first_page;
@@ -183,7 +182,7 @@ export class SocialPage implements OnInit {
         }
         this.share.getpostNextPage(this.paginaActual).subscribe( resPg => {
           resPg.data.forEach(element => {
-            this.miactividad.unshift(element);
+            this.miactividad.push(element);
           });
           event.target.complete();
         });

@@ -35,9 +35,8 @@ ion-slides {
   }
 
   .swiper-slide img {
-    max-height: 50%;
-    max-width: 80%;
-    margin: 60px 0 40px;
+    max-height: 100%;
+    max-width: 100%;
     pointer-events: none;
   }
 
@@ -46,10 +45,8 @@ ion-slides {
   }
 
   p {
-    padding: 0 40px;
+    padding: 0px 10px;
     font-size: 14px;
-    line-height: 1.5;
-    color: var(--ion-color-step-600, #60646b);
   }
 
   p b {
@@ -63,15 +60,13 @@ ion-slides {
   }
 
   .itemback{
-    background-color: #f6f6f685;
-    border: none;
     color: #000000;
     text-decoration: none;
-    border: 2px solid  #ffffff79;
+    border: 2px solid #ffffff79;
     transition: all 0.3s ease-in-out;
     border-radius: 8px;
     --background: rgba(255, 255, 255, 0.438) !important;
-    width: 93%;
+    width: 100%;
   }
 
   .buttonCss{

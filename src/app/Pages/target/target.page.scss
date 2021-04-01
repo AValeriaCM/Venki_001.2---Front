@@ -1,17 +1,23 @@
 .title {
+    padding: 10px 25px;
     text-align: center;
+    font-size: 16px;
+    font-weight: bold;
     text-transform: uppercase;
-    font-size: 15px;
-    color: white;
-    margin: 15px 0px 0px 0px;
-    padding: 10px;
-    font-weight: 500;
-    background-color: #002a68;
 }
 
+.subtitle {
+    padding: 10px 20px;
+    font-size: 15px;
+    text-align: center;
+}
 
-.text-align-last-center {
-    text-align-last: center;
+.badge-instructions {
+    background-color: #002a68;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 12px;
+    margin-left: 15px;
 }
 
 .no-content {
@@ -24,4 +30,23 @@
     padding: 5px 10px;
     border-radius: 5px;
     font-weight: 500
+}
+
+.icon-target {
+    color: white;
+    background-color: #002a68;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.label-target {
+    white-space: normal;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.button-end {
+    --background: #002a68;
+    margin-bottom: 15px;
 }

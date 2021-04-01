@@ -23,7 +23,8 @@ export class RegistroService {
       .set('email', regist.email)
       .set('password', regist.password)
       .set('password_confirmation', regist.password)
-      .set('phone', regist.phone);
+      .set('phone', regist.phone)
+      .set('register_social', String(regist.register_social));
 
 
     return this.http.post(this.basePath + this.url2, body, {

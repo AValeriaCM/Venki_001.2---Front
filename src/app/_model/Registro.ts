@@ -10,4 +10,8 @@ export class Registro {
     description: string;
     institution: string;
     city: string;
+    register_social: boolean;
+    constructor() {
+        this.register_social = true;
+    }
 }

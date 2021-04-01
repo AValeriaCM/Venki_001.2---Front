@@ -1,10 +1,8 @@
 import { AlertController } from '@ionic/angular';
 import { Registro } from './../../_model/Registro';
-import { RegistroService } from './../../_services/registro.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-olvidoc',
@@ -14,19 +12,16 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 export class OlvidocPage implements OnInit {
 
   // ----------Pattern-----------
-
   emailPattern: any = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/;
-  // ----------Pattern-----------
 
   correoForm: FormGroup;
   isSubmitted = false;
   nUsuario: Registro;
 
-  constructor(private router: Router,
-              private snackbar: MatSnackBar,
-              private registro: RegistroService,
-              private formBuilder: FormBuilder,
-              private alertController:AlertController ) { }
+  constructor(
+    private router: Router,
+    private alertController:AlertController 
+  ) { }
 
   ngOnInit() {
     this.inicializarFormulario();
@@ -52,8 +47,8 @@ export class OlvidocPage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Cambio Contraseña',
-      subHeader: 'cambio de contraseña',
-      message: 'por favor revise su correo para cambiar a contraseña.',
+      subHeader: 'Cambio de contraseña',
+      message: 'Por favor revisa tu correo para recuperar tu cuenta',
       buttons: ['OK']
     });
 

@@ -26,20 +26,24 @@ export class TargetPage implements OnInit {
   }
 
   getTargets() {
-    this.loadingService.loadingPresent({spinner: "circles" });
-    this.auth.gettokenLog().then(dt => {
-      this.log.logdataInfData(dt).subscribe(infoUser => {
-        this.userId = infoUser.id;
-        this.share.obtenerObhetivos(this.userId).subscribe((res: any) => {
-          this.targets = res.data;
-          this.loadingService.loadingDismiss();
-        }, error => {
-          this.loadingService.loadingDismiss();
-        });
-      }, error => {
-        this.loadingService.loadingDismiss();
-      });
-    });
+    this.targets.push(
+      { 'target': "Quiero tener mayor agilidad fisica y mental en mi vida y para mi deporte." },
+      { 'target': "Quiero controlar mis emociones y pensamientos." },
+      { 'target': "Quiero tener más motivación tanto en competencia como entrenamientos." },
+      { 'target': "Quiero mejorar mis habitos de bienestar."},
+      { 'target': "Quiero tener más confianza."},
+      { 'target': "Quiero concentrarme más antes, durante y despues una actividad deportiva."},
+      { 'target': "Quiero tener un mejor rendimiento para mi deporte."},
+      { 'target': "Quiero enfocar mi proyecto de vida 100% hacía mi carrera Deportiva."},
+      { 'target': "Quiero aprender a reponerme de los errores y 'volver rápido' a la competencia."},
+      { 'target': "Quiero tener un gran reconocimiento dentro del entorno deportivo."}
+    );
   }
+
+  reorder(event: any) {  
+    const itemMove = this.targets.splice(event.detail.from, 1)[0];
+    this.targets.splice(event.detail.to, 0, itemMove);
+    event.detail.complete();
+  } 
 
 }

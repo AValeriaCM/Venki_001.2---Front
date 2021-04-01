@@ -35,7 +35,7 @@
       </ion-item>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.lastname.valid && (regisform.controls.lastname.touched || regisform.controls.lastname.dirty)">
-        <ion-label>El Apellido debe tener mínimo 5 caracteres</ion-label>
+        <ion-label class="l-error">El Apellido debe tener mínimo 5 caracteres</ion-label>
       </ion-item>
       <div>
         <international-phone-number class="phone form-control form-control-sm"  [maxlength]="22" formControlName="phone" placeholder="Ingres Tu # De Contacto" [defaultCountry]="'co'"
@@ -43,7 +43,7 @@
       </div>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.phone.valid && (regisform.controls.phone.touched || regisform.controls.phone.dirty)">
-        <ion-label>El teléfono debe tener mínimo 10 caracteres</ion-label>
+        <ion-label class="l-error">El teléfono debe tener mínimo 10 caracteres</ion-label>
       </ion-item>
       <ion-item class="ion-item-css">
         <ion-input name="email" type="email" placeholder="Correo electrónico" formControlName="email">
@@ -51,7 +51,7 @@
       </ion-item>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.email.valid && (regisform.controls.email.touched || regisform.controls.email.dirty)">
-        <ion-label>El correo no es valido</ion-label>
+        <ion-label class="l-error">El correo no es valido</ion-label>
       </ion-item>
       <ion-item class="ion-item-css">
         <ion-datetime #myPicker placeholder="Fecha de Nacimiento" text-center (ionChange)="cambioFecha(myPicker.value)" displayFormat="YYYY/MM/DD" min="1980" max="2005"
@@ -65,7 +65,7 @@
       </ion-item>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.password.valid && (regisform.controls.password.touched || regisform.controls.password.dirty)">
-        <ion-label>La Contraseña debe tener: <br>1 numero <br> 1 letra Mayuscula <br> 1 letra minuscula <br> y 8 o más caracteres</ion-label>
+        <ion-label class="l-error">La Contraseña debe tener: <br>1 numero <br> 1 letra Mayuscula <br> 1 letra minuscula <br> y 8 o más caracteres</ion-label>
       </ion-item>
       <ion-item class="ion-item-css">
         <ion-input placeholder="Confirmar Contraseña" [type]="showpasswordConfirm ? 'text' : 'password'"
@@ -74,7 +74,7 @@
       </ion-item>
       <ion-item class='form-text-error'
         *ngIf="regisform.controls.password_confirmation.touched && regisform.hasError('mismatchedPasswords') && regisform.controls.password.valid">
-        <ion-label no-margin stacked>Las contraseñas no coinciden</ion-label>
+        <ion-label no-margin stacked class="l-error">Las contraseñas no coinciden</ion-label>
       </ion-item>
     </form>
     <div *ngIf="edad<18">

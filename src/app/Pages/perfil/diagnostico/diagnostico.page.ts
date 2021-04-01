@@ -1,12 +1,13 @@
-import { element } from 'protractor';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PerfilesService } from 'src/app/_services/perfiles.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { IonSlides, AlertController } from '@ionic/angular';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { DiagnosticHelpComponent } from '../diagnostic-help/diagnostic-help.component';
 import { ModalController } from '@ionic/angular';
+import { LoadingService } from 'src/app/_services/loading.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-diagnostico',
   templateUrl: './diagnostico.page.html',
@@ -44,13 +45,15 @@ export class DiagnosticoPage implements OnInit {
 
   constructor(
     private perfile: PerfilesService,
-    private route: ActivatedRoute,
     private pObjecto: PassObjectService,
     private pEtapa: PassObjectService,
     public alertController: AlertController,
     private share: ShareserviceService,
     private router: Router,
-    private dialogo: ModalController) {
+    private dialogo: ModalController,
+    private loadingService: LoadingService,
+    private snackbar: MatSnackBar
+    ) {
   }
 
   ngOnInit() {
@@ -63,94 +66,105 @@ export class DiagnosticoPage implements OnInit {
     this.diagnosticoTemp = [];
     this.envioDataCuiestionario = [];
     const informacion = this.pObjecto.getNavData();
-    this.profileid = informacion.idprofile;
-    this.userID = informacion.idUser;
+    if(informacion) {
+      this.profileid = informacion.idprofile;
+      this.userID = informacion.idUser;
+    }
     this.pagina=0;
     this.color="ffff";
-    if(this.pagina==0){
+    if(this.pagina==0) { 
       this.color=this.colors[0];
     }
     this.slidefromHtml.lockSwipeToPrev(true);
 
-    this.perfile.getPreguntasPerfil(this.profileid).subscribe((profileQ: any) => {
-      this.preguntot = profileQ.data.length;
-      this.preguntat = profileQ.data.length;
-      this.totallenght  = profileQ.meta.total;
-
-      this.share.retornarDiagnosticoCurrentpage().then( rest => {
-        let tempP = rest;
-        this.pagina=tempP;
-        this.color=this.colors[this.pagina-1];
-        if (tempP === null){
-          this.currentPage = profileQ.meta.current_page;
-          this.existe = false;
-        }else {
-          this.currentPage = tempP;
-          this.existe = true;
-          this.validadExistencia(this.existe);
-        }
-      });
-      this.pagina=this.currentPage;
-      this.share.retornarDiagnosticoLastpage().then( restt  => {
-        let tempL = restt;
-        if (tempL === null){
-          this.lastPage = profileQ.meta.last_page;
-          this.existe = false;
-        }else {
-          this.lastPage = tempL;
-          this.existe  = true;
-        }
-      });
-
-      this.cantidad = profileQ.data.map(value => {
-        value.calificacionVal = 0;
-        return value;
-      });
-
-      this.share.retornarDiagnostico().then( diag => {
-        let result01;
-        if (diag !== null){
-          this.cacheArray = diag;
-        }
-        if(this.currentPage === 5){
-          this.cacheArray.forEach(element => {
-            result01 = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))]
-          });
-          this.arrayFEnv = result01;
-        }
-      });
-
-      this.share.varTotalPreguntas.subscribe( dt => {
+    if(this.profileid) {
+      this.loadingService.loadingPresent({spinner: "circles" });
+      this.perfile.getPreguntasPerfil(this.profileid).subscribe((profileQ: any) => {
+        this.loadingService.loadingDismiss();
+        this.preguntot = profileQ.data.length;
+        this.preguntat = profileQ.data.length;
+        this.totallenght  = profileQ.meta.total;
+  
+        this.share.retornarDiagnosticoCurrentpage().then( rest => {
+          let tempP = rest;
+          this.pagina=tempP;
+          this.color=this.colors[this.pagina-1];
+          if (tempP === null){
+            this.currentPage = profileQ.meta.current_page;
+            this.existe = false;
+          }else {
+            this.currentPage = tempP;
+            this.existe = true;
+            this.validadExistencia(this.existe);
+          }
+        });
+        this.pagina=this.currentPage;
+        this.share.retornarDiagnosticoLastpage().then( restt  => {
+          let tempL = restt;
+          if (tempL === null){
+            this.lastPage = profileQ.meta.last_page;
+            this.existe = false;
+          }else {
+            this.lastPage = tempL;
+            this.existe  = true;
+          }
+        });
+  
+        this.cantidad = profileQ.data.map(value => {
+          value.calificacionVal = 0;
+          return value;
+        });
+  
         this.share.retornarDiagnostico().then( diag => {
-          let result;
+          let result01;
           if (diag !== null){
             this.cacheArray = diag;
           }
-          if (this.currentPage === 5){
+          if(this.currentPage === 5){
             this.cacheArray.forEach(element => {
-              result = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))];
+              result01 = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))]
             });
-            if (result.length !== this.totallenght){
-              this.share.retornarDiagnostico().then( diag => {
-                let result01;
-                if (diag !== null){
-                  this.cacheArray = diag;
-                }
-                if(this.currentPage === 5){
-                  this.cacheArray.forEach(element => {
-                    result01 = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))];
-                  });
-                  this.arrayFEnv = result01;
-                }
-              });
-            } else {
-              this.arrayFEnv = result;
-            }
+            this.arrayFEnv = result01;
           }
         });
+  
+        this.share.varTotalPreguntas.subscribe( dt => {
+          this.share.retornarDiagnostico().then( diag => {
+            let result;
+            if (diag !== null){
+              this.cacheArray = diag;
+            }
+            if (this.currentPage === 5){
+              this.cacheArray.forEach(element => {
+                result = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))];
+              });
+              if (result.length !== this.totallenght){
+                this.share.retornarDiagnostico().then( diag => {
+                  let result01;
+                  if (diag !== null){
+                    this.cacheArray = diag;
+                  }
+                  if(this.currentPage === 5){
+                    this.cacheArray.forEach(element => {
+                      result01 = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))];
+                    });
+                    this.arrayFEnv = result01;
+                  }
+                });
+              } else {
+                this.arrayFEnv = result;
+              }
+            }
+          });
+        }, error => {
+          this.loadingService.loadingDismiss();
+        });
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
-
-    });
+    } else {
+      this.mostrarmensaje('No existen preguntas para el diagnostico', 'Error', 'red-snackbar');
+    }
   }
 
 
@@ -284,7 +298,11 @@ export class DiagnosticoPage implements OnInit {
   }
 
   verifImg() {
-    this.preguntat = this.preguntat - 1;
+    this.slidefromHtml.getActiveIndex().then( index => {
+      if(index > 1) {
+        this.preguntat = this.preguntat - 1;
+      }
+    });
     this.slidefromHtml.lockSwipeToNext(true);
     if (this.finalDta.length === 0) {
       this.alertnodata();
@@ -294,11 +312,6 @@ export class DiagnosticoPage implements OnInit {
       });
     }
   }
-
-  async alertAvisoGif() {
-  
-  }
-
 
    alertDespuesTiempoimg1() {
     const informacion = this.pObjecto.getNavData();
@@ -341,10 +354,17 @@ export class DiagnosticoPage implements OnInit {
     this.alert = await this.alertController.create({
       cssClass: 'my-custom-class2',
       header: 'Recuerda',
-      message: 'Debes Seleccionar un valor en tus preguntas o no podras enviar nada',
-      buttons: ['Entiendo'],
+      message: 'Debes seleccionar un valor en tus preguntas o no podras enviar nigun dato',
+      buttons: ['OK'],
     });
     await this.alert.present();
+  }
+
+  mostrarmensaje(message: string, action: string, type: string) {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+      panelClass: [type],
+    });
   }
 
 }

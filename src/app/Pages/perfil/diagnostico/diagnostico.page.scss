@@ -3,51 +3,58 @@
   }
 .range {
     --knob-size: 40px;
+    --ion-color-base: #002a68 !important;
 }
 .circulo {
-	width: 5rem;
-	border-radius: 50%;
-	background: #002a68;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-    margin:0px auto;
-    padding:3%;
-    color:white;
+    width: 60px;
+    border-radius: 50%;
+    height: 60px;
+    background: #002a68;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0px auto;
+    color: white;
 }
 
-.footer-dis-bot1{
+.footer-dis-bot1 {
     display:list-item;
-    --background:#35538f;
+    --background:#b9b9b9;
 }
 .footer-dis-bot2{
-    --background:#252632;
-    display:list-item;
+    --background: #002a68;
+    display: list-item;
 }
-.question-st{
-    padding:3px 10px;
-    border:#002a68 2px solid;
-    border-radius:20px;
+.question-st {
+    padding: 3px 10px;
+    border: 1px solid #b9b9b9;
+    border-width: 1px !important;
+    border-radius: 7px;
+    box-shadow: none;
 }
-.questions{
-    margin:22px;
+
+.questions {
+    margin: 10px;
+    background: white;
+    border-radius: 10px;
+    height: 95%;
 }
+
 .icono-lateral{
     color:#002a68;
     font-size:20px;
 }
-.title-css{
-    color: rgb(8, 8, 8);
-    margin: 0;
-    padding: 0px 0px 6px 0px;
-    font-size: 21px;
-    line-height: 44px;
+.title-css {
+    color: #ffffff;
+    margin: 15px 0px 0px;
+    font-size: 18px;
     letter-spacing: 1px;
-    font-weight: bold;
+    font-weight: 500;
     text-align: center;
     white-space: normal;
-    background-color:whitesmoke
+    background-color: #002a68;
+    padding: 10px;
 }
 
 .subtitle-css{
@@ -98,4 +105,42 @@ ion-slides {
     --background: whitesmoke;
     --backdrop-opacity: 0.33;
     text-align: center;
+}
+
+.title {
+    text-align: center;
+    padding-top: 10px;
+    background-color: #f4f4f4;
+}
+
+.bagde-title {
+    background-color: #002a68;
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.icon-danger {
+    background: #f44336;
+    --ion-color-base: white !important;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 20px;
+    font-size: 30px;
+}
+
+.icon-success {
+    background: #4caf50;
+    --ion-color-base: white !important;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 30px;
+}
+
+.label-content {
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 15px;
 }

@@ -43,7 +43,7 @@ export class DiagnosticoInicioPage implements OnInit {
 
   async diagnosticoRedirect(){
     this.pObjecto.setData(this.informacion);
-    this.router.navigate(['/users/perfil/diagnostico/']);
+    this.router.navigate(['/users/perfil/diagnostico']);
   }
 
   getcursos() {

@@ -116,10 +116,8 @@ export class MisObjetivosPage implements OnInit {
   volver() {
     this.route.navigateByUrl('/users/perfil');
   }
-/*
-*funcion de manejo para el reordenar el vector de los objetivos.
-*/
-  reorder(event){  
+
+  reorder(event) {  
       const itemMover = this.objetivosList.splice(event.detail.from ,1)[0];
       this.objetivosList.splice(event.detail.to, 0, itemMover);
       event.detail.complete(true);
@@ -129,7 +127,6 @@ export class MisObjetivosPage implements OnInit {
         this.share.actualizarObjetivos(obj, this.userId).subscribe(() =>{ 
       });
         });
-      
-      } 
+  } 
   
 }

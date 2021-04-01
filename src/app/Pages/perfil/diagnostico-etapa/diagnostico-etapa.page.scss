@@ -151,9 +151,12 @@ h3{
     background-image: url(../../../../assets/globos.gif);
     background-repeat: no-repeat;
     background-position: right;
-    background-size: 80px;
-    border: white 2px outset;
-    margin: 10px;
+    background-size: 120px;
+    border: 1px solid #d6d6d6;
+    border-left: 4px solid #0d3570;
+    margin: 0px 10px;
+    box-shadow: none !important;
+    border-radius: 10px;
  }
  
  @media(max-width: 990px){
@@ -167,6 +170,6 @@ h3{
 }
 
 .footer-dis-bot2{
-    --background:#0c1626;
-    display:list-item;
+  --background: #0d3570;
+  display: list-item;
 }

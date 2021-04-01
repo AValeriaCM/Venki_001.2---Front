@@ -79,14 +79,12 @@ export class HomePage implements OnInit {
   }
 
   getActiveCourse() {
-    console.log('entro getActiveCourse');
     this.share.getcursoActivo().then( info => {
       this.cursoActivo = info;
     });
   }
 
   getActiveLesson() {
-    console.log('entro getActiveLesson');
     this.share.getleccionActiva().then( resp => {
       this.leccionActiva = resp;
     });

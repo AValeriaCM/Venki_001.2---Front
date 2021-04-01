@@ -108,7 +108,7 @@ export class EntrenaPage implements OnInit {
   getcursos() {
     this.loadingService.loadingPresent({spinner: "circles" });
     this.share.getCategorias().subscribe(info => {
-      this.cursos = info.data;
+      this.cursos = info.data.reverse();
       this.cursosCargados = info.data;
       this.loadingService.loadingDismiss();
     }, error => {

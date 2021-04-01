@@ -51,44 +51,12 @@ export class DiagnosticoEtapaPage implements OnInit {
 
   createDoughnutChart() {
     this.arrayBac= [
-      "rgba(0, 42, 104, 0.95)",
-      "rgba(20, 20, 240, 0.2)",
-      "rgba(10, 155, 240, 0.2)",
-      "rgba(216, 99, 99, 0.2)"
+      "rgba(255, 152, 0, 1)",
+      "rgba(244, 67, 54, 1)",
+      "rgba(76, 175, 80, 1)",
+      "rgba(33, 150, 243, 1)",
+      "rgba(244, 67, 54, 1)"
     ];
-    if(this.etapa==2){
-      this.arrayBac= [
-        "rgba(0, 42, 104, 0.95)",
-        "rgba(20, 20, 240, 0.95)",
-        "rgba(10, 155, 240, 0.2)",
-        "rgba(216, 99, 99, 0.2)"
-      ];
-    }
-    if(this.etapa==3){
-      this.arrayBac= [
-        "rgba(0, 42, 104, 0.95)",
-        "rgba(20, 20, 240, 0.95)",
-        "rgba(10, 155, 240, 0.95)",
-        "rgba(216, 99, 99, 0.2)"
-      ];
-    }
-    if(this.etapa==3){
-      this.arrayBac= [
-        "rgba(0, 42, 104, 0.95)",
-        "rgba(20, 20, 240, 0.95)",
-        "rgba(10, 155, 240, 0.95)",
-        "rgba(216, 99, 99, 0.2)"
-      ];
-    }
-    if(this.etapa==4){
-      this.arrayBac= [
-        "rgba(0, 42, 104, 0.95)",
-        "rgba(20, 20, 240, 0.95)",
-        "rgba(10, 155, 240, 0.95)",
-        "rgba(85, 97, 240, 0.95)",
-        "rgba(216, 99, 99,1)"
-      ];
-    }
     this.donuts = new Chart(this.doughnutChart.nativeElement, {
       type: 'doughnut',
       data: {
@@ -96,13 +64,13 @@ export class DiagnosticoEtapaPage implements OnInit {
         datasets: [{
           label: "# of Votes",
           data: [0.25,0.25,0.25,0.25],
-          backgroundColor:  this.arrayBac, // array should have same number of elements as number of dataset
+          backgroundColor:  this.arrayBac,
           borderColor:[
-            "rgba(0,12,30, 1)",
-            "rgba(185, 197, 202, 1)",
-            "rgba(185, 197, 202, 1)",
-            "rgba(185, 197, 202, 1)",
-          ],// array should have same number of elements as number of dataset
+            "rgba(255, 152, 0, 1)",
+            "rgba(244, 67, 54, 1)",
+            "rgba(76, 175, 80, 1)",
+            "rgba(33, 150, 243, 1)",
+          ],
           borderWidth: 1,
           hoverBackgroundColor: ["#8BB9F6", "#848B94B"]
         }]
@@ -110,13 +78,11 @@ export class DiagnosticoEtapaPage implements OnInit {
       options: {
         rotation: 1 * Math.PI,
         circumference: 1 * Math.PI,
-      
         legend: {
           position: 'bottom'
         }
       }
-      });
- 
+    });
   }
 }
 

@@ -46,8 +46,8 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
 
   scrollToBottom() {
     if (this.menjs.length === 15) {
-      this.content.scrollToBottom(100);
-      this.scrollBottom = false;
+      this.content.scrollToBottom();
+      this.scrollBottom = true;
     }
   }
 
@@ -83,7 +83,7 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
     if(this.data.id) {
       this.chatS.getchatsMSGUser(this.data.id).subscribe((msgServ: any) => {
         this.total = msgServ.meta;
-        this.menjs = msgServ.data.reverse();
+        this.menjs = msgServ.data;
         const currentPage = this.total.current_page;
         this.page = currentPage + 1;
         this.loadingService.loadingDismiss();

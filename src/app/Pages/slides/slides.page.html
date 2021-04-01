@@ -71,10 +71,9 @@
                 <h3>{{ mensaje }}</h3>
                 <div formArrayName="profiles" *ngFor="let profile of profilesArray.controls">
 
-                    <ion-item [formGroupName]="profile.value.index" class="itemback" style="padding-top: 0px;margin-bottom: 4px;margin-left: 10px;margin-right: 50px; background-image: url(http://venki.inkdigital.co/medias/{{profile.value.profile.photo}});">
-                        <br>
+                    <ion-item [formGroupName]="profile.value.index" class="itemback">
                         <ion-checkbox slot="end" color="primary" formControlName="selected" (ngModelChange)="selectProfile($event, profile.value.index)"></ion-checkbox>
-                        <p style="color: darkblue; text-align: justify; text-transform: uppercase; font-weight: bolder;">{{profile.value.profile.name}}</p>
+                        <p style="text-transform: uppercase; font-weight: 500;">{{profile.value.profile.name}}</p>
                     </ion-item>
                 </div>
                 <ion-button class="buttonCss" (click)="continuar()" [disabled]="!form.valid">Continuar

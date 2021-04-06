@@ -10,6 +10,7 @@ import { EventEmitter } from 'events';
 import { PassNameLessonsService } from 'src/app/_services/pass-name-lessons.service';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-verleccion',
@@ -17,6 +18,10 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./verleccion.page.scss'],
 })
 export class VerleccionPage implements OnInit {
+
+  @ViewChild(IonContent) content: IonContent;
+  @Input() mensaje: any;
+  @Input() infoVideo = new EventEmitter();
 
   data: any;
   info;
@@ -40,13 +45,9 @@ export class VerleccionPage implements OnInit {
   color:string;
   progreso: any;
   index: number;
+  token: any;
 
-lectionName: any; video: any;  order: any; tma: any;
-
-  @ViewChild(IonContent) content: IonContent;
-  @Input() mensaje: any;
-  @Input()  
-  infoVideo = new EventEmitter();
+  lectionName: any; video: any;  order: any; tma: any;
 
   basePath = `${environment.HOST}`;
   
@@ -59,10 +60,23 @@ lectionName: any; video: any;  order: any; tma: any;
     private pObjecAux: PassObjectAuxService,
     private pObjectIndex: PassNameLessonsService,
     private previewAnyFile: PreviewAnyFile,
-    private loadingService: LoadingService
-    ) { }
+    private loadingService: LoadingService,
+    private auth: AuthService
+    ) { 
+      this.getToken();
+    }
 
   ngOnInit() {
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadPage();
+    });
+  }
+
+  loadPage() {
     this.index = this.pObjectIndex.getData();
     const informacion = this.pObjecto.getNavData();
     this.color=informacion.color;
@@ -91,11 +105,11 @@ lectionName: any; video: any;  order: any; tma: any;
 
   getCourse() {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
+    this.share.getCursoEspecifico(this.data.id, this.token).subscribe(async infodt => {
       this.info = infodt.data;
-      this.share.getComentariosCurso(this.data.id).subscribe(info => {
+      this.share.getComentariosCurso(this.data.id, this.token).subscribe(info => {
         this.comentariosGeneral = info.data;
-        this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
+        this.share.getCursosUsuario(this.userinfo.id, this.token).subscribe(dataCurso => {
           this.loadingService.loadingDismiss();
           let temid  = dataCurso.data;
           let dttemp = temid.filter(r => r.id === this.courseID);
@@ -130,8 +144,8 @@ lectionName: any; video: any;  order: any; tma: any;
 
   enviarMensaje() {
     if (this.calificacionVal) {
-      this.share.enviarComentarioIPutuacion(this.data.id, this.userinfo, this.menajeNuevo, this.calificacionVal).subscribe(data => {
-        this.share.getComentariosCurso(this.data.id).subscribe(info => {
+      this.share.enviarComentarioIPutuacion(this.data.id, this.userinfo, this.menajeNuevo, this.calificacionVal, this.token).subscribe(data => {
+        this.share.getComentariosCurso(this.data.id, this.token).subscribe(info => {
           this.menajeNuevo = '';
           this.calificacionVal = 1;
           this.comentariosGeneral = info.data;
@@ -158,7 +172,7 @@ lectionName: any; video: any;  order: any; tma: any;
   }
 
   getcursos(userid: any) {
-    this.share.getCursos().subscribe(info => {
+    this.share.getCursos(this.token).subscribe(info => {
       this.cursos = info.data;
     });
   }

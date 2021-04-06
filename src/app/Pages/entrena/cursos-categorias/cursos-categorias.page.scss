@@ -232,7 +232,18 @@ hr.dashed {
 
 .description-course {
     color: black;
-    padding: 5px 10px;
-    font-size: 16px;
     white-space: break-spaces;
+    padding: 10px;
+    font-weight: bold;
+    height: 60px;
+    font-size: 15px;
+}
+
+.div-content {
+    width: 90%;
+    background-color: #0000000d;
+    border-radius: 10px;
+    border: 1px solid #ececec;
+    padding: 10px;
+    margin-top: 5px;
 }

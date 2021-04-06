@@ -84,8 +84,8 @@
           <label class="content-post">{{ pst.post | slice:9:pst.post.length | title }}</label>
         </div>
 
-        <div *ngIf="pst.medias.length !== 0">
-          <ion-slides [options]="sliderImgOption">
+        <div *ngIf="pst.medias.length !== 0" class="slides-social">
+          <ion-slides [options]="sliderImgOption" pager="true">
             <ion-slide *ngFor="let imag of pst.medias">
               <img class="image-cont" src="{{basePath}}medias/{{imag.media}}" (click)="imageView(imag.media)">
             </ion-slide>
@@ -114,6 +114,9 @@
       </div>
     </ion-card>
   </ion-list>
+  <div *ngIf="miactividad.length === 0" style="text-align: center;margin-top: 15px;">
+    <ion-badge color="warning" style="font-size: 14px;">No existen publicaciones</ion-badge>
+  </div>
   <ion-infinite-scroll threshold="10%" position="center" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
     </ion-infinite-scroll-content>

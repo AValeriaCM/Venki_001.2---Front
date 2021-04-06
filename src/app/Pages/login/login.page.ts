@@ -47,6 +47,7 @@ export class LoginPage implements OnInit {
               this.log.saveDevice(resTk.id, DeviceTk);
             }
           });
+          console.log('resTk.profile_id', resTk.profile_id);
           if (resTk.profile_id == null) {
             this.route.navigateByUrl('/slides');
           } else {
@@ -101,7 +102,9 @@ export class LoginPage implements OnInit {
                 this.log.saveDevice(resTk.id, DeviceTk);
               });
               this.inicializarFormulario();
-              if(resTk.profile_id === null) {
+              if(resTk.register_social == 1) {
+                this.route.navigateByUrl('/change-password');
+              } else if(resTk.profile_id === null) {
                 this.route.navigateByUrl('/slides');
               } else{ 
                 this.route.navigateByUrl('/users/home');

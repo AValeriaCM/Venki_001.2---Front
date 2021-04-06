@@ -52,9 +52,9 @@
               <ion-icon slot="end" color="success" name="happy" class="icon-success"></ion-icon>
             </ion-range>
             <div *ngIf="dt.calificacionVal as value; else elseBlock">
-              <img style="margin-top: 25px;" src="../../../assets/estados/{{value}}.png">
+              <img src="../../../assets/estados/{{value}}.png">
             </div>
-            <ng-template #elseBlock><img style="margin-top: 25px;" src="../../../assets/estados/1.png"></ng-template>
+            <ng-template #elseBlock><img src="../../../assets/estados/1.png"></ng-template>
             <ion-row  [hidden]="finalDta.length  !== preguntot">
               <ion-col>
                 <ion-button size="small" [hidden]="pagina == 4"  class="footer-dis-bot1" (click)="guardar()">
@@ -71,7 +71,7 @@
             </ion-row>
           </ion-col>
         </ion-row>
-        <ion-row [hidden]="finalDta.length  !== preguntot">
+        <ion-row [hidden]="finalDta.length !== preguntot" style="place-content: center;">
             <ion-button [hidden]="pagina != 4" class="footer-dis-bot2" (click)="enviarQuestion()">Enviar</ion-button>
         </ion-row>
       </ion-grid>

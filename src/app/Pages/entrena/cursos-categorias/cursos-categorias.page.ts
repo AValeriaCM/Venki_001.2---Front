@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { AuthService } from 'src/app/_services/auth.service';
 
 declare let cordova: any;
 
@@ -24,7 +25,7 @@ export class CursosCategoriasPage implements OnInit{
   video: any;
   usertk = null;
   userIDName: any; 
-  coursetk: any;
+  coursetk = null;
   color:String;
   cursos: any[] = [];
   cursosUser: any[] = [];
@@ -33,6 +34,8 @@ export class CursosCategoriasPage implements OnInit{
   alert: any;
   cursoId: any[] =[];
   basePath = `${environment.HOST}`;
+  token: any;
+
   constructor(
     private router: Router,
     private share: ShareserviceService,
@@ -43,11 +46,23 @@ export class CursosCategoriasPage implements OnInit{
     private snackbar: MatSnackBar,
     private fileOpener: FileOpener,
     private diagnostic: Diagnostic,
-    private transfer: FileTransfer 
-    ) { }
+    private transfer: FileTransfer,
+    private auth: AuthService 
+    ) {
+      this.getToken();
+  }
 
   ngOnInit() {
 
+  }
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadPage();
+    });
+  }
+
+  loadPage() {
     let informacion = this.pObjecto.getNavData();
     this.color=informacion.color;
     this.usertk = informacion.userInf;
@@ -59,12 +74,12 @@ export class CursosCategoriasPage implements OnInit{
       this.video = null;
     }
     this.getcursos(this.usertk.id, this.coursetk.id);
-    this.share.getCursosUsuario(this.userIDName);  
+    this.share.getCursosUsuario(this.userIDName, this.token); 
   }
 
   getcursos(userid: any, categoriaid: any) {
     this.loadingService.loadingPresent({spinner: "circles" });
-      this.share.getCursosCategorias(categoriaid, userid).subscribe(dataCurso => {
+      this.share.getCursosCategorias(categoriaid, userid, this.token).subscribe(dataCurso => {
         this.cursosUser = dataCurso;
         this.cursosU=this.cursosUser;
         this.loadingService.loadingDismiss();
@@ -89,7 +104,7 @@ export class CursosCategoriasPage implements OnInit{
   }
 
   agregarCurso(curso: any) {
-    this.share.getCursosUsuario(this.userIDName).subscribe(dataCurso =>{
+    this.share.getCursosUsuario(this.userIDName, this.token).subscribe(dataCurso =>{
       let temid  = dataCurso.data;
       temid.forEach(element => {
         if(element.id == curso.id){
@@ -97,7 +112,7 @@ export class CursosCategoriasPage implements OnInit{
         }
       });
       if(this.cursoId != curso.id || this.cursoId.length == 0){
-        this.share.agregarCurso(this.usertk.id, curso.id).subscribe(data => {
+        this.share.agregarCurso(this.usertk.id, curso.id, this.token).subscribe(data => {
         });
       }else{
         this.alertDespuesTiempo();

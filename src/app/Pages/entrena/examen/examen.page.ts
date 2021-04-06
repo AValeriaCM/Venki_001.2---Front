@@ -10,6 +10,7 @@ import { AlertController } from '@ionic/angular';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { UsuarioCurso } from 'src/app/_model/UsuarioCurso';
 import { LoadingService } from 'src/app/_services/loading.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-examen',
@@ -40,6 +41,7 @@ export class ExamenPage implements OnInit {
   indexLection: number;
   newProgress: number;
   user: UsuarioCurso;
+  token: any;
 
   constructor(
     private pObjecto: PassObjectService,
@@ -50,16 +52,28 @@ export class ExamenPage implements OnInit {
     private alertController: AlertController,
     private share: ShareserviceService,
     private router: Router,
-    private loadingService: LoadingService
-  ) { }
+    private loadingService: LoadingService,
+    private auth: AuthService
+  ) { 
+    this.getToken();
+  }
 
   ngOnInit() {
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadPage();
+    });
+  }
+
+  loadPage() {
     this.totalExam = [];
     const informacion = this.pObjectExamen.getNavData();
     this.examenDT  = informacion.examen.exam;
     this.tama = this.examenDT.length;
-    this.indexLection = this.pObjectIndex.getData();
-    
+    this.indexLection = this.pObjectIndex.getData();    
     const infor = this.pObjectAux.getNavData();
     if( infor ) {
       this.color=infor.color;
@@ -73,12 +87,11 @@ export class ExamenPage implements OnInit {
 
   getCourse() {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
+    this.share.getCursoEspecifico(this.data.id, this.token).subscribe(async infodt => {
       this.info = infodt.data;
-      this.share.getComentariosCurso(this.data.id).subscribe(info => {
+      this.share.getComentariosCurso(this.data.id, this.token).subscribe(info => {
         this.comentariosGeneral = info.data;
-        this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
-          this.loadingService.loadingDismiss();
+        this.share.getCursosUsuario(this.userinfo.id, this.token).subscribe(dataCurso => {
           let temid  = dataCurso.data;
           let dttemp = temid.filter(r => r.id === this.courseID);
           dttemp.forEach(element => {
@@ -88,16 +101,10 @@ export class ExamenPage implements OnInit {
           this.cursos = dttemp;
           this.cursos.forEach(element => {
             this.numLecciones = element.lessons.length;
-          });          
-        }, error => {
-          this.loadingService.loadingDismiss();
+          });
         });
-      }, error => {
-        this.loadingService.loadingDismiss();
       });
-    }, error => {
-      this.loadingService.loadingDismiss();
-    });
+    });    
   }
 
   obtenerVal(nombre: any,value: any, correct: any){
@@ -188,12 +195,12 @@ export class ExamenPage implements OnInit {
     this.newProgress = 1/this.numLecciones;
     if( varProgreso >= 0.60 && varProgreso < 1 && this.numLecciones == 3){
       this.user.progress = 1;
-      this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress).subscribe(()=>{
+      this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress, this.token).subscribe(()=>{
         this.alertProgreso();
       });
     }else if( varProgreso == 0 && varProgreso < 1){
       this.user.progress =  parseFloat(this.newProgress.toFixed(2));
-      this.share.actualizarProgreso(this.userinfo.id,this.courseID,this.user.progress).subscribe(()=>{
+      this.share.actualizarProgreso(this.userinfo.id,this.courseID,this.user.progress, this.token).subscribe(()=>{
       });
       this.alertProgreso();
     }else if(varProgreso !== 0 && varProgreso < 1){  
@@ -201,7 +208,7 @@ export class ExamenPage implements OnInit {
       this.newProgress = this.newProgress + varProgreso;
       progress = parseFloat(this.newProgress.toFixed(2));
       this.user.progress = progress; 
-      this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress).subscribe(()=>{
+      this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress, this.token).subscribe(()=>{
         this.alertProgreso();
       });
     }

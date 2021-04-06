@@ -21,8 +21,9 @@ export class ChatPage implements OnInit {
   nameUser: any;
   userTk = null;
   filterList = '';
-  searchActive = false;
   notifications = false;
+  token: any;
+  message_header: string;
 
   constructor(
     private router: Router,
@@ -34,14 +35,34 @@ export class ChatPage implements OnInit {
     ) {
       this.textoBuscar = '';
       this.filterList = '';
+      this.getToken();
+      this.getCurrentHour();
   }
 
   ngOnInit() {
     this.data = [];
     this.userList = [];
-    this.getUserAuth();
-    this.chatS.removeNotification();
-    this.chatS.var.next('token remove');
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.getUserAuth();
+      this.chatS.removeNotification();
+      this.chatS.var.next('token remove');
+    });
+  }
+
+  getCurrentHour() {
+    var today = new Date()
+    var curHr = today.getHours()
+    if (curHr < 12) {
+      this.message_header = "Buenos días";
+    } else if (curHr < 18) {
+      this.message_header = "Buenas tardes";
+    } else {
+      this.message_header = "Buenas noches";
+    }
   }
 
   getUserAuth() {
@@ -61,7 +82,7 @@ export class ChatPage implements OnInit {
 
   getUsersChats() {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.chatS.getchatsUser(this.idUser).subscribe((chatData: any)  => {
+    this.chatS.getchatsUser(this.idUser, this.token).subscribe((chatData: any)  => {
       var chats = chatData.data.filter( (user: any) => user.receiver.id !== this.idUser);
       chats.map( (chat: any) => {
         const message = chat;
@@ -84,7 +105,7 @@ export class ChatPage implements OnInit {
     this.textoBuscar = event.detail.value;
     if(this.textoBuscar != '') {
       this.loadingService.loadingPresent({spinner: "circles" });
-      this.chatS.getAllUsers(this.textoBuscar).subscribe( allUser => {
+      this.chatS.getAllUsers(this.textoBuscar, this.token).subscribe( allUser => {
         if(allUser.data.length > 0) {
           const users = this.validateUsers(allUser.data); 
           this.data = users.filter( (user: any) => user.id !== this.idUser);
@@ -112,14 +133,7 @@ export class ChatPage implements OnInit {
     return listUsers;
   } 
 
-  openSearch() {
-    if(!this.notifications) {
-      this.searchActive = true
-    }
-  }
-
   closeSearch() {
-    this.searchActive = false;
     this.textoBuscar = '';
     this.filterList = '';
     this.data = []; 
@@ -154,9 +168,5 @@ export class ChatPage implements OnInit {
     };
     this.pObjecto.setData(dataObj);
     this.router.navigate(['/users/chat/mensaje-busqueda']);
-  }
-
-  volverHome() {
-    this.router.navigate(['/users/home']);
   }
 }

@@ -6,14 +6,14 @@ import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ChatServiceService } from 'src/app/_services/chat-service.service';
-import { AlertController, IonInfiniteScroll, LoadingController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, LoadingController, ModalController } from '@ionic/angular';
 import { LoginService } from 'src/app/_services/login.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { PopoverController } from '@ionic/angular';  
 import { AvatarPage } from '../popup/avatar/avatar.page';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { environment } from 'src/environments/environment';
-
+import { ImageModalPage } from '../social/image-modal/image-modal.page';
 
 @Component({
   selector: 'app-perfil',
@@ -25,13 +25,11 @@ export class PerfilPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infonitescroll: IonInfiniteScroll;
 
   sliderImgOption = {
+    initialSlide: 0,
     zoom: false,
-    slidesPerView: 1.5,
-    cemteredSlides: true,
-    spaceBetween: 20
   };
 
-  miactividad: any;
+  miactividad = [];
 
   trofeosInsig = [];
 
@@ -58,17 +56,15 @@ export class PerfilPage implements OnInit {
   contrasenaPattern: any = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
   adressPattern: any = /^[#.0-9a-zA-Z\s,-]+$/;
   phonePatten: any = /^[ +0-9 +]+$/;
-  
   editarForm: FormGroup;
   isSubmitted = false;
   editarUser: Registro;
-  situacionS = null;
-
   message_header: string;
   basePath = `${environment.HOST}`;
   coursesProgress = [];
   coursesCompleted = [];
-  
+  token: any;
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -81,11 +77,13 @@ export class PerfilPage implements OnInit {
     public alertController: AlertController,
     private popover:PopoverController,
     private edit: RegistroService ,
-    private loadingService: LoadingService 
-  ) { }
+    private loadingService: LoadingService,
+    private modelcontroller: ModalController 
+  ) { 
+    this.getToken();
+  }
 
   ngOnInit() {
-
     this.getCurrentHour();
     this.chatS.var.subscribe(chatMsg => {
       this.msj = this.chatS.getbadge();
@@ -93,6 +91,12 @@ export class PerfilPage implements OnInit {
     this.msj = this.chatS.getbadge();
     this.cart = this.share.getCart();
     this.getAuthUser();
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+    });
   }
 
   getAuthUser() {
@@ -147,7 +151,7 @@ export class PerfilPage implements OnInit {
 
   getMiactividad(userid: any) {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getActividadUsuario(userid).subscribe(info => {
+    this.share.getActividadUsuario(userid, this.token).subscribe(info => {
       this.miactividad = info.data;
       this.paginaActual = info.meta.current_page;
       this.ultimaPage = info.meta.last_page;
@@ -159,7 +163,7 @@ export class PerfilPage implements OnInit {
   }
 
   getcursos(userid: any) {
-    this.share.getCursosUsuario(userid).subscribe(info => {
+    this.share.getCursosUsuario(userid, this.token).subscribe(info => {
       this.coursesProgress = info.data.filter( (course: any) => course.pivot.progress != 1 );
       this.coursesCompleted = info.data.filter( (course: any) => course.pivot.progress == 1 );
     });
@@ -212,7 +216,7 @@ export class PerfilPage implements OnInit {
   }
 
 
-  loadData(event){
+  loadData(event) {
     this.paginaActual = this.paginaActual + 1;
     setTimeout(() => {
         if (this.miactividad.length >= this.totalDt){
@@ -220,7 +224,7 @@ export class PerfilPage implements OnInit {
           this.infonitescroll.disabled  = true;
           return;
         }
-        this.share.getpostNextPage(this.paginaActual).subscribe( resPg => {
+        this.share.getpostNextPage(this.paginaActual, this.token).subscribe( resPg => {
           resPg.data.forEach(element => {
             this.miactividad.push(element);
           });
@@ -249,23 +253,30 @@ export class PerfilPage implements OnInit {
         [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
       city : new FormControl(dt.city,
           [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+      status : new FormControl(dt.status,[Validators.required]),
     });
   }
 
   editar(){
     this.editarUser = this.editarForm.value;
-    this.edit.Editartodo(this.editarUser, this.usertk.id, this.situacionS).subscribe( response => {
+    this.edit.Editartodo(this.editarUser, this.usertk.id, this.editarForm.value.status, this.token).subscribe( response => {
       this.auth.updateToken();
       this.share.var.next('data update');
       this.router.navigateByUrl('/users/home');
     });
   }
 
-  optionsFn(it: any){
-    this.situacionS = it.situacion;
-  }
-
   logout(){
     this.auth.logout();
+  }
+
+  imageView(imag: any) {
+    const url = this.basePath+"medias/"+imag; 
+    this.modelcontroller.create({
+      component: ImageModalPage,
+      componentProps: {
+        img: url
+      }
+    }).then(model => model.present());
   }
 }

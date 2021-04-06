@@ -15,72 +15,67 @@
     <ion-label><ion-icon name="search-outline"></ion-icon></ion-label>
     <ion-input placeholder="Buscar" (keyup)="filtrar($event)"></ion-input>
   </ion-item>
-  <div class="divBack">
-    <ion-grid style="padding: 5px 0px;">
-      <ion-row>
-        <ion-title class="title-gen">
-          <h1 class="title-cat" [ngStyle]="{'color': color}">
-            <strong>{{coursetk.name.split(':')[0]}}</strong>
-          </h1>
-        </ion-title>
-      </ion-row>
-      <ion-row>
-        <ion-title class="title-gen">
-          <div class="title-emb">
-            <p>
-              {{coursetk.name.split(':')[1]}}
-            </p>
+  <div class="divBack" *ngIf="coursetk">
+    <ion-grid style="padding: 5px 0px;text-align: -webkit-center;">
+      <div class="div-content">
+        <ion-row>
+          <ion-title class="title-gen">
+            <h1 class="title-cat" [ngStyle]="{'color': color}">
+              <strong>{{coursetk.name.split(':')[0]}}</strong>
+            </h1>
+          </ion-title>
+        </ion-row>
+        <ion-row>
+          <ion-title class="title-gen">
+            <div class="title-emb">
+              <p>
+                {{coursetk.name.split(':')[1]}}
+              </p>
+            </div>
+          </ion-title>
+        </ion-row>
+        <ion-row *ngIf="video">
+          <iframe #playerVim [src]="video" frameborder="0" allow="autoplay;" width="100%" height="100%"
+            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </ion-row>
+        <ion-row *ngIf="!video" style="place-content: center;padding-bottom: 10px;">
+          <ion-badge color="danger">No existe video para la categoria</ion-badge>
+        </ion-row>
+  
+        <ion-row style="place-content: center;" *ngIf="coursetk.pdf">
+          <div style="margin: 5px 0px;">
+            <ion-button (click)="descargarPDF()">
+              <ion-icon name="download-outline"></ion-icon>
+              Más información
+            </ion-button>
           </div>
-        </ion-title>
-      </ion-row>
-      <ion-row *ngIf="video">
-        <iframe #playerVim [src]="video" frameborder="0" allow="autoplay;" width="100%" height="100%"
-          webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      </ion-row>
-      <ion-row *ngIf="!video" style="place-content: center;padding-bottom: 10px;">
-        <ion-badge color="danger">No existe video para la categoria</ion-badge>
-      </ion-row>
-
-      <ion-row style="place-content: center;" *ngIf="coursetk.pdf">
-        <div style="margin: 5px 0px;">
-          <ion-button (click)="descargarPDF()">
-            <ion-icon name="download-outline"></ion-icon>
-            Más información
-          </ion-button>
-        </div>
-      </ion-row>
-      <ion-row *ngIf="!coursetk.pdf" style="place-content: center;padding-bottom: 10px;">
-        <ion-badge color="danger">No existe información adicional para mostrar</ion-badge>
-      </ion-row>
+        </ion-row>
+        <ion-row *ngIf="!coursetk.pdf" style="place-content: center;padding-bottom: 10px;">
+          <ion-badge color="danger">No existe información adicional para mostrar</ion-badge>
+        </ion-row>
+      </div>
       <ion-row *ngIf="cursosUser.length > 0">
         <ion-col size="12" style="padding: 5px 0px;">
           <ion-list lines="none">
-            <ion-list-header style="color: black;">
-              <ion-badge color="primary" class="title-courses">Listado de cursos:</ion-badge>
-            </ion-list-header>
-            <div *ngFor="let curso of cursosUser;">
-              <div *ngIf="curso.users.length !== 0">
-                <ion-item>
-                  <ion-card style="margin: 0 0 20px 0;">
-                    <img src="{{basePath}}{{curso.photo}}" (click)="verCurso(curso)">
-                    <ion-card-subtitle class="description-course" (click)="verCurso(curso)">{{curso.name}}</ion-card-subtitle>
-                    <ion-button expand="block" (click)="agregarCurso(curso)" style="margin: 0;">
-                      <ion-icon name="add-circle"> Agregar Curso</ion-icon>
-                    </ion-button>
-                  </ion-card>
-                </ion-item>
-              </div>
-              <div *ngIf="curso.users.length === 0">
-                <ion-item>
-                  <ion-card>
-                    <img src="{{basePath}}{{curso.photo}}" (click)="verCurso(curso)">
-                    <ion-card-subtitle class="description-course" (click)="verCurso(curso)">{{curso.name}}</ion-card-subtitle>
-                    <ion-button expand="block" (click)="agregarCurso(curso)" style="margin: 0;">
-                      <ion-icon name="add-circle"> Agregar Curso</ion-icon>
-                    </ion-button>
-                  </ion-card>
-                </ion-item>
-              </div>
+            <div style="text-align-last: center;">
+              <ion-label style="font-size: 17px;font-weight: bold;text-transform: uppercase;color: #002a68;">Listado de cursos</ion-label>
+            </div>
+            <div>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="6" *ngFor="let curso of cursosUser;">
+                    <div *ngIf="curso.users.length !== 0 || curso.users.length === 0">
+                      <ion-card style="margin: 0 0 20px 0;">
+                        <img src="{{basePath}}{{curso.photo}}" (click)="verCurso(curso)" style="height: 132px;">
+                        <ion-card-subtitle class="description-course" (click)="verCurso(curso)">{{curso.name}}</ion-card-subtitle>
+                        <ion-button expand="block" (click)="agregarCurso(curso)" style="margin: 0;">
+                          <ion-icon name="add-circle"> Agregar Curso</ion-icon>
+                        </ion-button>
+                      </ion-card>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
             </div>
           </ion-list>
         </ion-col>

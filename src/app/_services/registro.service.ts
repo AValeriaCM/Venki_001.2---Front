@@ -55,24 +55,22 @@ export class RegistroService {
   }
 
 
-  Editartodo(regist: Registro, id: number, estado: any) {
-
+  Editartodo(regist: Registro, id: number, estado: any, token:any) {
     const body = new HttpParams()
-      .set('name', regist.name)
-      .set('lastname', regist.lastname)
-      .set('birthday', regist.birthday)
-      .set('email', regist.email)
-      .set('phone', regist.phone)
-      .set('description', regist.description)
-      .set('city', regist.city)
-      .set('institution', regist.institution)
-      .set('status', estado);
-
-
+    .set('name', regist.name)
+    .set('lastname', regist.lastname)
+    .set('birthday', regist.birthday)
+    .set('email', regist.email)
+    .set('phone', regist.phone)
+    .set('description', regist.description)
+    .set('city', regist.city)
+    .set('institution', regist.institution)
+    .set('status', estado);
     return this.http.put(this.basePath + this.url2 + `/${id}`, body, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 

@@ -296,3 +296,55 @@
 .my-custombackInicio .alert-head.sc-ion-alert-md {
   padding: 5px 25px;
 }
+
+.mat-h2, .mat-title, .mat-typography h2 {
+  text-transform: uppercase !important;
+}
+
+small {
+  text-transform: capitalize !important;
+}
+
+.event-detail {
+  background-color: #03a9f4;
+  color: white;
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-weight: 500;
+}
+
+.monthview-eventdetail-timecolumn {
+  width: 100px !important;
+  background-color: #ff9800;
+  margin-right: 10px;
+  padding: 3px 10px;
+  font-weight: 500;
+  border-radius: 10px;
+}
+
+.monthview-primary-with-event {
+  background-color: #03a9f4 !important;
+  color: white;
+}
+
+.slides-social .swiper-container-android .swiper-slide, .swiper-wrapper {
+  margin-bottom: 15px;
+}
+
+.slides-social .swiper-pagination-fraction, .slides-social .swiper-pagination-custom, .slides-social .swiper-container-horizontal>.swiper-pagination-bullets {
+  bottom: 3px !important;
+}
+
+.slides-social .swiper-pagination-bullet-active {
+  background: #002a68 !important;
+}
+
+.slides-social .swiper-pagination-bullet {
+  background: #000000;
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+  padding-inline-end: 20px !important;
+  font-size: 13px !important;
+  color: black !important;
+}

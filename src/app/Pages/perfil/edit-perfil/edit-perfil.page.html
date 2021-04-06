@@ -63,8 +63,8 @@
           </ion-item>
           <ion-item class="itemDec ion-item-css">
             <ion-icon name="heart-outline" style="color: #737373;"></ion-icon>
-            <ion-select class="itemSelect select-placeholder" placeholder="Situación sentimental" (ionChange)="optionsFn(r.value);" #r>
-              <ion-select-option [value]="it" *ngFor="let it of items">{{it.situacion}}</ion-select-option>
+            <ion-select class="ion-select itemSelect select-placeholder" placeholder="Situación sentimental" formControlName="status">
+              <ion-select-option value="{{ it.situacion }}" *ngFor="let it of items">{{it.situacion}}</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item class="itemDec ion-item-css">
@@ -74,8 +74,8 @@
           <ion-item class='form-text-error' *ngIf="!editarForm.controls.city.valid && (editarForm.controls.city.touched || editarForm.controls.city.dirty)">
             <ion-label>El lugar donde vives no es valido</ion-label>
           </ion-item>
-          <div>
-            <ion-button type="submit" (click)="editar()" [disabled]="!editarForm.valid || situacionS === null" expand="block" style="margin: 0;">Editar</ion-button>
+          <div style="margin: 15px 0px;text-align: -webkit-center;">
+            <ion-button type="submit" (click)="editar()" [disabled]="!editarForm.valid || situacionS === null" expand="block" style="margin: 0;width: 50%;--background: #002a68;">Editar</ion-button>
           </div>
         </form>
       </div>

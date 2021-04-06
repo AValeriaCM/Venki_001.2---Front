@@ -67,6 +67,9 @@
           </li>
         </ul>
       </div>
+      <div *ngIf="miactividad.length === 0" style="text-align: center;margin-top: 15px;">
+        <ion-badge color="warning">No existen datos para el timeline</ion-badge>
+      </div>
     </div>
   </div>
 </ion-content>

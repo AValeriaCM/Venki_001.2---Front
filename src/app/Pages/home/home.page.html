@@ -10,8 +10,8 @@
           </ion-col>
           <ion-col size="8" style="align-self: flex-end">
             <div class="info-header">
-              <ion-label *ngIf="usertk" style="font-size: 14px;color: #fff;margin-right: 5px;">{{message_header }}</ion-label>
-              <ion-label *ngIf="usertk" style="font-size: 14px;color: #fff;text-transform: capitalize;">{{usertk.name}}</ion-label>
+              <ion-label *ngIf="usertk" style="font-size: 14px;color: #fff;margin-right: 5px;">{{ message_header }}</ion-label>
+              <ion-label *ngIf="usertk" style="font-size: 14px;color: #fff;text-transform: capitalize;">{{ usertk.name}}</ion-label>
             </div>
           </ion-col>
         </ion-row>
@@ -22,49 +22,15 @@
 
 <ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" id="ion-content-opcional">
 
-  <div align="center" class="card" style="background-image: url('../../../assets/home/activity.jpg'); padding: 12px 50px;background-attachment: fixed;background-position: top;">
+  <div align="center" class="card" style="padding: 5px 50px;margin: 10px 25px;border: 1px solid #e8e8e8;border-radius: 8px;">
     <div class="div-activity">
       <h3 style="padding-top: 10px;font-size: 20px;margin-bottom: 0px;">Tu actividad de hoy</h3>
-      <ion-label *ngIf="actividadDiaria" style="font-size: 16px; color: #000; text-align: center;"> {{actividadDiaria}}</ion-label>
+      <ion-label *ngIf="actividadDiaria" style="font-size: 16px;color: #002a68;font-weight: bold;text-align: center;"> {{actividadDiaria}}</ion-label>
     </div>
   </div>
-  
-  <ion-grid style="text-align-last: left;padding: 10px;">
-    <ion-label style="font-size: 16px;font-weight: bold;">¿Qué quieres hacer hoy?</ion-label>
-    <ion-row *ngIf="usertk">
-        <ion-col size="4" *ngIf="actividadDiaria !== null" style="text-align: -webkit-center;">
-            <div class="actions card-primary" (click)="opinarSobreActividad(actividadDiaria)">
-              Opinar sobre la actividad
-            </div>
-        </ion-col>
-
-        <ion-col size="4" style="text-align: -webkit-center;">
-          <div class="actions card-primary" (click)="crearEntrada()">
-            Ir a la comunidad
-          </div>
-        </ion-col>
-
-        <ion-col size="4" style="text-align: -webkit-center;">
-          <div class="actions card-primary" *ngIf="usertk.surveyed === 0" (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
-            Hacer diagnóstico
-          </div>
-          <div class="actions card-primary" *ngIf="usertk.surveyed === 1" (click)="recomedacionesRedirect(usertk.id)">
-            Comprar un paquete
-          </div>
-        </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <hr style="background-color: #d8d8d8;margin: 0px;">
-
-  <ion-badge class="badge-lesson" *ngIf="!leccionActiva" color="warning" >No tienes lecciones activas</ion-badge>
-
-  <ion-badge class="badge-lesson" *ngIf="leccionActiva" color="tertiary" (click)="retomarleccion()" >Retomar: {{leccionActiva.name}}</ion-badge>
-
-  <hr style="background-color: #d8d8d8;margin: 0px;">
 
   <ion-grid style="text-align-last: left;padding: 10px;">
-    <ion-label style="font-size: 16px;font-weight: bold;">¿Cómo te encuentras hoy?</ion-label>
+    <ion-label style="font-size: 16px;font-weight: bold;">¿Cuál es tu estado actual?</ion-label>
     <ion-row>
       <ion-col size="3" class="col-emotions" [ngClass]="{'col-active': emotion === 1 }" (click)="emotion = 1">
         <img class="wid-70" src="/assets/emotions/happy.png"/>
@@ -102,6 +68,40 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  
+  <ion-grid style="text-align-last: left;padding: 10px;">
+    <ion-label style="font-size: 16px;font-weight: bold;">¿Qué quieres hacer hoy?</ion-label>
+    <ion-row *ngIf="usertk">
+        <ion-col size="4" style="text-align: -webkit-center;">
+          <div class="actions card-community" (click)="opinarSobreActividad(actividadDiaria)" >
+            Ir a la comunidad
+          </div>
+        </ion-col>
+
+        <ion-col size="4" style="text-align: -webkit-center;">
+          <div class="actions card-train" (click)="goTraing()">
+            Iniciar entrenamiento
+          </div>
+        </ion-col>
+
+        <ion-col size="4" style="text-align: -webkit-center;">
+          <div class="actions card-diagnosis" *ngIf="usertk.surveyed === 0" (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
+            Hacer diagnóstico
+          </div>
+          <div class="actions card-diagnosis" *ngIf="usertk.surveyed === 1" (click)="recomedacionesRedirect(usertk.id)">
+            Comprar un paquete
+          </div>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <hr style="background-color: #d8d8d8;margin: 0px;">
+
+  <ion-badge class="badge-lesson" *ngIf="!leccionActiva" color="warning" >No tienes lecciones activas</ion-badge>
+
+  <ion-badge class="badge-lesson" *ngIf="leccionActiva" color="tertiary" (click)="retomarleccion()" >Retomar: {{leccionActiva.name}}</ion-badge>
+
+  <hr style="background-color: #d8d8d8;margin: 0px;">
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="secondary" routerLink="/help">

@@ -57,7 +57,7 @@
     width: 100%;">
         </ion-slide>
 
-        <ion-slide style="
+        <ion-slide lines="none" style="
     background: url(../../../assets/slidesImg/img1.jpg) no-repeat center center; 
     min-width: 100%;
     min-height: 100%;
@@ -65,16 +65,36 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: 100% 100%;
-    width: 100%;">
+    width: 100%;
+    overflow: auto;">
             <form [formGroup]="form">
-                <h2 class="titulo">CON QUE PERFIL TE IDENTIFICAS</h2>
+                <h2 class="titulo">¿CON QUE PERFIL TE IDENTIFICAS?</h2>
                 <h3>{{ mensaje }}</h3>
-                <div formArrayName="profiles" *ngFor="let profile of profilesArray.controls">
-
-                    <ion-item [formGroupName]="profile.value.index" class="itemback">
-                        <ion-checkbox slot="end" color="primary" formControlName="selected" (ngModelChange)="selectProfile($event, profile.value.index)"></ion-checkbox>
-                        <p style="text-transform: uppercase; font-weight: 500;">{{profile.value.profile.name}}</p>
-                    </ion-item>
+                <div formArrayName="profiles" *ngFor="let profile of profilesArray.controls" style="margin-bottom: 15px;text-align: -webkit-center;" lines="none">
+                    <div style="text-align: -webkit-center;margin-bottom: 2px">
+                        <ion-item [formGroupName]="profile.value.index" class="itemback" lines="none">
+                            <ion-checkbox slot="end" color="primary" formControlName="selected" (ngModelChange)="selectProfile($event, profile.value.index)"></ion-checkbox>
+                            <p style="text-transform: uppercase;font-weight: bold;margin: 0;">{{profile.value.profile.name}}</p>
+                        </ion-item>
+                    </div>
+                    <div style="background-color: #a9a9a94d;width: 95%;border-radius: 10px;margin: 10px 0px;">
+                        <ion-grid lines="none">
+                            <ion-row style="align-items: center;">
+                                <ion-col *ngFor="let description of profile.value.profile.descriptions" size="4"> 
+                                    <ion-card class="card-profiles">
+                                        <div>
+                                            <ion-card-content class="content-descriptions">
+                                                <ion-label class="label-descriptions">
+                                                    {{ description.name | capitalize }}
+                                                </ion-label>
+                                            </ion-card-content>
+                                        </div>
+                                      </ion-card>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <hr class="hr-descriptions">
                 </div>
                 <ion-button class="buttonCss" (click)="continuar()" [disabled]="!form.valid">Continuar
                     <ion-icon slot="end" name="arrow-forward"></ion-icon>

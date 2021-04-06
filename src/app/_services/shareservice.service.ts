@@ -44,31 +44,35 @@ export class ShareserviceService {
   });
   }
 
-  getCursos(){
+  getCursos(token: any) {
     return this.http.get<any>(this.basePath + this.urlCuros, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
   });
   }
 
-  getCategorias(){
+  getCategorias(token: any) {
     return this.http.get<any>(this.basePath + 'api/categories', {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
   });
   }
 
-  getCursosUsuario(idUser: any){
+  getCursosUsuario(idUser: any, token: any) {
     return this.http.get<any>(this.basePath + `api/users/${idUser}/courses` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  getCursosCategorias(idCat: any, idUser: any){
+  getCursosCategorias(idCat: any, idUser: any, token: any) {
     return this.http.get<any>(this.basePath + `api/categories/${idCat}/courses?user_id=${idUser}` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
@@ -79,30 +83,33 @@ export class ShareserviceService {
     });
   }
 
-  getCursoEspecifico(id: number){
+  getCursoEspecifico(id: number, token: any){
     return this.http.get<any>(this.basePath + this.urlCuros + `/${id}`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
   });
   }
 
-  agregarCurso(idUser: any, curso: any){
+  agregarCurso(idUser: any, curso: any, token: any) {
     const body = new HttpParams()
       .set('course_id', curso);
     return this.http.post(this.basePath  + `api/users/${idUser}/courses`, body, {
       headers: new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
-      .set('X-Requested-With', 'XMLHttpRequest'),
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  actualizarProgreso(idUser:number,idCurso:number, progreso:any){
+  actualizarProgreso(idUser:number,idCurso:number, progreso:any, token: any){
     const body = new HttpParams()
       .set('progress', progreso);
     return this.http.put(this.basePath  + `api/users/${idUser}/courses/${idCurso}`, body, {
       headers: new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
@@ -115,7 +122,7 @@ export class ShareserviceService {
     this.cart.push(product);
   }
 
-  enviarComentarioIPutuacion(idCurso: any, idUser: any, comment: any, score: any){
+  enviarComentarioIPutuacion(idCurso: any, idUser: any, comment: any, score: any, token: any){
       const body = new HttpParams()
       .set('course_id', idCurso)
       .set('user_id', idUser)
@@ -124,14 +131,16 @@ export class ShareserviceService {
     return this.http.post(this.basePath  + `api/scores`, body, {
       headers: new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
-      .set('X-Requested-With', 'XMLHttpRequest'),
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  getComentariosCurso(idCurso: any){
+  getComentariosCurso(idCurso: any, token:any) {
     return this.http.get<any>(this.basePath + `api/courses/${idCurso}/scores`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
   });
   }
 
@@ -145,19 +154,21 @@ export class ShareserviceService {
     });
   }
 
-  actualizarAvatar(idUser: any, imgUrl: UsuariosF) {
+  actualizarAvatar(idUser: any, imgUrl: UsuariosF, token:any) {
     const body = new HttpParams()
     .set('photo',imgUrl.avatar );
     return this.http.put(this.basePath + `api/users/${idUser}`, body, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  getNetDiagnostico(idDiagnostico: any, idPage: any){
+  getNetDiagnostico(idDiagnostico: any, idPage: any, token: any) {
     return this.http.get<any[]>(this.basePath + `api/surveys/${idDiagnostico}/questions?page=${idPage}&per_page=15`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 
@@ -243,23 +254,21 @@ export class ShareserviceService {
     this.varorder.next('update order');
   }
 
-  guardarpost(userid: any, posttxt: any, media: any) {
-    const formData = new FormData();
-    formData.append('user_id', userid);
-    formData.append('post', posttxt);
-    formData.append('medias[]', media);
-    return this.http.post(this.basePath + `api/posts`, formData, {
+  guardarpost(form: any, token: any) {
+    return this.http.post(this.basePath + `api/posts`, form, {
       headers: new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  actualizarpost(userid: any, countlike: any) {
+  actualizarpost(userid: any, countlike: any, token:any) {
     const body = new HttpParams()
         .set('count_like', countlike);
     return this.http.put(this.basePath + `api/posts` + `/${userid}`, body, {
       headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded')
           .set('X-Requested-With', 'XMLHttpRequest')
+          .set('Authorization', 'Bearer ' + token)
     });
   }
 
@@ -270,31 +279,35 @@ export class ShareserviceService {
   });
   }
 
-  getTimeline(idUser: any){
+  getTimeline(idUser: any, token: any) {
     return this.http.get<any>(this.basePath + `api/users/${idUser}/timelines`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  getpost(){
+  getpost(token: any) {
     return this.http.get<any>(this.basePath + `api/posts`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  getpostNextPage(page: any){
+  getpostNextPage(page: any, token: any) {
     return this.http.get<any>(this.basePath + `api/posts?page=${page}`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  getActividadUsuario(idUser: any){
+  getActividadUsuario(idUser: any, token: any){
     return this.http.get<any>(this.basePath + `api/users/${idUser}/posts` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
@@ -338,46 +351,61 @@ export class ShareserviceService {
   }
 
 
-  obtenerObhetivos(id: any){
+  obtenerObhetivos(id: any, token: any) {
     return this.http.get(this.basePath + `api/users/${id}/achievements`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 
 
-  agregarObjetivos(objetivos: any, idUser: any) {
+  agregarObjetivos(form: any, token: any) {
+    return this.http.post(this.basePath + `api/achievements`, form, {
+      headers: new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
 
+  actualizarObjetivos( objetivos:any, idUser:any) {
     const body = new HttpParams()
-      .set('achievement', objetivos)
-      .set('user_id', idUser);
-
-    return this.http.post(this.basePath + `api/achievements`, body, {
+    .set('achievement', objetivos)
+    .set('user_id', idUser);
+    return this.http.put(this.basePath + `api/achievements`, body, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
-/*
-* servicio que se utiliza para actualizar la lista de objetivos
-*creado el 26/03/2021
-*/
-    actualizarObjetivos( objetivos:any, idUser:any){
-      const body = new HttpParams()
-      .set('achievement', objetivos)
-      .set('user_id', idUser);
-      return this.http.put(this.basePath + `api/achievements`, body, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/x-www-form-urlencoded')
-          .set('X-Requested-With', 'XMLHttpRequest')
-        });
-    }
 
-  getaactividadesDiaria(){
+  getaactividadesDiaria(token: any) {
     return this.http.get<any>(this.basePath + `api/dailyactivities?today=1` , {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  forgetPassword(email: any) {
+    const body = new HttpParams()
+      .set('email', email);
+    return this.http.post(this.basePath  + `api/password/email`, body, {
+      headers: new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('X-Requested-With', 'XMLHttpRequest'),
+    });
+  }
+
+  resetPassword(user: any, password: any, confirmPassword: any) {
+    const body = new HttpParams()
+      .set('user_id', user)
+      .set('password', password)
+      .set('confirmed_password', confirmPassword);
+    return this.http.post(this.basePath  + `api/password/reset`, body, {
+      headers: new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('X-Requested-With', 'XMLHttpRequest'),
     });
   }
 }

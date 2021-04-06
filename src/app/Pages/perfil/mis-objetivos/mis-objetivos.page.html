@@ -4,71 +4,79 @@
       <ion-back-button defaultHref="/users/perfil"></ion-back-button>
     </ion-buttons>
     <ion-title class="tituloInfo logo">
+      <ion-icon *ngIf="!addTarget" name="add-outline" class="icon-add" (click)="addTarget = true"></ion-icon>
+      <ion-icon *ngIf="addTarget" name="close-outline" class="icon-add" (click)="addTarget = false; form.reset()"></ion-icon>
       <label style="color: white;">MAGIN</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card-title class="title">¿Que aspectos estas buscando mejorar en tu vida con nuestros programas?</ion-card-title>
+
+  <ion-card class="card-add" *ngIf="addTarget">
     <ion-card-header>
-      <ion-card-title class="title-css" style="text-align: center;">Mis Objetivos</ion-card-title>
+      <ion-card-title class="title-css" style="text-align: center;">Nuevo objetivo</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <div>
-        <ion-button fill="clear" class="larger" (click)="onDetalles()">
-          <ion-icon name="add-outline"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" class="larger" (click)="onClear()">
-          <ion-icon name="refresh-outline"></ion-icon>
-        </ion-button>
-        <br>
-        <br>
+        <form [formGroup]="form">
+          <div>
+            <ion-item class="ion-item-css" lines="none">
+              <textarea class="textArea" formControlName="target" placeholder="¿Cual es tu objetivo?" rows="4" cols="150" maxlength="150" required></textarea>
+            </ion-item>
 
-        <form [formGroup]="dynamicForm" (ngSubmit)="operar()">
-          <div *ngFor="let detalle of t.controls; let i = index">
-            <div [formGroup]="detalle">
-              <div>
-                <ion-item class="ion-item-css">
-                  <textarea class="textArea" name="item" formControlName="item" pattern="^[A-Za-z0-9]*$"
-                    placeholder="¿Cual es mi Objetivo?" rows="4" cols="150" maxlength="150" required></textarea>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <ion-button fill="clear" class="larger" (click)="onReset(i)">
-                    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-                  </ion-button>
-                </ion-item>
-                <br>
-              </div>
-            </div>
+            <ion-item class="ion-item-css" lines="none">
+              <ion-datetime #myPicker class="item-date" placeholder="Fecha de objetivo" displayFormat="YYYY/MM/DD" min="2021" max="2050" formControlName="date" cancelText="Cancelar" doneText="Hecho"></ion-datetime>            
+            </ion-item>
 
+          </div>
+          <div style="text-align: center;">
+            <ion-button class="button-css-options" [disabled]="!form.valid" (click)="operar()">Agregar a la lista</ion-button>
           </div>
         </form>
       </div>
-      <div>
-        <ion-button class="button-css-options" [disabled]="t.length === 0" (click)="operar()">Agregar Objetivos
-        </ion-button>
-      </div>
     </ion-card-content>
   </ion-card>
-  <br>
-  <div *ngIf="objetivosList" class="expansionCsss2">
-    <br>
-    <p style="text-align: center; font-family: 'Proxima'; text-transform: uppercase; font-size: 18px;color: white;">Mis Objetivos</p>
-    <br>
+
+  <ion-card-subtitle class="subtitle">Organiza estos objetivos según tú interes y tu momento actual</ion-card-subtitle>
+    
+  <div>
+    <ion-badge class="badge-instructions">Instrucciones:</ion-badge>
+    <div style="margin-left: 15px;">
+      <ion-label style="font-size: 13px;font-weight: 500;">
+        Debes arrastrar los objetivos dentro del recuadro seleccionandolos desde el icono izquierdo, listandolos del más importante al menos importante.
+      </ion-label>
+    </div>
+  </div>
+
+  <div *ngIf="objetivosList.length > 0" class="container-targets">
+    <ion-badge class="badge-title">Mis Objetivos</ion-badge>
     <ion-list>
-      <ion-reorder-group [disabled]="false" (ionItemReorder)=" reorder($event) ">
-        <ion-item *ngFor=" let item of objetivosList">
-          <ion-label> {{item.achievement}} </ion-label>
-          <ion-reorder slot="start">
-            <ion-icon name="medal-outline"></ion-icon>
+      <ion-reorder-group disabled="false" (ionItemReorder)="reorder($event)">
+        <ion-item *ngFor="let target of objetivosList">
+          <ion-reorder>
+            <ion-icon name="medal-outline" class="icon-target"></ion-icon>
           </ion-reorder>
-        </ion-item>  
-      </ion-reorder-group>  
+          <div style="margin-left: 10px;width:100%;display: flex;">
+            <ion-label class="label-target">
+              {{ target.achievement }}
+            </ion-label>
+            <ion-label *ngIf="target.date" style="margin: 0px 10px;">
+              -
+            </ion-label>
+            <ion-badge *ngIf="target.date" class="badge-date"> {{ target.date }}</ion-badge>
+          </div>
+        </ion-item>
+      </ion-reorder-group>
     </ion-list>
+
+    <div style="text-align-last: center;">
+      <ion-button class="button-end" (click)="submit()">Guardar</ion-button>
+    </div>
   </div>
 
   <ion-row *ngIf="objetivosList.length === 0" style="place-content: center;margin-top: 10px;">
     <ion-badge color="danger" style="font-size: 14px;padding: 5px 10px;border-radius: 5px;">No existen objetivos</ion-badge>
   </ion-row>
-
 </ion-content>

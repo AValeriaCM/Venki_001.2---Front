@@ -1,6 +1,6 @@
 import { ImageModalPageModule } from './Pages/social/image-modal/image-modal.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -41,7 +41,9 @@ import { CondicionesPageModule } from './Pages/condiciones/condiciones.module';
 import { TerminosNinosPageModule } from './Pages/terminos-ninos/terminos-ninos.module';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common'; 
+registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
@@ -109,6 +111,7 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
       useClass: ServiceErrorInterceptorService,
       multi: true
     },
+    {provide: LOCALE_ID, useValue: 'es'},
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

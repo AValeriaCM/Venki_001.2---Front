@@ -8,12 +8,16 @@ import { DiagnosticHelpComponent } from '../diagnostic-help/diagnostic-help.comp
 import { ModalController } from '@ionic/angular';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/_services/auth.service';
 @Component({
   selector: 'app-diagnostico',
   templateUrl: './diagnostico.page.html',
   styleUrls: ['./diagnostico.page.scss'],
 })
 export class DiagnosticoPage implements OnInit {
+
+  @ViewChild('slider', { static: true }) slidefromHtml: IonSlides;
+
   status:number;
   cantidad: any;
   profileid: any;
@@ -40,8 +44,7 @@ export class DiagnosticoPage implements OnInit {
   "rgba(20, 20, 240, 1)",
   "rgba(10, 155, 240, 1)",
   "rgba(216, 99, 99, 1)"];
-
-  @ViewChild('slider', { static: true }) slidefromHtml: IonSlides;
+  token: any;
 
   constructor(
     private perfile: PerfilesService,
@@ -52,11 +55,23 @@ export class DiagnosticoPage implements OnInit {
     private router: Router,
     private dialogo: ModalController,
     private loadingService: LoadingService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private auth: AuthService
     ) {
+    this.getToken();
   }
 
   ngOnInit() {
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadPage();
+    });
+  }
+
+  loadPage() {
     this.status=0;
     this.pagina=0;
     this.cacheArray = [];
@@ -79,7 +94,7 @@ export class DiagnosticoPage implements OnInit {
 
     if(this.profileid) {
       this.loadingService.loadingPresent({spinner: "circles" });
-      this.perfile.getPreguntasPerfil(this.profileid).subscribe((profileQ: any) => {
+      this.perfile.getPreguntasPerfil(this.profileid, this.token).subscribe((profileQ: any) => {
         this.loadingService.loadingDismiss();
         this.preguntot = profileQ.data.length;
         this.preguntat = profileQ.data.length;
@@ -87,9 +102,9 @@ export class DiagnosticoPage implements OnInit {
   
         this.share.retornarDiagnosticoCurrentpage().then( rest => {
           let tempP = rest;
-          this.pagina=tempP;
-          this.color=this.colors[this.pagina-1];
-          if (tempP === null){
+          this.pagina = tempP;
+          this.color= this.colors[this.pagina-1];
+          if (tempP === null) {
             this.currentPage = profileQ.meta.current_page;
             this.existe = false;
           }else {
@@ -98,29 +113,30 @@ export class DiagnosticoPage implements OnInit {
             this.validadExistencia(this.existe);
           }
         });
-        this.pagina=this.currentPage;
+        this.pagina = this.currentPage;
+
         this.share.retornarDiagnosticoLastpage().then( restt  => {
           let tempL = restt;
-          if (tempL === null){
+          if (tempL === null) {
             this.lastPage = profileQ.meta.last_page;
             this.existe = false;
-          }else {
+          } else {
             this.lastPage = tempL;
             this.existe  = true;
           }
         });
   
-        this.cantidad = profileQ.data.map(value => {
+        this.cantidad = profileQ.data.map( (value: any) => {
           value.calificacionVal = 0;
           return value;
         });
   
         this.share.retornarDiagnostico().then( diag => {
-          let result01;
-          if (diag !== null){
+          let result01: any;
+          if (diag !== null) {
             this.cacheArray = diag;
           }
-          if(this.currentPage === 5){
+          if( this.currentPage === 5 ) {
             this.cacheArray.forEach(element => {
               result01 = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))]
             });
@@ -130,11 +146,11 @@ export class DiagnosticoPage implements OnInit {
   
         this.share.varTotalPreguntas.subscribe( dt => {
           this.share.retornarDiagnostico().then( diag => {
-            let result;
+            let result: any;
             if (diag !== null){
               this.cacheArray = diag;
             }
-            if (this.currentPage === 5){
+            if (this.currentPage === 5) {
               this.cacheArray.forEach(element => {
                 result = [...new Set([].concat(...this.cacheArray.map((o) => o.myPropArray)))];
               });
@@ -167,13 +183,12 @@ export class DiagnosticoPage implements OnInit {
     }
   }
 
-
-  validadExistencia(existe: any){
-    if (existe === true){
+  validadExistencia(existe: any) {
+    if (existe === true) {
       const nuevoArra = this.totallenght;
       this.cantidad = [];
       if (this.preguntot !== nuevoArra) {
-        this.share.getNetDiagnostico(this.profileid, this.currentPage).subscribe((netpreg: any) => {
+        this.share.getNetDiagnostico(this.profileid, this.currentPage, this.token).subscribe((netpreg: any) => {
           this.preguntat = netpreg.data.length;
           this.preguntot = netpreg.data.length;
           this.cantidad = netpreg.data.map(value => {
@@ -185,8 +200,7 @@ export class DiagnosticoPage implements OnInit {
     }
   }
 
-  calificacion(event, id: any, index: any) {
-
+  calificacion(event: any, id: any, index: any) {
     const res = [];
     const listemp = [];
     if (this.cuestionario.length === 0) {
@@ -212,13 +226,13 @@ export class DiagnosticoPage implements OnInit {
 
   terminarEtapa(){
     this.etapa = true;
-    if (this.currentPage === 1){
+    if (this.currentPage === 1) {
       this.alertDespuesTiempoimg1();
-    } else if (this.currentPage === 2){
+    } else if (this.currentPage === 2) {
       this.alertDespuesTiempoimg2(2);
-    } else if (this.currentPage  === 3){
+    } else if (this.currentPage  === 3) {
       this.alertDespuesTiempoimg2(3);
-    }else if (this.currentPage  === 4){
+    }else if (this.currentPage  === 4) {
       this.alertDespuesTiempoimg3();
     }
   }
@@ -232,7 +246,7 @@ export class DiagnosticoPage implements OnInit {
   }
 
 
-  guardar(){
+  guardar() {
     this.status=1;
     this.currentPage = this.currentPage + 1;
     this.cacheArray.push({myPropArray: this.finalDta});
@@ -246,14 +260,14 @@ export class DiagnosticoPage implements OnInit {
     this.terminarEtapa();
   }
 
-  Continuar(){
+  Continuar() {
     this.status=2;
     setTimeout(() => {
       this.currentPage = this.currentPage + 1;
       const nuevoArra = this.totallenght;
       this.cantidad = [];
       if (this.preguntot !== nuevoArra) {
-        this.share.getNetDiagnostico(this.profileid, this.currentPage).subscribe((netpreg: any) => {
+        this.share.getNetDiagnostico(this.profileid, this.currentPage, this.token).subscribe((netpreg: any) => {
           this.preguntat = netpreg.data.length;
           this.preguntot = netpreg.data.length;
           this.cantidad = netpreg.data.map(value => {
@@ -266,7 +280,7 @@ export class DiagnosticoPage implements OnInit {
           this.share.guardarDiagnosticoLastpage(this.lastPage);
           this.finalDta = [];
           this.cuestionario = [];
-          if (this.currentPage === 5){
+          if (this.currentPage === 5) {
             this.share.varTotalPreguntas.next('update preguntas');
           }
           this.etapa = false;
@@ -278,7 +292,7 @@ export class DiagnosticoPage implements OnInit {
 
   enviarQuestion() {
     const infoConvert = JSON.stringify(this.arrayFEnv);
-    this.perfile.SendSurveyInfo(infoConvert, this.surveyID, this.userID).subscribe(surveyResponse => {
+    this.perfile.SendSurveyInfo(infoConvert, this.surveyID, this.userID, this.token).subscribe(surveyResponse => {
       let surveyed = 1;
       this.share.editSurveyed(surveyed, this.userID).subscribe( res => {
         this.share.removerDiagnostico();

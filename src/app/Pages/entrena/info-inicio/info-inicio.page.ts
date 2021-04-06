@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
+import { AuthService } from 'src/app/_services/auth.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 
 @Component({
@@ -14,16 +15,25 @@ export class InfoInicioPage implements OnInit {
   oculto = false;
 
   courses = [];
+  token: any;
 
   constructor(
     private share: ShareserviceService,
     private modalCRTL: ModalController,
     public alertController: AlertController,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
-    this.getcourses();
+    this.getToken();
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.getcourses();
+    });
   }
 
   verMas(){
@@ -52,7 +62,7 @@ export class InfoInicioPage implements OnInit {
   }
 
   getcourses() {
-    this.share.getCategorias().subscribe(info => {
+    this.share.getCategorias(this.token).subscribe(info => {
       this.courses = info.data;
     });
   }

@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { PassObjectAuxService } from './../../../_services/pass-object-aux.service';
 import { PassObjectExamenService } from './../../../_services/pass-object-examen.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -9,6 +10,8 @@ import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
 import { PassNameLessonsService } from 'src/app/_services/pass-name-lessons.service';
 import { LoadingService } from 'src/app/_services/loading.service';
+import { AuthService } from 'src/app/_services/auth.service';
+
 
 @Component({
   selector: 'app-vercurso',
@@ -16,6 +19,11 @@ import { LoadingService } from 'src/app/_services/loading.service';
   styleUrls: ['./vercurso.page.scss'],
 })
 export class VercursoPage implements OnInit {
+
+  @ViewChild(IonContent) content: IonContent;
+
+  stars: number[] = [1, 2, 3, 4, 5];
+  selectedValue: number;
 
   data: any;
   info;
@@ -36,9 +44,8 @@ export class VercursoPage implements OnInit {
   exam = 0;
   color:string;
   progreso: any;
-
-
-  @ViewChild(IonContent) content: IonContent;
+  token: any;
+  comments = false;
   constructor(
     private router: Router,
     private share: ShareserviceService,
@@ -49,11 +56,23 @@ export class VercursoPage implements OnInit {
     private pObjetoAux: PassObjectAuxService,
     private PObjecIndex: PassNameLessonsService,
     private previewAnyFile: PreviewAnyFile,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private auth: AuthService
     ) {
-  }
+      this.getToken();
+    }
 
   ngOnInit() {
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadPage();
+    });
+  }
+
+  loadPage() {
     const informacion = this.pObjecto.getNavData();
     this.pObjectoVideo.setData(informacion);
     this.pObjectExamen.setData(informacion);
@@ -65,11 +84,11 @@ export class VercursoPage implements OnInit {
     this.courseID = informacion.infoCurso.id;
 
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
+    this.share.getCursoEspecifico(this.data.id, this.token).subscribe(async infodt => {
       this.info = infodt.data;
-      this.share.getComentariosCurso(this.data.id).subscribe(info => {
+      this.share.getComentariosCurso(this.data.id, this.token).subscribe(info => {
         this.comentariosGeneral = info.data;
-        this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
+        this.share.getCursosUsuario(this.userinfo.id, this.token).subscribe(dataCurso => {
           let temid  = dataCurso.data;
           let dttemp = temid.filter(r => r.id === this.courseID);
           dttemp.forEach(element => {
@@ -110,17 +129,21 @@ export class VercursoPage implements OnInit {
     this.share.varExam.subscribe( res => {
       this.exam = 1;
     });
-
   }
 
   calificacion(event) {
     this.calificacionVal = event.detail.value;
   }
 
+  countStar(star) {
+    this.selectedValue = star;
+    return this.calificacionVal = this.selectedValue;
+  }
+
   enviarMensaje() {
     if (this.calificacionVal) {
-      this.share.enviarComentarioIPutuacion(this.data.id, this.userinfo, this.menajeNuevo, this.calificacionVal).subscribe(data => {
-        this.share.getComentariosCurso(this.data.id).subscribe(info => {
+      this.share.enviarComentarioIPutuacion(this.data.id, this.userinfo.id, this.menajeNuevo, this.calificacionVal, this.token).subscribe(data => {
+        this.share.getComentariosCurso(this.data.id, this.token).subscribe(info => {
           this.menajeNuevo = '';
           this.calificacionVal = 1;
           this.comentariosGeneral = info.data;
@@ -140,14 +163,14 @@ export class VercursoPage implements OnInit {
       subHeader:
         'Por favor califica nuestros cursos, es importante',
       message:
-        'Puedes calificar desplazandote y seleccionando un valor entre 1 y 10 ',
+        'Puedes calificar desplazandote y seleccionando las estrellas para la calificacion de 1 a 5.',
       buttons: ['Acepto'],
     });
     await this.alert.present();
   }
 
   getcursos(userid: any) {
-    this.share.getCursos().subscribe(info => {
+    this.share.getCursos(this.token).subscribe(info => {
       this.cursos = info.data;
     });
   }
@@ -176,7 +199,7 @@ export class VercursoPage implements OnInit {
         this.share.updateorder(order);
       }
     });
-    let url = 'http://venki.3utilities.com/' + doc;
+    let url = environment.HOST + doc;
     this.previewAnyFile.preview(url).then(() => {
 
     }, (err) => {
@@ -184,7 +207,7 @@ export class VercursoPage implements OnInit {
   }
 
   audioPlayer(lectionName: any, content: any, order: any, tma: any) {
-    const dataaud = 'http://venki.3utilities.com/' + content;
+    const dataaud = environment.HOST + content;
     const dataObj = {
       name: lectionName,
       audioInfo: dataaud,
@@ -204,8 +227,9 @@ export class VercursoPage implements OnInit {
         .map(item => item.open = false);
     }
   }
-
-  verRecursos(recursos: any){
+  
+  verUser(userdt: any){
+    this.pObjecto.setData({userinfo: userdt});
+    this.router.navigate(['/users/social/ver-usuario']);
   }
-
 }

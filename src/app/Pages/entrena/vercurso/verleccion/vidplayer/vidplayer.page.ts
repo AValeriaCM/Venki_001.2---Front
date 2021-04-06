@@ -6,6 +6,7 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { PassObjectAuxService } from 'src/app/_services/pass-object-aux.service';
 import { LoadingService } from 'src/app/_services/loading.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-vidplayer',
@@ -39,6 +40,7 @@ export class VidplayerPage implements OnInit {
  exam = 0;
  color:string;
  progreso: any;
+ token: any;
 
   constructor(
     private router: Router,
@@ -47,11 +49,23 @@ export class VidplayerPage implements OnInit {
     private PObjectoExamen: PassObjectExamenService,
     private PObjectoAuxiliar: PassObjectAuxService,
     private share: ShareserviceService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private auth: AuthService
     ) {
+    this.getToken();
   }  
 
   ngOnInit() {
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadPage();
+    });
+  }
+
+  loadPage() {
     let info = this.pObjectoVideo.getNavData();
     this.share.guardarLeccionActiva(info);
     this.data = info.vidInfo;
@@ -61,12 +75,10 @@ export class VidplayerPage implements OnInit {
     this.vid.push(this.data);
     this.share.verorder().then( rval => {
       if (rval === this.tam){
-        this.share.varExam.next('Listo para el examen');
       }else{
         this.share.updateorder(this.orderID);
       }
     });
-   
     const informacion = this.PObjectoExamen.getNavData();
     this.color=informacion.color;
     this.data = informacion.infoCurso;
@@ -79,11 +91,11 @@ export class VidplayerPage implements OnInit {
 
   getCourse() {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
+    this.share.getCursoEspecifico(this.data.id, this.token).subscribe(async infodt => {
       this.info = infodt.data;
-      this.share.getComentariosCurso(this.data.id).subscribe(info => {
+      this.share.getComentariosCurso(this.data.id, this.token).subscribe(info => {
         this.comentariosGeneral = info.data;
-        this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
+        this.share.getCursosUsuario(this.userinfo.id, this.token).subscribe(dataCurso => {
           this.loadingService.loadingDismiss();
           let temid  = dataCurso.data;
           let dttemp = temid.filter(r => r.id === this.courseID);

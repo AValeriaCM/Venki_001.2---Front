@@ -199,18 +199,18 @@
       <div *ngFor="let cur of cursos; let i index">
         <div *ngFor="let lens of cur.lessons; let j = index">
           <div *ngIf="j === indexLessons">
-          <div *ngFor="let recursos of lens.resources">
-            <div *ngIf="recursos.order === 2">
-              <div *ngIf="recursos.video">
-                <ion-button class="footer-dis-bot2" (click)="startVideo(lens.name, recursos.video, recursos.order, lens.resources?.length)">
-                  Continuar
-                <ion-icon name="caret-forward-outline"></ion-icon></ion-button>
+            <div *ngFor="let recursos of lens.resources">
+              <div *ngIf="recursos.order === 2">
+                <div *ngIf="recursos.video">
+                  <ion-button class="footer-dis-bot2" (click)="startVideo(lens.name, recursos.video, recursos.order, lens.resources?.length)">
+                    Continuar
+                  <ion-icon name="caret-forward-outline"></ion-icon></ion-button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>          
- </ion-row>
+      </div>          
+    </ion-row>
   </ion-toolbar>
 </ion-footer>

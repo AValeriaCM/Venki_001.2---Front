@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from 'src/app/_services/auth.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 
@@ -14,16 +15,28 @@ export class DiagnosticoInicioPage implements OnInit {
   informacion:any;
   categorias: any[] = [];
   cursos:any[] = [];
+  token: any;
 
-  constructor(private share: ShareserviceService,  
+  constructor(
+    private share: ShareserviceService,  
     public alertController: AlertController,
     private pObjecto: PassObjectService,
-    private router: Router) { }
+    private router: Router,
+    private auth: AuthService
+    ) {
+      this.getToken();
+    }
 
   ngOnInit() {
-      this.informacion = this.pObjecto.getNavData();
+    this.informacion = this.pObjecto.getNavData(); 
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
       this.getcursos();
       this.getcategorias();
+    });
   }
 
   async alertAvisoGif() {
@@ -47,13 +60,13 @@ export class DiagnosticoInicioPage implements OnInit {
   }
 
   getcursos() {
-    this.share.getCategorias().subscribe(info => {
+    this.share.getCategorias(this.token).subscribe(info => {
       this.cursos = info.data;
     });
   }
 
   getcategorias() {
-    this.share.getCategorias().subscribe(categ => {
+    this.share.getCategorias(this.token).subscribe(categ => {
       this.categorias = categ.data;
     });
   }

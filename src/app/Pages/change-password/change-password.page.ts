@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
+import { LoadingService } from 'src/app/_services/loading.service';
+import { LoginService } from 'src/app/_services/login.service';
+import { ShareserviceService } from 'src/app/_services/shareservice.service';
 
 @Component({
   selector: 'app-change-password',
@@ -17,12 +23,29 @@ export class ChangePasswordPage implements OnInit {
   passwordToggleIcon = 'eye';
   showpasswordConfirm = false;
   passwordToggleIconConfirm = 'eye';
+  usertk = null;
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private log: LoginService,
+    private snackbar: MatSnackBar,
+    private loadingService: LoadingService,
+    private sharedService: ShareserviceService,
+    private route: Router 
+  ) { }
 
   ngOnInit() {
+    this.getDataInfo();
     this.getCurrentHour();
     this.loadForm();
+  }
+
+  getDataInfo() {
+    this.auth.gettokenLog().then( dt => {
+      this.log.logdataInfData(dt).subscribe( infoUser => {
+        this.usertk = infoUser;
+      });
+    });
   }
 
   loadForm() {
@@ -45,7 +68,33 @@ export class ChangePasswordPage implements OnInit {
   }
 
   changePassword() {
-    console.log(this.form.value);
+    if (!this.form.valid && this.usertk.id) {
+      this.mostrarmensaje('Los datos ingresados no son validos', 'Error', 'red-snackbar');
+      return false;
+    } else {
+      const password = this.form.value.password;
+      const password_confirmation = this.form.value.password_confirmation;
+      this.loadingService.loadingPresent({spinner: "circles" });
+      this.sharedService.resetPassword(this.usertk.id,password,password_confirmation).subscribe(async res => {
+        if (res) {
+          this.loadingService.loadingDismiss();
+          this.mostrarmensaje('La contraseña se ha cambiado exitosamente', 'OK', 'green-snackbar');
+          this.loadForm();
+          if(this.usertk.profile_id === null) {
+            this.route.navigateByUrl('/slides');
+          } else { 
+            this.route.navigateByUrl('/users/home');
+          }
+        } else {
+          this.loadingService.loadingDismiss();
+          this.mostrarmensaje('El email no se encuentra registrado en el sistema', 'Error', 'red-snackbar');
+        }
+      }, error => {
+        this.loadingService.loadingDismiss();
+        this.mostrarmensaje('Error restableciendo la contraseña', 'Error', 'red-snackbar');
+        this.auth.logout();
+      });
+    }
   }
 
   showpass(): void {
@@ -78,5 +127,12 @@ export class ChangePasswordPage implements OnInit {
     } else {
       this.message_header = "Buenas noches";
     }
+  }
+
+  mostrarmensaje(message: string, action: string, type: string) {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+      panelClass: [type],
+    });
   }
 }

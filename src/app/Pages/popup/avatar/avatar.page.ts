@@ -70,18 +70,27 @@ export class AvatarPage implements OnInit {
 
   idUser:number;
   user: UsuariosF;
+  token: any;
 
   constructor(
     private popover:PopoverController,
     private auth: AuthService,
     private log: LoginService,
     private share: ShareserviceService
-  ){} 
+  ){
+    this.getToken();
+  } 
   
   ngOnInit() {
-    this.auth.gettokenLog().then( dt => {
-      this.log.logdataInfData(dt).subscribe( infoUser => {
-        this.idUser = infoUser.id;   
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.auth.gettokenLog().then( dt => {
+        this.log.logdataInfData(dt).subscribe( infoUser => {
+          this.idUser = infoUser.id;   
+        });
       });
     });
   }
@@ -96,7 +105,7 @@ export class AvatarPage implements OnInit {
     if(urlImagen){
     this.user.id = this.idUser;
     this.user.avatar = urlImagen;
-    this.share.actualizarAvatar(this.idUser,this.user).subscribe(()=> {
+    this.share.actualizarAvatar(this.idUser,this.user, this.token).subscribe(()=> {
 
     });
     this.ClosePopover();

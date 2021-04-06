@@ -58,37 +58,25 @@ ion-card-subtitle {
 .divBack {
     background-color:#ffffff;
     margin-top:0px ;
+    padding: 0px 10px;
 }
 
-.icon-photo{
-    border-radius:50% !important;
-    margin-top: 10px;
-    height: 1.7em !important;
-    width: 1.7em !important;
-} 
 
 .usernamecss {
-    color: #444;
-    margin: 0;
-    padding: 0px 0px 6px 0px;
-    font-size: 14px;
-    line-height: 44px;
+    color: #000;
+    margin: 0px 25px;
+    font-size: 15px;
     letter-spacing: 1px;
-    font-weight: bold;
-    margin-top: 2px;
-    text-align: left;
 }
 
 .mensajecss{
-
     font-size: 14px;
     line-height: 12px;
-    margin: 0;
-    padding: 7px 7px 7px 7px;
-    text-transform: uppercase;
+    margin: 0px 25px;
+    padding-top: 5px;
     letter-spacing: 1px;
-    font-weight: bold;
-    text-align: justify;
+    font-weight: 500;
+    color: black;
 }
 
 .divBack{
@@ -336,4 +324,40 @@ hr.dashed {
 ion-progress-bar {
     --buffer-background: #e4e4e4;
     --progress-background: #002a68;
+}
+
+//rating
+.rating-list li {
+    float: right;
+    color: white;
+    padding: 0px 5px;
+    background-color: #002a68;
+    border-radius: 10px;
+    padding: 0px 5px;
+    margin: 0px 5px;
+}
+.rating-list li:hover,
+.rating-list li:hover ~ li, .rating-list li.selected {
+    color: #ffd700;
+    background-color: #002a68;
+    border-radius: 10px;
+    padding: 0px 5px;
+    margin: 0px 5px;
+}
+.rating-list {
+    display: inline-block;
+    list-style: none;
+}
+
+.div-rating {
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.date-rating {
+    color: #000000;
+    font-size: 12px;
+    font-weight: 500;
 }

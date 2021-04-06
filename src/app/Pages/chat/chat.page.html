@@ -1,23 +1,30 @@
-<ion-header>
-  <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start" style="color: white;">
-      <ion-button (click)="volverHome()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title class="tituloInfo logo">
-      <ion-icon *ngIf="!searchActive" name="search-outline" class="icon-search" (click)="openSearch()"></ion-icon>
-      <ion-icon *ngIf="searchActive" name="close-outline" class="icon-search" (click)="closeSearch()"></ion-icon>
-      <label style="color: white;">MAGIN</label>
-    </ion-title>
+<ion-header #header>
+  <ion-toolbar #toolbar class="ion-toolbar-ccs">
+    <div>
+      <ion-toolbar>
+        <ion-row class="logo">
+          <ion-col size="4">
+            <div class="icon-header">
+              <img src="/assets/finallogo.png" width="120" height="70">
+            </div>
+          </ion-col>
+          <ion-col size="8" style="align-self: flex-end">
+            <div class="info-header">
+              <ion-label *ngIf="nameUser" style="font-size: 14px;color: #fff;margin-right: 5px;">{{ message_header }}</ion-label>
+              <ion-label *ngIf="nameUser" style="font-size: 14px;color: #fff;text-transform: capitalize;">{{ nameUser }}</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-toolbar>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-searchbar *ngIf="searchActive" [value]="searhVariable" placeholder="Buscar" animated (ionChange)="buscar($event)" style="padding: 0;"></ion-searchbar>
+  <ion-searchbar *ngIf="!notifications" [value]="searhVariable" placeholder="Busca más miembros de la comunidad MAGIN" animated (ionChange)="buscar($event)" style="padding: 0;"></ion-searchbar>
 
-  <ion-card *ngIf="searchActive" style="margin: 5px 0px;">
+  <ion-card style="margin: 5px 0px;" *ngIf="!notifications">
 
     <ion-label *ngIf="data.length > 0" class="label-results">Resultados encontrados:</ion-label>
     <ion-label *ngIf="textoBuscar && !filterList && data.length === 0" class="label-results">No se encontraron resultados</ion-label>
@@ -25,7 +32,7 @@
     <ion-list *ngIf="data.length > 0">
       <ion-item class="container friend" *ngFor="let userS of data">
         <ion-avatar slot="start">
-          <img src="/assets/user.png" (click)="abrirMensajesBusqueda(userS)"/>
+          <img src="assets/avatar/{{userS.avatar}}.png" (click)="abrirMensajesBusqueda(userS)">
         </ion-avatar>
         <div class="user-list" (click)="abrirMensajesBusqueda(userS)">
           <div style="display: flex;width: 100%;">
@@ -47,7 +54,7 @@
       <ion-list style="padding: 0;">
         <ion-item *ngFor="let cont of userList | filter:filterList" class="friend">
           <ion-avatar slot="start">
-            <img src="/assets/user.png" (click)="abrirDialogo(cont)" />
+            <img src="assets/avatar/{{cont.receiver.avatar}}.png" (click)="abrirDialogo(cont)">
           </ion-avatar>
           <div class="user-list" (click)="abrirDialogo(cont)">
             <div style="display: flex;width: 100%;">

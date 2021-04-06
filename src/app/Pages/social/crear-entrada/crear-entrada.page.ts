@@ -31,6 +31,7 @@ export class CrearEntradaPage implements OnInit {
   idAction: number;
   sFotos: Array<any>;
   actividad;
+  token: any;
 
   constructor(
     private camara: Camera,
@@ -45,7 +46,9 @@ export class CrearEntradaPage implements OnInit {
     private router: Router,
     private loadingService: LoadingService,
     private snackbar: MatSnackBar
-  ) { }
+  ) { 
+    this.getToken();
+  }
 
   ngOnInit() {
     const informacion = this.pObjecto.getNavData();
@@ -55,7 +58,6 @@ export class CrearEntradaPage implements OnInit {
       const informacion = this.pObjecto.getNavData();
       this.actividad = informacion.actividad;
     });
-
     this.sFotos = [];
     this.photos = [];
     this.auth.gettokenLog().then( dt => {
@@ -63,8 +65,14 @@ export class CrearEntradaPage implements OnInit {
         this.usertk = infoUser;
       });
     });
-
   }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+    });
+  }
+
   vistaHolder(idAction: number) {
     if (idAction === 1) {
       return '¿Como estás entrenando?';
@@ -77,7 +85,7 @@ export class CrearEntradaPage implements OnInit {
     }
   }
 
-  async selccionImg(){
+  async selccionImg() {
     const acctionSheet = await this.actionSheetcontroller.create({
       header: 'Seleccione una imagen',
       cssClass: 'match-item-action-sheet',
@@ -173,8 +181,7 @@ export class CrearEntradaPage implements OnInit {
     });
   }
 
-  Publicar(){
-
+  Publicar() {
     if(this.textareainput) {
       this.loadingService.loadingPresent({spinner: "circles" });
       if (this.idAction === 1) {
@@ -186,7 +193,20 @@ export class CrearEntradaPage implements OnInit {
       if (this.idAction === 3) {
         this.textareainput = '#Reto: ' + this.textareainput;
       }
-      this.share.guardarpost(this.usertk.id, this.textareainput, this.photos).subscribe(  res => {
+      const medias = new Array();
+      if(this.photos.length > 0) {
+        this.photos.map( media => {
+          medias.push({
+            image: media
+          });
+        });
+      }
+      const form = {
+        user_id: this.usertk.id,
+        post: this.textareainput,
+        medias: medias
+      }
+      this.share.guardarpost(form, this.token).subscribe(  res => {
         this.loadingService.loadingDismiss();
         this.share.varPostUpdate.next('update data');
         this.router.navigate(['/users/social']);

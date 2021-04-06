@@ -9,6 +9,10 @@
     margin-top: 40px;
 }
 
+ion-button.ion-color.ion-color-light.md.button.button-small.button-clear.ion-activatable.ion-focusable.hydrated {
+    --ion-color-base: #ffffff !important;
+}
+
 ion-content{
     --background: rgba(44, 39, 45, 0.863);
 }

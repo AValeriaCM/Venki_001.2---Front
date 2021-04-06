@@ -31,7 +31,9 @@ ion-slides {
   }
 
   .swiper-slide h2 {
-    margin-top: 2.8rem;
+    color: #032d6a;
+    margin: 15px auto;
+    font-weight: bold;
   }
 
   .swiper-slide img {
@@ -54,38 +56,49 @@ ion-slides {
   }
 
   .titulo{
-    font-size: 18px;
+    font-size: 15px;
     letter-spacing: 1px;
     text-align: center;
   }
 
-  .itemback{
-    color: #000000;
-    text-decoration: none;
-    border: 2px solid #ffffff79;
-    transition: all 0.3s ease-in-out;
-    border-radius: 8px;
-    --background: rgba(255, 255, 255, 0.438) !important;
-    width: 100%;
-  }
+.itemback{
+  color: #ffffff;
+  text-decoration: none;
+  width: 80%;
+  border-radius: 10px;
+  --background: rgb(0,42,104);
+  --background: linear-gradient(90deg, rgba(0,42,104,1) 18%, rgba(128,185,246,1) 71%, rgba(0,65,162,1) 88%);
+}
 
-  .buttonCss{
-    -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
-    box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.151);
-    text-transform: uppercase;
-    font-size: 9px;
-    letter-spacing: 1px;
-    margin: 0px;
-    margin-top: 10px;
-    margin-left: 5%;
-    text-align: center;
-    border: rgba(20, 110, 155, 0.267);;
-    text-decoration: none;
-    display: inline-block;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
-    width: 85%;
-    height: 35px;
-    color: #ffffff;
-    --background: #002a68 !important;
-  }
+.buttonCss{
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin: 15px auto;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  width: 85%;
+  --background: #002a68 !important;
+}
+
+.card-profiles {
+  margin: 0;
+  border-left: 4px solid #094aa8;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.label-descriptions {
+  font-size: 13px;
+  font-weight: bold;
+  color: black;
+}
+
+.content-descriptions {
+  padding: 5px;
+}
+
+.hr-descriptions {
+  background-color: #b5b5b5;
+}

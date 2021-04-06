@@ -62,34 +62,35 @@ export class ChatServiceService {
   }
 
 
-  getAllUsers(correo: any) {
+  getAllUsers(correo: any, token: any) {
     return this.http.get<any>(this.urlServ + `api/users?query=name|=|${correo}`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  getchatsUser(idUser: any) {
+  getchatsUser(idUser: any, token: any) {
     return this.http.get<any[]>(this.urlServ + `api/users/${idUser}/chats`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  crearChat(transmiterID: any, reciberID: any) {
+  crearChat(transmiterID: any, reciberID: any, token: any) {
     const body = new HttpParams()
       .set('transmitter_id', transmiterID)
       .set('receiver_id', reciberID);
-
-
     return this.http.post(this.urlServ + `api/chats`, body, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  enviarMensajeChat(chatid: any, userid: any, msg: any) {
+  enviarMensajeChat(chatid: any, userid: any, msg: any, token:any) {
     const body = new HttpParams()
       .set('chat_id', chatid)
       .set('user_id', userid)
@@ -99,20 +100,23 @@ export class ChatServiceService {
       headers: new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  getchatsMSGUser(idUser: any) {
+  getchatsMSGUser(idUser: any, token: any) {
     return this.http.get<any[]>(this.urlServ + `api/chats/${idUser}/messages?page=1&orber_by=created_at&direction=desc`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 
-  getMessageOFPages(idChat: any, idPage: any){
+  getMessageOFPages(idChat: any, idPage: any, token: any){
     return this.http.get<any[]>(this.urlServ + `api/chats/${idChat}/messages?page=${idPage}&orber_by=created_at&direction=desc`, {
       headers: new HttpHeaders()
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 }

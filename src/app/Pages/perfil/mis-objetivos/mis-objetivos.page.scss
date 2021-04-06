@@ -1,53 +1,29 @@
 *{
   font-family: 'Proxima Nova' !important;
 }
-.button-css-options{
-    -webkit-box-shadow : 0  10px  30px  0 rgba(130, 192, 223, 0.288);
-    box-shadow : 0  10px  30px  0 rgba(95, 187, 233, 0.151);
-    font-size: 9px;
-    letter-spacing: 1px;
-    margin: 0px;
-    margin-top: 10px;
-    margin-left: 5%;
-    text-align: center;
-    border: rgba(20, 110, 155, 0.267);;
-    text-decoration: none;
-    display: inline-block;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
-    width: 85%;
-    height: 35px;
-    color: #f8f9fa;
-    --background: #002a68 !important;
+.button-css-options {
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-top: 5px;
+  width: 60%;
+  --background: #002a68 !important;
 }
 
 .textArea{
   width: 100%;
-  max-width: 800px;
-  height: 160px;
   display: block;
-  margin: 0 auto;
   resize: none;
-  border-bottom: 1px solid ;
-  border-top: 1px solid;
-  border-right: 1px solid;
-  border-left: 1px solid;
-  padding: 10px;
-  outline: 0;
-  border-radius: 8px;
-  margin-top: 10%;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border-color: #c7c7c7;
 }
 
 
 .title-css {
-  color: rgb(8, 8, 8);
-  margin: 0;
-  padding: 0px 0px 6px 0px;
-  font-size: 11px;
-  line-height: 44px;
+  color: #080808;
+  font-size: 13px;
   letter-spacing: 1px;
-  font-weight: bold;
-  text-align: center;
+  font-weight: 500;
 }
 
 .Subtitle-css {
@@ -62,29 +38,14 @@
 }
 
 .ion-item-css {
-  background-color: #f6f6f685;
-  border: none;
-  color: #000000;
-  text-decoration: none;
-  font-size: 13px;
-  margin: 5px;
-  width: 90%;
-  border: 2px solid #ffffff79;
-  transition: all 0.3s ease-in-out;
-  height: 80%;
+  font-size: 12px;
+  width: 100%;
   text-align: center;
-  margin: 0 auto;
   margin-bottom: 10px;
-  border-radius: 8px;
-  --background: rgba(255, 255, 255, 0.562) !important;
 }
 
 .expansionCsss {
   background-color: rgba(248, 249, 250, 0.527);
-}
-
-.expansionCsss2{
-  background: rgb(0 42 104);
 }
 
 .larger{
@@ -100,5 +61,85 @@
   font-size: 15px;
   color: white;
   margin: 15px 0px 0px 0px;
+  padding: 10px;
+}
+
+.icon-add {
+  color: white;
+  margin: 5px 15px 0px 0px;
+}
+
+.container-targets {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.badge-title {
+  background-color: #002a68;
+  padding: 8px 10px;
+  border-radius: 5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.icon-target {
+  color: white;
+  background-color: #002a68;
+  padding: 5px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+.label-target {
+  white-space: normal;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.button-end {
+  --background: #002a68;
+  margin-bottom: 15px;
+}
+
+.badge-date {
+  font-size: 12px;
+  padding: 4px 5px;
+  font-weight: 500;
+}
+
+.title {
+  padding: 10px 25px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+}
+
+.subtitle {
+  padding: 10px 20px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.badge-instructions {
+  background-color: #002a68;
+  padding: 5px;
+  font-weight: 500;
+  font-size: 12px;
+  margin-left: 15px;
+}
+
+.card-add {
+  margin: 10px 20px;
+  border-radius: 10px;
+  border-left: 4px solid #002a68;
+}
+
+.item-date {
+  width: 100%;
+  border: 1px solid #c7c7c7;
+  border-radius: 5px;
   padding: 10px;
 }

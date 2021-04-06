@@ -17,15 +17,15 @@ import { environment } from 'src/environments/environment';
 })
 export class SocialPage implements OnInit {
 
-  miactividad: any;
+  @ViewChild(IonInfiniteScroll) infonitescroll: IonInfiniteScroll;
+
+  miactividad = [];
 
   message_header: string;
 
   sliderImgOption = {
+    initialSlide: 0,
     zoom: false,
-    slidesPerView: 1.5,
-    cemteredSlides: true,
-    spaceBetween: 20
   };
 
   sliderImgOption2 = {
@@ -45,8 +45,6 @@ export class SocialPage implements OnInit {
 
   msj = [];
 
-  @ViewChild(IonInfiniteScroll) infonitescroll: IonInfiniteScroll;
-
   paginaActual: any;
   ultimaPage: any;
   totalDt: any;
@@ -56,6 +54,7 @@ export class SocialPage implements OnInit {
   config: any;
 
   basePath = `${environment.HOST}`;
+  token: any;
 
   constructor(
     private route: Router,
@@ -68,9 +67,9 @@ export class SocialPage implements OnInit {
     private auth: AuthService,
     private loadingService: LoadingService
     ) {
+      this.getToken();
       this.LikeValue = 0;
       this.getCurrentHour();
-      this.getPosts();
   }
 
   ngOnInit() {
@@ -99,9 +98,16 @@ export class SocialPage implements OnInit {
     });
   }
 
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.getPosts();
+    });
+  }
+
   getPosts() {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getpost().subscribe( res => {
+    this.share.getpost(this.token).subscribe( res => {
       this.miactividad = res.data;
       this.paginaActual = res.meta.current_page;
       this.ultimaPage = res.meta.first_page;
@@ -134,7 +140,7 @@ export class SocialPage implements OnInit {
     this.contadorlike = valor;
     this.contadorlike = this.contadorlike + 1;
     this.idPost = valorid;
-    this.share.actualizarpost(this.idPost, this.contadorlike).subscribe( res => {
+    this.share.actualizarpost(this.idPost, this.contadorlike, this.token).subscribe( res => {
       this.share.varPostUpdate.next('update data');
       this.ngOnInit();
     });
@@ -145,11 +151,12 @@ export class SocialPage implements OnInit {
     this.route.navigate(['/users/social/ver-usuario']);
   }
 
-  imageView(imag: any){
+  imageView(imag: any) {
+    const url = this.basePath+"medias/"+imag;
     this.modelcontroller.create({
       component: ImageModalPage,
       componentProps: {
-        img: imag
+        img: url
       }
     }).then(model => model.present());
   }
@@ -180,7 +187,7 @@ export class SocialPage implements OnInit {
           this.infonitescroll.disabled  = true;
           return;
         }
-        this.share.getpostNextPage(this.paginaActual).subscribe( resPg => {
+        this.share.getpostNextPage(this.paginaActual, this.token).subscribe( resPg => {
           resPg.data.forEach(element => {
             this.miactividad.push(element);
           });

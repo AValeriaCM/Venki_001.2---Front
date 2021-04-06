@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/_services/auth.service';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { LoginService } from 'src/app/_services/login.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-mis-objetivos',
@@ -22,24 +24,40 @@ export class MisObjetivosPage implements OnInit {
   userId: any;
   objetivosList =  [];
 
+  addTarget = false;
+
+  form: FormGroup;
+  isSubmitted = false;
+  token: any;
+
   constructor(
     private route: Router,
-    private formBuilder: FormBuilder,
     public alertController: AlertController,
     private share: ShareserviceService,
     private log: LoginService,
     private auth: AuthService,
-    private loadingService: LoadingService
-  ) { }
+    private loadingService: LoadingService,
+    private snackbar: MatSnackBar 
+  ) { 
+    this.getToken();
+  }
 
-  get f() { return this.dynamicForm.controls; }
-  get t() { return this.f.item as FormArray; }
   ngOnInit() {
-    this.dynamicForm = this.formBuilder.group({
-      item: new FormArray([])
-    });
+    this.loadForm();
+  }
 
-    this.getTargets();
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.getTargets();
+    });
+  }
+
+  loadForm() {
+    this.form = new FormGroup({
+      target : new FormControl('',[Validators.required, Validators.minLength(3) , Validators.maxLength(70)]),
+      date: new FormControl('')
+    });
   }
 
   getTargets() {
@@ -47,8 +65,10 @@ export class MisObjetivosPage implements OnInit {
     this.auth.gettokenLog().then(dt => {
       this.log.logdataInfData(dt).subscribe(infoUser => {
         this.userId = infoUser.id;
-        this.share.obtenerObhetivos(this.userId).subscribe((res: any) => {
-          this.objetivosList = res.data;
+        this.share.obtenerObhetivos(this.userId, this.token).subscribe((res: any) => {
+          this.objetivosList = res.data.sort((a: any,b: any) => {
+            return 0 - a.priority < b.priority ? -1 : 1
+          });
           this.loadingService.loadingDismiss();
         }, error => {
           this.loadingService.loadingDismiss();
@@ -59,46 +79,53 @@ export class MisObjetivosPage implements OnInit {
     });
   }
 
-
-  onDetalles() {
-    this.t.push(this.formBuilder.group({
-      item: [''],
-    }));
-  }
-
-  onReset(i: number) {
-    this.t.removeAt(i);
-  }
-
-  onClear() {
-    this.submitted = false;
-    this.t.reset();
-  }
-
   operar() {
-    this.submitted = true;
-    this.list = this.t.value;
-    let correct = 0;
-    let incorrect = 0;
-    this.list.forEach(dt => {
-      if (dt.item === '') {
-        incorrect = incorrect + 1;
-      } else {
-        correct = correct + 1;
+    if (!this.form.valid) {
+      this.mostrarmensaje('Los datos ingresados no son validos', 'Error', 'red-snackbar');
+      return false;
+    } else {
+      const that = this;
+      let bt = '';
+      if(that.form.value.date) {
+        bt = format(new Date(that.form.value.date), 'yyyy-MM-dd');
       }
-    });
-
-    if (incorrect > 0) {
-      this.alerta();
-    } else if (correct === this.list.length) {
-      this.list.forEach(dt => {
-        this.share.agregarObjetivos(dt.item, this.userId).subscribe(res => {
-        });
+      this.objetivosList.push({
+        achievement: that.form.value.target,
+        date: bt
       });
-      this.share.varObjetivos.next('objetivos agregados');
-      this.share.var.next('Objetivo Agregado');
-      this.t.clear();
+      this.addTarget = false;
+      this.form.reset();
     }
+  }
+
+  submit() {
+    const listTargets = [];
+    let i = 1;
+    this.objetivosList.map( (target) => {
+      listTargets.push({
+        achievement: target.achievement,
+        priority: i,
+        date: target.date
+      });
+      i++;
+    });
+    this.loadingService.loadingPresent({spinner: "circles" });
+    const form = {
+      objectives: listTargets,
+      user_id: this.userId 
+    };
+    this.share.agregarObjetivos(form, this.token).subscribe(async res => {
+      if (res) {
+        this.loadingService.loadingDismiss();
+        this.mostrarmensaje('Los objetivos se han guardado satisfactoriamente', 'OK', 'green-snackbar');
+      } else {
+        this.loadingService.loadingDismiss();
+        this.mostrarmensaje('Error guardando los objetivos', 'Error', 'red-snackbar');
+      }
+    }, error => {
+      this.loadingService.loadingDismiss();
+      this.mostrarmensaje('Error guardando los objetivos', 'Error', 'red-snackbar');
+    });
   }
 
   async alerta() {
@@ -117,16 +144,16 @@ export class MisObjetivosPage implements OnInit {
     this.route.navigateByUrl('/users/perfil');
   }
 
-  reorder(event) {  
-      const itemMover = this.objetivosList.splice(event.detail.from ,1)[0];
-      this.objetivosList.splice(event.detail.to, 0, itemMover);
-      event.detail.complete(true);
-      console.log(this.objetivosList,'lista objet');
-        this.objetivosList.forEach(obj=>{
-          console.log(obj);
-        this.share.actualizarObjetivos(obj, this.userId).subscribe(() =>{ 
-      });
-        });
-  } 
+  reorder(event: any) {  
+    const itemMove = this.objetivosList.splice(event.detail.from, 1)[0];
+    this.objetivosList.splice(event.detail.to, 0, itemMove);
+    event.detail.complete();
+  }
   
+  mostrarmensaje(message: string, action: string, type: string) {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+      panelClass: [type],
+    });
+  }
 }

@@ -1,8 +1,10 @@
 import { AlertController } from '@ionic/angular';
-import { Registro } from './../../_model/Registro';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { ShareserviceService } from 'src/app/_services/shareservice.service';
+import { LoadingService } from 'src/app/_services/loading.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-olvidoc',
@@ -16,11 +18,13 @@ export class OlvidocPage implements OnInit {
 
   correoForm: FormGroup;
   isSubmitted = false;
-  nUsuario: Registro;
 
   constructor(
     private router: Router,
-    private alertController:AlertController 
+    private alertController:AlertController,
+    private sharedService: ShareserviceService,
+    private loadingService: LoadingService,
+    private snackbar: MatSnackBar 
   ) { }
 
   ngOnInit() {
@@ -34,9 +38,23 @@ export class OlvidocPage implements OnInit {
     });
   }
 
-  RecuperarEmail(){
-    this.nUsuario = this.correoForm.value;
-    this.presentAlert();
+  RecuperarEmail() {
+    if (!this.correoForm.valid) {
+      this.mostrarmensaje('Los datos ingresados no son validos', 'Error', 'red-snackbar');
+      return false;
+    } else {
+      const email = this.correoForm.value;
+      this.loadingService.loadingPresent({spinner: "circles" });
+      this.sharedService.forgetPassword(email.correo).subscribe(async res => {
+        if (res) {
+          this.loadingService.loadingDismiss();
+          this.presentAlert();
+        } else {
+          this.loadingService.loadingDismiss();
+          this.mostrarmensaje('El email no se encuentra registrado en el sistema', 'Error', 'red-snackbar');
+        }
+      });
+    }
   }
 
   volverLogin(){
@@ -53,5 +71,12 @@ export class OlvidocPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  mostrarmensaje(message: string, action: string, type: string) {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+      panelClass: [type],
+    });
   }
 }

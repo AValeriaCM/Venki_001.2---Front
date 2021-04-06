@@ -34,6 +34,7 @@ export class EntrenaPage implements OnInit {
 
   message_header: string;
   basePath = `${environment.HOST}`;
+  token: any;
 
   constructor(
     private router: Router,
@@ -45,24 +46,31 @@ export class EntrenaPage implements OnInit {
     private modelcontroller: ModalController,
     private log: LoginService,
     private loadingService: LoadingService 
-    ) { }
+    ) { 
+      this.getToken();
+  }
 
   ngOnInit() {
+  }
 
+  loadPage() {
     this.getCurrentHour();
-
     this.getAuthUser();
-
     this.chatS.var.subscribe(chatMsg => {
       this.msj = this.chatS.getbadge();
     });
     this.msj = this.chatS.getbadge();
-
     this.auth.getUserData().then(dt => {
       this.usertk = dt;
       this.getcursos();
     });
+  }
 
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadPage();
+    });
   }
 
   getAuthUser() {
@@ -104,10 +112,9 @@ export class EntrenaPage implements OnInit {
     await this.alert.present();
   }
 
-
   getcursos() {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getCategorias().subscribe(info => {
+    this.share.getCategorias(this.token).subscribe(info => {
       this.cursos = info.data.reverse();
       this.cursosCargados = info.data;
       this.loadingService.loadingDismiss();

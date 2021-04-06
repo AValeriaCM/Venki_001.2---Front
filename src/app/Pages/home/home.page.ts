@@ -38,6 +38,7 @@ export class HomePage implements OnInit {
   basePath = `${environment.HOST}`;
 
   emotion = 0;
+  token: any;
 
   constructor(
     private router: Router,
@@ -49,26 +50,25 @@ export class HomePage implements OnInit {
     private log: LoginService,
     private modelcontroller: ModalController,
     private loadingService: LoadingService
-  ) { }
+  ) { 
+    this.getToken();
+  }
 
   ngOnInit() {
     this.imageSelect = new Image();
     this.getCurrentHour();
     this.getActiveLesson();
     this.getActiveCourse();
-    this.getDataInfo();
-    this.loadData();
     this.localNotification();
   }
 
-  crearEntrada() {
-    const dataObj = {
-      idAction: 1
-    };
-    this.pObjecto.setData(dataObj);
-    this.router.navigate(['/users/social/crear-entrada/']);
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadData();
+      this.getDataInfo();
+    });
   }
-
   getDataInfo() {
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
@@ -91,7 +91,7 @@ export class HomePage implements OnInit {
   }
 
   getData(): Observable<any> {
-    let activity = this.share.getaactividadesDiaria();
+    let activity = this.share.getaactividadesDiaria(this.token);
     return forkJoin([activity]);
   }
 
@@ -147,7 +147,7 @@ export class HomePage implements OnInit {
   }
 
   getMiactividad(userid: any) {
-    this.share.getActividadUsuario(userid).subscribe(info => {
+    this.share.getActividadUsuario(userid, this.token).subscribe(info => {
       this.miactividad = info.data.length;
     });
   }
@@ -176,5 +176,9 @@ export class HomePage implements OnInit {
     this.pObjecto.setData(dataObj);
     this.share.varDesafio.next('mostrar desafio');
     this.router.navigate(['/users/social']);
+  }
+
+  goTraing() {
+    this.router.navigate(['/users/entrena']);
   }
 }

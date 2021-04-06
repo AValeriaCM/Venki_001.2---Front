@@ -67,6 +67,8 @@ export class RegisterPage implements OnInit {
   termSelectNino = false;
   basePath = `${environment.HOST}`;
 
+  year = (new Date()).getFullYear();
+
   constructor(
     private router: Router,
     private snackbar: MatSnackBar,
@@ -83,6 +85,7 @@ export class RegisterPage implements OnInit {
     private diagnostic: Diagnostic,
     private transfer: FileTransfer
     ) {
+      console.log('now', this.year);
     }
 
   ngOnInit() {

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { LoginService } from 'src/app/_services/login.service';
 import { LoadingService } from 'src/app/_services/loading.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-edit-perfil',
@@ -34,7 +35,7 @@ export class EditPerfilPage implements OnInit {
   isSubmitted = false;
   editarUser: Registro;
   usertk = null;
-  situacionS = null;
+  token: any;
   constructor(
     private auth: AuthService,
     private edit: RegistroService,
@@ -42,10 +43,18 @@ export class EditPerfilPage implements OnInit {
     private share: ShareserviceService,
     private log: LoginService,
     private loadingService: LoadingService 
-    ) { }
+    ) { 
+      this.getToken();
+    }
 
   ngOnInit() {
     this.loadAuthUser();
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+    });
   }
 
   loadAuthUser() {
@@ -79,19 +88,19 @@ export class EditPerfilPage implements OnInit {
         [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
       city : new FormControl(dt.city,
           [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+      status : new FormControl(dt.status,[Validators.required]),
     });
   }
 
   editar(){
     this.editarUser = this.editarForm.value;
-    this.edit.Editartodo(this.editarUser, this.usertk.id, this.situacionS).subscribe( response => {
+    const bt = format(new Date(this.editarUser.birthday), 'yyyy-MM-dd');
+    this.editarUser.birthday = bt;
+    this.editarUser.register_social = false;
+    this.edit.Editartodo(this.editarUser, this.usertk.id, this.editarForm.value.status, this.token).subscribe( response => {
       this.auth.updateToken();
       this.share.var.next('data update');
       this.router.navigateByUrl('/users/perfil');
     });
-  }
-
-  optionsFn(it: any){
-    this.situacionS = it.situacion;
   }
 }

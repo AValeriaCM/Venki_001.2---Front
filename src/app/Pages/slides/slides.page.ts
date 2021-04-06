@@ -21,6 +21,7 @@ export class SlidesPage implements OnInit {
   select  =  false;
   userInf: any;
   form: FormGroup;
+  token: any;
 
   get profilesArray() {
     return this.form.get('profiles') as FormArray;
@@ -40,6 +41,7 @@ export class SlidesPage implements OnInit {
   ngOnInit() {
     this.validateProfileUserAuth();
     this.loadForm();
+    this.getToken();
   }
 
   validateProfileUserAuth() {
@@ -61,14 +63,20 @@ export class SlidesPage implements OnInit {
     });
   }
 
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+    });
+  }
+
   getProfiles() {
     this.loadingService.loadingPresent({message: "Por favor espere", spinner: "circles" });
-    this.porfiles.getProfiles().subscribe( (resp: any) => {
+    this.porfiles.getProfiles(this.token).subscribe((resp: any) => {
       this.loadProfiles(resp);
       this.auth.gettokenLog().then( tkInf => {
         if (tkInf !==  null) {
           this.log.logdataInfData(tkInf).subscribe( resTk => {
-            if (resTk){
+            if (resTk) {
               this.userInf = resTk;
             }
           });
@@ -84,7 +92,6 @@ export class SlidesPage implements OnInit {
     this.form = new FormGroup({
       profiles: this.formBuilder.array([], {validators: this.minProfileSelected })
     });
-
   }
 
   minProfileSelected: ValidatorFn = (form: FormArray) => {
@@ -119,10 +126,10 @@ export class SlidesPage implements OnInit {
       const profile = this.profilesArray.controls.find( control => control.get('selected').value === true );
       if(profile) {
         this.loadingService.loadingPresent({message: "Por favor espere", spinner: "circles" });
-        this.porfiles.updateProfile(this.userInf.id, profile.value.profile.id).subscribe( profileUpdate => {
+        this.porfiles.updateProfile(this.userInf.id, profile.value.profile.id, this.token).subscribe( profileUpdate => {
           this.auth.setNomolestarP();
           this.loadingService.loadingDismiss();
-          this.router.navigateByUrl('/users/home');
+          this.router.navigateByUrl('/target');
         }, error => {
           this.loadingService.loadingDismiss();
         });

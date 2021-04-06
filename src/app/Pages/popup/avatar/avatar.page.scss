@@ -33,3 +33,14 @@
     color: #ffffff;
     --background: #002a68 !important;
 }
+
+.label-avatar {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: capitalize !important;
+}
+
+.popover-content.sc-ion-popover-md {
+    width: 275px !important;
+}

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { AlertController, IonContent } from '@ionic/angular';
 import { LoadingService } from 'src/app/_services/loading.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-vercurso',
@@ -15,20 +16,23 @@ export class VercursoPage implements OnInit {
 
   data: any;
   prueba: any;
-  info;
-  calificacionVal;
+  info: any;
+  calificacionVal: any;
   menajeNuevo = '';
-  userinfo;
+  userinfo: any;
   alert: any;
   comentariosGeneral: any[] = [];
   infomsg: any;
+  token: any;
   
   constructor(
     private route: ActivatedRoute,
     private share: ShareserviceService,
     public alertController: AlertController,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private auth: AuthService
     ) {
+    this.getToken();
     this.route.queryParams.subscribe( params => {
       if ( params && params.info  && params.userinf) {
         this.data = params.info;
@@ -39,14 +43,20 @@ export class VercursoPage implements OnInit {
 
   ngOnInit() {
     this.prueba = JSON.parse(this.data);
-    this.getCourse();
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp
+      this.getCourse();
+    });
   }
 
   getCourse() {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getCursoEspecifico(this.prueba).subscribe( async infodt => {
+    this.share.getCursoEspecifico(this.prueba, this.token).subscribe( async infodt => {
       this.info = infodt.data;
-      this.share.getComentariosCurso(this.prueba).subscribe( info =>  {
+      this.share.getComentariosCurso(this.prueba, this.token).subscribe( info =>  {
         this.comentariosGeneral = info.data;
         this.loadingService.loadingDismiss();
       }, error => {
@@ -62,9 +72,9 @@ export class VercursoPage implements OnInit {
   }
 
   enviarMensaje(){
-    if (this.calificacionVal){
-      this.share.enviarComentarioIPutuacion(this.prueba, this.userinfo, this.menajeNuevo, this.calificacionVal).subscribe( data => {
-        this.share.getComentariosCurso(this.prueba).subscribe( info =>  {
+    if (this.calificacionVal) {
+      this.share.enviarComentarioIPutuacion(this.prueba, this.userinfo, this.menajeNuevo, this.calificacionVal, this.token).subscribe( data => {
+        this.share.getComentariosCurso(this.prueba, this.token).subscribe( info =>  {
           this.menajeNuevo = '';
           this.calificacionVal = 1;
           this.comentariosGeneral = info.data;
@@ -89,6 +99,4 @@ export class VercursoPage implements OnInit {
     });
     await this.alert.present();
   }
-
-
 }

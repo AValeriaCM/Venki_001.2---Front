@@ -9,6 +9,7 @@ import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { PassObjectVideoService } from 'src/app/_services/pass-object-video.service';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-audioplayer',
@@ -16,6 +17,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./audioplayer.page.scss'],
 })
 export class AudioplayerPage implements OnInit {
+
+  @ViewChild('range', {static: false})  range: IonRange;
 
   data: any;
   aud: Array<any>;
@@ -48,22 +51,33 @@ export class AudioplayerPage implements OnInit {
   color:string;
   progreso: any;
   indexLessons: number;
+  token: any;
   
-  @ViewChild('range', {static: false})  range: IonRange;
- constructor(
+  constructor(
     private router: Router,
     private pObjecto: PassObjectService,
     private PObjectAux: PassObjectAuxService,
     private share: ShareserviceService,
     private pObjectoVideo: PassObjectVideoService,
     private PObjecIndex: PassNameLessonsService,
-    private loadingService: LoadingService   ,
-    private snackbar: MatSnackBar
-    ) { }
-
+    private loadingService: LoadingService,
+    private snackbar: MatSnackBar,
+    private auth: AuthService
+    ) { 
+    this.getToken();
+  }
 
   ngOnInit() {
+  }
 
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadPage();
+    });
+  }
+
+  loadPage() {
     let info = this.pObjecto.getNavData();
     if(info) {
       this.share.guardarLeccionActiva(info);
@@ -90,17 +104,16 @@ export class AudioplayerPage implements OnInit {
     this.userinfo = informacion.userInf;
     this.course = informacion.course.name;
     this.courseID = informacion.infoCurso.id;
-
     this.getCourse();
   }
 
   getCourse() {
     this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getCursoEspecifico(this.data.id).subscribe(async infodt => {
+    this.share.getCursoEspecifico(this.data.id, this.token).subscribe(async infodt => {
       this.info = infodt.data;
-      this.share.getComentariosCurso(this.data.id).subscribe(info => {
+      this.share.getComentariosCurso(this.data.id, this.token).subscribe(info => {
         this.comentariosGeneral = info.data;
-        this.share.getCursosUsuario(this.userinfo.id).subscribe(dataCurso => {
+        this.share.getCursosUsuario(this.userinfo.id, this.token).subscribe(dataCurso => {
           this.loadingService.loadingDismiss();
           let temid  = dataCurso.data;
           let dttemp = temid.filter(r => r.id === this.courseID);

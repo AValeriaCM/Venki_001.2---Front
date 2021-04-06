@@ -75,33 +75,58 @@
     </div>
   </div>
 
-  <div class="divBack">
-    <ion-grid>
-      <div *ngFor="let com of comentariosGeneral;">
-        <ion-row class="user-comments">
-          <ion-col size="2">
-            <ion-avatar item-start>
-              <img class="icon-photo" src="{{img}}">
-            </ion-avatar>
-          </ion-col>
-          <ion-col size="10">
-            <div>
-              <p class="usernamecss"><strong></strong></p>
-              <p class="mensajecss">{{com.comment}}</p>
-              <div class="time" class="ion-text-right"><br>
-                {{com.created_at | date:'short'}}
-              </div>
-            </div>
-          </ion-col>
-        </ion-row>
+  <div class="divBack" *ngIf="comentariosGeneral.length > 0">
+
+    <ion-card style="margin: 10px 0px;border-radius: 10px;">
+      <ion-item tappable class="section">
+        <ion-icon slot="start" class="icon-description" name="arrow-forward" *ngIf="!comments" (click)="comments = true"></ion-icon>
+        <ion-icon slot="start" name="arrow-down" class="icon-description" *ngIf="comments" (click)="comments = false"></ion-icon>
+        <ion-card-title class="title-content">Comentarios y Calificaciones</ion-card-title>
+      </ion-item>
+      <div>
+        <ion-card-subtitle style="font-size: medium;">
+          <ion-badge color="primary" class="label-progress">Cantidad de reseñas: {{ comentariosGeneral.length }}</ion-badge>
+        </ion-card-subtitle>
       </div>
-    </ion-grid>
+      <div style="padding: 10px;" *ngIf="comments">
+        <ion-grid>
+          <div *ngFor="let com of comentariosGeneral;" class="div-rating">
+            <ion-row class="user-comments">
+              <ion-col size="2">
+                <ion-avatar item-start>
+                  <img src="assets/avatar/{{com.user.avatar}}.png" (click)="verUser(com.user)">
+                </ion-avatar>
+              </ion-col>
+              <ion-col size="10">
+                <div style="text-align: center;">
+                  <ul class="list-inline rating-list" style="display: inline-block;padding: 0;margin: 0;" *ngFor="let star of stars; let i = index">
+                    <li [ngClass]="{ 'selected': com.score > i }">★</li> 
+                  </ul>
+                </div>
+                <div>
+                  <p class="usernamecss"><strong style="text-transform: capitalize;">{{ com.user.name }}</strong>&nbsp;<strong style="text-transform: capitalize;">{{ com.user.lastname }}</strong></p>
+                  <p class="mensajecss">{{ com.comment | capitalize }}</p>
+                  <div class="date-rating ion-text-right">{{com.created_at | date:'short'}}</div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-grid>
+      </div>
+    </ion-card>
   </div>
-
-
 </ion-content>
 
 <ion-footer *ngIf="progreso !== 0">
+  
+  <div style="text-align: center;padding: 10px;">
+    <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block;padding: 0 10px;margin: 0;">
+      <li (click)="countStar(star)"
+          [ngClass]="{'selected': (star <= selectedValue)}">★
+      </li> 
+    </ul>
+  </div>
+
   <ion-toolbar>
     <ion-row class="ion-align-items-center ion-no-padding">
       <ion-col size="10">

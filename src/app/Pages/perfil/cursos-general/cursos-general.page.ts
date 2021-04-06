@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-cursos-general',
@@ -12,20 +13,31 @@ export class CursosGeneralPage implements OnInit {
   cursos;
   data: any;
   prueba: any;
-  constructor(private share: ShareserviceService,
-              private router: Router,
-              private route: ActivatedRoute, ) {
-                this.route.queryParams.subscribe( params => {
-                  if ( params && params.info) {
-                    this.data = params.info;
-                  }
-                });
-              }
+  token: any;
 
-  ngOnInit() {
-    this.prueba = JSON.parse(this.data);
-    this.share.getCursos().subscribe( info => {
-      this.cursos = info.data;
+  constructor(
+    private share: ShareserviceService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private auth: AuthService
+    ) {
+      this.route.queryParams.subscribe( params => {
+        if ( params && params.info) {
+          this.data = params.info;
+        }
+      });
+      this.getToken();
+    }
+
+  ngOnInit() {}
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp
+      this.prueba = JSON.parse(this.data);
+      this.share.getCursos(this.token).subscribe( info => {
+        this.cursos = info.data;
+      });
     });
   }
 
@@ -39,7 +51,7 @@ export class CursosGeneralPage implements OnInit {
   }
 
   agregarCurso(curso: any){
-    this.share.agregarCurso(this.prueba, curso.id).subscribe( data =>  {
+    this.share.agregarCurso(this.prueba, curso.id, this.token).subscribe( data =>  {
     });
   }
 }

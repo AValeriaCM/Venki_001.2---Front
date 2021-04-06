@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarComponent } from 'ionic2-calendar';
+import { AuthService } from 'src/app/_services/auth.service';
+import { LoadingService } from 'src/app/_services/loading.service';
+import { LoginService } from 'src/app/_services/login.service';
+import { ShareserviceService } from 'src/app/_services/shareservice.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-calendario',
@@ -8,21 +13,71 @@ import { CalendarComponent } from 'ionic2-calendar';
 })
 export class CalendarioPage implements OnInit {
 
+  @ViewChild(CalendarComponent) myCal: CalendarComponent;
   eventSource = [];
   viewTitle: string;
-
   calendar = {
+    locale: 'es',
     mode: 'month',
     currentDate: new Date()
   };
-
   selectDate: Date;
+  token: any;
+  userId: any;
+  targets =  [];
 
-  @ViewChild(CalendarComponent) myCal: CalendarComponent;
-
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private loadingService: LoadingService,
+    private log: LoginService,
+    private share: ShareserviceService,
+    private datePipe: DatePipe
+  ) { 
+    this.getToken();
+  }
 
   ngOnInit() {
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.getTargets();
+    });
+  }
+
+  getTargets() {
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.auth.gettokenLog().then(dt => {
+      this.log.logdataInfData(dt).subscribe(infoUser => {
+        this.userId = infoUser.id;
+        this.share.obtenerObhetivos(this.userId, this.token).subscribe((res: any) => {
+          this.targets = res.data;
+          this.loadEvents();
+          this.loadingService.loadingDismiss();
+        }, error => {
+          this.loadingService.loadingDismiss();
+        });
+      }, error => {
+        this.loadingService.loadingDismiss();
+      });
+    });
+  }
+
+  loadEventsTargets() {
+    var events = [];
+    this.targets.map( (target: any) => {
+      if(target.date) {
+        events.push({
+          title: target.achievement,
+          startTime: new Date(target.date + " 00:00:00"),
+          endTime: new Date(target.date + " 00:00:00"),
+          allDay: true
+        });
+      }
+    });
+    console.log('events', events);
+    return events; 
   }
 
   caledarNext(){
@@ -38,7 +93,7 @@ export class CalendarioPage implements OnInit {
   }
 
   loadEvents() {
-    this.eventSource = this.createRandomEvents();
+    this.eventSource = this.loadEventsTargets();
   }
 
   createRandomEvents() {

@@ -20,20 +20,23 @@ export class TimelinePage implements OnInit {
   totalDt: any;
   miactividad = [];
   usertk = null;
+  token: any;
 
   constructor(
     private auth: AuthService,
     private log: LoginService,
     private share: ShareserviceService,
     private loadingService: LoadingService
-  ) { }
+  ) { 
+    this.getToken();
+  }
 
   ngOnInit() {
     this.loadingService.loadingPresent({spinner: "circles" });
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
         this.currentUser = infoUser.name + ' ' + infoUser.lastname;
-        this.share.getTimeline(infoUser.id).subscribe( Res => {
+        this.share.getTimeline(infoUser.id, this.token).subscribe( Res => {
           this.loadingService.loadingDismiss();
           this.infoTimeline = Res.data;
           this.paginaActual = Res.meta.current_page;
@@ -50,8 +53,14 @@ export class TimelinePage implements OnInit {
     });
   }
 
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+    });
+  }
+
   getMiactividad(userid: any) {
-    this.share.getActividadUsuario(userid).subscribe(info => {
+    this.share.getActividadUsuario(userid, this.token).subscribe(info => {
       this.miactividad = info.data;
       this.paginaActual = info.meta.current_page;
       this.ultimaPage = info.meta.last_page;
@@ -67,7 +76,7 @@ export class TimelinePage implements OnInit {
           this.infonitescroll.disabled  = true;
           return;
         }
-        this.share.getpostNextPage(this.paginaActual).subscribe( resPg => {
+        this.share.getpostNextPage(this.paginaActual, this.token).subscribe( resPg => {
           resPg.data.forEach(element => {
             this.infoTimeline.push(element);
           });

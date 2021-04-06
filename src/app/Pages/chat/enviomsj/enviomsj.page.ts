@@ -29,6 +29,7 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   page: any;
   scrollBottom = true;
   usertk = null;
+  token: any;
 
   constructor(
     private router: Router,
@@ -38,10 +39,19 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
     private pObjecto: PassObjectService,
     private pusher: PusherServiceService,
     private loadingService: LoadingService
-    ) {}
+    ) {
+      this.getToken();
+  }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
+  }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.loadPage();
+    });
   }
 
   scrollToBottom() {
@@ -52,6 +62,9 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
+  }
+
+  loadPage() {
     this.getAuhUser();
     const info = this.pObjecto.getNavData();
     if(info) {
@@ -81,7 +94,8 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   loadMessages() {
     this.loadingService.loadingPresent({spinner: "circles" });
     if(this.data.id) {
-      this.chatS.getchatsMSGUser(this.data.id).subscribe((msgServ: any) => {
+      console.log('this.data.id', this.data.id);
+      this.chatS.getchatsMSGUser(this.data.id, this.token).subscribe((msgServ: any) => {
         this.total = msgServ.meta;
         this.menjs = msgServ.data;
         const currentPage = this.total.current_page;
@@ -95,18 +109,21 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
 
   loadData(event) {
     setTimeout(() => {
-      const nuevoArra = this.total;
-      if (this.menjs.length !== nuevoArra) {
-        this.chatS.getMessageOFPages(this.data.id, this.page).subscribe((chatMsg: any) => {
-          chatMsg.data.forEach(element => {
-            this.menjs.unshift(element);
-          });
-          event.target.complete();
-        })
-      } else if (this.menjs.length === nuevoArra) {
-        event.target.disabled = true;
-      } else {
-        event.target.disabled = true;
+      if(this.data.id) {
+        console.log('this.data.id loadData' , this.data.id);
+        const nuevoArra = this.total;
+        if (this.menjs.length !== nuevoArra) {
+          this.chatS.getMessageOFPages(this.data.id, this.page, this.token).subscribe((chatMsg: any) => {
+            chatMsg.data.forEach(element => {
+              this.menjs.unshift(element);
+            });
+            event.target.complete();
+          })
+        } else if (this.menjs.length === nuevoArra) {
+          event.target.disabled = true;
+        } else {
+          event.target.disabled = true;
+        }
       }
     }, 1000);
   }
@@ -119,8 +136,8 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   enviarMsg() {
     if(this.chatId) {
       this.loadingService.loadingPresent({spinner: "circles" });
-      this.chatS.enviarMensajeChat(this.chatId, this.transmiterID, this.newMsg).subscribe( response => {
-        this.chatS.getchatsMSGUser(this.chatId).subscribe( res => {
+      this.chatS.enviarMensajeChat(this.chatId, this.transmiterID, this.newMsg, this.token).subscribe( response => {
+        this.chatS.getchatsMSGUser(this.chatId, this.token).subscribe( res => {
           this.chatS.var.next('update messages');
           setTimeout(() => {
             this.content.scrollToBottom(200);

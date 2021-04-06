@@ -37,11 +37,6 @@ export class ServiceErrorInterceptorService implements HttpInterceptor{
           duration: 5000,
           panelClass: ['red-snackbar']  
         });
-        this.aut.getTokeR().then( dt => {
-          this.log.loginRefreh(dt).subscribe( (info: any) => {
-            this.aut.settokenlog(info.access_token,  info.refresh_token);
-          });
-        });
       }else if(err.status === 422){
           if(err.error.error.email){
             this.snackBar.open(err.error.error.email[0], 'ERROR', { 

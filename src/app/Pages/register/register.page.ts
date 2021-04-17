@@ -85,7 +85,6 @@ export class RegisterPage implements OnInit {
     private diagnostic: Diagnostic,
     private transfer: FileTransfer
     ) {
-      console.log('now', this.year);
     }
 
   ngOnInit() {

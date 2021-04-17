@@ -64,10 +64,8 @@ ion-slides {
 .itemback{
   color: #ffffff;
   text-decoration: none;
-  width: 80%;
+  width: 95%;
   border-radius: 10px;
-  --background: rgb(0,42,104);
-  --background: linear-gradient(90deg, rgba(0,42,104,1) 18%, rgba(128,185,246,1) 71%, rgba(0,65,162,1) 88%);
 }
 
 .buttonCss{
@@ -101,4 +99,26 @@ ion-slides {
 
 .hr-descriptions {
   background-color: #b5b5b5;
+}
+
+.card-1 {
+  --background: #002a68;
+}
+.card-2 {
+  --background: #80b9f6;
+}
+.card-3 {
+  --background: #0041a2;
+}
+
+.card-descriptions-1 {
+  border-left: 4px solid #002a68;
+}
+
+.card-descriptions-2 {
+  border-left: 4px solid #80b9f6;
+}
+
+.card-descriptions-3 {
+  border-left: 4px solid #0041a2;
 }

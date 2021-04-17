@@ -94,7 +94,6 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   loadMessages() {
     this.loadingService.loadingPresent({spinner: "circles" });
     if(this.data.id) {
-      console.log('this.data.id', this.data.id);
       this.chatS.getchatsMSGUser(this.data.id, this.token).subscribe((msgServ: any) => {
         this.total = msgServ.meta;
         this.menjs = msgServ.data;
@@ -110,7 +109,6 @@ export class EnviomsjPage implements OnInit, AfterViewChecked {
   loadData(event) {
     setTimeout(() => {
       if(this.data.id) {
-        console.log('this.data.id loadData' , this.data.id);
         const nuevoArra = this.total;
         if (this.menjs.length !== nuevoArra) {
           this.chatS.getMessageOFPages(this.data.id, this.page, this.token).subscribe((chatMsg: any) => {

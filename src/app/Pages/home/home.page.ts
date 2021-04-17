@@ -1,6 +1,6 @@
 import { ImgPrevPage } from './img-prev/img-prev.page';
 import { AuthService } from 'src/app/_services/auth.service';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
@@ -37,12 +37,11 @@ export class HomePage implements OnInit {
   message_header: string;
   basePath = `${environment.HOST}`;
 
-  emotion = 0;
+  emotion = '';
   token: any;
 
   constructor(
     private router: Router,
-    public alertController: AlertController,
     private auth: AuthService,
     private share: ShareserviceService,
     private pObjecto: PassObjectService,
@@ -95,6 +94,7 @@ export class HomePage implements OnInit {
     return forkJoin([activity]);
   }
 
+
   async loadData() {
     this.loadingService.loadingPresent({spinner: "circles" });
     this.getData().subscribe(res => {
@@ -137,13 +137,14 @@ export class HomePage implements OnInit {
     });
   }
 
-  imageView(imag: any){
-    this.modelcontroller.create({
-      component: ImgPrevPage,
-      componentProps: {
-        img: imag
-      }
-    }).then(model => model.present());
+  async imageView(imag: any) {
+    const modal = await this.modelcontroller.create({
+        component: ImgPrevPage,
+        componentProps: {
+          img: imag
+        }
+    });
+    await modal.present();
   }
 
   getMiactividad(userid: any) {
@@ -180,5 +181,15 @@ export class HomePage implements OnInit {
 
   goTraing() {
     this.router.navigate(['/users/entrena']);
+  }
+
+  savefeeling(feeling: any) {
+    this.emotion = feeling;
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.share.savefeeling(this.usertk.id, feeling, this.token).subscribe( resp => {
+      this.loadingService.loadingDismiss();      
+    }, error => {
+      this.loadingService.loadingDismiss();
+    });
   }
 }

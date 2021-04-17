@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="toolbar">
-    <ion-title style="color: black;">Seleccionar avatar</ion-title>
+    <ion-title style="color: black;font-size: 16px;font-weight: bold;">Selecciona tu avatar favorito</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,7 +9,7 @@
     <ion-row>
       <ion-col size="2" *ngFor="let avatar of avatars" style="display: contents;"> 
         <ion-item (click)="cambiarAvatar(avatar.photo)" lines="none">
-          <ion-avatar slot="start" style="margin: 0;">
+          <ion-avatar slot="start" style="margin: 0;width: 100%;height: 100%;">
             <img class="profile-photo" src= "../../../assets/avatar/{{avatar.photo}}.png">
           </ion-avatar>
         </ion-item>

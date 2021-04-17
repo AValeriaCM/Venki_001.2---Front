@@ -3,33 +3,29 @@ import { Registro } from './../../_model/Registro';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ShareserviceService } from './../../_services/shareservice.service';
 import { AuthService } from './../../_services/auth.service';
-import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ChatServiceService } from 'src/app/_services/chat-service.service';
-import { AlertController, IonInfiniteScroll, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, LoadingController } from '@ionic/angular';
 import { LoginService } from 'src/app/_services/login.service';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { PopoverController } from '@ionic/angular';  
 import { AvatarPage } from '../popup/avatar/avatar.page';
-import { LoadingService } from 'src/app/_services/loading.service';
 import { environment } from 'src/environments/environment';
-import { ImageModalPage } from '../social/image-modal/image-modal.page';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
+  styleUrls: ['./perfil.page.scss']
 })
 export class PerfilPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infonitescroll: IonInfiniteScroll;
-
+  
   sliderImgOption = {
     initialSlide: 0,
     zoom: false,
   };
-
-  miactividad = [];
 
   trofeosInsig = [];
 
@@ -41,7 +37,6 @@ export class PerfilPage implements OnInit {
   usertk = null;
   loading: any;
   alert: any;
-  //var from edit
   items = [
     {
       situacion: 'Soltero'
@@ -65,6 +60,8 @@ export class PerfilPage implements OnInit {
   coursesCompleted = [];
   token: any;
 
+  profileUser = null;
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -77,8 +74,6 @@ export class PerfilPage implements OnInit {
     public alertController: AlertController,
     private popover:PopoverController,
     private edit: RegistroService ,
-    private loadingService: LoadingService,
-    private modelcontroller: ModalController 
   ) { 
     this.getToken();
   }
@@ -93,6 +88,26 @@ export class PerfilPage implements OnInit {
     this.getAuthUser();
   }
 
+  async showLoader() {
+    this.loading = await this.loadingCtrl.create({
+      message: 'Cargando Datos...'
+    });
+    return this.loading.present();
+  }
+
+  dismissLoader() {
+    this.loading.dismiss();
+  }
+
+  async presentAlert(title, message) {
+    let alert = await this.alertController.create({
+      header: title,
+      subHeader: message,
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
+
   getToken() {
     this.auth.gettokenLog().then(resp => {
       this.token = resp;
@@ -103,16 +118,15 @@ export class PerfilPage implements OnInit {
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
         this.usertk = infoUser;
+        this.profileUser = this.usertk.profile.name
         this.inicializarFormulario(this.usertk);  
         if (this.usertk.photo === null){
           this.usertk.photo = 'https://i.ibb.co/f0Z6QWK/default.jpg';
           this.getcursos(this.usertk.id);
-          this.getMiactividad(this.usertk.id);
         }else{
           let pht = this.basePath + 'photos/' + this.usertk.photo;
           this.usertk.photo = pht;
           this.getcursos(this.usertk.id);
-          this.getMiactividad(this.usertk.id);
         }
       });
     });
@@ -132,12 +146,22 @@ export class PerfilPage implements OnInit {
 
   CreatePopover()
   {
-    this.popover.create({component:AvatarPage,
-    showBackdrop:false}).then((popoverElement)=>{
+    const that = this;
+    this.popover.create({component:AvatarPage, showBackdrop:false}).then((popoverElement)=>{
       popoverElement.present();
+      popoverElement.onDidDismiss().then(data => {
+        that.refreshAvatar();
+      });
     })
   }
 
+  refreshAvatar() {
+    this.auth.gettokenLog().then( dt => {
+      this.log.logdataInfData(dt).subscribe( infoUser => {
+        this.usertk = infoUser;
+      });
+    });
+  }
   async presentLoading() {
     this.loading = await this.loadingCtrl.create({
       message: 'Cargando Datos...'
@@ -147,19 +171,6 @@ export class PerfilPage implements OnInit {
 
   eventchangeTab(e) {
     this.getcursos(this.usertk.id);
-  }
-
-  getMiactividad(userid: any) {
-    this.loadingService.loadingPresent({spinner: "circles" });
-    this.share.getActividadUsuario(userid, this.token).subscribe(info => {
-      this.miactividad = info.data;
-      this.paginaActual = info.meta.current_page;
-      this.ultimaPage = info.meta.last_page;
-      this.totalDt = info.meta.total;
-        this.loadingService.loadingDismiss();
-    }, error => {
-      this.loadingService.loadingDismiss();
-    });
   }
 
   getcursos(userid: any) {
@@ -207,7 +218,7 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['/users/perfil/diagnostico-inicio']);
   }
 
-  recomedacionesRedirect(id: any){
+  recomedacionesRedirect(id: any) {
     let dataObj = {
       idUser: id
     };
@@ -215,22 +226,8 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['/users/perfil/recomendaciones']);
   }
 
-
-  loadData(event) {
-    this.paginaActual = this.paginaActual + 1;
-    setTimeout(() => {
-        if (this.miactividad.length >= this.totalDt){
-          event.target.complete();
-          this.infonitescroll.disabled  = true;
-          return;
-        }
-        this.share.getpostNextPage(this.paginaActual, this.token).subscribe( resPg => {
-          resPg.data.forEach(element => {
-            this.miactividad.push(element);
-          });
-          event.target.complete();
-        });
-    }, 2000);
+  activityRedirect() {
+    this.router.navigate(['/users/perfil/actividad']);
   }
 
   /*
@@ -266,17 +263,15 @@ export class PerfilPage implements OnInit {
     });
   }
 
-  logout(){
-    this.auth.logout();
+  createCompetition(id: number) {
+    const dataObj = {
+      idAction: id
+    };
+    this.pObjecto.setData(dataObj);
+    this.router.navigate(['/users/perfil/competencia']);
   }
 
-  imageView(imag: any) {
-    const url = this.basePath+"medias/"+imag; 
-    this.modelcontroller.create({
-      component: ImageModalPage,
-      componentProps: {
-        img: url
-      }
-    }).then(model => model.present());
+  logout(){
+    this.auth.logout();
   }
 }

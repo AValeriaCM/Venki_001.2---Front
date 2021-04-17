@@ -2,7 +2,7 @@
 
 <ion-item class="close-fake"  lines="none" text-center>
 
-  <ion-button (click)="close()" fill="clear" color="light"> 
+  <ion-button (click)="close(true)" fill="clear" color="light"> 
     <ion-icon name="close" slot="start"></ion-icon>
     Cerrar
   </ion-button>
@@ -20,7 +20,8 @@
 <ion-slides [options]="sliderOpts" #slider>
   <ion-slide>
     <div class="swiper-zoom-container">
-      <img src="{{img}}">
+      <img *ngIf="type === 1" src="{{img}}">
+      <video *ngIf="type === 2" controls src="{{ img }}"></video>
     </div>
   </ion-slide>
 </ion-slides>

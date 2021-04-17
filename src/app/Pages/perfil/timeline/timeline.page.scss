@@ -153,6 +153,7 @@ html, body {
   border-radius: 10px;
   padding: 10px;
   width: 135px;
+  align-self: center;
 }
 
 .content-inform {
@@ -161,6 +162,7 @@ html, body {
   border-radius: 10px;
   padding: 10px;
   width: 135px;
+  align-self: center;
 }
 
 .content-challenge {
@@ -169,6 +171,7 @@ html, body {
   border-radius: 10px;
   padding: 10px;
   width: 135px;
+  align-self: center;
 }
 
 .label-share {
@@ -198,4 +201,21 @@ html, body {
   border-radius: 5px;
   font-weight: bold;
   font-size: 13px;
+}
+
+.content-feeling {
+  border-left: 4px solid #ffc107 !important;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  padding: 10px;
+  width: 135px;
+  align-self: center;
+}
+
+.label-feeling {
+  background-color: #ffc107;
+  padding: 4px 10px;
+  color: black;
+  border-radius: 5px;
+  font-weight: bold;
 }

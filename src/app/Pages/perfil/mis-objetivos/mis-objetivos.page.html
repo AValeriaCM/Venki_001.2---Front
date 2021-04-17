@@ -4,8 +4,6 @@
       <ion-back-button defaultHref="/users/perfil"></ion-back-button>
     </ion-buttons>
     <ion-title class="tituloInfo logo">
-      <ion-icon *ngIf="!addTarget" name="add-outline" class="icon-add" (click)="addTarget = true"></ion-icon>
-      <ion-icon *ngIf="addTarget" name="close-outline" class="icon-add" (click)="addTarget = false; form.reset()"></ion-icon>
       <label style="color: white;">MAGIN</label>
     </ion-title>
   </ion-toolbar>
@@ -14,47 +12,64 @@
 <ion-content>
   <ion-card-title class="title">¿Que aspectos estas buscando mejorar en tu vida con nuestros programas?</ion-card-title>
 
-  <ion-card class="card-add" *ngIf="addTarget">
-    <ion-card-header>
-      <ion-card-title class="title-css" style="text-align: center;">Nuevo objetivo</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <div>
-        <form [formGroup]="form">
-          <div>
-            <ion-item class="ion-item-css" lines="none">
-              <textarea class="textArea" formControlName="target" placeholder="¿Cual es tu objetivo?" rows="4" cols="150" maxlength="150" required></textarea>
-            </ion-item>
-
-            <ion-item class="ion-item-css" lines="none">
-              <ion-datetime #myPicker class="item-date" placeholder="Fecha de objetivo" displayFormat="YYYY/MM/DD" min="2021" max="2050" formControlName="date" cancelText="Cancelar" doneText="Hecho"></ion-datetime>            
-            </ion-item>
-
-          </div>
-          <div style="text-align: center;">
-            <ion-button class="button-css-options" [disabled]="!form.valid" (click)="operar()">Agregar a la lista</ion-button>
-          </div>
-        </form>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
   <ion-card-subtitle class="subtitle">Organiza estos objetivos según tú interes y tu momento actual</ion-card-subtitle>
     
   <div>
-    <ion-badge class="badge-instructions">Instrucciones:</ion-badge>
+    <ion-label class="label-instructions" style="margin-left: 15px;"> Instrucciones:</ion-label>
     <div style="margin-left: 15px;">
       <ion-label style="font-size: 13px;font-weight: 500;">
-        Debes arrastrar los objetivos dentro del recuadro seleccionandolos desde el icono izquierdo, listandolos del más importante al menos importante.
+        1. Debes arrastrar los objetivos dentro del recuadro.
+      </ion-label>
+    </div>
+    <div style="margin-left: 15px;">
+      <ion-label style="font-size: 13px;font-weight: 500;">
+        2. Seleccionalos desde el icono izquierdo.
+      </ion-label>
+    </div>
+    <div style="margin-left: 15px;">
+      <ion-label style="font-size: 13px;font-weight: 500;">
+        3. Organizalos del más importante al menos importante.
       </ion-label>
     </div>
   </div>
 
+  <div style="text-align: center;">
+    <ion-badge *ngIf="!addTarget" class="badge-new" (click)="addTarget = true; edit = false">Agregar un nuevo objetivo</ion-badge>
+    <ion-badge *ngIf="addTarget && !edit" class="badge-cancelar" (click)="addTarget = false; form.reset()">Cerrar Formulario</ion-badge>
+    <ion-badge *ngIf="addTarget && edit"  class="badge-cancelar" (click)="addTarget = false; form.reset(); edit = false;">Cancelar</ion-badge>
+    
+    <ion-card class="card-add" *ngIf="addTarget">
+      <ion-card-header>
+        <ion-card-title class="title-css" style="text-align: center;">Nuevo objetivo</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <form [formGroup]="form">
+            <div>
+              <ion-item class="ion-item-css" lines="none">
+                <textarea class="textArea" formControlName="target" placeholder="¿Cual es tu objetivo?" rows="4" cols="150" maxlength="150" required></textarea>
+              </ion-item>
+  
+              <ion-item class="ion-item-css" lines="none">
+                <ion-datetime #myPicker class="item-date" placeholder="Fecha de objetivo" displayFormat="YYYY/MM/DD" min="2021" max="2050" formControlName="date" cancelText="Cancelar" doneText="Hecho"></ion-datetime>            
+              </ion-item>
+  
+            </div>
+            <div style="text-align: center;">
+              <ion-button *ngIf="!edit" class="button-css-options" [disabled]="!form.valid" (click)="operar()">Agregar a la lista</ion-button>
+              <ion-button *ngIf="edit" class="button-css-options" [disabled]="!form.valid" (click)="editar()">Editar</ion-button>
+            </div>
+          </form>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
   <div *ngIf="objetivosList.length > 0" class="container-targets">
-    <ion-badge class="badge-title">Mis Objetivos</ion-badge>
+    <ion-label class="label-instructions">Mis Objetivos</ion-label>
     <ion-list>
       <ion-reorder-group disabled="false" (ionItemReorder)="reorder($event)">
-        <ion-item *ngFor="let target of objetivosList">
+        <ion-item *ngFor="let target of objetivosList; let i = index" (click)="editTarget(target, index)">
           <ion-reorder>
             <ion-icon name="medal-outline" class="icon-target"></ion-icon>
           </ion-reorder>

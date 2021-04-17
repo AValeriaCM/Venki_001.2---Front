@@ -59,7 +59,19 @@ const routes: Routes = [
   {
     path: 'diagnostico-etapa',
     loadChildren: () => import('../../Pages/perfil/diagnostico-etapa/diagnostico-etapa.module').then( m => m.DiagnosticoEtapaPageModule)
+  },  {
+    path: 'actividad',
+    loadChildren: () => import('./actividad/actividad.module').then( m => m.ActividadPageModule)
   },
+  {
+    path: 'competencia',
+    loadChildren: () => import('./competencia/competencia.module').then( m => m.CompetenciaPageModule)
+  },
+  {
+    path: 'publicacion',
+    loadChildren: () => import('./publicacion/publicacion.module').then( m => m.PublicacionPageModule)
+  },
+
 
 ];
 

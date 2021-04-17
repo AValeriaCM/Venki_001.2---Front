@@ -67,21 +67,44 @@
     background-size: 100% 100%;
     width: 100%;
     overflow: auto;">
+
+            <ion-header #header>
+                <ion-toolbar #toolbar class="ion-toolbar-ccs">
+                <div>
+                    <ion-toolbar>
+                    <ion-row class="logo">
+                        <ion-col size="4">
+                        <div class="icon-header">
+                            <img src="/assets/finallogo.png" width="120" height="70">
+                        </div>
+                        </ion-col>
+                        <ion-col size="8" style="align-self: flex-end">
+                        <div class="info-header">
+                            <ion-label *ngIf="userInf" style="font-size: 14px;color: #fff;margin-right: 5px;">{{ message_header }}</ion-label>
+                            <ion-label *ngIf="userInf" style="font-size: 14px;color: #fff;text-transform: capitalize;">{{ userInf.name }}</ion-label>
+                        </div>
+                        </ion-col>
+                    </ion-row>
+                    </ion-toolbar>
+                </div>
+                </ion-toolbar>
+            </ion-header>
+  
             <form [formGroup]="form">
                 <h2 class="titulo">¿CON QUE PERFIL TE IDENTIFICAS?</h2>
                 <h3>{{ mensaje }}</h3>
                 <div formArrayName="profiles" *ngFor="let profile of profilesArray.controls" style="margin-bottom: 15px;text-align: -webkit-center;" lines="none">
                     <div style="text-align: -webkit-center;margin-bottom: 2px">
-                        <ion-item [formGroupName]="profile.value.index" class="itemback" lines="none">
+                        <ion-item [formGroupName]="profile.value.index" class="itemback {{ profile.value.color }}" lines="none">
                             <ion-checkbox slot="end" color="primary" formControlName="selected" (ngModelChange)="selectProfile($event, profile.value.index)"></ion-checkbox>
                             <p style="text-transform: uppercase;font-weight: bold;margin: 0;">{{profile.value.profile.name}}</p>
                         </ion-item>
                     </div>
-                    <div style="background-color: #a9a9a94d;width: 95%;border-radius: 10px;margin: 10px 0px;">
+                    <div style="background-color: #a9a9a94d;width: 95%;border-radius: 10px;margin: 10px 0px;padding: 5px;">
                         <ion-grid lines="none">
                             <ion-row style="align-items: center;">
                                 <ion-col *ngFor="let description of profile.value.profile.descriptions" size="4"> 
-                                    <ion-card class="card-profiles">
+                                    <ion-card class="card-profiles {{ profile.value.descriptions }}">
                                         <div>
                                             <ion-card-content class="content-descriptions">
                                                 <ion-label class="label-descriptions">

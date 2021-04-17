@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start" style="font-size: 30px;color: white;" (click)="back()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" style="--background: #f4f4f4;">
+  <div class="oval" [ngStyle]="{'background': colors[idAction-1]}" ></div>
+  <div style="margin-top: 15px;">
+    <div *ngIf="idAction == 1">
+      <div align="center"  class="title">
+        DEPORTIVO
+      </div>
+    </div>
+    <div *ngIf="idAction == 2">
+      <div align="center" class="title">
+        ACADÉMICO
+      </div>
+    </div>
+    <br>
+
+    <ion-card style="border-radius: 10px;padding: 10px;">
+      <ion-row>
+        <ion-col size="2" class="col-img" *ngIf="usertk">
+          <img src="../../../assets/avatar/{{usertk.avatar}}.png">
+        </ion-col>
+        <ion-col size="10">
+          <textarea class="input-message" fill=clear [(ngModel)]="message" [placeholder]="placeholder(idAction)" rows="4" cols="150"></textarea>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" style="text-align: -webkit-center;">
+          <ion-card class="card-buttons" (click)="selectImg()">
+            <img src="/assets/camera.png" style="width: 35%;">
+            <ion-label class="label-buttons">Imagen</ion-label>
+          </ion-card>
+        </ion-col>
+        <ion-col size="4" style="text-align: -webkit-center;">
+          <ion-card class="card-buttons" (click)="loadVideo()">
+            <img src="/assets/video.png" style="width: 35%;">
+            <ion-label class="label-buttons">Video</ion-label>
+          </ion-card>
+        </ion-col>
+        <ion-col size="4" style="text-align: -webkit-center;">
+          <ion-card class="card-buttons" (click)="post()">
+            <img src="/assets/send.png" style="width: 35%;">
+            <ion-label class="label-buttons">Guardar</ion-label>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="padding-top: 0px;">
+          <div *ngIf="photos.length > 0" style="padding: 10px;background: #deeffd;margin-top: 10px;border-radius: 5px;">
+            <ion-row *ngFor="let imag of photos" style="place-content: flex-end;margin-bottom: 10px;">
+              <ion-icon name="close-outline" class="remove-image" (click)="removeImagen(imag)"></ion-icon>
+              <img class="img-content" [src]="imag">
+            </ion-row>
+          </div>
+          <div *ngIf="url" style="padding: 10px;background: #deeffd;margin-top: 10px;border-radius: 5px;">
+            <ion-row style="place-content: flex-end;margin-bottom: 10px;">
+              <ion-icon name="close-outline" class="remove-video" (click)="removeVideo()"></ion-icon>
+              <video controls autoplay #videoCompetence style="width: 100%;"> </video>
+            </ion-row>
+          </div>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+
+    <div style="text-align-last: center;margin-top: 15px;">
+      <ion-badge style="font-size: 17px;font-weight: 500;background-color: #002a68;padding: 6px 8px;">Publicaciones</ion-badge>
+    </div>
+
+    <ion-grid>
+      <ion-row wrap>
+        <ion-col size="4" *ngFor="let post of posts" style="padding: 0;">
+          <div style="height: 100%;align-items: center; justify-content: center;">
+            <ion-card class="card-posts" *ngIf="post.medias.length !== 0" >
+              <img *ngIf="post.medias[0].type === 1" src="{{basePath}}medias/{{post.medias[0].media}}" (click)="seePublication(post)">
+              <video *ngIf="post.medias[0].type === 2" autoplay loop [muted]="'muted'" src="{{basePath}}medias/{{post.medias[0].media}}" style="width: 100%;height: 380px;" (click)="seePublication(post)"></video>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div *ngIf="posts.length === 0" style="text-align: center;margin-top: 15px;">
+      <ion-badge color="warning" style="font-size: 14px;">No existen publicaciones</ion-badge>
+    </div>
+    <ion-infinite-scroll threshold="10%" position="center" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <br>
+  </div>
+</ion-content>

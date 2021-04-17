@@ -25,12 +25,12 @@
   <div class="message">
     <div *ngFor="let msg of menjs">
       <div class="message other-message left" *ngIf="transmiterID !== msg.user_id">
-        <span style="color: white;font-size: 11px;">{{msg.message}}</span>
+        <span style="color: white;font-size: 16px;">{{msg.message}}</span>
         <div class="ion-text-left" style="color: #ffffff;font-size: 11px;margin-right: 15px;">{{msg.created_at | date:'short'}}</div>
       </div>
 
       <div class="message my-message right" *ngIf="transmiterID === msg.user_id">
-        <div class="ion-text-right" style="color: white;font-size: 11px;">{{msg.message}}</div>
+        <div class="ion-text-right" style="color: white;font-size: 16px;">{{msg.message}}</div>
         <div class="time ion-text-right" style="color: white;font-size: 11px;">{{msg.created_at | date:'short'}}</div>
       </div>
     </div>

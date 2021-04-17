@@ -33,10 +33,8 @@ export class ImgPrevPage implements OnInit {
     }
   }
 
-  close(){
-    this.modalCRTL.dismiss();
+  async close(isConfirmed: any) {
+    await this.modalCRTL.dismiss({ confirmed: isConfirmed }, undefined);
   }
-
-
 
 }

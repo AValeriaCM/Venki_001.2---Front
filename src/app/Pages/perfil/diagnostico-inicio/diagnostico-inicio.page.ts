@@ -34,6 +34,7 @@ export class DiagnosticoInicioPage implements OnInit {
   getToken() {
     this.auth.gettokenLog().then(resp => {
       this.token = resp;
+      this.alertAvisoGif();
       this.getcursos();
       this.getcategorias();
     });

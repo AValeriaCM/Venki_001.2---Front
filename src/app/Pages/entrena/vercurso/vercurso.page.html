@@ -78,9 +78,9 @@
   <div class="divBack" *ngIf="comentariosGeneral.length > 0">
 
     <ion-card style="margin: 10px 0px;border-radius: 10px;">
-      <ion-item tappable class="section">
-        <ion-icon slot="start" class="icon-description" name="arrow-forward" *ngIf="!comments" (click)="comments = true"></ion-icon>
-        <ion-icon slot="start" name="arrow-down" class="icon-description" *ngIf="comments" (click)="comments = false"></ion-icon>
+      <ion-item tappable class="section" (click)="comments = !comments">
+        <ion-icon slot="start" class="icon-description" name="arrow-forward" *ngIf="!comments"></ion-icon>
+        <ion-icon slot="start" name="arrow-down" class="icon-description" *ngIf="comments"></ion-icon>
         <ion-card-title class="title-content">Comentarios y Calificaciones</ion-card-title>
       </ion-item>
       <div>
@@ -91,7 +91,7 @@
       <div style="padding: 10px;" *ngIf="comments">
         <ion-grid>
           <div *ngFor="let com of comentariosGeneral;" class="div-rating">
-            <ion-row class="user-comments">
+            <ion-row class="user-comments" *ngIf="com.active === 1">
               <ion-col size="2">
                 <ion-avatar item-start>
                   <img src="assets/avatar/{{com.user.avatar}}.png" (click)="verUser(com.user)">

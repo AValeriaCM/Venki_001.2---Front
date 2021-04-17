@@ -348,3 +348,8 @@ small {
   font-size: 13px !important;
   color: black !important;
 }
+
+.sc-ion-popover-md-h {
+  --width: 300px !important;
+  overflow: auto;
+}

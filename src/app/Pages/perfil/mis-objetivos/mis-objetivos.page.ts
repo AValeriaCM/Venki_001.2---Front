@@ -16,7 +16,6 @@ import { format } from 'date-fns';
 })
 export class MisObjetivosPage implements OnInit {
 
-
   dynamicForm: FormGroup;
   submitted = false;
   list: any[] = [];
@@ -29,6 +28,9 @@ export class MisObjetivosPage implements OnInit {
   form: FormGroup;
   isSubmitted = false;
   token: any;
+  edit = false;
+  targetEdit = null;
+  indexEdit = null;
 
   constructor(
     private route: Router,
@@ -126,6 +128,35 @@ export class MisObjetivosPage implements OnInit {
       this.loadingService.loadingDismiss();
       this.mostrarmensaje('Error guardando los objetivos', 'Error', 'red-snackbar');
     });
+  }
+
+  editTarget(target: any, index: any) {
+    this.addTarget = true;
+    this.edit = true;
+    this.targetEdit = target;
+    this.indexEdit = index;
+    this.form.patchValue({
+      target: target.achievement,
+      date: target.date,
+    });
+  }
+
+  editar() {
+    const target = this.objetivosList.find( t => t.id == this.targetEdit.id);
+    if(target) {
+      target.achievement = this.form.value.target;
+      let bt = '';
+      if(this.form.value.date) {
+        bt = format(new Date(this.form.value.date), 'yyyy-MM-dd');
+      }
+      target.date = bt;
+      this.form.reset();
+    } else {
+      this.objetivosList.slice(this.indexEdit, 1);
+      this.operar();
+    }
+    this.addTarget = false;
+    this.edit = false;
   }
 
   async alerta() {

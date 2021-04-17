@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start" style="font-size: 30px;color: white;" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div>
+    <h2 class="titulo">Mi Actividad</h2>
+  </div>
+
+
+  <ion-list class="list-mdActividad" *ngFor="let pst of activity">
+
+    <ion-card class="card-posts" [ngClass]="{
+      'card-challenge': pst.post[0] == '#',
+      'card-inform': pst.post[0] == '!',
+      'card-share': pst.post[0] == '@'}">
+      <div class="boder">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="assets/avatar/{{user.avatar}}.png"> 
+          </ion-avatar>
+          <ion-label style="margin: 0;">
+            <h3 class="name-user" style="margin: 0;">{{user.name}} {{user.lastname}}</h3>
+            <p style="margin: 0;font-size: 12px;">{{pst.created_at | date:'short'}}</p>
+          </ion-label>
+        </ion-item>
+
+        <div *ngIf="pst.post[0] == '@'" style="margin: 10px;">
+          <label class="content content-share">{{ pst.post | slice:0:10 }}</label>
+          <label class="content-post">{{ pst.post | slice:10:pst.post.length | title }}</label>
+        </div>
+
+        <div *ngIf="pst.post[0] == '#'" style="margin: 10px;">
+          <label class="content content-challenge">{{ pst.post | slice:0:6 }}</label>
+          <label class="content-post">{{ pst.post | slice:6:pst.post.length | title }}</label>
+        </div>
+
+        <div *ngIf="pst.post[0] == '!'" style="margin: 10px;">
+          <label class="content content-inform">{{ pst.post | slice:0:9 }}</label>
+          <label class="content-post">{{ pst.post | slice:9:pst.post.length | title }}</label>
+        </div>
+
+        <div *ngIf="pst.medias.length !== 0" class="labelContent">
+          <ion-slides [options]="sliderImgOption" pager="true">
+            <ion-slide *ngFor="let imag of pst.medias">
+              <img class="image-cont" src="{{basePath}}medias/{{imag.media}}" (click)="imageView(imag.media)">
+            </ion-slide>
+          </ion-slides>
+        </div>
+      </div>
+    </ion-card>
+  </ion-list>
+
+  <div *ngIf="activity.length === 0" style="margin-top: 15px;text-align: center;">
+    <ion-badge color="warning">No existen posts</ion-badge>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" position="bottom" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando post...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

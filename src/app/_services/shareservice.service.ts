@@ -127,7 +127,8 @@ export class ShareserviceService {
       .set('course_id', idCurso)
       .set('user_id', idUser)
       .set('comment', comment)
-      .set('score', score);
+      .set('score', score)
+      .set('active', '0');
     return this.http.post(this.basePath  + `api/scores`, body, {
       headers: new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
@@ -156,7 +157,7 @@ export class ShareserviceService {
 
   actualizarAvatar(idUser: any, imgUrl: UsuariosF, token:any) {
     const body = new HttpParams()
-    .set('photo',imgUrl.avatar );
+    .set('avatar',imgUrl.avatar );
     return this.http.put(this.basePath + `api/users/${idUser}`, body, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
@@ -311,6 +312,14 @@ export class ShareserviceService {
     });
   }
 
+  getNextActividadUsuario(idUser: any, token: any, page: any) {
+    return this.http.get<any>(this.basePath + `api/users/${idUser}/posts?page=${page}` , {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
   editpremium(premNum: any, id: number) {
 
     const body = new HttpParams()
@@ -406,6 +415,57 @@ export class ShareserviceService {
       headers: new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded')
       .set('X-Requested-With', 'XMLHttpRequest'),
+    });
+  }
+
+  savefeeling(idUser: any, feeling: any, token: any) {
+    const body = new HttpParams()
+      .set('user_id', idUser)
+      .set('name', feeling);
+    return this.http.post(this.basePath  + `api/feelings`, body, {
+      headers: new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  getFeeling(idUser: any, token: any) {
+    return this.http.get<any>(this.basePath + `api/users/` + idUser + '/feelings', {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  getFeelingNextPage(idUser: any, page: any, token: any) {
+    return this.http.get<any>(this.basePath + `api/users/${idUser}/feelings?page=${page}`, {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  savePostCompetence(form: any, token: any) {
+    return this.http.post(this.basePath + `api/competences`, form, {
+      headers: new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  getPostCompetence(token: any, userId: any) {
+    return this.http.get<any>(this.basePath + `api/users/` + userId + '/competences', {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  getPostCompetenceNextPage(page: any, token: any, userId: any) {
+    return this.http.get<any>(this.basePath + `api/users/${userId}/competences?page=${page}`, {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
     });
   }
 }

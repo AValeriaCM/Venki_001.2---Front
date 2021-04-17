@@ -156,7 +156,8 @@ export class SocialPage implements OnInit {
     this.modelcontroller.create({
       component: ImageModalPage,
       componentProps: {
-        img: url
+        img: url,
+        type: 1
       }
     }).then(model => model.present());
   }
@@ -171,7 +172,7 @@ export class SocialPage implements OnInit {
     this.route.navigate(['/users/chat/mensaje-busqueda/']);
   }
 
-  crearEntrada(id: number){
+  crearEntrada(id: number) {
     const dataObj = {
       idAction: id
     };

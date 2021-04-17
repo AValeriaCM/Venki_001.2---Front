@@ -22,6 +22,10 @@ export class SlidesPage implements OnInit {
   userInf: any;
   form: FormGroup;
   token: any;
+  message_header: string;
+
+  colors = ['card-1', 'card-2', 'card-3'];
+  descriptions = ['card-descriptions-1', 'card-descriptions-2', 'card-descriptions-3'];
 
   get profilesArray() {
     return this.form.get('profiles') as FormArray;
@@ -42,6 +46,7 @@ export class SlidesPage implements OnInit {
     this.validateProfileUserAuth();
     this.loadForm();
     this.getToken();
+    this.getCurrentHour();
   }
 
   validateProfileUserAuth() {
@@ -61,6 +66,18 @@ export class SlidesPage implements OnInit {
         });
       }
     });
+  }
+
+  getCurrentHour() {
+    var today = new Date()
+    var curHr = today.getHours()
+    if (curHr < 12) {
+      this.message_header = "Buenos días";
+    } else if (curHr < 18) {
+      this.message_header = "Buenas tardes";
+    } else {
+      this.message_header = "Buenas noches";
+    }
   }
 
   getToken() {
@@ -100,14 +117,18 @@ export class SlidesPage implements OnInit {
   }
 
   loadProfiles(profiles: any) {
+    var i = 0;
     profiles.data.map( (profile: any) => {
       this.profilesArray.push(
         this.formBuilder.group({
           index: new FormControl(this.profilesArray.controls.length),
           profile: new FormControl(profile),
-          selected: new FormControl(false)
+          selected: new FormControl(false),
+          color: new FormControl(this.colors[i]),
+          descriptions: new FormControl(this.descriptions[i]),
         })
-      )
+      );
+      i == 2 ? i = 0 : i++;
     });
   }
 

@@ -33,6 +33,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 import * as Sentry from "@sentry/angular";
 import { APP_INITIALIZER } from "@angular/core";
 import { Router } from "@angular/router";
@@ -44,6 +45,7 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common'; 
 registerLocaleData(localeEs);
+  
 
 @NgModule({
   declarations: [
@@ -90,6 +92,7 @@ registerLocaleData(localeEs);
     FileOpener,
     Diagnostic,
     FileTransfer,
+    WebView,
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({

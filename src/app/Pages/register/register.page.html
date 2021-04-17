@@ -78,8 +78,8 @@
       </ion-item>
     </form>
     <div *ngIf="edad<18">
-    <ion-item  class="ion-item-css" *ngFor="let check of ischeckNino" (click)="checkvalNinos(check)">
-      <ion-checkbox color="dark" class="cb_color" checked slot="start" style="margin: 0px;"></ion-checkbox>
+    <ion-item  class="ion-item-css" *ngFor="let check of ischeckNino">
+      <ion-checkbox color="dark" class="cb_color" checked slot="start" style="margin: 0px;" disabled></ion-checkbox>
       <ion-button fill="clear" (click)="terminosMostrarNinos()">
         <ion-label style="color: black;border-bottom: 1px solid #025975;white-space: break-spaces;">Leer términos y condiciones para menores de edad</ion-label>
       </ion-button>
@@ -92,7 +92,7 @@
       </ion-button>
     </ion-item>
     <div>
-      <ion-button class="button-css" type="submit" (click)="Registrarce()" [disabled]="!regisform.valid" expand="block">
+      <ion-button class="button-css" type="submit" (click)="Registrarce()" [disabled]="!regisform.valid || !ischeck[0].selected" expand="block">
         Unete a nosotros</ion-button>
     </div>
   </div>

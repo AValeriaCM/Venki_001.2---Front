@@ -107,8 +107,7 @@ export class ChatPage implements OnInit {
       this.loadingService.loadingPresent({spinner: "circles" });
       this.chatS.getAllUsers(this.textoBuscar, this.token).subscribe( allUser => {
         if(allUser.data.length > 0) {
-          const users = this.validateUsers(allUser.data); 
-          this.data = users.filter( (user: any) => user.id !== this.idUser);
+          this.data = allUser.data.filter( (user: any) => user.id !== this.idUser);
           this.chatS.var.next('User find');
         }
         this.loadingService.loadingDismiss();
@@ -119,20 +118,7 @@ export class ChatPage implements OnInit {
       this.data = [];
     }
   }
-
-  validateUsers(users: any) {
-    const listUsers = [];
-    users.map( (user: any) => {
-      const exist = this.userList.find( (o: any) => o.receiver.id === user.id);
-      if(!exist) {
-        listUsers.push(user);
-      } else {
-        this.filterList = exist.receiver.name;
-      } 
-    });
-    return listUsers;
-  } 
-
+  
   closeSearch() {
     this.textoBuscar = '';
     this.filterList = '';
@@ -148,8 +134,8 @@ export class ChatPage implements OnInit {
     }
   }
 
-  abrirDialogo(info: any){
-    this.data = [];
+  abrirDialogo(info: any) {
+    this.data = []; 
     let dataObj = {
       infoDt :  info,
       transferID : this.idUser,
@@ -159,7 +145,7 @@ export class ChatPage implements OnInit {
     this.router.navigate(['/users/chat/enviomsj']);
   }
 
-  abrirMensajesBusqueda(info: any){
+  abrirMensajesBusqueda(info: any) {
     this.data = [];
     const dataObj = {
       infoDt :  info,

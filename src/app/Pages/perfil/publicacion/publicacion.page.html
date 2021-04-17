@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start" style="font-size: 30px;color: white;" (click)="back()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card class="border-post">
+    <div class="boder">
+      <ion-item class="border-bottom: 1px solid #e8e7e7;" *ngIf="usertk">
+        <ion-avatar slot="start" class="avatar-user">
+          <img src="../../../assets/avatar/{{usertk.avatar}}.png">
+        </ion-avatar>
+        <ion-label>
+          <h3 class="name-user">{{ usertk.name }} {{ usertk.lastname }}</h3>
+          <p style="margin: 0;font-size: 12px;">{{ post.created_at | date:'short' }}</p>
+        </ion-label>
+      </ion-item>
+
+      <div style="margin-top: 24px;margin-bottom: 5px;margin-left: 5px;">
+        <label class="content-post">{{ post.comment | capitalize }}</label>
+      </div>
+
+      <div *ngIf="post.medias.length !== 0" class="slides-social">
+        <ion-slides [options]="sliderImgOption" pager="true">
+          <ion-slide *ngFor="let media of post.medias">
+            <img  *ngIf="media.type === 1" class="image-cont" src="{{basePath}}medias/{{media.media}}" (click)="imageView(media.media, 1)">
+            <video *ngIf="media.type === 2" controls src="{{basePath}}medias/{{media.media}}" style="width: 100%;" (click)="imageView(media.media, 2)"></video>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,108 @@
+.titulo {
+    font-size: 19px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #002a68;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.list-mdActividad { 
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: var(--ion-item-background, var(--ion-background-color, #868585cb));
+}
+
+.card-posts {
+    margin: 5px 10px;
+    border-radius: 15px;
+    box-shadow: none;
+    border: 1px solid #dadada;
+}
+
+.card-share {
+    border-left: 4px solid #3880ff !important;
+}
+
+.card-inform {
+    border-left: 4px solid #3dc2ff !important;
+}
+
+.card-challenge {
+    border-left: 4px solid #eb445a !important;
+}
+
+.name-user {
+    font-size: 17px;
+    text-transform: capitalize;
+    margin-bottom: 0px;
+}
+
+.content-share {
+    background-color: #3880ff;
+}
+
+.content-inform {
+    background-color: #3dc2ff;
+}
+
+.content-challenge {
+    background-color: #eb445a;
+}
+
+.content {
+    word-break: break-all;
+    text-align: justify;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.labelContent{
+    font-size: 11px;
+    background-color: #fffefe91;
+    color: #000000;
+    margin: 10px 0px;
+    white-space: break-spaces;
+    margin-bottom: 0px;
+}
+
+.image-cont {
+    width: 70%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.content-post {
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 5px;
+    color: black;
+}
+
+.boder {
+    margin-left: 0%;
+    margin-right: 0%;
+    padding-bottom: 0px;
+}
+
+ion-slides {
+    background: rgba(152, 152, 152, 0.12);
+    border-radius: 10px;
+}
+
+ion-slides{
+    width: 90%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}

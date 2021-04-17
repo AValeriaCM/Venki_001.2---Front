@@ -4,6 +4,7 @@ import { LoginService } from './../../../_services/login.service';
 import { AuthService } from './../../../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';  
+import { LoadingService } from 'src/app/_services/loading.service';
 
 
 @Component({
@@ -65,6 +66,38 @@ export class AvatarPage implements OnInit {
     {
       'name': "Tenista",
       'photo': "tennis-player"
+    },
+    {
+      'name': "Tenista",
+      'photo': "football_women"
+    },
+    {
+      'name': "Tenista",
+      'photo': "bowling"
+    },
+    {
+      'name': "Tenista",
+      'photo': "hockey"
+    },
+    {
+      'name': "Tenista",
+      'photo': "surfer"
+    },
+    {
+      'name': "fencing",
+      'photo': "fencing"
+    },
+    {
+      'name': "fencing",
+      'photo': "martial-art"
+    },
+    {
+      'name': "fencing",
+      'photo': "rhythmic-gymnastics"
+    },
+    {
+      'name': "baseball",
+      'photo': "baseball"
     }
   ]
 
@@ -76,7 +109,8 @@ export class AvatarPage implements OnInit {
     private popover:PopoverController,
     private auth: AuthService,
     private log: LoginService,
-    private share: ShareserviceService
+    private share: ShareserviceService,
+    private loadingService: LoadingService
   ){
     this.getToken();
   } 
@@ -102,13 +136,16 @@ export class AvatarPage implements OnInit {
 
   cambiarAvatar( urlImagen:string){
     this.user = new UsuariosF;
-    if(urlImagen){
-    this.user.id = this.idUser;
-    this.user.avatar = urlImagen;
-    this.share.actualizarAvatar(this.idUser,this.user, this.token).subscribe(()=> {
-
-    });
-    this.ClosePopover();
+    if(urlImagen) {
+      this.loadingService.loadingPresent({spinner: "circles" });
+      this.user.id = this.idUser;
+      this.user.avatar = urlImagen;
+      this.share.actualizarAvatar(this.idUser,this.user, this.token).subscribe(()=> {
+        this.loadingService.loadingDismiss();      
+      }, error => {
+        this.loadingService.loadingDismiss();
+      });
+      this.ClosePopover();
     }
   }
 } 

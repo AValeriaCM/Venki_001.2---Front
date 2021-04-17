@@ -76,7 +76,6 @@ export class CalendarioPage implements OnInit {
         });
       }
     });
-    console.log('events', events);
     return events; 
   }
 

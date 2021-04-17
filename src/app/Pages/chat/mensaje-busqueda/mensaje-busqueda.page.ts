@@ -82,7 +82,8 @@ export class MensajeBusquedaPage implements OnInit {
       this.chatS.crearChat(this.transmiterID, this.data.id, this.token).subscribe((responseChat: any) => {
         this.idChat = responseChat.data.id;
         this.chatS.enviarMensajeChat(responseChat.data.id, this.transmiterID, this.newMsg, this.token).subscribe( responseMsg  => {
-          this.chatS.getchatsMSGUser(responseChat.data.id, this.token).subscribe( msgServ => {
+          this.chatS.getchatsMSGUser(responseChat.data.id, this.token).subscribe( (msgServ: any) => {
+            this.menjs = msgServ.data;
             this.chatS.var.next('update mgs');
             setTimeout(() => {
               this.content.scrollToBottom();

@@ -36,6 +36,7 @@
     "@ionic-native/file-transfer": "^5.31.1",
     "@ionic-native/google-plus": "^5.28.0",
     "@ionic-native/image-picker": "^5.31.1",
+    "@ionic-native/ionic-webview": "^5.32.0",
     "@ionic-native/local-notifications": "^5.27.0",
     "@ionic-native/preview-any-file": "^5.27.0",
     "@ionic-native/splash-screen": "^5.0.0",
@@ -130,9 +131,7 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {
-        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      },
+      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-local-notification": {},

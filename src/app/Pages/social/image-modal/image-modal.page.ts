@@ -9,6 +9,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 export class ImageModalPage implements OnInit {
 
   img: any;
+  type: any
 
   @ViewChild('slider', {read: ElementRef}) slider: ElementRef;
 
@@ -22,6 +23,7 @@ export class ImageModalPage implements OnInit {
 
   ngOnInit() {
     this.img = this.navParams.get('img');
+    this.type = this.navParams.get('type');
   }
 
   zoom(zoomIn: boolean){
@@ -33,8 +35,7 @@ export class ImageModalPage implements OnInit {
     }
   }
 
-  close(){
-    this.modalCRTL.dismiss();
+  async close(isConfirmed: any) {
+    await this.modalCRTL.dismiss({ confirmed: isConfirmed }, undefined);
   }
-
 }

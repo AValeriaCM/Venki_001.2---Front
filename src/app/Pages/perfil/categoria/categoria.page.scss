@@ -1,0 +1,63 @@
+*{
+    font-family: 'Proxima Nova' !important;
+}
+  
+.label-profile {
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #002a68;
+    text-transform: capitalize;
+}
+
+.card-1 {
+    --background: #002a68;
+}
+.card-2 {
+    --background: #80b9f6;
+}
+.card-3 {
+    --background: #0041a2;
+}
+
+.card-descriptions-1 {
+    border-left: 4px solid #002a68;
+}
+
+.card-descriptions-2 {
+    border-left: 4px solid #80b9f6;
+}
+
+.card-descriptions-3 {
+    border-left: 4px solid #0041a2;
+}
+
+
+.itemback{
+    color: #ffffff;
+    text-decoration: none;
+    width: 95%;
+    border-radius: 10px;
+}
+  
+.content-descriptions {
+    padding: 5px;
+}
+
+.label-descriptions {
+    font-size: 13px;
+    font-weight: bold;
+    color: black;
+}
+
+.hr-descriptions {
+    background-color: #9e9e9e;
+}
+
+.card-profiles {
+    margin: 0;
+    border-left: 4px solid #094aa8;
+    border-radius: 10px;
+    height: 100%;
+}
+  

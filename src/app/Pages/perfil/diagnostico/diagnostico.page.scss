@@ -19,13 +19,23 @@
 }
 
 .footer-dis-bot1 {
-    display:list-item;
-    --background:#b9b9b9;
+    display: list-item;
+    --background: #607d8b;
+    font-size: 12px;
+    margin: 15px auto;
+    height: 35px;
+    white-space: initial;
 }
+
 .footer-dis-bot2{
     --background: #002a68;
     display: list-item;
+    font-size: 12px;
+    white-space: initial;
+    margin: 15px auto;
+    height: 35px;
 }
+
 .question-st {
     padding: 3px 10px;
     border: 1px solid #b9b9b9;
@@ -35,15 +45,17 @@
 }
 
 .questions {
-    margin: 10px;
+    margin: 0px 40px;
     background: white;
     border-radius: 10px;
     height: 100%;
+    width: 100%;
+    padding: 10px 25px;
 }
 
 .icono-lateral{
-    color:#002a68;
-    font-size:20px;
+    color :#002a68;
+    font-size: 35px;
 }
 .title-css {
     color: #ffffff;
@@ -70,7 +82,8 @@
 }
 
 ion-slides {
-    height: 80%;
+    height: auto;
+    overflow: auto;
     background-color:whitesmoke
 }
 
@@ -111,14 +124,17 @@ ion-slides {
     text-align: center;
     padding: 10px 0px;
     background-color: #f4f4f4;
+    border: 1px solid transparent;
 }
 
 .bagde-title {
-    background-color: #002a68;
-    padding: 5px 10px;
-    font-size: 18px;
+    padding: 10px;
+    font-size: 16px;
     border-radius: 5px;
-    font-weight: 500;
+    font-weight: bold;
+    background-color: #002a68;
+    color: #ffffff;
+    text-transform: uppercase;
 }
 
 .icon-danger {
@@ -144,3 +160,93 @@ ion-slides {
     padding: 10px;
     font-size: 15px;
 }
+
+.select-answers {
+    background-color: #ffffff;
+    width: 80%;
+    letter-spacing: 1px;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+}
+
+.label-progress {
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    background-color: #002a68;
+    border-radius: 5px;
+    margin: 18px;
+    text-align: center;
+    padding: 8px;
+}
+
+.label-progress-1 {
+    font-weight: 500;
+    font-size: 13px;
+    color: white;
+    background-color: #2196f3;
+    border-radius: 5px;
+    margin: 15px;
+    padding: 5px 25px;
+    letter-spacing: 1px;
+}
+
+.label-progress-2 {
+    font-weight: 500;
+    font-size: 13px;
+    color: black;
+    background-color: #ff9800;
+    border-radius: 5px;
+    margin: 15px;
+    padding: 5px 25px;
+    letter-spacing: 1px;
+}
+
+.label-progress-3 {
+    font-weight: 500;
+    font-size: 13px;
+    color: white;
+    background-color: #4caf50;
+    border-radius: 5px;
+    margin: 15px;
+    padding: 5px 25px;
+    letter-spacing: 1px;
+}
+
+.question-1 {
+    border: 2px solid #2196f3
+}
+
+.question-2 {
+    border: 2px solid #ff9800
+}
+
+.question-3 {
+    border: 2px solid #4caf50
+}
+
+.question-4 {
+    border: 2px solid #f44336
+}
+
+.circulo-1 {
+    background: #2196f3;
+}
+
+.circulo-2 {
+    background: #ff9800;
+}
+
+.circulo-3 {
+    background: #4caf50;
+}
+
+.circulo-4 {
+    background: #f44336;
+}
+
+
+

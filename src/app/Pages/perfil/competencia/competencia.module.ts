@@ -8,6 +8,7 @@ import { CompetenciaPageRoutingModule } from './competencia-routing.module';
 
 import { CompetenciaPage } from './competencia.page';
 import { PipesModule } from 'src/app/Pipe/pipes.module';
+import { SharedDirectivesModule } from 'src/app/directives/shared-directives.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { PipesModule } from 'src/app/Pipe/pipes.module';
     FormsModule,
     IonicModule,
     CompetenciaPageRoutingModule,
-    PipesModule
+    PipesModule,
+    SharedDirectivesModule
   ],
   declarations: [CompetenciaPage]
 })

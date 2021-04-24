@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-buttons slot="start" style="font-size: 30px;color: white;" (click)="back()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="usertk" style="margin-top: 10px;text-align: center;">
+    <ion-label style="font-size: 22px;letter-spacing: 1px;">¡Hola {{ usertk.name }}!</ion-label>
+    <br>
+    <ion-label class="label-profile">  {{ profileUser }} </ion-label>
+  </div>
+
+  <div *ngIf="profileUser" style="text-align: center;margin: 10px">
+    <ion-label style="font-size: 13px;">Por favor selecciona el perfil deportivo con el que te identificas actualmente</ion-label>
+  </div>
+
+  <div>
+    <form [formGroup]="form">
+      <div formArrayName="profiles" *ngFor="let profile of profilesArray.controls" style="margin-bottom: 15px;text-align: -webkit-center;" lines="none">
+          <div style="text-align: -webkit-center;margin-bottom: 2px;padding: 0px 25px;">
+              <ion-item [formGroupName]="profile.value.index" class="itemback {{ profile.value.color }}" lines="none">
+                  <ion-checkbox slot="end" color="primary" formControlName="selected" (ngModelChange)="selectProfile($event, profile.value.index)"></ion-checkbox>
+                  <p style="text-transform: uppercase;font-weight: bold;margin: 0;">{{profile.value.profile.name}}</p>
+              </ion-item>
+          </div>
+          <div style="background-color: #a9a9a94d;width: 95%;border-radius: 10px;margin: 10px 0px;padding: 5px;">
+              <ion-grid lines="none">
+                  <ion-row style="align-items: center;">
+                      <ion-col *ngFor="let description of profile.value.profile.descriptions" size="4"> 
+                          <ion-card class="card-profiles {{ profile.value.descriptions }}">
+                              <div>
+                                  <ion-card-content class="content-descriptions">
+                                      <ion-label class="label-descriptions">
+                                          {{ description.name | capitalize }}
+                                      </ion-label>
+                                  </ion-card-content>
+                              </div>
+                            </ion-card>
+                      </ion-col>
+                  </ion-row>
+              </ion-grid>
+          </div>
+          <hr class="hr-descriptions">
+      </div>
+
+      <div style="text-align: center;">
+        <ion-button class="buttonCss" (click)="confirm()" [disabled]="!form.valid">Modificar</ion-button>
+      </div>
+  </form>
+  </div>
+
+</ion-content>

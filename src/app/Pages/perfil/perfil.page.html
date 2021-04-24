@@ -37,7 +37,14 @@
                     <ion-label (click)="abrirDialogo()">{{usertk.name}} {{usertk.lastname}}</ion-label>
                   </strong>
                 </p>
-                <ion-label *ngIf="profileUser" style="font-size: 16px;letter-spacing: 1px;color: #002a68;font-weight: bold;">{{ profileUser }}</ion-label>
+                <ion-label *ngIf="profileUser" (click)="categoryRedirect()" style="font-size: 12px;
+                letter-spacing: 1px;
+                color: #ffffff;
+                font-weight: bold;
+                background: #002a68;
+                padding: 7px;
+                border-radius: 5px;
+                white-space: break-spaces;">{{ profileUser }}</ion-label>
               </div>
             </div>
           </ion-col>
@@ -251,7 +258,7 @@
                 <ion-label>
                   <ion-button class="button-css-options" fill="clear" expand="block"
                     (click)="activityRedirect()">
-                    <ion-icon name="book"></ion-icon>&nbsp;
+                    <ion-icon name="chatbox-outline"></ion-icon>&nbsp;
                     Mi actividad
                   </ion-button>
                 </ion-label>
@@ -268,16 +275,16 @@
               <ion-item lines="none">
                 <ion-label>
                   <ion-button class="button-css-options" fill="clear" expand="block" (click)="miTimeLine()">
-                    <ion-icon name="calendar-outline"></ion-icon>&nbsp;
+                    <ion-icon name="hourglass-outline"></ion-icon>&nbsp;
                     TimeLine
                   </ion-button>
                 </ion-label>
               </ion-item>
               <ion-item lines="none">
                 <ion-label>
-                  <ion-button [disabled]="usertk.surveyed  !== 1" class="button-css-options" fill="clear" expand="block"
+                  <ion-button class="button-css-options" fill="clear" expand="block"
                     (click)="misEstadisticas()">
-                    <ion-icon name="stats-chart-outline"></ion-icon>&nbsp;
+                    <ion-icon name="bar-chart-outline"></ion-icon>&nbsp;
                     Metricas
                   </ion-button>
                 </ion-label>
@@ -285,7 +292,7 @@
               <ion-item lines="none">
                 <ion-label>
                   <ion-button class="button-css-options" fill="clear" expand="block" (click)="MisObjetivos(usertk.id)">
-                    <ion-icon name="stats-chart-outline"></ion-icon>&nbsp;
+                    <ion-icon name="trophy-outline"></ion-icon>&nbsp;
                     Mis Objetivos
                   </ion-button>
                 </ion-label>
@@ -294,8 +301,16 @@
                 <ion-label>
                   <ion-button [disabled]="usertk.surveyed  === 1" class="button-css-options" fill="clear" expand="block"
                     (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
-                    <ion-icon name="book"></ion-icon>&nbsp;
+                    <ion-icon name="fitness-outline"></ion-icon>&nbsp;
                     Diagnostico
+                  </ion-button>
+                </ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>
+                  <ion-button class="button-css-options" fill="clear" expand="block" (click)="categoryRedirect()">
+                    <ion-icon name="rocket-outline"></ion-icon>&nbsp;
+                    Categoría
                   </ion-button>
                 </ion-label>
               </ion-item>

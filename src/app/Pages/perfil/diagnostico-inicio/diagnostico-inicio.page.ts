@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -11,6 +11,9 @@ import { ShareserviceService } from 'src/app/_services/shareservice.service';
   styleUrls: ['./diagnostico-inicio.page.scss'],
 })
 export class DiagnosticoInicioPage implements OnInit {
+
+  @ViewChild('videoDiagnosis', {static: false}) videoDiagnosis: ElementRef;
+
   alerta: any;
   informacion:any;
   categorias: any[] = [];
@@ -44,7 +47,10 @@ export class DiagnosticoInicioPage implements OnInit {
     this.alerta = await this.alertController.create({
       cssClass: 'my-custombackInicio',
       header: 'Recomendaciones',
-      message: '<br> 1. Seleccionar el puntaje o la respuesta correspondiente a la pregunta  <br> 2.  Deslizar hacia la derecha para continuar  <br> 3. No se guardara el progreso hasta contestar todas las preguntas de cada ronda',
+      message: `
+      <br> 1. Seleccionar el puntaje o la respuesta correspondiente a la pregunta  
+      <br> 2.  Deslizar hacia la derecha para continuar  
+      <br> 3. No se guardara el progreso hasta contestar todas las preguntas de cada bloque`,
       buttons: [
         {
           text: '',
@@ -55,7 +61,9 @@ export class DiagnosticoInicioPage implements OnInit {
     await this.alerta.present();
   }
 
-  async diagnosticoRedirect(){
+  async diagnosticoRedirect() {
+    let video = this.videoDiagnosis.nativeElement;
+    video.pause();
     this.pObjecto.setData(this.informacion);
     this.router.navigate(['/users/perfil/diagnostico']);
   }

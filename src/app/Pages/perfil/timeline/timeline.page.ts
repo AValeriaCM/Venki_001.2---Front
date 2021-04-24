@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { Timeline } from 'src/app/interfaces/timeline.interface';
 import { AuthService } from 'src/app/_services/auth.service';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { LoginService } from 'src/app/_services/login.service';
@@ -25,7 +26,7 @@ export class TimelinePage implements OnInit {
 
   miactividad = [];
   feelings = [];
-  timeline = [];
+  timeline: Timeline[] = [];
   usertk = null;
   token: any;
 

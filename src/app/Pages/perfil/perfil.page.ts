@@ -76,6 +76,7 @@ export class PerfilPage implements OnInit {
     private edit: RegistroService ,
   ) { 
     this.getToken();
+    this.refreshProfile();
   }
 
   ngOnInit() {
@@ -86,6 +87,16 @@ export class PerfilPage implements OnInit {
     this.msj = this.chatS.getbadge();
     this.cart = this.share.getCart();
     this.getAuthUser();
+  }
+
+  refreshProfile() {
+    this.share.varProfile.subscribe( res => {
+      if(res) {
+        this.profileUser = res.name;
+        this.usertk.profile.id = res.id;
+        this.usertk.surveyed = 0;
+      }
+    });
   }
 
   async showLoader() {
@@ -162,6 +173,7 @@ export class PerfilPage implements OnInit {
       });
     });
   }
+
   async presentLoading() {
     this.loading = await this.loadingCtrl.create({
       message: 'Cargando Datos...'
@@ -209,7 +221,7 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['/users/perfil/timeline']);
   }
 
-  diagnosticoRedirect(info, id){
+  diagnosticoRedirect(info: any, id: any) {
     let dataObj = {
       idprofile: info,
       idUser: id
@@ -228,6 +240,10 @@ export class PerfilPage implements OnInit {
 
   activityRedirect() {
     this.router.navigate(['/users/perfil/actividad']);
+  }
+
+  categoryRedirect() {
+    this.router.navigate(['/users/perfil/categoria']);
   }
 
   /*
@@ -271,7 +287,7 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['/users/perfil/competencia']);
   }
 
-  logout(){
+  logout() {
     this.auth.logout();
   }
 }

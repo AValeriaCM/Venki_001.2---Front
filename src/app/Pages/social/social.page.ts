@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/_services/login.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { environment } from 'src/environments/environment';
+import { Posts } from 'src/app/interfaces/social.interface';
 
 @Component({
   selector: 'app-social',
@@ -19,8 +20,7 @@ export class SocialPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infonitescroll: IonInfiniteScroll;
 
-  miactividad = [];
-
+  miactividad: Posts[] = [];
   message_header: string;
 
   sliderImgOption = {

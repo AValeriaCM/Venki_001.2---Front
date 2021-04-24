@@ -57,7 +57,6 @@ export class PublicacionPage implements OnInit {
   getInformation() {
     const informacion = this.pObjecto.getNavData();
     this.post = informacion.publication;
-
   }
 
   imageView(imag: any, type: any) {

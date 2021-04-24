@@ -11,33 +11,55 @@
 
 <ion-content>
   <div class="title">
-    <ion-badge class="bagde-title">Diagnostico</ion-badge>
+    <ion-badge class="bagde-title" *ngIf="title">Diagnóstico de categorización</ion-badge>
+    <ion-badge class="bagde-title" *ngIf="pagina === 1 && !title" style="color: #2196f3;background: transparent;">Bloque A</ion-badge>
+    <ion-badge class="bagde-title" *ngIf="pagina === 2 && !title" style="color: #ff9800;background: transparent;">Bloque B</ion-badge>
+    <ion-badge class="bagde-title" *ngIf="pagina === 3 && !title" style="color: #4caf50;background: transparent;">Bloque C</ion-badge>
+    <ion-badge class="bagde-title" *ngIf="pagina === 4 && !title" style="color: #f44336;background: transparent;">Bloque D</ion-badge>
+
   </div>
   <ion-slides #slider (ionSlideWillChange)="verifImg()">
     <ion-slide [hidden]="currentPage === 5">
       <ion-card style="margin: 0px 10px;">
-        <img src="../../../../assets/inicio-diag.jpg" />
-        <ion-card-header style="padding: 5px;">
-          <ion-card-title style="font-weight: bold;">
-            Inicio de diagnóstico
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content style="color: black;">
-          <strong>Recuerda: </strong>que no se guardará el progreso hasta que termines la primer
-          ronda de preguntas. Responderás 20 de ellas y tendrás 2 opciones: guardar
-          y salir o continuar. Tu progreso solo se guarda hasta que llegues al final de la ronda.
-          ¡Animo!
+        <ion-card-content style="color: black;text-align: justify;">
+          A continuación, encontraras cuatro bloques de preguntas divididas en respectivas categorías con las cuales clasificaremos para programar 
+          tu plan de entrenamiento basado en tus necesidades individuales del momento.
+          <div class="label-progress" *ngIf="pagina === 1">  
+            <ion-label> Aun no has resuelto ningun bloque. ¡Animo!</ion-label>
+          </div>
+
+          <div class="label-progress-1" *ngIf="pagina === 2">
+            <ion-label> Has completado el primer bloque, cada vez estas mas cerca de completar tu programa de entrenamiento. ¡Animo!</ion-label>
+          </div>
+
+          <div class="label-progress-2" *ngIf="pagina === 3">
+            <ion-label>Has completado el segundo bloque del diagnostico estas a la mitad del camino. ¡Animo!</ion-label>
+          </div>
+
+          <div class="label-progress-3" *ngIf="pagina === 4">
+            <ion-label>Has completado el tercer bloque cada vez estas mas cerca de completar tu diagnostico, falta muy poco. ¡Animo!</ion-label>
+          </div>
+
+        </ion-card-content>
+
+        <ion-card-content style="padding: 0;">
+          <div>
+            <canvas #doughnutChart width="250" height="180"></canvas>
+          </div>
+          <div #legendChart class="chart-legend row justify-content-center m-t-15" style="text-align: -webkit-center;margin-top: 10px;"></div>
         </ion-card-content>
       </ion-card>
 
     </ion-slide>
 
-    <ion-slide [hidden]="etapa === true || arrayFEnv.length  === totallenght"
-      *ngFor="let dt of cantidad; let i of index;">
-      <ion-grid class="questions">
+    <ion-slide  lines="none" [hidden]="etapa === true || arrayFEnv.length  === totallenght" *ngFor="let dt of cantidad; let i of index;">
+      <ion-grid class="questions" [ngClass]="{ 'question-1': pagina === 1, 'question-2': pagina === 2, 'question-3': pagina === 3, 'question-4': pagina === 4 }">
         <ion-row>
-          <ion-col size="12"><label class="circulo">
-              {{preguntat}}/{{preguntot}}</label></ion-col>
+          <ion-col size="12">
+            <label class="circulo" [ngClass]="{ 'circulo-1': pagina === 1, 'circulo-2': pagina === 2, 'circulo-3': pagina === 3, 'circulo-4': pagina === 4 }" >
+              {{preguntat}}/{{preguntot}}
+            </label>
+            </ion-col>
           <ion-col size="12">
             <ion-card class="question-st">
               <ion-card-content class="label-content">
@@ -46,23 +68,42 @@
             </ion-card>
           </ion-col>
           <ion-col size="12">
-            <ion-range class="range" min="1" max="5" step="1" [(ngModel)]="dt.calificacionVal"
-              (ionChange)="calificacion($event, dt.id, i)" snaps="true" pin="true" ticks="true" color="tertiary">
-              <ion-icon slot="start" color="danger" name="sad" class="icon-danger"></ion-icon>
-              <ion-icon slot="end" color="success" name="happy" class="icon-success"></ion-icon>
-            </ion-range>
-            <div *ngIf="dt.calificacionVal as value; else elseBlock">
-              <img src="../../../assets/estados/{{value}}.png">
+
+            <div *ngIf="dt.answers.length === 0">
+              <ion-range class="range" min="1" max="5" step="1" [(ngModel)]="dt.calificacionVal" (ionChange)="calificacion($event, dt.id, i)" snaps="true" pin="true" ticks="true" color="tertiary">
+                <ion-icon slot="start" color="danger" name="sad" class="icon-danger"></ion-icon>
+                <ion-icon slot="end" color="success" name="happy" class="icon-success"></ion-icon>
+              </ion-range>
+  
+              <div *ngIf="dt.calificacionVal as value; else bloque">
+                <img src="../../../assets/estados/{{value}}.png">
+              </div>
+  
+              <ng-template #bloque>
+                <img src="../../../assets/estados/1.png">
+              </ng-template>
             </div>
-            <ng-template #elseBlock><img src="../../../assets/estados/1.png"></ng-template>
-            <ion-row  [hidden]="finalDta.length  !== preguntot">
-              <ion-col>
+
+
+            <div *ngIf="dt.answers.length > 1" style="overflow: auto;height: 250px;">
+              <ion-list>
+                <ion-radio-group [(ngModel)]="dt.calificacionVal" (ionChange)="calificacion($event, dt.id, i)">
+                  <ion-item *ngFor="let it of dt.answers">
+                    <ion-label style="white-space: break-spaces;font-size: 13px;">{{ it.answer }}</ion-label>
+                    <ion-radio slot="end" checked="false" value="{{ it.point }}"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>
+            </div>
+      
+            <ion-row [hidden]="finalDta.length !== preguntot">
+              <ion-col size="6">
                 <ion-button size="small" [hidden]="pagina == 4"  class="footer-dis-bot1" (click)="guardar()">
                   <ion-icon name="enter-outline"></ion-icon>
-                  Terminar y salir
+                  Guardar y salir
                 </ion-button>
               </ion-col>
-              <ion-col>
+              <ion-col size="6">
                 <ion-button size="small" class="footer-dis-bot2" [hidden]="pagina == 4"  (click)="Continuar()">
                   Continuar
                   <ion-icon name="caret-forward-circle-outline"></ion-icon>
@@ -72,7 +113,7 @@
           </ion-col>
         </ion-row>
         <ion-row [hidden]="finalDta.length !== preguntot" style="place-content: center;">
-            <ion-button [hidden]="pagina != 4" class="footer-dis-bot2" (click)="enviarQuestion()">Enviar</ion-button>
+            <ion-button [hidden]="pagina != 4" class="footer-dis-bot2" (click)="Continuar()">Enviar</ion-button>
         </ion-row>
       </ion-grid>
     </ion-slide>

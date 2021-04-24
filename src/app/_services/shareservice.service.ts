@@ -27,6 +27,7 @@ export class ShareserviceService {
   varDesafio  = new Subject<string>();
   varObjetivos = new Subject<string>();
   varTotalPreguntas = new Subject<string>();
+  varProfile = new Subject<any>();
 
   private cart = [];
 
@@ -189,7 +190,7 @@ export class ShareserviceService {
     this.storage.set('cpage', page);
   }
 
-  retornarDiagnosticoCurrentpage(){
+  retornarDiagnosticoCurrentpage() {
     return this.storage.get('cpage');
   }
 
@@ -333,7 +334,7 @@ export class ShareserviceService {
   }
 
 
-  editSurveyed(surveyedNum: any, id: number) {
+  editSurveyed(surveyedNum: any, id: number, token: any) {
 
     const body = new HttpParams()
       .set('surveyed', surveyedNum);
@@ -342,6 +343,7 @@ export class ShareserviceService {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 

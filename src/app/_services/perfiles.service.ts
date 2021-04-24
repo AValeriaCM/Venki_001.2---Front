@@ -35,8 +35,8 @@ export class PerfilesService {
     });
   }
 
-  getPreguntasPerfil(idPerfil: any, token: any){
-    return this.http.get(this.urlServ + `/api/surveys/${idPerfil}/questions?per_page=15`, {
+  getPreguntasPerfil(idPerfil: any, token: any, category){
+    return this.http.get(this.urlServ + `/api/surveys/${idPerfil}/category/${category}/questions`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
@@ -44,9 +44,7 @@ export class PerfilesService {
     });
   }
 
-  
-
-  SendSurveyInfo(surveyData: any, surveyid: any, userid: any, token: any){
+  SendSurveyInfo(surveyData: any, surveyid: any, userid: any, token: any) {
     const body = new HttpParams()
     .set('reply', surveyData)
     .set('survey_id', surveyid)
@@ -66,4 +64,14 @@ export class PerfilesService {
         .set('X-Requested-With', 'XMLHttpRequest')
     });
   }
+
+  getCalifications(idUser: any, token: any) {
+    return this.http.get(this.urlServ + `/api/users/${idUser}/replies`, {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
 }

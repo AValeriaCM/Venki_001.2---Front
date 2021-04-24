@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { AuthService } from 'src/app/_services/auth.service';
 import { LoginService } from 'src/app/_services/login.service';
+import { LoadingService } from 'src/app/_services/loading.service';
+import { PerfilesService } from 'src/app/_services/perfiles.service';
 
 
 @Component({
@@ -11,6 +13,9 @@ import { LoginService } from 'src/app/_services/login.service';
   styleUrls: ['./estadisticas.page.scss'],
 })
 export class EstadisticasPage implements OnInit {
+
+  @ViewChild('barChart') barChart;
+
 
   dataStats: any [];
 
@@ -22,28 +27,50 @@ export class EstadisticasPage implements OnInit {
   conductual:number;
   fortaleza:number;
 
+  califications: any [] = new Array();
+  labels: any [] = new Array();
+  dataSets:  any [] = new Array();
+
+  token: any;
+  color = null;
+  border = null;
+
   constructor(
     private auth: AuthService,
     private log: LoginService,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService,
+    private perfilService: PerfilesService
   ) { }
 
   ngOnInit() {
-    this.auth.gettokenLog().then( dt => {
-      this.log.logdataInfData(dt).subscribe( infoUser => {
-        this.usertk = infoUser;
-         this.dataStats = [infoUser.emocional, infoUser.cognitivo, infoUser.conductual, infoUser.fortaleza_mental];
-         this.emocional = this.usertk.emocional;
-         this.cognitivo = this.usertk.cognitivo;
-         this.conductual = this.usertk.conductual;
-         this.fortaleza = this.usertk.fortaleza_mental; 
-         this.createBarChart();         
-      });   
-    });
-    
+    this.getToken();
   }
+
+  getToken() {
+    this.auth.gettokenLog().then(resp => {
+      this.token = resp;
+      this.log.logdataInfData(resp).subscribe( infoUser => {
+        this.usertk = infoUser;
+        this.getCalifications();
+      });
+    });
+  }
+
+  getCalifications() {
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.perfilService.getCalifications(this.usertk.id, this.token).subscribe( (resp: any) => {
+      this.califications = resp.data;
+      this.loadingService.loadingDismiss();
+      if(this.califications.length > 0) {
+        this.loadDataSets();
+      }
+    }, error => {
+      this.loadingService.loadingDismiss();
+    });
+  }
+
   
-  @ViewChild('barChart') barChart;
   ionViewDidEnter() {
     this.createBarChart();
   }
@@ -52,39 +79,67 @@ export class EstadisticasPage implements OnInit {
     this.router.navigate(['/users/perfil']);
   }
 
+  loadDataSets() {
+    this.califications.map( dataset => {
+      this.dynamicColorsArray();
+      this.dataSets.push({
+        label: (new Date(dataset.created_at)).toISOString().slice(0, 10),
+        data: [
+          dataset.reply.Atletico,
+          dataset.reply.Bienestar,
+          dataset.reply.Fortaleza_Mental,
+          dataset.reply.Desarrollo_Competitivo,
+          dataset.reply.Nutricion,
+        ],
+        backgroundColor: this.color,
+        borderColor: this.border,
+        pointBackgroundColor: this.border,
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: this.border
+      });
+    });
+    this.createBarChart(); 
+  }
+
+  dynamicColorsArray() {
+    var r = Math.floor(Math.random() * 255);
+    var g = Math.floor(Math.random() * 255);
+    var b = Math.floor(Math.random() * 255);
+    this.color = "rgba(" + r + "," + g + "," + b + ", 0.2)";
+    this.border = "rgb(" + r + "," + g + "," + b + ")";
+  };
+
   createBarChart() {
     this.bars = new Chart(this.barChart.nativeElement, {
-      type: 'bar',
+      type: 'radar',
       data: {
-        labels: ['Emocional', 'Cognitivo', 'Conductual', 'Fortaleza mental'],
-        datasets: [{
-          label: 'Resultados',
-          data:  this.dataStats,//[2.0, 1.0, 2.0, 3.0],//data db
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.8)",
-            "rgba(54, 162, 235, 0.8)",
-            "rgba(255, 206, 86, 0.8)",
-            "rgba(75, 192, 192, 0.8)",
-          ],
-          borderColor: [
-            "rgba(255,99,132,1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)"
-          ],// array should have same number of elements as number of dataset
-          borderWidth: 1
-        }]
+        labels: ['Atletico', 'Bienestar', 'Fortaleza mental', 'Desarrollo Competitivo', 'Nutricion'],
+        datasets: this.dataSets
       },
       options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+              fontColor: 'rgb(0, 0, 0)'
+          }
+        },
+        responsive : true , 
+        keepAspectRatio : false , 
+        animation : { 
+            duration : 0 
+        } , 
+        hover : { 
+            animationDuration : 0 
+        }, 
+        responsiveAnimationDuration : 0 
       }
     });
+  }
+
+  back() {
+    this.router.navigate(['/users/perfil']);
   }
 
 }

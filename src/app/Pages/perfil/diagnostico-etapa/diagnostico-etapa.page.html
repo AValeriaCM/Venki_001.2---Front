@@ -22,12 +22,12 @@
     <div class="confetti-piece"></div>
   <ion-card-content style="padding: 0px 5px;">
     <div class="card card-3" [ngClass]="{ 'question-1': etapa === 1, 'question-2': etapa === 2, 'question-3': etapa === 3, 'question-4': etapa === 4 }">
-      <h3 *ngIf="etapa === 1">BLOQUE A</h3>
-      <h3 *ngIf="etapa === 2">BLOQUE B</h3>
-      <h3 *ngIf="etapa === 3">BLOQUE C</h3>
-      <h3 *ngIf="etapa === 4">BLOQUE D</h3>
-      <ion-label style="font-size: 16px;" *ngIf="etapa === 1 || etapa === 2 || etapa === 3"> !Felicitaciones! acabas de culminar con exito este bloque de preguntas</ion-label>
-      <ion-label style="font-size: 16px;" *ngIf="etapa === 4"> !Felicitaciones! acabas de culminar con exito tu diagnostico</ion-label>
+      <h3 *ngIf="etapa === 1">PRUEBA DE MENTALIDAD</h3>
+      <h3 *ngIf="etapa === 2">PRUEBA NUTRICIONAL</h3>
+      <h3 *ngIf="etapa === 3">PRUEBA DE BIENESTAR</h3>
+      <h3 *ngIf="etapa === 4">PRUEBA ATLÉTICA</h3>
+      <ion-label style="font-size: 16px;" *ngIf="etapa === 1 || etapa === 2 || etapa === 3"> !Felicitaciones! acabas de culminar con éxito este bloque de preguntas</ion-label>
+      <ion-label style="font-size: 16px;" *ngIf="etapa === 4"> !Felicitaciones! acabas de culminar con éxito tu diagnostico</ion-label>
     </div>
   </ion-card-content>
   <ion-card-content style="padding: 0;margin: 20px" *ngIf="etapa === 4">

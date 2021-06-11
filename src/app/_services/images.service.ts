@@ -11,11 +11,12 @@ export class ImagesService {
   constructor(private http: HttpClient) { }
 
 
-  getImages(){
+  getImages(token) {
     return this.http.get<Image[]>(`${this.urlServ}/api/images`, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer ' + token)
     });
   }
 }

@@ -33,7 +33,7 @@
           <span class="card__date__index">{{curso.id}}</span>
         </div>
         <div class="card__body">
-          <div class="card__category" [ngStyle]="{'background': colores[curso.id-1]}"><label>Categoria</label></div>
+          <div class="card__category" [ngStyle]="{'background': colores[curso.id-1]}"><label>Categoría</label></div>
           <div class="card__title"><ion-label  (click)="verCurso(curso, curso.description, colores[curso.id-1])"><u>{{ curso.name.split(':')[0]}}</u></ion-label></div>
           <p class="card__description">{{curso.name.split(':')[1] | title }}</p>
         </div>

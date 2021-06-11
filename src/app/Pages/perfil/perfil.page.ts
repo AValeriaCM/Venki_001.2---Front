@@ -12,6 +12,8 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { PopoverController } from '@ionic/angular';  
 import { AvatarPage } from '../popup/avatar/avatar.page';
 import { environment } from 'src/environments/environment';
+import { ImagesService } from 'src/app/_services/images.service';
+import { LoadingService } from 'src/app/_services/loading.service';
 
 @Component({
   selector: 'app-perfil',
@@ -45,6 +47,36 @@ export class PerfilPage implements OnInit {
       situacion: 'Casado'
     }
   ];
+
+  sexs = [
+    {
+      sex: 'Masculino'
+    },
+    {
+      sex: 'Femenino'
+    },
+    {
+      sex: 'Prefiero no decirlo'
+    }
+  ];
+
+  orientationsFeet = [
+    {
+      orientation: 'Derecho'
+    },
+    {
+      orientation: 'Izquierdo'
+    }
+  ];
+
+  orientationsHands = [
+    {
+      orientation: 'Derecha'
+    },
+    {
+      orientation: 'Izquierda'
+    }
+  ];
   
   emailPattern: any = /^[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})/;
   nombrePattern: any = /^[A-Za-z -]+$/;
@@ -60,6 +92,9 @@ export class PerfilPage implements OnInit {
   coursesCompleted = [];
   token: any;
 
+  imageSports = null;
+  imageAcademic = null;
+
   profileUser = null;
 
   constructor(
@@ -73,7 +108,9 @@ export class PerfilPage implements OnInit {
     private pObjecto: PassObjectService,
     public alertController: AlertController,
     private popover:PopoverController,
-    private edit: RegistroService ,
+    private edit: RegistroService,
+    private images: ImagesService,
+    private loadingService: LoadingService
   ) { 
     this.getToken();
     this.refreshProfile();
@@ -125,13 +162,25 @@ export class PerfilPage implements OnInit {
     });
   }
 
+  getImages() {
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.images.getImages(this.token).subscribe( (resp: any) => {
+      this.imageSports = resp.data.find( (image: any) => image.type === 1);
+      this.imageAcademic = resp.data.find( (image: any) => image.type === 0);
+      this.loadingService.loadingDismiss();
+    }, error => {
+      this.loadingService.loadingDismiss();
+    });
+  }
+
   getAuthUser() {
     this.auth.gettokenLog().then( dt => {
       this.log.logdataInfData(dt).subscribe( infoUser => {
         this.usertk = infoUser;
         this.profileUser = this.usertk.profile.name
+        this.getImages();
         this.inicializarFormulario(this.usertk);  
-        if (this.usertk.photo === null){
+        if (this.usertk.photo === null) {
           this.usertk.photo = 'https://i.ibb.co/f0Z6QWK/default.jpg';
           this.getcursos(this.usertk.id);
         }else{
@@ -251,22 +300,38 @@ export class PerfilPage implements OnInit {
   */
   inicializarFormulario(dt: any) {
     this.editarForm = new FormGroup({
-      name : new FormControl(dt.name,
-      [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
-      lastname : new FormControl(dt.lastname,
-      [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+      name : new FormControl(dt.name, [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+      lastname : new FormControl(dt.lastname, [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
       birthday : new FormControl(dt.birthday, [Validators.required]),
-      email : new FormControl(dt.email,
-      [Validators.required, Validators.min(7) , Validators.max(70), Validators.pattern(this.emailPattern)]),
-      phone : new FormControl(dt.phone,
-      [Validators.required, Validators.minLength(8) , Validators.maxLength(22), Validators.pattern(this.phonePatten)]),
-      description : new FormControl(dt.description,
-      [Validators.required]),
-      institution : new FormControl(dt.institution,
-        [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
-      city : new FormControl(dt.city,
-          [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
-      status : new FormControl(dt.status,[Validators.required]),
+      email : new FormControl(dt.email, [Validators.required, Validators.min(7) , Validators.max(70), Validators.pattern(this.emailPattern)]),
+      phone : new FormControl(dt.phone, [Validators.required, Validators.minLength(8) , Validators.maxLength(22), Validators.pattern(this.phonePatten)]),
+      description : new FormControl(dt.description),
+      institution : new FormControl(dt.institution, [Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+      city : new FormControl(dt.city, [Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+      status : new FormControl(dt.status),
+      sex : new FormControl(null),
+      placeOfBirth : new FormControl(null),
+      height : new FormControl(null),
+      weight : new FormControl(null),
+      dominantFoot: new FormControl(null),
+      dominantHand: new FormControl(null),
+      graduationYear: new FormControl(null),
+      highSchoolAverage: new FormControl(null),
+      gpa: new FormControl(null),
+      sat: new FormControl(null),
+      toefl: new FormControl(null),
+      mainSport: new FormControl(null),
+      playingPosition: new FormControl(null),
+      events: new FormControl(null),
+      time: new FormControl(null),
+      records: new FormControl(null),
+      route: new FormControl(null),
+      rankings: new FormControl(null),
+      recognitions: new FormControl(null),
+      press: new FormControl(null),
+      differences: new FormControl(null),
+      competencies: new FormControl(null),
+      goals: new FormControl(null)
     });
   }
 

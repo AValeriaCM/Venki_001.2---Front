@@ -1,6 +1,6 @@
 import { ImgPrevPage } from './img-prev/img-prev.page';
 import { AuthService } from 'src/app/_services/auth.service';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
@@ -12,6 +12,7 @@ import { Image } from 'src/app/_model/Image';
 import { forkJoin, Observable } from 'rxjs';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { environment } from 'src/environments/environment';
+import { ImagesService } from 'src/app/_services/images.service';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +41,9 @@ export class HomePage implements OnInit {
   emotion = '';
   token: any;
 
+  imageHome = null;
+  imageDescription = null;
+
   constructor(
     private router: Router,
     private auth: AuthService,
@@ -48,7 +52,9 @@ export class HomePage implements OnInit {
     private localN: LocalNotifications,
     private log: LoginService,
     private modelcontroller: ModalController,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private imagesService: ImagesService,
+    private alertController: AlertController
   ) { 
     this.getToken();
   }
@@ -59,6 +65,28 @@ export class HomePage implements OnInit {
     this.getActiveLesson();
     this.getActiveCourse();
     this.localNotification();
+  }
+
+  showMessageCoins() {
+    this.alertController.create({
+      header: 'MAGIN',
+      message: 'Moneda oficial de venki',
+      buttons: ['OK']
+    }).then(alert => alert.present());
+  }
+
+  getImages() {
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.imagesService.getImages(this.token).subscribe( (resp: any) => {
+      this.imageHome = resp.data.find( (image: any) => image.type === 2 );
+      if(this.imageHome) {
+        this.imageDescription = this.imageHome.description;
+        this.imageHome = `${this.basePath}${this.imageHome.url}`;
+      }
+      this.loadingService.loadingDismiss();
+    }, error => {
+      this.loadingService.loadingDismiss();
+    });
   }
 
   getToken() {
@@ -150,6 +178,7 @@ export class HomePage implements OnInit {
   getMiactividad(userid: any) {
     this.share.getActividadUsuario(userid, this.token).subscribe(info => {
       this.miactividad = info.data.length;
+      this.getImages();
     });
   }
 

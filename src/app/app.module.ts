@@ -44,6 +44,7 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common'; 
+
 registerLocaleData(localeEs);
   
 
@@ -72,7 +73,7 @@ registerLocaleData(localeEs);
     ImageModalPageModule,
     AvatarPageModule,
     CondicionesPageModule,
-    TerminosNinosPageModule
+    TerminosNinosPageModule,
   ],
   providers: [
     MatDatepickerModule,

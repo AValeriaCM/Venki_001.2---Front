@@ -80,7 +80,7 @@ hr.solid {
 
 .button-css-options {
     box-shadow: 0 10px 30px 0 #fcfcfc;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 1px;
     margin: 0px;
     display: table-cell;
@@ -142,26 +142,24 @@ hr.solid {
 }
 
 .title-css{
-    color: rgb(8, 8, 8);
+    color: #ffffff;
     margin: 0;
-    padding: 0px 0px 6px 0px;
-    font-size: 11px;
-    line-height: 44px;
     letter-spacing: 1px;
     font-weight: bold;
-    text-align: center;
+    background-color: #002a68;
+    border-radius: 10px;
+    padding: 7px;
 }
 
 
 .title-cssCursos{
-    color: rgb(10, 10, 10);
+    color: #ffffff;
     margin: 0;
-    padding: 0px 0px 6px 0px;
-    font-size: 11px;
-    line-height: 44px;
     letter-spacing: 1px;
     font-weight: bold;
-    text-align: center;
+    background-color: #002a68;
+    border-radius: 10px;
+    padding: 7px;
 }
 
 .title-css2 {
@@ -484,10 +482,16 @@ hr.solid {
     border-radius: 5px;
 }
 
+.competence-sport-none {
+    --background: url(/assets/competencia/sports.jpg) 0 0/100% 100% no-repeat;
+    height: 200px;
+}
+
 .competence-sport {
     --background: url(/assets/competencia/sports.jpg) 0 0/100% 100% no-repeat;
     height: 200px;
 }
+
 
 .competence-academic {
     --background: url(/assets/competencia/academic.jpg) 0 0/100% 100% no-repeat;
@@ -503,4 +507,18 @@ hr.solid {
     font-weight: bold;
     letter-spacing: 1px;
     border-radius: 5px;
+}
+
+.label-form {
+    width: 100%;
+    text-align-last: left;
+    font-size: 18px;
+    color: #949494;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+ion-item.item-has-focus > ion-label{
+    color: #002a68 !important;
 }

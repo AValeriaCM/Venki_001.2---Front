@@ -60,7 +60,7 @@
   </ion-list>
 
   <div *ngIf="activity.length === 0" style="margin-top: 15px;text-align: center;">
-    <ion-badge color="warning">No existen posts</ion-badge>
+    <ion-badge color="warning">No existen publicaciones</ion-badge>
   </div>
 
   <ion-infinite-scroll threshold="100px" position="bottom" (ionInfinite)="loadData($event)">

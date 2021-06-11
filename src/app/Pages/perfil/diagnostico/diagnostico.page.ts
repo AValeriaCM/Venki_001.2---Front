@@ -138,7 +138,7 @@ export class DiagnosticoPage implements OnInit {
         },
         rotation: (1* Math.PI) - (1 * Math.PI),
         tooltips: {
-          enabled: true,
+          enabled: false,
           mode: 'single',
           callbacks: {
             label: function(index: any, data: any) { 
@@ -157,24 +157,24 @@ export class DiagnosticoPage implements OnInit {
             for (let i = 0; i < datasets[0].data.length; ++i) {
               if (labels[i]) {
 
-                text.push('<ion-col size="6">');
+                text.push('<ion-col size="12">');
                 var nameClass = ''
                 var label = '';
                 if(labels[i] == 'Bloque A') {
                   nameClass = 'bloque-1'
-                  label = "Bloque A"
+                  label = "PRUEBA DE MENTALIDAD"
                 }
                 if(labels[i] == 'Bloque B') {
                   nameClass = 'bloque-2'
-                  label = "Bloque B"
+                  label = "PRUEBA NUTRICIONAL"
                 }
                 if(labels[i] == 'Bloque C') {
                   nameClass = 'bloque-3'
-                  label = "Bloque C"
+                  label = "PRUEBA DE BIENESTAR"
                 }
                 if(labels[i] == 'Bloque D') {
                   nameClass = 'bloque-4'
-                  label = "Bloque D"
+                  label = "PRUEBA ATLÉTICA"
                 }
                 text.push('<p class="text-danger m-b-0 ' + nameClass + '">' + label + '</p>');
               }
@@ -186,9 +186,7 @@ export class DiagnosticoPage implements OnInit {
         },
       }
     });
-
     this.legendChart.nativeElement.innerHTML = this.donuts.chart.generateLegend();
-
   }
 
   loadPage() {
@@ -317,6 +315,8 @@ export class DiagnosticoPage implements OnInit {
               }
               this.enviarQuestion();
             });
+          } else {
+            this.loadingService.loadingDismiss();
           }
         });
       }, error => {
@@ -361,8 +361,13 @@ export class DiagnosticoPage implements OnInit {
           this.slidefromHtml.lockSwipeToNext(false);
           if (item.calificacionVal !== 0) {
             this.surveyID = item.survey_id;
-            res.push({ id: item.id, r: item.calificacionVal, ct: item.category_id });
-            this.finalDta = res;
+            if(item.subcategory_id === null) {
+              res.push({ id: item.id, r: item.calificacionVal, ct: item.category_id });
+              this.finalDta = res;
+            } else {
+              res.push({ id: item.id, r: item.calificacionVal, ct: item.subcategory_id });
+              this.finalDta = res;
+            }
           }
         }
       });
@@ -428,7 +433,7 @@ export class DiagnosticoPage implements OnInit {
         this.etapa = false;
       });
     } else {
-      this.loadingService.loadingDismiss();
+      this.loadingService.loadingPresent({spinner: "circles" });
       this.cacheArray.push({myPropArray: this.finalDta});
       this.share.guardarDiagnostico(this.cacheArray);
       this.share.guardarDiagnosticoCurrenpage(this.currentPage);
@@ -441,11 +446,11 @@ export class DiagnosticoPage implements OnInit {
   }
 
   enviarQuestion() {
-    this.loadingService.loadingDismiss();
     const infoConvert = JSON.stringify(this.arrayFEnv);
     this.perfile.SendSurveyInfo(infoConvert, this.surveyID, this.userID, this.token).subscribe(surveyResponse => {
       let surveyed = 1;
       this.share.editSurveyed(surveyed, this.userID, this.token).subscribe( res => {
+        this.loadingService.loadingDismiss();
         this.share.removerDiagnostico();
         this.share.removerDiagnosticoCurrenpage();
         this.share.removerDiagnosticoLastpage();

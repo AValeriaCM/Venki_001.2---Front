@@ -308,20 +308,20 @@ video{
 .badge-lesson {
   padding: 5px;
   margin: 15px 25px 10px 25px;
-  text-transform: uppercase;
   white-space: break-spaces;
   font-weight: 500;
 }
 
 ion-col > .actions {
   box-shadow: none !important;
+  -moz-text-align-last: center !important;
   text-align-last: center !important;
   font-weight: 500;
   border-radius: 10px;
-  height: 85px;
-  width: 100px;
-  font-size: 14px;
-  padding: 20px 0px;
+  height: 34px;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 8px;
 }
 
 .card-primary {
@@ -349,14 +349,13 @@ ion-col > .actions {
 
 .badge-emotions {
   color: black;
-  padding: 0px 10px;
   font-weight: bold;
   background-color: #ffffff;
   border-radius: 10px;
 }
 
-.wid-70 {
-  width: 70%;
+.wid-55 {
+  width: 55%;
 }
 
 .col-active {

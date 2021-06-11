@@ -102,8 +102,15 @@ export class ExamenPage implements OnInit {
           this.cursos.forEach(element => {
             this.numLecciones = element.lessons.length;
           });
+          this.loadingService.loadingDismiss();
+        }, error => {
+          this.loadingService.loadingDismiss();
         });
+      }, error => {
+        this.loadingService.loadingDismiss();
       });
+    }, error => {
+      this.loadingService.loadingDismiss();
     });    
   }
 
@@ -144,7 +151,7 @@ export class ExamenPage implements OnInit {
     }
   }
 
-  calificar(){
+  calificar() {
     let correcto = 0;
     let incorrecto = 0;
 
@@ -189,11 +196,11 @@ export class ExamenPage implements OnInit {
     await this.alert.present();
   }
   
-  guardaProgreso(progreso: number){
+  guardaProgreso(progreso: number) {
     this.user = new UsuarioCurso;
     let varProgreso = progreso;
     this.newProgress = 1/this.numLecciones;
-    if( varProgreso >= 0.60 && varProgreso < 1 && this.numLecciones == 3){
+    if( varProgreso >= 0.60 && varProgreso < 1 && this.numLecciones == 3) {
       this.user.progress = 1;
       this.share.actualizarProgreso(this.userinfo.id,this.courseID, this.user.progress, this.token).subscribe(()=>{
         this.alertProgreso();

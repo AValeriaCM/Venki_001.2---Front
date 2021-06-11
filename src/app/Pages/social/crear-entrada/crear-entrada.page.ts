@@ -81,7 +81,7 @@ export class CrearEntradaPage implements OnInit {
       return ' Muestra cómo compites';
     }
     if (idAction === 3) {
-      return '¡Reta a la Comunidad! ¡Crea un desafío!';
+      return '¡Reta a la comunidad! ¡Crea un desafío!';
     }
   }
 
@@ -91,14 +91,14 @@ export class CrearEntradaPage implements OnInit {
       cssClass: 'match-item-action-sheet',
       buttons: [
         {
-          text: 'Galeria',
+          text: 'Galería',
           icon: 'image-outline',
           handler: () => {
             this.usarGaleria();
           }
         },
         {
-          text: 'Camara',
+          text: 'Cámara',
           icon: 'camera-outline',
           handler: () => {
             this.usarCamara();
@@ -224,7 +224,7 @@ export class CrearEntradaPage implements OnInit {
       subHeader:
         'Debes Escribir algo',
       message:
-        'Dinos que piensas, no puede ir vacio',
+        'Dinos que piensas, no puede ir vacío',
       buttons: ['Acepto'],
     });
     await this.alert.present();

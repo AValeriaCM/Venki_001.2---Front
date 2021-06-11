@@ -165,7 +165,7 @@ export class MisObjetivosPage implements OnInit {
       subHeader:
         'No puedes hacer eso',
       message:
-        'No puedes Poner objetivos vacios Agrega tus Objetivos para poder guiarte',
+        'No puedes Poner objetivos vacíos Agrega tus Objetivos para poder guiarte',
       buttons: ['Acepto'],
     });
     await this.alert.present();

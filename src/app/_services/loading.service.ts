@@ -22,6 +22,8 @@ export class LoadingService {
 
   async loadingDismiss() {
     this.loading = false;
-    return await this.loadingController.dismiss();
+    while (await this.loadingController.getTop() !== undefined) {
+      await this.loadingController.dismiss();
+    }
   }
 }

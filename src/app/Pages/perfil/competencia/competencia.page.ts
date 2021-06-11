@@ -126,14 +126,14 @@ export class CompetenciaPage implements OnInit {
       cssClass: 'match-item-action-sheet',
       buttons: [
         {
-          text: 'Galeria',
+          text: 'Galería',
           icon: 'image-outline',
           handler: () => {
             this.usarGaleria();
           }
         },
         {
-          text: 'Camara',
+          text: 'Cámara',
           icon: 'camera-outline',
           handler: () => {
             this.usarCamara();
@@ -333,7 +333,7 @@ export class CompetenciaPage implements OnInit {
     this.alert = await this.alertController.create({
       header: 'HEY!',
       subHeader:
-        'Cuentanos que piensas',
+        'Cuéntanos que piensas',
       message:
         'Debes escribir algo y publicar una imagen o un video',
       buttons: ['Acepto'],
@@ -341,12 +341,12 @@ export class CompetenciaPage implements OnInit {
     await this.alert.present();
   }
 
-  async presentAlert(title, message) {
+  async presentAlert(title: any, message: any) {
     this.removeVideo();
     let alert = await this.alertController.create({
       header: title,
       subHeader: message,
-      buttons: ['Dismiss']
+      buttons: ['Cerrar']
     });
     alert.present();
   }

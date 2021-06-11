@@ -94,7 +94,7 @@ export class VercursoPage implements OnInit {
       subHeader:
         'Por favor califica nuestros cursos es importante',
       message:
-        'Puedes calificar usando desplazandote y seleccionanaod un valor entre 1 y 10 ',
+        'Puedes calificar usando desplazándote y seleccionando un valor entre 1 y 10 ',
       buttons: ['Acepto'],
     });
     await this.alert.present();

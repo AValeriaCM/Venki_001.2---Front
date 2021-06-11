@@ -1,46 +1,39 @@
 <ion-header>
   <ion-toolbar class="ion-toolbar-ccs">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/users/perfil"></ion-back-button>
+    <ion-buttons slot="start" style="font-size: 30px;color: white;" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title class="tituloInfo">
-      <label class="color-blue">M</label><label class="color-blueC">A</label><label class="color-blue">GIN</label>
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-
-  <mat-accordion style="margin-top: 20%;">
-    <mat-expansion-panel style="margin-top: 6%;" *ngFor="let cour of recomen">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{cour.name}}
-        </mat-panel-title>
-        <mat-panel-description>
-          <label>Te recomendamos {{cour.name}}</label>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <br>
-      <p style="text-align: justify;">
-        {{cour.description}}
-      </p>
-      <iframe #playerVim [src]="cour.trailer + '?loop=1&muted=1&playsinline=1' | vimeoUrl" frameborder="0"
-        allow="autoplay;" width="100%" height="40%" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      <img src="http://venki.tk/{{cour.photo}}" class="center"
-        style="width: 100px;  height: 100px; border-radius: 8px;">
-      <p>
-        duración: {{cour.duration}} <br>
-        Precio: {{cour.price}}
-        <br>
-      </p>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <br>
-
-  <ion-button class="button-css-options" fill="clear" expand="block" (click)="hacerpremium()">
-    <ion-icon name="book"></ion-icon>&nbsp;
-    Hacerte Premium
-  </ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Pagar con PayPal
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card class="welcome-card">
+    <ion-img src="/assets/paypal.png"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>MAGIN</ion-card-subtitle>
+      <ion-card-title>Contenido Premium</ion-card-title>
+      <ion-row>
+        <ion-col>
+          Total
+        </ion-col>
+        <ion-col>
+          {{currencyIcon}} {{paymentAmount}}
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="full" color="success" (click)="payWithPaypal()">Pagar con Paypal</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

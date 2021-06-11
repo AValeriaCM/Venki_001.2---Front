@@ -78,7 +78,9 @@ export class CategoriaPage implements OnInit {
 
   getProfiles() {
     this.loadingService.loadingPresent({message: "Por favor espere", spinner: "circles" });
+    console.log('this.token', this.token);
     this.porfiles.getProfiles(this.token).subscribe((resp: any) => {
+      console.log('resp', resp);
       this.loadProfiles(resp);
       this.loadingService.loadingDismiss();
     }, error => {
@@ -114,7 +116,7 @@ export class CategoriaPage implements OnInit {
     const that = this;
     this.alert = await this.alertController.create({
       header: '¡TEN MUY PRESENTE!',
-      message: 'Al cambiar tu perfil actual modificara todo tu programa de entrenamiento. ¿Estas seguro que deseas ajustarlo?',
+      message: 'Al cambiar tu perfil actual modificará todo tu programa de entrenamiento. ¿Estas seguro que deseas ajustarlo?',
       buttons: [
         {
           text: 'Confirmar',

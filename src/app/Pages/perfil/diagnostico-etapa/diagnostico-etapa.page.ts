@@ -91,7 +91,7 @@ export class DiagnosticoEtapaPage implements OnInit {
             for (let i = 0; i < datasets[0].data.length; ++i) {
               if (labels[i]) {
 
-                text.push('<ion-col size="6">');
+                text.push('<ion-col size="12">');
                 var nameClass = ''
                 var label = '';
                 if(labels[i] == 'Bloque A') {

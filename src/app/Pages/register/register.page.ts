@@ -219,7 +219,7 @@ export class RegisterPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Ups!',
       subHeader: 'No puedes registrarte',
-      message: 'No te puedes registrar si no aceptas los terminos y condicones de uso',
+      message: 'No te puedes registrar si no aceptas los terminos y condiciones de uso',
       buttons: ['Acepto']
     });
 
@@ -268,7 +268,7 @@ async loginGoogleAndroid() {
         that.loadingService.loadingDismiss();
       });
     } else {
-      that.mostrarmensaje('Es necesario un correo electronico para realizar el registro', 'Error', 'red-snackbar');        
+      that.mostrarmensaje('Es necesario un correo electrónico para realizar el registro', 'Error', 'red-snackbar');        
     }
   })
   .catch( err => {

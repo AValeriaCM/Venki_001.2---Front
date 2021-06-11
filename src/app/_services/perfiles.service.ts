@@ -16,10 +16,8 @@ export class PerfilesService {
 
 
   getProfiles(token: any){
-    return this.http.get(this.urlServ + `/api/profiles`, {
+    return this.http.get(this.urlServ + `/api/profiles?per_page=10&page=1`, {
       headers: new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('X-Requested-With', 'XMLHttpRequest')
         .set('Authorization', 'Bearer ' + token)
     });
   }

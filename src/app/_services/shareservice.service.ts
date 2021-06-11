@@ -244,16 +244,15 @@ export class ShareserviceService {
     return this.storage.get(CURSOCONTROLNAME);
   }
 
-  verorder(){
+  verorder() {
     const token = this.storage.get(ORDERSTRG);
     return token;
   }
 
-  updateorder(order: any){
+  updateorder(order: any) {
     let inc = 1;
     inc =  order + inc;
     this.storage.set(ORDERSTRG, inc);
-    this.varorder.next('update order');
   }
 
   guardarpost(form: any, token: any) {
@@ -274,10 +273,11 @@ export class ShareserviceService {
     });
   }
 
-  getrecomendation(idUser: any){
+  getrecomendation(idUser: any, token: any){
     return this.http.get<any>(this.basePath + `api/users/${idUser}/recomendations`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
   });
   }
 

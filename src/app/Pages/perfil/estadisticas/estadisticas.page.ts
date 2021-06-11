@@ -15,8 +15,7 @@ import { PerfilesService } from 'src/app/_services/perfiles.service';
 export class EstadisticasPage implements OnInit {
 
   @ViewChild('barChart') barChart;
-
-
+  
   dataStats: any [];
 
   bars: any;
@@ -86,10 +85,12 @@ export class EstadisticasPage implements OnInit {
         label: (new Date(dataset.created_at)).toISOString().slice(0, 10),
         data: [
           dataset.reply.Atletico,
+          dataset.reply.Nutricion,
           dataset.reply.Bienestar,
           dataset.reply.Fortaleza_Mental,
-          dataset.reply.Desarrollo_Competitivo,
-          dataset.reply.Nutricion,
+          dataset.reply.Conductual,
+          dataset.reply.Emocional,
+          dataset.reply.Cognitivo
         ],
         backgroundColor: this.color,
         borderColor: this.border,
@@ -114,7 +115,7 @@ export class EstadisticasPage implements OnInit {
     this.bars = new Chart(this.barChart.nativeElement, {
       type: 'radar',
       data: {
-        labels: ['Atletico', 'Bienestar', 'Fortaleza mental', 'Desarrollo Competitivo', 'Nutricion'],
+        labels: ['Atlético', 'Nutrición', 'Bienestar', 'Fortaleza mental', 'Conductual' , 'Emocional', 'Cognitivo'],
         datasets: this.dataSets
       },
       options: {

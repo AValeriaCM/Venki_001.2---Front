@@ -52,16 +52,16 @@ export class TargetPage implements OnInit {
 
   getTargets() {
     this.targets.push(
-      { 'target': "Quiero tener mayor agilidad fisica y mental en mi vida y para mi deporte." },
-      { 'target': "Quiero controlar mis emociones y pensamientos." },
-      { 'target': "Quiero tener más motivación tanto en competencia como entrenamientos." },
-      { 'target': "Quiero mejorar mis habitos de bienestar."},
-      { 'target': "Quiero tener más confianza."},
-      { 'target': "Quiero concentrarme más antes, durante y despues una actividad deportiva."},
-      { 'target': "Quiero tener un mejor rendimiento para mi deporte."},
-      { 'target': "Quiero enfocar mi proyecto de vida 100% hacía mi carrera Deportiva."},
-      { 'target': "Quiero aprender a reponerme de los errores y 'volver rápido' a la competencia."},
-      { 'target': "Quiero tener un gran reconocimiento dentro del entorno deportivo."}
+      { 'target': "Mejorar mi rendimiento deportivo" },
+      { 'target': "Controlar mis emociones y pensamientos" },
+      { 'target': "Aprender a reponerme de los errores y mantenerme dentro de la competencia" },
+      { 'target': "Tener un gran reconocimiento dentro del entorno deportivo"},
+      { 'target': "Mejorar mis hábitos de bienestar"},
+      { 'target': "Aumentar mi confianza"},
+      { 'target': "Tener más motivación tanto en competencia como en los entrenamientos"},
+      { 'target': "Adquirir mayor agilidad física y mental tanto en mi deporte como en la vida"},
+      { 'target': "Concentrarme más, antes, durante y después de una actividad deportiva"},
+      { 'target': "Enfocar 100% mi carrera deportiva como proyecto de vida"}
     );
   }
 

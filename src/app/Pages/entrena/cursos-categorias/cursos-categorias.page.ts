@@ -153,7 +153,7 @@ export class CursosCategoriasPage implements OnInit{
         this.mostrarmensaje('El archivo no es un pdf', 'Error', 'red-snackbar');
       }
     } else {
-      this.mostrarmensaje('La categoria no tiene mas información', 'Error', 'red-snackbar');
+      this.mostrarmensaje('La categoría no tiene mas información', 'Error', 'red-snackbar');
     }
   }
 

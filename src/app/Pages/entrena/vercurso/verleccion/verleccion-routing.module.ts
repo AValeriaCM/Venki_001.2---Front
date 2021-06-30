@@ -15,7 +15,8 @@ const routes: Routes = [
   {
     path: 'vidplayer',
     loadChildren: () => import('../../../../Pages/entrena/vercurso/verleccion/vidplayer/vidplayer.module').then( m => m.VidplayerPageModule)
-  },  {
+  },
+  {
     path: 'video',
     loadChildren: () => import('./video/video.module').then( m => m.VideoPageModule)
   },

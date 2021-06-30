@@ -9,14 +9,16 @@
 
   <div class="itemback" style="padding-top: 0px;margin-bottom: 4px;margin-left: 10px;margin-right: 50px;">
     <h2>¡Hey! Echa un vistazo a esta información</h2>
-    <p class="p1" id="p1">El estado de bienestar en el cual el individuo es consciente de sus propias capacidades, tener una respuesta de forma productiva y fructífera y es capaz de hacer una contribución a su
-      comunidad o al contexto donde se desenvuelva...</p>
-    <p class="ocultar p2" id="p2">
+    <!--<p class="p1" id="p1">El estado de bienestar en el cual el individuo es consciente de sus propias capacidades, tener una respuesta de forma productiva y fructífera y es capaz de hacer una contribución a su
+      comunidad o al contexto donde se desenvuelva...</p>-->
+
+    <p>Hola! Te invitamos a que continues desarrollando más habilidades.</p>
+    <p class="p2" id="p2">
       En esta sección encontrarás categorías como: <br><br>
       <li *ngFor="let course of courses">{{ course.name.split(':')[0]}}<br></li>
     </p>
-    <button class="button-css" *ngIf="oculto === false" (click)="verMas()">Ver más</button>
-    <button class="button-css" *ngIf="oculto === true" (click)="vermenos()">Ver Menos</button>
+    <!--<button class="button-css" *ngIf="oculto === false" (click)="verMas()">Ver más</button>
+    <button class="button-css" *ngIf="oculto === true" (click)="vermenos()">Ver Menos</button>-->
   </div>
 
 </ion-content>

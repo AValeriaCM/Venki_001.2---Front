@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item style="text-align: center;margin-bottom: 10px;padding: 5px 0px;">
+    <ion-icon name="headset-outline" slot="start" style="color: #002a68;zoom: 1.5;margin: 0;"></ion-icon>
+    <ion-label style="font-size: 20px;color: #002a68;text-transform: uppercase;font-weight: bold;">Audio</ion-label>
+  </ion-item>
+
+  <div class="coverBack">
+    <div class="container">
+
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer *ngIf="audio">
+  <ion-toolbar class="toolbarColor">
+    <ion-row>
+      <ion-col size="12" class="ion-text-center" style="padding-top: 20px;">
+        <ion-label color="light"  style="font-size: 16px;text-transform: uppercase;color: black;font-weight: bold;">{{ nameCourse }}</ion-label>
+      </ion-col>
+      <ion-col size="12">
+        <ion-range #range [(ngModel)]="progress" max="100" color="dark" (touched)="seek()" (mouseup)="seek()"></ion-range>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+
+        <ion-button fill=clear (click)="toggleplayer(false, audio)" *ngIf="!isPlaying" color="dark">
+          <ion-icon slot="icon-only" style="color: black;" name="play"></ion-icon>
+        </ion-button>
+
+        <ion-button fill=clear (click)="toggleplayer(true, audio)" *ngIf="isPlaying" color="dark">
+          <ion-icon slot="icon-only" style="color: black;" name="pause"></ion-icon>
+        </ion-button>
+        
+      </ion-col>
+      
+      <div style="text-align: center;width: 100%;margin: 10px;">
+        <ion-button class="footer-dis-bot2" (click)="goContent()">Continuar
+          <ion-icon name="caret-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

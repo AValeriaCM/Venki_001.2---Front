@@ -69,7 +69,7 @@ export class CursosCategoriasPage implements OnInit{
     this.userIDName  = informacion.userInf.id;
     this.coursetk = informacion.infoCurso;
     if(this.coursetk.video) {
-      this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.coursetk.video);
+      this.video = this.sanitizer.bypassSecurityTrustResourceUrl(this.coursetk.video+"?title=0&byline=0&portrait=0&sidedock=0");
     } else {
       this.video = null;
     }
@@ -79,13 +79,30 @@ export class CursosCategoriasPage implements OnInit{
 
   getcursos(userid: any, categoriaid: any) {
     this.loadingService.loadingPresent({spinner: "circles" });
-      this.share.getCursosCategorias(categoriaid, userid, this.token).subscribe(dataCurso => {
-        this.cursosUser = dataCurso;
-        this.cursosU=this.cursosUser;
+    this.share.getCursosCategorias(categoriaid, userid, this.token).subscribe(dataCurso => {
+      this.share.getCursosUsuario(userid, this.token).subscribe(data => {
+        if(data.data.length > 0) {
+
+          var cursosDisponibles = [];
+          data.data.map( (curso: any) => {
+            const find = dataCurso.find( (o: any) => o.id === curso.id);
+            if(find) {
+              cursosDisponibles.push(find);
+            }
+          });
+          this.cursosUser = cursosDisponibles;
+          this.cursosU = this.cursosUser;
+        } else {
+          this.mostrarmensaje('Actualmente no cuentas con cursos disponibles', 'Error', 'red-snackbar');
+        }
         this.loadingService.loadingDismiss();
       }, error => {
         this.loadingService.loadingDismiss();
       });
+
+    }, error => {
+      this.loadingService.loadingDismiss();
+    });
   }
 
   openChat() {
@@ -153,7 +170,7 @@ export class CursosCategoriasPage implements OnInit{
         this.mostrarmensaje('El archivo no es un pdf', 'Error', 'red-snackbar');
       }
     } else {
-      this.mostrarmensaje('La categoria no tiene mas información', 'Error', 'red-snackbar');
+      this.mostrarmensaje('La categoría no tiene mas información', 'Error', 'red-snackbar');
     }
   }
 

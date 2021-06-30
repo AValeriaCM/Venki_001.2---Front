@@ -46,17 +46,20 @@
   <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" (selectedIndexChange)="selectedIndexChange($event)">
     <mat-tab>
       <ng-template mat-tab-label>
-        <ion-card-title class="title-css" style="font-size: 30px;margin-top: 15px;">
-          <ion-icon name="chatbubbles"></ion-icon>
+        <ion-card-title class="title-css">
+          <div style="display: flex;align-items: center;font-size: 18px;">
+            <ion-icon name="chatbubbles"></ion-icon>
+            <ion-label style="margin-left: 10px;">Chat</ion-label>
+          </div>
         </ion-card-title>
       </ng-template>
 
       <ion-list style="padding: 0;">
         <ion-item *ngFor="let cont of userList | filter:filterList" class="friend">
-          <ion-avatar slot="start">
+          <ion-avatar slot="start" *ngIf="cont.receiver" >
             <img src="assets/avatar/{{cont.receiver.avatar}}.png" (click)="abrirDialogo(cont)">
           </ion-avatar>
-          <div class="user-list" (click)="abrirDialogo(cont)">
+          <div class="user-list" (click)="abrirDialogo(cont)" *ngIf="cont.receiver" >
             <div style="display: flex;width: 100%;">
               <ion-label color="primary" class="label-user-chat">{{cont.receiver.name}} {{cont.receiver.lastname}}</ion-label>
               <ion-label *ngIf="cont.messagesReceptor.length > 0" class="label-date">{{ cont.messagesReceptor[cont.messagesReceptor.length-1].created_at | date: 'dd/MM/yyyy'}}</ion-label>
@@ -69,13 +72,16 @@
 
     <mat-tab>
       <ng-template mat-tab-label>
-        <ion-card-title class="title-css" style="font-size: 30px;margin-top: 15px;">
-          <ion-icon name="notifications"></ion-icon>
+        <ion-card-title class="title-css">
+          <div style="display: flex;align-items: center;font-size: 18px;">
+            <ion-icon name="notifications"></ion-icon>
+            <ion-label style="margin-left: 10px;">Notificaciones</ion-label>
+          </div>
         </ion-card-title>
       </ng-template>
       <div class="container">
         <ion-list *ngFor="let cont of userList">
-          <ion-item *ngIf="idUser == cont.transmitter.id" class="friend">
+          <ion-item *ngIf="idUser == cont.transmitter.id && cont.receiver" class="friend">
             <ion-avatar slot="start" class="author-image">
               <img class="avatar" src="../../../assets/avatar/{{cont.receiver.avatar}}.png" class="imagestyle">
             </ion-avatar>
@@ -83,7 +89,7 @@
               <strong>Agregaste a <span style="color: black; font-size: 15px;text-transform:capitalize;">{{cont.receiver.name}}&nbsp;{{cont.receiver.lastname}}</span> como amigo.</strong>
             </p>
           </ion-item>
-          <ion-item *ngIf="idUser !== cont.transmitter.id" class="friend">
+          <ion-item *ngIf="idUser !== cont.transmitter.id && cont.transmitter" class="friend">
             <ion-avatar slot="start" class="author-image">
               <img class="avatar" src="../../../assets/avatar/{{cont.transmitter.avatar}}.png" class="imagestyle"/>
             </ion-avatar>
@@ -91,7 +97,7 @@
               <strong>El usuario <span style="color: black; font-size: 15px;text-transform:capitalize;">{{cont.transmitter.name}}&nbsp;{{cont.transmitter.lastname}}</span> te ha agregado como amigo. </strong>
             </p>
           </ion-item>
-          <ion-item *ngIf="idUser !== cont.transmitter.id" class="friend">
+          <ion-item *ngIf="idUser !== cont.transmitter.id && cont.transmitter" class="friend">
             <ion-avatar slot="start" class="author-image">
               <img class="avatar" src="../../../assets/avatar/{{cont.transmitter.avatar}}.png" class="imagestyle"/>
             </ion-avatar>

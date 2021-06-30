@@ -28,8 +28,6 @@
             <img class="profile-photo" src="../../../assets/avatar/{{usertk.avatar}}.png" (click)="CreatePopover()">
           </ion-col>
           <ion-col size="8" style="align-self: center;">
-            <ion-label color="primary" class="logout" (click)="logout()">Cerrar Sesión</ion-label>
-            <!--<ion-label color="primary" class="logout" (click)="abrirDialogo()">Modificar información</ion-label>-->
             <div>
               <div class="info-square">
                 <p class="user-name">
@@ -63,57 +61,342 @@
               </ng-template>
               <!--form-edit-->
               <div *ngIf="usertk">
-                <form [formGroup]="editarForm">
-                  <ion-item>
-                    <ion-icon name="person" style="color:  #002a68"></ion-icon>
-                    <ion-input class="Subtitle-css" clearInput name="nombre" type="text" placeholder="Nombre" formControlName="name">
-                    </ion-input>
+                <form [formGroup]="editarForm" style="padding: 0 25px;">
+
+                  <div style="width: 100%;margin-top: 15px;">
+                    <ion-badge style="width: 100%;color: #ffffff;background-color: #002a68;padding: 10px;font-size: 13px;text-transform: uppercase;">Datos Generales</ion-badge>
+                  </div>
+
+                  <!--Nombre-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="person" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Nombre</ion-label>
+                    <ion-input name="nombre" clearInput type="text" placeholder="Nombre" formControlName="name" style="text-align-last: left;"></ion-input>
                   </ion-item>
                   <ion-item class='form-text-error' *ngIf="!editarForm.controls.name.valid && (editarForm.controls.name.touched || editarForm.controls.name.dirty)">
                     <ion-label class="label-error">El nombre debe tener mínimo 5 caracteres</ion-label>
                   </ion-item>
-                  <ion-item> 
-                    <ion-icon name="person" style="color:  #002a68"></ion-icon>
-                    <ion-input class="Subtitle-css" clearInput name="apellido" type="text" placeholder="Apellido" formControlName="lastname"></ion-input>
+
+                  <!--Apellido-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="person" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Apellido</ion-label>
+                    <ion-input name="apellido" clearInput type="text" placeholder="Apellido" formControlName="lastname" style="text-align-last: left;"></ion-input>
                   </ion-item>
                   <ion-item class='form-text-error' *ngIf="!editarForm.controls.lastname.valid && (editarForm.controls.lastname.touched || editarForm.controls.lastname.dirty)">
                     <ion-label class="label-error">El apellido debe tener mínimo 5 caracteres</ion-label>
                   </ion-item>
-                  <ion-item class="itemDec ion-item-css">
-                    <ion-icon name="call" style="color:  #002a68"></ion-icon>
-                    <ion-input name="celular" type="text" clearInput placeholder="Teléfono" formControlName="phone"></ion-input>
+
+                  <!--Teléfono-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="call" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Teléfono</ion-label>
+                    <ion-input name="phone" clearInput type="text" placeholder="Teléfono" formControlName="phone" style="text-align-last: left;"></ion-input>
                   </ion-item>
                   <ion-item class='form-text-error' *ngIf="!editarForm.controls.phone.valid && (editarForm.controls.phone.touched || editarForm.controls.phone.dirty)">
                     <ion-label class="Subtitle-css" class="label-error">El teléfono supera el mínimo de caracteres permitido</ion-label>
                   </ion-item>
-                  <ion-item>
-                    <ion-icon name="calendar" style="color:  #002a68"></ion-icon>
-                    <ion-datetime class="Subtitle-css" clearInput placeholder="Fecha de Nacimiento"
-                      displayFormat="YYYY/MM/DD" min="1980" max="2005" formControlName="birthday" cancelText="Cancelar" doneText="Hecho" style="width: 100%;"></ion-datetime>
+
+                  <!--Fecha de nacimiento-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="calendar" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Fecha de nacimiento</ion-label>
+                    <ion-datetime  clearInput placeholder="Fecha de Nacimiento" displayFormat="YYYY/MM/DD" min="1980" max="2005" formControlName="birthday" cancelText="Cancelar" doneText="Hecho" style="width: 100%;text-align-last: left;"></ion-datetime>
                   </ion-item>
-                  <ion-item>
-                    <ion-icon name="chatbubble-ellipses" class="iconDesc" style="color:  #002a68"></ion-icon> &nbsp;
-                    <ion-textarea formControlName="description" clearInput [disabled]="false" rows="5" class="Subtitle-cs-desc">Descripción</ion-textarea>
+
+                  <!--Descripción-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="chatbubble-ellipses" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Descripción</ion-label>
+                    <ion-textarea formControlName="description" clearInput placeholder="Descripción" [disabled]="false" rows="5" style="text-align-last: left;"></ion-textarea>
                   </ion-item>
-                  <ion-item>
-                    <ion-icon name="school" class="iconDesc" style="color:  #002a68"></ion-icon> &nbsp;
-                    <ion-input class="Subtitle-css" clearInput name="institution" type="text" placeholder="¿Dónde estudiaste?" formControlName="institution"></ion-input>
+
+
+                  <!--Situación Sentimental-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="heart-circle" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Situación Sentimental</ion-label>
+                    <ion-select style="text-align-last: left;" formControlName="status" placeholder="Situación Sentimental">
+                      <ion-select-option value="{{ it.situacion }}" *ngFor="let it of items">
+                        {{it.situacion}}
+                      </ion-select-option>
+                    </ion-select>                  
+                  </ion-item>
+
+                  <!--¿Dónde vives?-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="location" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">¿Dónde vives?</ion-label>
+                    <ion-input clearInput name="city" type="text" placeholder="¿Dónde vives?" formControlName="city" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--Sobre Mi-->
+                  <div style="width: 100%;margin-top: 15px;">
+                    <ion-badge style="width: 100%;color: #ffffff;background-color: #002a68;padding: 10px;font-size: 13px;text-transform: uppercase;">Sobre Mi</ion-badge>
+                  </div>
+
+                  <!--Sexo-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="transgender-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Sexo</ion-label>
+                    <ion-select style="text-align-last: left;" formControlName="sex" placeholder="Sexo">
+                      <ion-select-option value="{{ sex.sex }}" *ngFor="let sex of sexs">
+                        {{ sex.sex }}
+                      </ion-select-option>
+                    </ion-select>                  
+                  </ion-item>
+
+                   <!--Lugar de Nacimiento-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="location" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Lugar de nacimiento</ion-label>
+                    <ion-input clearInput name="placeOfBirth" type="text" placeholder="Lugar de Nacimiento" formControlName="placeOfBirth" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+
+                  <!--Estatura (Cms)-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="information-circle-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Estatura (Cms)</ion-label>
+                    <ion-input name="height" clearInput type="text" placeholder="Estatura (Cms)" formControlName="height" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--Peso (Kg)-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="information-circle-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Peso (Kg)</ion-label>
+                    <ion-input name="weight" clearInput type="text" placeholder="Peso (Kg)" formControlName="weight" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--Pie dominante-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="information-circle-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Pie dominante</ion-label>
+                    <ion-select style="text-align-last: left;" placeholder="Pie dominante" formControlName="dominantFoot">
+                      <ion-select-option value="{{ orientation.orientation }}" *ngFor="let orientation of orientationsFeet">
+                        {{ orientation.orientation }}
+                      </ion-select-option>
+                    </ion-select>                  
+                  </ion-item>
+
+                  <!--Mano dominante-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="hand-left-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Mano dominante</ion-label>
+                    <ion-select style="text-align-last: left;" placeholder="Mano dominante" formControlName="dominantHand">
+                      <ion-select-option value="{{ orientation.orientation }}" *ngFor="let orientation of orientationsHands">
+                        {{ orientation.orientation }}
+                      </ion-select-option>
+                    </ion-select>                  
+                  </ion-item>
+
+                  <!--Datos Academicos-->
+                  <div style="width: 100%;margin-top: 15px;">
+                    <ion-badge style="width: 100%;color: #ffffff;background-color: #002a68;padding: 10px;font-size: 13px;text-transform: uppercase;">Datos Académicos</ion-badge>
+                  </div>
+
+                  <!--¿Dónde estudiaste?-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="school" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Nombre instituto</ion-label>
+                    <ion-input clearInput name="institution" type="text" placeholder="Nombre instituto" formControlName="institution" style="text-align-last: left;"></ion-input>
                   </ion-item>
                   <ion-item class='form-text-error' *ngIf="!editarForm.controls.institution.valid && (editarForm.controls.institution.touched || editarForm.controls.institution.dirty)">
                     <ion-label class="label-error">La institución es incorrecta.</ion-label>
                   </ion-item>
-                  <ion-item>
-                    <ion-icon name="heart-circle" style="color:  #002a68"></ion-icon> &nbsp;                        
-                    <ion-select class="ion-select Subtitle-css" formControlName="status">
-                      <ion-select-option value="{{ it.situacion }}" *ngFor="let it of items">
-                        {{it.situacion}}
-                      </ion-select-option>
-                    </ion-select>
+
+                  <!--Año graduacion-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="calendar-outline"  style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Año graduación</ion-label>
+                    <ion-input clearInput name="graduationYear" type="text" placeholder="Año graduación" formControlName="graduationYear" style="text-align-last: left;"></ion-input>
                   </ion-item>
-                  <ion-item>
-                    <ion-icon name="location" style="color:  #002a68"></ion-icon> &nbsp;
-                    <ion-input class="Subtitle-css" clearInput name="city" type="text" placeholder="Dónde vives?" formControlName="city"></ion-input>
+
+                  <!--Promedio bachillerato-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="star-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Promedio bachillerato</ion-label>
+                    <ion-input clearInput name="highSchoolAverage" type="text" placeholder="Promedio bachillerato" formControlName="highSchoolAverage" style="text-align-last: left;"></ion-input>
                   </ion-item>
+
+                  <!--GPA-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="information-circle-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">GPA</ion-label>
+                    <ion-input clearInput name="gpa" type="text" placeholder="GPA" formControlName="gpa" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--SAT-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="information-circle-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">SAT</ion-label>
+                    <ion-input clearInput name="sat" type="text" placeholder="SAT" formControlName="sat" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--TOEFL-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="information-circle-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">TOEFL / IELTS</ion-label>
+                    <ion-input clearInput name="toefl" type="text" placeholder="TOEFL / IELTS" formControlName="toefl" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--Datos Atléticos-->
+                  <div style="width: 100%;margin-top: 15px;">
+                    <ion-badge style="width: 100%;color: #ffffff;background-color: #002a68;padding: 10px;font-size: 13px;text-transform: uppercase;">Datos Atléticos</ion-badge>
+                  </div>
+
+                  <!--Deporte Principal-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="american-football-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Deporte Principal</ion-label>
+                    <ion-input clearInput name="mainSport" type="text" placeholder="Deporte Principal" formControlName="mainSport" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--Posición de juego-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="body-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Posición de juego</ion-label>
+                    <ion-input clearInput name="playingPosition" type="text" placeholder="Posición de juego" formControlName="playingPosition" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--Eventos-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="earth-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Eventos</ion-label>
+                    <ion-input clearInput name="events" type="text" placeholder="Eventos" formControlName="events" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--Tiempos-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="stopwatch-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Tiempos</ion-label>
+                    <ion-input clearInput name="time" type="text" placeholder="Tiempos" formControlName="time" style="text-align-last: left;"></ion-input>
+                  </ion-item>
+
+                  <!--Records-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="medal-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Records</ion-label>
+                    <ion-textarea formControlName="records" clearInput placeholder="Records" [disabled]="false" rows="5" style="text-align-last: left;"></ion-textarea>
+                  </ion-item>
+
+                  <!--Recorrido-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="map-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Recorrido</ion-label>
+                    <ion-textarea formControlName="route" clearInput placeholder="Recorrido" [disabled]="false" rows="5" style="text-align-last: left;"></ion-textarea>
+                  </ion-item>
+
+                  <!--Rankings-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="podium-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Rankings</ion-label>
+                    <ion-textarea formControlName="rankings" clearInput placeholder="Rankings" [disabled]="false" rows="5" style="text-align-last: left;"></ion-textarea>
+                  </ion-item>
+
+                  <!--Reconocimientos-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="trophy-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Reconocimientos</ion-label>
+                    <ion-textarea formControlName="recognitions" clearInput placeholder="Reconocimientos" [disabled]="false" rows="5" style="text-align-last: left;"></ion-textarea>
+                  </ion-item>
+
+                  <!--Prensa-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="newspaper-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">Prensa</ion-label>
+                    <ion-textarea formControlName="press" clearInput placeholder="Prensa" [disabled]="false" rows="5" style="text-align-last: left;"></ion-textarea>
+                  </ion-item>
+
+                  <!--Extras-->
+                  <div style="width: 100%;margin-top: 15px;">
+                    <ion-badge style="width: 100%;color: #ffffff;background-color: #002a68;padding: 10px;font-size: 13px;text-transform: uppercase;">Extras</ion-badge>
+                  </div>
+
+                  <!--¿Qué te hace diferente?-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="information-circle-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">¿Qué te hace diferente?</ion-label>
+                    <ion-textarea formControlName="differences" clearInput placeholder="¿Qué te hace diferente?" [disabled]="false" rows="5" style="text-align-last: left;"></ion-textarea>
+                  </ion-item>
+
+                  <!--¿Por qué quieres competir?-->
+                   <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="information-circle-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">¿Por qué quieres competir?</ion-label>
+                    <ion-textarea formControlName="competencies" clearInput placeholder="¿Por qué quieres competir?" [disabled]="false" rows="5" style="text-align-last: left;"></ion-textarea>
+                  </ion-item>
+
+                  <!--¿Cuáles son tus metas deportivas?-->
+                  <ion-item style="align-items: center;">
+                    <ion-thumbnail slot="start" style="width: 10px;height: auto;">
+                      <ion-icon name="flag-outline" style="color:  #002a68"></ion-icon>
+                    </ion-thumbnail>
+                    <ion-label class="label-form" position="floating">¿Cuáles son tus metas deportivas?</ion-label>
+                    <ion-textarea formControlName="goals" clearInput placeholder="¿Cuáles son tus metas deportivas?" [disabled]="false" rows="5" style="text-align-last: left;"></ion-textarea>
+                  </ion-item>
+            
+                  <!--Guardar-->
                   <div style="margin-top: 15px;text-align: -webkit-center;"> 
                     <ion-button type="submit" (click)="editar()" [disabled]="!editarForm.valid" expand="block" style="margin: 0;width: 50%;--background: #002a68;">Editar</ion-button>
                   </div>
@@ -126,7 +409,17 @@
               </ng-template>
 
               <div style="padding: 10px 25px;">
-                <ion-card class="competence-sport" (click)="createCompetition(1)">
+
+                <ion-card class="competence-sport-none" (click)="createCompetition(1)" *ngIf="!imageSports">
+                  <ion-card-content style="height: 100%;top: 35%;">
+                    <div>
+                      <ion-label class="label-competence">DEPORTIVO</ion-label>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+
+                <ion-card *ngIf="imageSports" (click)="createCompetition(1)" style="height: 200px;background-repeat: no-repeat;
+                background-size: 100% 100%;" [ngStyle]="{'background-image': 'url(' + basePath + imageSports.url + ')' }">
                   <ion-card-content style="height: 100%;top: 35%;">
                     <div>
                       <ion-label class="label-competence">DEPORTIVO</ion-label>
@@ -134,13 +427,23 @@
                   </ion-card-content>
                 </ion-card>
   
-                <ion-card class="competence-academic" (click)="createCompetition(2)">
+                <ion-card (click)="createCompetition(2)" class="competence-academic" *ngIf="!imageAcademic"> 
                   <ion-card-content style="height: 100%;top: 35%;">
                     <div>
                       <ion-label class="label-competence">ACADÉMICO</ion-label>
                     </div>
                   </ion-card-content>
                 </ion-card>
+
+                <ion-card *ngIf="imageAcademic" (click)="createCompetition(2)" style="height: 200px;background-repeat: no-repeat;
+                background-size: 100% 100%;" [ngStyle]="{'background-image': 'url(' + basePath + imageAcademic.url + ')' }" > 
+                  <ion-card-content style="height: 100%;top: 35%;">
+                    <div>
+                      <ion-label class="label-competence">ACADÉMICO</ion-label>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+
               </div>
             </mat-tab>
           </mat-tab-group>
@@ -154,33 +457,48 @@
           <div>
             <div *ngIf="usertk.email !== null">
 
-              <ion-card-title class="title-css" style="font-size: 20px; text-align: center;">MI DESARROLLO</ion-card-title>
+              <ion-card-title class="title-css" style="font-size: 14px; text-align: center;">MI DESARROLLO</ion-card-title>
 
               <mat-accordion>
                 <mat-expansion-panel class="expacionCss">
                   <mat-expansion-panel-header class="expacionCss">
                     <mat-panel-title>
-                      <label class="Subtitle-css-expansive">TROFEOS E INSIGNIAS</label>
+                      <label class="Subtitle-css-expansive">LOGROS Y RECONOCIMIENTOS</label>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
+
+                  <!--<ion-row style="display: flex;place-items: center;justify-content: center;">
+                    <div style="display: flex;place-items: center;justify-content: center;margin-bottom: 25px;">
+                      <img src="../../../assets/home/money.png" style="width: 30%;">
+                      <ion-label style="margin: 0px 5px;font-weight: bold;font-size: 20px;" >X 0</ion-label>
+                    </div>
+                  </ion-row>-->
+
                   <ion-row style="border-bottom: groove;" *ngIf="trofeosInsig.length > 0">
-                    <ion-col col-4>
-                      <ion-label class="title-cssCursos">Trofeos</ion-label>
+                    <ion-col col-3>
+                      <ion-label class="title-cssCursos">Trofeo</ion-label>
                     </ion-col>
-                    <ion-col col-4>
-                      <ion-label class="title-cssCursos">Insignias</ion-label>
+                    <ion-col col-3>
+                      <ion-label class="title-cssCursos">Insignia</ion-label>
+                    </ion-col>
+                    <ion-col col-3>
+                      <ion-label class="title-cssCursos">Nota</ion-label>
                     </ion-col>
                   </ion-row>
-                  <template *ngIf="trofeosInsig.length > 0">
+                  <div *ngIf="trofeosInsig.length > 0" style="margin-top: 5px;">
                     <ion-row style="border-bottom: groove;" *ngFor="let tyi of trofeosInsig">
-                      <ion-col col-4>
-                        <ion-label class="title-cssCursos">{{tyi.trofeo}}</ion-label>
+                      <ion-col col-3 class="col-trofeo">
+                        <ion-label class="label-trofeo">{{ tyi.nombre }}</ion-label>
                       </ion-col>
-                      <ion-col col-4>
-                        <img style="margin-left: 24px;" src="{{tyi.insignia}}">
+                      <ion-col col-3>
+                        <img style="width: 40px;" src="{{basePath}}{{tyi.imagen}}">
+                      </ion-col>
+                      <ion-col col-3 class="col-trofeo">
+                        <ion-label class="label-trofeo">{{ tyi.nota }}</ion-label>
                       </ion-col>
                     </ion-row>
-                  </template>
+                  </div>
+
                   <ion-row *ngIf="trofeosInsig.length === 0" style="justify-content: center;">
                     <ion-badge color="warning">No cuentas con trofeos e insignias</ion-badge>
                   </ion-row>
@@ -188,7 +506,7 @@
                 </mat-expansion-panel>
               </mat-accordion>
 
-              <ion-card-title class="title-css" style="font-size: 20px; text-align: center;">MIS CURSOS</ion-card-title>
+              <ion-card-title class="title-css" style="font-size: 14px; text-align: center;">MIS CURSOS</ion-card-title>
 
               <mat-tab-group mat-stretch-tabs class="expand-css2 mat-elevation-z4">
                 <mat-tab>
@@ -265,7 +583,7 @@
               </ion-item>
               <ion-item lines="none">
                 <ion-label>
-                  <ion-button [disabled]="usertk.premium === 0" class="button-css-options" fill="clear" expand="block"
+                  <ion-button class="button-css-options" fill="clear" expand="block"
                     (click)="miCalendario()">
                     <ion-icon name="calendar-outline"></ion-icon>&nbsp;
                     Calendario
@@ -276,13 +594,13 @@
                 <ion-label>
                   <ion-button class="button-css-options" fill="clear" expand="block" (click)="miTimeLine()">
                     <ion-icon name="hourglass-outline"></ion-icon>&nbsp;
-                    TimeLine
+                    Linea de Tiempo
                   </ion-button>
                 </ion-label>
               </ion-item>
               <ion-item lines="none">
                 <ion-label>
-                  <ion-button class="button-css-options" fill="clear" expand="block"
+                  <ion-button [disabled]="usertk.surveyed === 0" class="button-css-options" fill="clear" expand="block"
                     (click)="misEstadisticas()">
                     <ion-icon name="bar-chart-outline"></ion-icon>&nbsp;
                     Metricas

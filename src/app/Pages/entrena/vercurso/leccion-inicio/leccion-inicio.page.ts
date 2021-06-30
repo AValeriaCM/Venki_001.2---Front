@@ -29,7 +29,7 @@ export class LeccionInicioPage implements OnInit {
     this.informacion = this.pObjecto.getNavData();
   }
   
-  async leccionRedirect(){
+  async leccionRedirect() {
     this.pObjectIndex.setData(this.leccion);
     this.pObjecto.setData(this.informacion);
     this.router.navigate(['/users/entrena/vercurso/verleccion']);

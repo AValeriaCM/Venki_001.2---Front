@@ -1,11 +1,9 @@
-
 <div  id="custom-overlay" [style.display]="splash ? 'flex' : 'none'">
   <div  class="flb">
       <div class="Aligner-item Aligner-item--top"></div>
-      <img src="/assets/FINAL-LOGO-MAGIN-PNG.png">
+      <div class="container"></div>
       <div class="Aligner-item Aligner-item--bottom"></div>
   </div>
-
 </div>
 
 <ion-content class="ion-content-login" style="font-family: url(../src/assets/fonts/proxima/proxima-nova.otf);">
@@ -31,7 +29,7 @@
                 <ion-icon slot="end" [name]="passwordToggleIcon" (click)="showpass()"></ion-icon>
             </ion-item>
             <ion-item class='form-text-error' *ngIf="!loginForm.controls.contrasena.valid && (loginForm.controls.contrasena.touched || loginForm.controls.contrasena.dirty)">
-              <ion-label class="l-error">La Contraseña debe tener: <br>1 numero <br> 1 letra Mayuscula <br> 1 letra minuscula <br> y 8 o más caracteres</ion-label>
+              <ion-label class="l-error">La Contraseña debe tener: <br>1 numero <br> 1 letra Mayúscula <br> 1 letra minúscula <br> y 8 o más caracteres</ion-label>
             </ion-item>
             <div class="center">
 

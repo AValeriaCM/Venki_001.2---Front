@@ -248,5 +248,22 @@ ion-slides {
     background: #f44336;
 }
 
+.card-3 {
+    background-image: url(../../../../assets/swipe.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 113px;
+    box-shadow: none !important;
+    border-radius: 10px;
+    height: 130px;
+ }
 
-
+ .label-swipe {
+    color: #000000;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 13px;
+    background: #ff9800;
+    border-radius: 10px;
+    padding: 5px 10px;
+ }

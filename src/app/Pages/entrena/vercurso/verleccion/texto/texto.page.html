@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card-content style="padding: 0;">
+
+    <ion-item style="text-align: center;margin-bottom: 10px;padding: 5px 0px;">
+      <ion-icon name="reader-outline" slot="start" style="color: #002a68;zoom: 1.5;margin: 0;"></ion-icon>
+      <ion-label style="font-size: 20px;color: #002a68;text-transform: uppercase;font-weight: bold;">Texto</ion-label>
+    </ion-item>
+
+    <ion-card style="margin: 15px 10px;border-radius: 10px;border-left: 4px solid black;border-left-color: #3880ff;height: calc(100vh - 270px);">
+      <ion-card-header>
+        <ion-card-subtitle style="width: 100%;text-align: justify;font-weight: bold;color: black;font-size: 13px;">En este texto encontrarás la motivación que necesitas para continuar. Lee con atención...! </ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content style="padding: 0px 15px;">
+        <p class="description">
+          {{ description }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <div style="text-align: center;position: fixed;bottom: 0;width: 100%;border-top: 1px solid #9a9a9a;padding-top: 15px;">
+      <ion-button class="footer-dis-bot2" (click)="goContent()">Continuar
+        <ion-icon name="caret-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+  </ion-card-content>
+
+</ion-content>

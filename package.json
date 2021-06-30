@@ -38,6 +38,7 @@
     "@ionic-native/image-picker": "^5.31.1",
     "@ionic-native/ionic-webview": "^5.32.0",
     "@ionic-native/local-notifications": "^5.27.0",
+    "@ionic-native/paypal": "^5.33.1",
     "@ionic-native/preview-any-file": "^5.27.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
@@ -165,7 +166,8 @@
       "cordova.plugins.diagnostic": {
         "ANDROIDX_VERSION": "1.+"
       },
-      "cordova-plugin-file-transfer": {}
+      "cordova-plugin-file-transfer": {},
+      "com.paypal.cordova.mobilesdk": {}
     },
     "platforms": [
       "browser",

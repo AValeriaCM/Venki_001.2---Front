@@ -12,20 +12,19 @@
 <ion-content>
   <div class="title">
     <ion-badge class="bagde-title" *ngIf="title">Diagnóstico de categorización</ion-badge>
-    <ion-badge class="bagde-title" *ngIf="pagina === 1 && !title" style="color: #2196f3;background: transparent;">Bloque A</ion-badge>
-    <ion-badge class="bagde-title" *ngIf="pagina === 2 && !title" style="color: #ff9800;background: transparent;">Bloque B</ion-badge>
-    <ion-badge class="bagde-title" *ngIf="pagina === 3 && !title" style="color: #4caf50;background: transparent;">Bloque C</ion-badge>
-    <ion-badge class="bagde-title" *ngIf="pagina === 4 && !title" style="color: #f44336;background: transparent;">Bloque D</ion-badge>
+    <ion-badge class="bagde-title" *ngIf="pagina === 1 && !title" style="color: #2196f3;background: transparent;">PRUEBA DE MENTALIDAD</ion-badge>
+    <ion-badge class="bagde-title" *ngIf="pagina === 2 && !title" style="color: #ff9800;background: transparent;">PRUEBA NUTRICIONAL</ion-badge>
+    <ion-badge class="bagde-title" *ngIf="pagina === 3 && !title" style="color: #4caf50;background: transparent;">PRUEBA DE BIENESTAR</ion-badge>
+    <ion-badge class="bagde-title" *ngIf="pagina === 4 && !title" style="color: #f44336;background: transparent;">PRUEBA ATLÉTICA</ion-badge>
 
   </div>
   <ion-slides #slider (ionSlideWillChange)="verifImg()">
     <ion-slide [hidden]="currentPage === 5">
       <ion-card style="margin: 0px 10px;">
         <ion-card-content style="color: black;text-align: justify;">
-          A continuación, encontraras cuatro bloques de preguntas divididas en respectivas categorías con las cuales clasificaremos para programar 
-          tu plan de entrenamiento basado en tus necesidades individuales del momento.
+          A continuación, encontrarás cuatro bloques de preguntas divididas en categorías con las cuales vamos a programar tu plan de entrenamiento basado en tus necesidades individuales del momento.
           <div class="label-progress" *ngIf="pagina === 1">  
-            <ion-label> Aun no has resuelto ningun bloque. ¡Animo!</ion-label>
+            <ion-label> Aún no has resuelto ningún bloque. ¡Animo!</ion-label>
           </div>
 
           <div class="label-progress-1" *ngIf="pagina === 2">
@@ -42,12 +41,22 @@
 
         </ion-card-content>
 
+        <ion-card-content style="padding: 0px 5px 20px;">
+          <div class="card card-3">
+          </div>
+          <div class="label-swipe">
+            <ion-label>Recuerda deslizar la pantalla a la izquierda para dar inicio al diagnóstico.</ion-label>
+          </div>
+        </ion-card-content>
+
         <ion-card-content style="padding: 0;">
           <div>
             <canvas #doughnutChart width="250" height="180"></canvas>
           </div>
           <div #legendChart class="chart-legend row justify-content-center m-t-15" style="text-align: -webkit-center;margin-top: 10px;"></div>
         </ion-card-content>
+
+        
       </ion-card>
 
     </ion-slide>
@@ -85,7 +94,7 @@
             </div>
 
 
-            <div *ngIf="dt.answers.length > 1" style="overflow: auto;height: 250px;">
+            <div *ngIf="dt.answers.length > 1" style="overflow: auto;">
               <ion-list>
                 <ion-radio-group [(ngModel)]="dt.calificacionVal" (ionChange)="calificacion($event, dt.id, i)">
                   <ion-item *ngFor="let it of dt.answers">
@@ -110,6 +119,15 @@
                </ion-button>
               </ion-col>
             </ion-row>
+
+            <ion-card-content style="padding: 0px 5px 20px;" [hidden]="finalDta.length === preguntot">
+              <div class="card card-3">
+              </div>
+              <div class="label-swipe">
+                <ion-label>Recuerda deslizar la pantalla a la izquierda para cambiar de pregunta y avanzar en el diagnóstico.</ion-label>
+              </div>
+            </ion-card-content>
+
           </ion-col>
         </ion-row>
         <ion-row [hidden]="finalDta.length !== preguntot" style="place-content: center;">
@@ -117,7 +135,6 @@
         </ion-row>
       </ion-grid>
     </ion-slide>
-
   </ion-slides>
   <ion-fab vertical="center" horizontal="start" slot="fixed">
     <ion-icon class="icono-lateral" name="caret-back-outline"></ion-icon>

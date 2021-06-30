@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar class="ion-toolbar-ccs">
+    <ion-title class="tituloInfo logo">
+      <label style="color: white;">MAGIN</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div style="text-align: center;margin-top: 15px;">
+    <ion-badge style="font-weight: 500;font-size: 18px;width: 100%;background: #002a68;padding: 10px;text-transform: uppercase;">Examen</ion-badge>
+  </div>
+
+  <ion-content>
+    <ion-slides pager="true" #slider (ionSlideWillChange)="checkSlide()" *ngIf="preguntas.length > 0">
+
+      <ion-slide style="display: block;" class="slide-examen">
+
+        <div style="padding: 10px 25px;text-align: justify;">
+          <p>
+            Felicidades, acabas de terminar todas las lecciones del curso <strong>{{ informacion.infoCurso.name }}</strong>, a continuacion debes responder un examen, 
+            recuerda que al finalizar dependiendo de tu calificación obtendras un trofeo.
+          </p>
+        </div>
+      
+        <div style="padding: 10px 25px;text-align: justify;">
+          <ion-label style="display: block;text-align: center;">Número de preguntas del examen:</ion-label>
+          <div style="text-align-last: center;">
+            <ion-badge style="font-weight: 500;font-size: 15px;background: #002a68;padding: 5px 8px;margin-top: 10px;">{{preguntas.length}}</ion-badge>
+          </div>
+        </div>
+      
+        <ion-card-content style="padding: 0px 5px 20px;">
+          <div class="card card-3">
+          </div>
+          <div class="label-swipe">
+            <ion-label>Recuerda deslizar la pantalla a la izquierda para dar inicio al examen.</ion-label>
+          </div>
+        </ion-card-content>
+
+      </ion-slide>
+
+
+      <ion-slide *ngFor="let pregunta of preguntas; index as i;" style="width: 360px;display: block;padding: 5px 25px;">
+
+        <div>
+          <ion-badge style="font-size: 15px;font-weight: 500;padding: 6px 10px;border-radius: 10px;" >{{ i +1 }}/{{preguntas.length}}</ion-badge>
+        </div>
+
+        <h1 style="margin: 0;font-size: 20px;padding: 0px 10px;">{{ pregunta.pregunta }}</h1>
+
+        <ion-textarea *ngIf="pregunta.tiporespuesta === 'Abierta'" class="answer-open" placeholder="Digita tu respuesta" [(ngModel)]="pregunta.answer" (ionChange)="validate(pregunta.answer)"></ion-textarea>
+    
+        <ion-item *ngIf="pregunta.tiporespuesta === 'Numérica'">
+          <ion-range min="1" max="5" pin snaps color="secondary" [(ngModel)]="pregunta.answer" (ionChange)="validate(pregunta.answer)" (ionFocus)="block()" debounce="500">
+            <ion-label slot="start">1</ion-label>
+            <ion-label slot="end">5</ion-label>
+          </ion-range>
+        </ion-item>
+    
+        <ion-list *ngIf="pregunta.tiporespuesta === 'Multiple'" style="height: 250px;overflow: auto;">
+          <ion-radio-group [(ngModel)]="pregunta.answer" (ionChange)="validate(pregunta.answer)">
+            <ion-list-header>
+              <ion-label>
+                Opciones de respuestas
+              </ion-label>
+            </ion-list-header>
+        
+            <ion-item *ngFor="let respuesta of pregunta.respuestas">
+              <ion-label>{{ respuesta }}</ion-label>
+              <ion-radio value="{{respuesta}}"></ion-radio>
+            </ion-item>
+    
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-card-content style="padding: 0px 5px 20px;" [hidden]="i + 1 === preguntas.length">
+          <div class="card card-3">
+          </div>
+          <div class="label-swipe">
+            <ion-label>Recuerda deslizar la pantalla a la izquierda para cambiar de pregunta y avanzar en el examen.</ion-label>
+          </div>
+        </ion-card-content>
+
+        <div [hidden]="i + 1 !== preguntas.length" style="margin-top: 15px;">
+          <ion-button size="small" class="footer-dis-bot1" [disabled]="!pregunta.answer" (click)="post()">
+            <ion-icon name="enter-outline"></ion-icon>
+            Terminar
+          </ion-button>
+        </div>
+
+      </ion-slide>
+    </ion-slides>
+
+    <div *ngIf="preguntas.length === 0" style="text-align: center; margin-top: 10px;">
+
+      <ion-badge style="font-size: 15px;font-weight: 500;background: #ff9800;color: black;">No existen preguntas para el curso</ion-badge>
+
+    </div>
+
+  </ion-content>
+
+</ion-content>

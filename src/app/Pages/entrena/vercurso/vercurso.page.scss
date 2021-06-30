@@ -194,11 +194,18 @@ hr.dashed {
 
 .tema-css {
     width: 100%;
-    border-left: 4px solid #002a68 !important;
     border-radius: 10px;
     display: flex;
     background-color: transparent;
     border: 1px solid #cac6c6;
+}
+
+.done {
+    border-left: 6px solid #4caf50 !important;
+}
+
+.fail {
+    border-left: 6px solid #f44336 !important;
 }
 
 .ion-item-css{

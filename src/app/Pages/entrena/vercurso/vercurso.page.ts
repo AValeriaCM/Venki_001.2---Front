@@ -59,6 +59,7 @@ export class VercursoPage implements OnInit {
     private snackbar: MatSnackBar
     ) {
       this.getToken();
+      this.refreshPage();
     }
 
   ngOnInit() {
@@ -67,6 +68,12 @@ export class VercursoPage implements OnInit {
   getToken() {
     this.auth.gettokenLog().then(resp => {
       this.token = resp;
+      this.loadPage();
+    });
+  }
+
+  refreshPage() {
+    this.share.varLeciones.subscribe( res => {
       this.loadPage();
     });
   }
@@ -88,40 +95,50 @@ export class VercursoPage implements OnInit {
       this.share.getComentariosCurso(this.data.id, this.token).subscribe(info => {
         this.comentariosGeneral = info.data.filter( comment => comment.active === 1);
         this.share.getCursosUsuario(this.userinfo.id, this.token).subscribe(dataCurso => {
-          let temid  = dataCurso.data;
-          let dttemp = temid.filter(r => r.id === this.courseID);
-          dttemp.forEach(element => {
-            this.CourseLessonID = element.id;
-            this.progreso = element.pivot.progress;
-          });
-          this.share.hayorder().then( val => {
-            if (val){
-              this.share.verorder().then( rval => {
-                this.orderStorage = rval;
+          if(dataCurso.data.length > 0) {
+            let temid  = dataCurso.data;
+            let dttemp = temid.filter(r => r.id === this.courseID);
+            dttemp.forEach(element => {
+              this.CourseLessonID = element.id;
+              this.progreso = element.pivot.progress;
+            });
+            this.share.hayorder().then( val => {
+              if (val){
+                this.share.verorder().then( rval => {
+                  this.orderStorage = rval;
+                });
+              }else{
+                this.share.iniciorder();
+              }
+            });
+            this.cursos = dttemp;
+  
+            this.share.obtenerLeccionesUsuario(this.data.id, this.token, this.userinfo.id).subscribe(resp => {
+              resp.data.map( (leccion: any) => {
+                const find = this.cursos[0].lessons.find( (o: any) => o.id === leccion.id_lesson && o.course_id === leccion.id_course );
+                if(find) {
+                  find.status = 1
+                }
               });
-            }else{
-              this.share.iniciorder();
-            }
-          });
-          this.cursos = dttemp;
-          this.loadingService.loadingDismiss();
+              const totalLecciones = this.cursos[0].lessons.length;
+              const totalHechas = this.cursos[0].lessons.filter( (o: any) => o.status === 1 ).length;
+              if(totalLecciones > 0 ) {
+                this.progreso = totalHechas/totalLecciones;
+              }
+              this.loadingService.loadingDismiss();
+            }, error => {
+              this.loadingService.loadingDismiss();
+            });
+          }
+          else {
+            this.mostrarmensaje('Actualmente no cuentas con cursos disponibles', 'Error', 'red-snackbar');
+            this.loadingService.loadingDismiss();
+          }
         }, error => {
           this.loadingService.loadingDismiss();
         });
       }, error => {
         this.loadingService.loadingDismiss();
-      });
-    });
-
-    this.share.varorder.subscribe( res  =>  {
-      this.share.hayorder().then( val => {
-        if (val){
-          this.share.verorder().then( rval => {
-            this.orderStorage = rval;
-          });
-        }else{
-          this.share.iniciorder();
-        }
       });
     });
 
@@ -172,7 +189,7 @@ export class VercursoPage implements OnInit {
     });
   }
 
-  toggleItem(index, leccionesIndex) {
+  toggleItem(index: any, leccionesIndex: any) {
     this.cursos[index].lessons[leccionesIndex].open = !this.cursos[index].lessons[leccionesIndex].open;
     this.PObjecIndex.setData(leccionesIndex);
     this.router.navigate(['/users/entrena/vercurso/leccion-inicio']);

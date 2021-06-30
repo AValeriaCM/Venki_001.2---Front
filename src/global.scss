@@ -35,11 +35,10 @@
   --background: url(/assets/magin-fondo.jpg) 0 0/100% 100% no-repeat;
 }
 
-.ion-content-principal{
+.ion-content-principal {
   //--ion-background-color:linear-gradient(rgba(255,255,255), rgba(253,202,85) );
   //--ion-background-color: #002a68;
   //--ion-background-color: linear-gradient(123deg, #002a68 0%, #80b9f6 53%, #0041a2 100%);
-  --background: url(/assets/fondo-1.jpg) 0 0/100% 100% no-repeat;
 }
 
 #ion-content-opcional{
@@ -311,6 +310,10 @@ small {
   border-radius: 5px;
   padding: 3px 10px;
   font-weight: 500;
+  width: 220px;
+  white-space: break-spaces !important;
+  text-align: center;
+  font-size: 13px;
 }
 
 .monthview-eventdetail-timecolumn {
@@ -372,37 +375,73 @@ small {
 }
 
 .bloque-1 {
-  color: #2196f3;
+  color: #ffffff;
   padding: 7px 10px;
-  width: 60%;
+  width: 80%;
   border-radius: 5px;
-  font-size: 18px !important;
+  font-size: 13px !important;
   font-weight: bold !important;
+  background-color: #2196f3;
 }
 
 .bloque-2 {
-  color: #ff9800;
+  color: #ffffff;
   padding: 7px 10px;
-  width: 60%;
+  width: 80%;
   border-radius: 5px;
-  font-size: 18px !important;
+  font-size: 13px !important;
   font-weight: bold !important;
+  background-color: #ff9800;
 }
 
 .bloque-3 {
-  color: #4caf50;
+  color: #ffffff;
   padding: 7px 10px;
-  width: 60%;
+  width: 80%;
   border-radius: 5px;
-  font-size: 18px !important;
+  font-size: 13px !important;
   font-weight: bold !important;
+  background-color: #4caf50;
 }
 
 .bloque-4 {
-  color: #f44336;
+  color: #ffffff;
   padding: 7px 10px;
-  width: 60%;
+  width: 80%;
   border-radius: 5px;
-  font-size: 18px !important;
+  font-size: 13px !important;
   font-weight: bold !important;
+  background-color: #f44336;
+}
+
+.alert-head.sc-ion-alert-md+.alert-message.sc-ion-alert-md {
+  text-align: justify !important;
+}
+
+.alert-title.sc-ion-alert-md {
+  text-align-last: center !important;
+}
+
+.img-alert {
+  text-align: center  !important;
+}
+
+.coins .alert-wrapper.sc-ion-alert-md {
+  border-radius: 20px !important;
+  border-left: 6px solid #b94129;
+}
+
+.coins button.alert-button.ion-focusable.ion-activatable.sc-ion-alert-md {
+  background: #c85929;
+  padding: 10px 15px;
+}
+
+.coins span.alert-button-inner.sc-ion-alert-md {
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.calendar-event-inner {
+  background-color: #2196f3 !important;
 }

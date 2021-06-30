@@ -18,7 +18,7 @@ export class CalendarioPage implements OnInit {
   viewTitle: string;
   calendar = {
     locale: 'es',
-    mode: 'month',
+    mode: 'week',
     currentDate: new Date()
   };
   selectDate: Date;
@@ -71,8 +71,7 @@ export class CalendarioPage implements OnInit {
         events.push({
           title: target.achievement,
           startTime: new Date(target.date + " 00:00:00"),
-          endTime: new Date(target.date + " 00:00:00"),
-          allDay: true
+          endTime: new Date(target.date + " 23:59:59")
         });
       }
     });

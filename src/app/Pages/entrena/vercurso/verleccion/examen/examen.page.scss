@@ -1,0 +1,30 @@
+.question {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.answer-open {
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
+    font-size: 14px;
+    height: 324px;
+}
+
+.card-3 {
+    background-image: url(../../../../../../assets/swipe.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 113px;
+    box-shadow: none !important;
+    border-radius: 10px;
+    height: 130px;
+}
+
+.label-swipe {
+    text-align: justify;
+    padding: 20px 10px;
+}
+
+.slide-examen {
+    display: block !important;
+}

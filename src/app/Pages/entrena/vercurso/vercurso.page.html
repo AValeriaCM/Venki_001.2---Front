@@ -37,7 +37,7 @@
       </ion-grid>
 
       <div class="video-responsive">
-        <iframe #playerVim [src]="info.trailer + '?playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;"
+        <iframe #playerVim [src]="info.trailer + '?title=0&byline=0&portrait=0&sidedock=0&playsinline=0' | vimeoUrl" frameborder="0" allow="autoplay;"
           webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
     </ion-card>
@@ -61,9 +61,9 @@
         <div *ngIf="cur.lessons && cur.open">
           <ion-list lines="none">
             <ion-item *ngFor="let lections of cur.lessons;  let j = index;" >
-                <button class="tema-css" expand="block" tappable (click)="toggleItem(i, j)" [ngClass]="{'lecciones-active': lections.open, 'lecciones': !lections.open}">
-                  <ion-icon slot="start" name="checkmark-outline" *ngIf="!lections.open" class="icon-content"></ion-icon>
-                  <ion-icon slot="start" name="checkmark-outline" *ngIf="lections.open" class="icon-content"></ion-icon>                  
+                <button class="tema-css" expand="block" tappable (click)="toggleItem(i, j)" [ngClass]="{'lecciones-active': lections.open, 'lecciones': !lections.open, 'done': lections.status === 1, 'fail': !lections.status  }">
+                  <ion-icon slot="start" name="chevron-forward-outline" *ngIf="!lections.open" class="icon-content"></ion-icon>
+                  <ion-icon slot="start" name="chevron-forward-outline" *ngIf="lections.open" class="icon-content"></ion-icon> 
                   <ion-label class="color-text">
                     {{lections.name}}
                   </ion-label>

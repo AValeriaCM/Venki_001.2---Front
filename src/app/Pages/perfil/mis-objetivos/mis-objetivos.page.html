@@ -10,27 +10,45 @@
 </ion-header>
 
 <ion-content>
-  <ion-card-title class="title">¿Que aspectos estas buscando mejorar en tu vida con nuestros programas?</ion-card-title>
+  <ion-card-title class="title">¿Qué objetivos quieres alcanzar con nuestros programas?</ion-card-title>
 
-  <ion-card-subtitle class="subtitle">Organiza estos objetivos según tú interes y tu momento actual</ion-card-subtitle>
+  <ion-card-subtitle class="subtitle">Organiza estos objetivos según tú interés y actualidad deportiva.</ion-card-subtitle>
     
   <div>
-    <ion-label class="label-instructions" style="margin-left: 15px;"> Instrucciones:</ion-label>
+    <ion-badge class="badge-instructions">Instrucciones:</ion-badge>
     <div style="margin-left: 15px;">
       <ion-label style="font-size: 13px;font-weight: 500;">
-        1. Debes arrastrar los objetivos dentro del recuadro.
+        1. Lee atentamente los objetivos propuestos.
       </ion-label>
     </div>
     <div style="margin-left: 15px;">
       <ion-label style="font-size: 13px;font-weight: 500;">
-        2. Seleccionalos desde el icono izquierdo.
+        2. Utiliza el icono azul que encuentras al inicio de cada objetivo para organizarlos.
       </ion-label>
     </div>
     <div style="margin-left: 15px;">
       <ion-label style="font-size: 13px;font-weight: 500;">
-        3. Organizalos del más importante al menos importante.
+        3. Desliza los objetivos conforme a tu prioridad.
       </ion-label>
     </div>
+    <div style="margin-left: 15px;">
+      <ion-label style="font-size: 13px;font-weight: 500;">
+        4. Después de organizar tus objetivos presiona finalizar.
+      </ion-label>
+    </div>
+
+    <div style="margin-left: 15px;margin: 10px 10px 0px;">
+      <ion-label style="font-size: 12px;font-weight: 500;color: #939393;">
+        *Nota. Estos objetivos podrás modificarlos posteriormente.
+      </ion-label>
+    </div>
+
+    <div style="margin-left: 15px;margin: 0px 10px;">
+      <ion-label style="font-size: 12px;font-weight: 500;color: #939393;">
+        *Nota. Recuerda que para modificar un objetivo debes seleccionarlo.
+      </ion-label>
+    </div>
+
   </div>
 
   <div style="text-align: center;">
@@ -66,8 +84,10 @@
   </div>
 
   <div *ngIf="objetivosList.length > 0" class="container-targets">
-    <ion-label class="label-instructions">Mis Objetivos</ion-label>
     <ion-list>
+      <ion-list-header style="font-size: 18px;font-weight: 500;background: #002a68;color: white;text-transform: uppercase;display: block;text-align: center; padding: 0;">
+        <ion-label>Objetivos</ion-label>
+      </ion-list-header>
       <ion-reorder-group disabled="false" (ionItemReorder)="reorder($event)">
         <ion-item *ngFor="let target of objetivosList; let i = index" (click)="editTarget(target, i)">
           <ion-reorder>

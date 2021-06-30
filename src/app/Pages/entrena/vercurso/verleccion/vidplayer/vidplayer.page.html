@@ -13,9 +13,9 @@
     <div style="margin: 15px 0px 0px 0px;text-align-last: center;">
       <ion-badge color="primary" class="badge-title">¡Sigue así, ya falta poco!</ion-badge>
     </div>
-    <ion-card-content>
+    <ion-card-content style="margin: 15px 0;">
       <ion-card-subtitle>En este video encontrarás la motivación que necesitas para continuar. ¡Presta atención...! </ion-card-subtitle>
-      <div *ngFor="let item of vid">
+      <div *ngFor="let item of vid" style="text-align: -webkit-center;margin-top: 10px;">
         <div class="video-responsive" *ngIf="item !== '(NULL)'">
             <iframe #playerVim [src]="item + '?loop=1&muted=1&playsinline=1' | vimeoUrl" frameborder="0" allow="autoplay;" class="styleVideo" width="100%" height="100%" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </div>

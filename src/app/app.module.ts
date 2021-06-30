@@ -44,6 +44,8 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common'; 
+import { PayPal } from '@ionic-native/paypal/ngx';
+
 registerLocaleData(localeEs);
   
 
@@ -72,7 +74,7 @@ registerLocaleData(localeEs);
     ImageModalPageModule,
     AvatarPageModule,
     CondicionesPageModule,
-    TerminosNinosPageModule
+    TerminosNinosPageModule,
   ],
   providers: [
     MatDatepickerModule,
@@ -93,10 +95,11 @@ registerLocaleData(localeEs);
     Diagnostic,
     FileTransfer,
     WebView,
+    PayPal,
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({
-        showDialog: true,
+        showDialog: false,
       }),
     },
     {

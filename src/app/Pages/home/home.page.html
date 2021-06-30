@@ -22,84 +22,82 @@
 
 <ion-content [fullscreen]="true" [appHideHeader]="header" [scrollEvents]="true" id="ion-content-opcional">
 
+  <div style="display: flex;place-items: center;justify-content: flex-end;margin-top: 10px;" (click)="showMessageCoins();">
+    <img src="../../../assets/home/money.png" style="width: 8%;" >
+    <ion-label style="margin: 0px 30px 0px 10px;;font-weight: bold;font-size: 15px;">X 0</ion-label>
+  </div>
+
   <div align="center" class="card" style="padding: 5px 50px;margin: 10px 25px;border: 1px solid #e8e8e8;border-radius: 8px;">
     <div class="div-activity">
-      <h3 style="padding-top: 10px;font-size: 20px;margin-bottom: 0px;">Tu actividad de hoy</h3>
       <ion-label *ngIf="actividadDiaria" style="font-size: 16px;color: #002a68;font-weight: bold;text-align: center;"> {{actividadDiaria}}</ion-label>
     </div>
   </div>
 
   <ion-grid style="text-align-last: left;padding: 10px;">
-    <ion-label style="font-size: 16px;font-weight: bold;">¿Cuál es tu estado actual?</ion-label>
-    <ion-row>
+    <ion-label style="font-size: 16px;font-weight: bold;">¿Cuál es tu estado emocional actual?</ion-label>
+    <ion-row style="margin-top: 15px;">
       <ion-col size="3" class="col-emotions" [ngClass]="{'col-active': emotion === 'Alegre' }" (click)="savefeeling('Alegre')">
-        <img class="wid-70" src="/assets/emotions/happy.png"/>
-        <ion-badge color="warning" class="badge-emotions" >Alegre</ion-badge>
+        <img class="wid-55" src="/assets/emotions/happy.png"/>
+        <ion-badge color="warning" class="badge-emotions" >Alegría</ion-badge>
       </ion-col>
       <ion-col size="3" class="col-emotions" [ngClass]="{'col-active': emotion === 'Inspirado' }" (click)="savefeeling('Inspirado')">
-        <img class="wid-70" src="/assets/emotions/inspired.png"/>
-        <ion-badge color="warning" class="badge-emotions" >Inspirado</ion-badge>
+        <img class="wid-55" src="/assets/emotions/inspired.png"/>
+        <ion-badge color="warning" class="badge-emotions" >Inpiración</ion-badge>
       </ion-col>
       <ion-col size="3" class="col-emotions" [ngClass]="{'col-active': emotion === 'Motivado' }" (click)="savefeeling('Motivado')">
-        <img class="wid-70" src="/assets/emotions/motivated.png"/>
-        <ion-badge color="warning" class="badge-emotions" >Motivado</ion-badge>
+        <img class="wid-55" src="/assets/emotions/motivated.png"/>
+        <ion-badge color="warning" class="badge-emotions" >Motivación</ion-badge>
       </ion-col>
       <ion-col size="3" class="col-emotions" [ngClass]="{'col-active': emotion === 'Orgulloso' }" (click)="savefeeling('Orgulloso')">
-        <img class="wid-70" src="/assets/emotions/proud.png"/>
-        <ion-badge color="warning" class="badge-emotions" >Orgulloso</ion-badge>
+        <img class="wid-55" src="/assets/emotions/proud.png"/>
+        <ion-badge color="warning" class="badge-emotions" >Orgullo</ion-badge>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="3" class="col-emotions" [ngClass]="{'col-active': emotion === 'Cansado' }" (click)="savefeeling('Cansado')">
-        <img class="wid-70" src="/assets/emotions/tired.png"/>
-        <ion-badge color="warning" class="badge-emotions" >Cansado</ion-badge>
+        <img class="wid-55" src="/assets/emotions/tired.png"/>
+        <ion-badge color="warning" class="badge-emotions" >Cansancio</ion-badge>
       </ion-col>
       <ion-col size="3" class="col-emotions" [ngClass]="{'col-active': emotion === 'Aburrido' }" (click)="savefeeling('Aburrido')">
-        <img class="wid-70" src="/assets/emotions/bored.png"/>
-        <ion-badge color="warning" class="badge-emotions" >Aburrido</ion-badge>
+        <img class="wid-55" src="/assets/emotions/bored.png"/>
+        <ion-badge color="warning" class="badge-emotions" >Aburrimiento</ion-badge>
       </ion-col>
       <ion-col size="3" class="col-emotions" [ngClass]="{'col-active': emotion === 'Triste' }" (click)="savefeeling('Triste')">
-        <img class="wid-70" src="/assets/emotions/sad.png"/>
-        <ion-badge color="warning" class="badge-emotions" >Triste</ion-badge>
+        <img class="wid-55" src="/assets/emotions/sad.png"/>
+        <ion-badge color="warning" class="badge-emotions" >Tristeza</ion-badge>
       </ion-col>
       <ion-col size="3" class="col-emotions" [ngClass]="{'col-active': emotion === 'Enojado' }" (click)="savefeeling('Enojado')">
-        <img class="wid-70" src="/assets/emotions/angry.png"/>
-        <ion-badge color="warning" class="badge-emotions" >Enojado</ion-badge>
+        <img class="wid-55" src="/assets/emotions/angry.png"/>
+        <ion-badge color="warning" class="badge-emotions" >Enojo</ion-badge>
       </ion-col>
     </ion-row>
   </ion-grid>
   
   <ion-grid style="text-align-last: left;padding: 10px;">
     <ion-label style="font-size: 16px;font-weight: bold;">¿Qué quieres hacer hoy?</ion-label>
-    <ion-row *ngIf="usertk">
-        <ion-col size="4" style="text-align: -webkit-center;">
+    <ion-row *ngIf="usertk" style="margin-top: 15px;">
+        <ion-col size="12" style="text-align: -webkit-center;">
           <div class="actions card-community" (click)="opinarSobreActividad(actividadDiaria)" >
             Ir a la comunidad
           </div>
         </ion-col>
 
-        <ion-col size="4" style="text-align: -webkit-center;">
+        <ion-col size="12" style="text-align: -webkit-center;">
           <div class="actions card-train" (click)="goTraing()">
             Iniciar entrenamiento
           </div>
         </ion-col>
 
-        <ion-col size="4" style="text-align: -webkit-center;">
+        <ion-col size="12" style="text-align: -webkit-center;">
           <div class="actions card-diagnosis" *ngIf="usertk.surveyed === 0" (click)="diagnosticoRedirect(usertk.profile.id,  usertk.id)">
             Hacer diagnóstico
           </div>
           <div class="actions card-diagnosis" *ngIf="usertk.surveyed === 1" (click)="recomedacionesRedirect(usertk.id)">
-            Comprar un paquete
+            Adquiere aquí tu plan de entrenamiento
           </div>
         </ion-col>
     </ion-row>
   </ion-grid>
-
-  <hr style="background-color: #d8d8d8;margin: 0px;">
-
-  <ion-badge class="badge-lesson" *ngIf="!leccionActiva" color="warning" >No tienes lecciones activas</ion-badge>
-
-  <ion-badge class="badge-lesson" *ngIf="leccionActiva" color="tertiary" (click)="retomarleccion()" >Retomar: {{leccionActiva.name}}</ion-badge>
 
   <hr style="background-color: #d8d8d8;margin: 0px;">
 
@@ -110,12 +108,19 @@
   </ion-fab>
 
   
-  <ion-card>
-    <img src="../../../assets/icon/image1.jpg" (click)="imageView('../../../assets/icon/image1.jpg')" />
+  <ion-card *ngIf="imageHome">
+    <img [src]="imageHome" (click)="imageView(imageHome)" />
     <ion-card-content>
       <ion-label *ngIf="usertk">
-        <h3 style="text-align: center; color: #000; font-weight: bold;">¡Empieza bien tu día!</h3>
+        <h3 style="text-align: center; color: #000; font-weight: bold;">{{ imageDescription }}</h3>
       </ion-label>
     </ion-card-content>
   </ion-card>
+
+  <hr style="background-color: #d8d8d8;margin: 0px;">
+
+  <ion-badge class="badge-lesson" *ngIf="!leccionActiva" color="warning" >No tienes lecciones activas</ion-badge>
+
+  <ion-badge class="badge-lesson" *ngIf="leccionActiva" color="warning" (click)="retomarleccion()" ><strong>RETOMAR LECCIÓN: </strong><br>{{leccionActiva.name}}</ion-badge>
+
 </ion-content>

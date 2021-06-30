@@ -10,6 +10,7 @@ const INFO_TEMP = 'diagnostico';
 const ORDERSTRG = 'ordercourses';
 const CURSOCONTROL = 'controlinfoCursoTemp';
 const CURSOCONTROLNAME = 'CursoName';
+const QUIZ = 'quices'
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +29,15 @@ export class ShareserviceService {
   varObjetivos = new Subject<string>();
   varTotalPreguntas = new Subject<string>();
   varProfile = new Subject<any>();
+  varLeciones = new Subject<any>();
+  varExamen = new Subject<any>();
 
   private cart = [];
 
-  constructor(
+  constructor (
     private http: HttpClient,
-    private storage: Storage) { }
+    private storage: Storage
+    ) { }
 
 
   gerDataService(TK: string){
@@ -178,7 +182,7 @@ export class ShareserviceService {
     this.storage.set(INFO_TEMP, diagnostico);
   }
 
-  retornarDiagnostico(){
+  retornarDiagnostico() {
     return this.storage.get(INFO_TEMP);
   }
 
@@ -244,16 +248,27 @@ export class ShareserviceService {
     return this.storage.get(CURSOCONTROLNAME);
   }
 
-  verorder(){
+  verorder() {
     const token = this.storage.get(ORDERSTRG);
     return token;
   }
 
-  updateorder(order: any){
+  guardarQuiz(quices: any){
+    this.storage.set(QUIZ, quices);
+  }
+
+  retornarQuiz() {
+    return this.storage.get(QUIZ);
+  }
+
+  removerQuiz() {
+    this.storage.remove(QUIZ);
+  }
+
+  updateorder(order: any) {
     let inc = 1;
     inc =  order + inc;
     this.storage.set(ORDERSTRG, inc);
-    this.varorder.next('update order');
   }
 
   guardarpost(form: any, token: any) {
@@ -274,10 +289,11 @@ export class ShareserviceService {
     });
   }
 
-  getrecomendation(idUser: any){
+  getrecomendation(idUser: any, token: any){
     return this.http.get<any>(this.basePath + `api/users/${idUser}/recomendations`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
   });
   }
 
@@ -465,6 +481,59 @@ export class ShareserviceService {
 
   getPostCompetenceNextPage(page: any, token: any, userId: any) {
     return this.http.get<any>(this.basePath + `api/users/${userId}/competences?page=${page}`, {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  guardarquices(json: any, token: any) {
+    return this.http.post(this.basePath + `api/quiz`, json, {
+      headers: new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  guardarleccion(json: any, token: any) {
+    return this.http.post(this.basePath + `api/users/course/lesson`, json, {
+      headers: new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  obtenerLeccionesUsuario(idCurso: any, token:any, idUser: any) {
+    return this.http.get<any>(this.basePath + `api/users/${idUser}/course/${idCurso}`, {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  obtenerExamenes(idExamen: any, token: any) {
+    return this.http.get<any>(this.basePath + `api/examen/${idExamen}/preguntas` , {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  obtenerCursos(token:any) {
+    return this.http.get<any>(this.basePath + `api/courses`, {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  guardarExamenes(json: any, token: any) {
+    return this.http.post(this.basePath + `api/respuesta/examen`, json, {
+      headers: new HttpHeaders()
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  consultarResultados(token:any, idUser: any) {
+    return this.http.get<any>(this.basePath + `api/examen/resultados/user/${idUser}`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
       .set('Authorization', 'Bearer ' + token)

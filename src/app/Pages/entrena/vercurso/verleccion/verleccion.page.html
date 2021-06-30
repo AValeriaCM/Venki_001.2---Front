@@ -10,42 +10,60 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="courseID  === CourseLessonID">
-    <div *ngFor="let cur of cursos; let i = index;" class="accordion-list" lines="none" detail="false" no-padding>
-        <ion-list *ngFor="let lections of cur.lessons;  let j = index;" lines="none" class="itemCssF list-md">
-          <div *ngIf="j === index">
-          <ion-card style="border-radius: 10px;">
-            <ion-card-title align="center" [ngStyle]="{'color': color}" style="text-transform: uppercase;padding: 10px;"> {{lections.name}}</ion-card-title>
-            <ion-card-content style="text-align: justify; color: black;font-size: 14px;">{{lections.description}}</ion-card-content>
-            <div style="text-align: center;">
-              <ion-badge class="badge-go">¡Anímate!</ion-badge>
-            </div>
-            <ion-grid>
-              <ion-row>
-                <ion-col size="12" *ngFor="let recursos of lections.resources; let k = index" >
-                  <div *ngIf="recursos.audio && recursos.order ===  index + 1" style="text-align: center;">
-                    <ion-button fill="outline" class="button-start"
-                      (click)="audioPlayer(lections.name,recursos.audio, recursos.order, lections.resources?.length)">
-                      <ion-icon name="play"></ion-icon>Iniciar Leccion
-                    </ion-button>
-                  </div>
-                  <div *ngIf="recursos.document && (recursos.order <= orderStorage  && recursos.order >= 5)"  style="text-align: center;">
-                      <ion-button fill="outline"
-                        (click)="previewDocuments(lections.name,recursos.document, recursos.order, lections.resources?.length)">
-                        <ion-icon name="book-outline"></ion-icon>
+  <div *ngIf="curso">
+    <div class="accordion-list" lines="none" detail="false" no-padding>
+        <ion-list lines="none" class="itemCssF list-md">
+          <div>
+            <ion-card style="border-radius: 10px;">
+              <ion-card-title align="center" [ngStyle]="{'color': color}" style="text-transform: uppercase;padding: 10px;"> {{ curso.name }}</ion-card-title>
+              <ion-card-content style="text-align: justify; color: black;font-size: 14px;">{{ curso.description }}</ion-card-content>
+              <div style="text-align: center;">
+                <ion-badge class="badge-go">¡Anímate!</ion-badge>
+              </div>
+
+              <div style="text-align-last: center;margin-top: 15px;">
+                <ion-button fill="outline" class="button-star" (click)="goContent()">
+                  <ion-icon name="play"></ion-icon>Iniciar Lección
+                </ion-button>
+              </div>
+
+              <ion-grid>
+                
+                <!--<ion-row *ngFor="let resource of curso.resources">
+                  <app-video *ngIf="resource.order === order"></app-video>
+                  <app-audio *ngIf="resource.order === order"></app-audio>
+                  <app-texto *ngIf="resource.order === order"></app-texto>
+                  <app-quiz *ngIf="resource.order === order"></app-quiz>
+                </ion-row>-->
+
+              </ion-grid>
+
+              <!--<ion-grid>
+                <ion-row>
+                  <ion-col size="12" *ngFor="let recursos of curso.resources; let i = index" >
+                    <div *ngIf="recursos.audio && recursos.order ===  index + 1" style="text-align: center;">
+                      <ion-button fill="outline" class="button-start"
+                        (click)="audioPlayer(curso.name, recursos.audio, recursos.order, curso.resources?.length)">
+                        <ion-icon name="play"></ion-icon>Iniciar Leccion
                       </ion-button>
-                  </div>
-                  <div *ngIf="recursos.video && (recursos.order > orderStorage ||  recursos.order <= index)"  style="text-align: center;">
-                      <ion-button fill="outline" class="button-star"
-                      (click)="startVideo(lections.name,recursos.video, recursos.order, lections.resources?.length)">
-                      <ion-icon name="play"></ion-icon>Iniciar Leccion
-                    </ion-button>
-                  </div>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card>
-        </div>   
+                    </div>
+                    <div *ngIf="recursos.document && (recursos.order <= orderStorage  && recursos.order >= 5)"  style="text-align: center;">
+                        <ion-button fill="outline"
+                          (click)="previewDocuments(curso.name, recursos.document, recursos.order, curso.resources?.length)">
+                          <ion-icon name="book-outline"></ion-icon>
+                        </ion-button>
+                    </div>
+                    <div *ngIf="recursos.video && (recursos.order > orderStorage || recursos.order <= index + 1 )"  style="text-align: center;">
+                        <ion-button fill="outline" class="button-star"
+                        (click)="startVideo( curso.name, recursos.video, recursos.order, curso.resources?.length )">
+                        <ion-icon name="play"></ion-icon>Iniciar Leccion
+                      </ion-button>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>-->
+            </ion-card>
+          </div>   
       </ion-list>
     </div>
   </div>

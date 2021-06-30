@@ -13,7 +13,7 @@ import { PassObjectService } from 'src/app/_services/pass-object.service';
 import { ShareserviceService } from 'src/app/_services/shareservice.service';
 import { environment } from 'src/environments/environment';
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const MAX_FILE_SIZE = 20 * 1024 * 1024;
 const ALLOWED_MIME_TYPE = "video/mp4";
 
 @Component({
@@ -126,14 +126,14 @@ export class CompetenciaPage implements OnInit {
       cssClass: 'match-item-action-sheet',
       buttons: [
         {
-          text: 'Galeria',
+          text: 'Galería',
           icon: 'image-outline',
           handler: () => {
             this.usarGaleria();
           }
         },
         {
-          text: 'Camara',
+          text: 'Cámara',
           icon: 'camera-outline',
           handler: () => {
             this.usarCamara();
@@ -230,7 +230,7 @@ export class CompetenciaPage implements OnInit {
             this.dismissLoader();
             if (data.size > MAX_FILE_SIZE) {
               that.removeVideo();
-              return this.presentAlert("Error", "No puedes subir más de 5MB.");
+              return this.presentAlert("Error", "No puedes subir más de 20MB.");
             }
             if (data.type !== ALLOWED_MIME_TYPE)  {
               that.removeVideo();
@@ -333,7 +333,7 @@ export class CompetenciaPage implements OnInit {
     this.alert = await this.alertController.create({
       header: 'HEY!',
       subHeader:
-        'Cuentanos que piensas',
+        'Cuéntanos que piensas',
       message:
         'Debes escribir algo y publicar una imagen o un video',
       buttons: ['Acepto'],
@@ -341,12 +341,12 @@ export class CompetenciaPage implements OnInit {
     await this.alert.present();
   }
 
-  async presentAlert(title, message) {
+  async presentAlert(title: any, message: any) {
     this.removeVideo();
     let alert = await this.alertController.create({
       header: title,
       subHeader: message,
-      buttons: ['Dismiss']
+      buttons: ['Cerrar']
     });
     alert.present();
   }

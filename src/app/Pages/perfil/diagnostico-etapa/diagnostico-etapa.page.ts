@@ -91,24 +91,24 @@ export class DiagnosticoEtapaPage implements OnInit {
             for (let i = 0; i < datasets[0].data.length; ++i) {
               if (labels[i]) {
 
-                text.push('<ion-col size="6">');
+                text.push('<ion-col size="12">');
                 var nameClass = ''
                 var label = '';
                 if(labels[i] == 'Bloque A') {
                   nameClass = 'bloque-1'
-                  label = labels[i]  + ""
+                  label = "PRUEBA DE MENTALIDAD"
                 }
                 if(labels[i] == 'Bloque B') {
                   nameClass = 'bloque-2'
-                  label = labels[i]  + ""
+                  label = "PRUEBA NUTRICIONAL"
                 }
                 if(labels[i] == 'Bloque C') {
                   nameClass = 'bloque-3'
-                  label = labels[i]  + ""
+                  label = "PRUEBA DE BIENESTAR"
                 }
                 if(labels[i] == 'Bloque D') {
                   nameClass = 'bloque-4'
-                  label = labels[i]  + ""
+                  label = "PRUEBA ATLÉTICA"
                 }
                 text.push('<p class="text-danger m-b-0 ' + nameClass + '">' + label + '</p>');
               }

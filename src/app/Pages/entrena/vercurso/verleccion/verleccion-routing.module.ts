@@ -15,7 +15,31 @@ const routes: Routes = [
   {
     path: 'vidplayer',
     loadChildren: () => import('../../../../Pages/entrena/vercurso/verleccion/vidplayer/vidplayer.module').then( m => m.VidplayerPageModule)
+  },  {
+    path: 'video',
+    loadChildren: () => import('./video/video.module').then( m => m.VideoPageModule)
+  },
+  {
+    path: 'audio',
+    loadChildren: () => import('./audio/audio.module').then( m => m.AudioPageModule)
+  },
+  {
+    path: 'texto',
+    loadChildren: () => import('./texto/texto.module').then( m => m.TextoPageModule)
+  },
+  {
+    path: 'quiz',
+    loadChildren: () => import('./quiz/quiz.module').then( m => m.QuizPageModule)
+  },
+  {
+    path: 'contenido',
+    loadChildren: () => import('./contenido/contenido.module').then( m => m.ContenidoPageModule)
+  },
+  {
+    path: 'examen',
+    loadChildren: () => import('./examen/examen.module').then( m => m.ExamenPageModule)
   }
+
 ];
 
 @NgModule({

@@ -99,7 +99,7 @@
                 <ion-radio-group [(ngModel)]="dt.calificacionVal" (ionChange)="calificacion($event, dt.id, i)">
                   <ion-item *ngFor="let it of dt.answers">
                     <ion-label style="white-space: break-spaces;font-size: 13px;">{{ it.answer }}</ion-label>
-                    <ion-radio slot="end" checked="false" value="{{ it.point }}"></ion-radio>
+                    <ion-radio slot="end" value="{{it.id}}"></ion-radio>
                   </ion-item>
                 </ion-radio-group>
               </ion-list>

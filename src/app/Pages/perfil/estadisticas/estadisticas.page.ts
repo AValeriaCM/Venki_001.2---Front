@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { LoginService } from 'src/app/_services/login.service';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { PerfilesService } from 'src/app/_services/perfiles.service';
+import { ShareserviceService } from 'src/app/_services/shareservice.service';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class EstadisticasPage implements OnInit {
     private log: LoginService,
     private router: Router,
     private loadingService: LoadingService,
-    private perfilService: PerfilesService
+    private perfilService: PerfilesService,
+    private share: ShareserviceService
   ) { }
 
   ngOnInit() {
@@ -87,7 +89,7 @@ export class EstadisticasPage implements OnInit {
           dataset.reply.Atletico,
           dataset.reply.Nutricion,
           dataset.reply.Bienestar,
-          dataset.reply.Fortaleza_Mental,
+          dataset.reply.Fortaleza_mental,
           dataset.reply.Conductual,
           dataset.reply.Emocional,
           dataset.reply.Cognitivo
@@ -130,6 +132,7 @@ export class EstadisticasPage implements OnInit {
           reverse: false,
           ticks: {
             beginAtZero: true,
+            max: 5
           }
         },
         scaleOverride: true,
@@ -150,6 +153,7 @@ export class EstadisticasPage implements OnInit {
   }
 
   back() {
+    this.share.varProfile.next(true);
     this.router.navigate(['/users/perfil']);
   }
 

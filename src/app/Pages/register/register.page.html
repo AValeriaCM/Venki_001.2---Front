@@ -38,8 +38,7 @@
         <ion-label class="l-error">El apellido no es valido</ion-label>
       </ion-item>
       <div>
-        <international-phone-number class="phone form-control form-control-sm"  [maxlength]="22" formControlName="phone" placeholder="Teléfono" [defaultCountry]="'co'"
-          [required]="true" [allowDropdown]="true"></international-phone-number>
+        <international-phone-number class="phone form-control form-control-sm" formControlName="phone" placeholder="Teléfono" [defaultCountry]="'co'" [required]="true" [allowDropdown]="true"></international-phone-number>
       </div>
       <ion-item class='form-text-error'
         *ngIf="!regisform.controls.phone.valid && (regisform.controls.phone.touched || regisform.controls.phone.dirty)">

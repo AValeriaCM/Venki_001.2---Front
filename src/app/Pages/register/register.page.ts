@@ -93,20 +93,15 @@ export class RegisterPage implements OnInit {
 
   inicializarFormulario() {
     this.regisform = new FormGroup({
-      name: new FormControl('',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(35), Validators.pattern(this.nombrePattern)]),
-      lastname: new FormControl('',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(35), Validators.pattern(this.nombrePattern)]),
+      name: new FormControl('', [Validators.required, Validators.pattern(this.nombrePattern)]),
+      lastname: new FormControl('', [Validators.required, Validators.pattern(this.nombrePattern)]),
       birthday: new FormControl('', [Validators.required]),
-      email: new FormControl('',
-        [Validators.required, Validators.minLength(7), Validators.maxLength(70), Validators.pattern(this.emailPattern)]),
-      phone: new FormControl('',
-        [Validators.required, Validators.pattern(this.phonePatten)]),
-      password: new FormControl('',
-        [Validators.required, Validators.minLength(8), Validators.maxLength(12), Validators.pattern(this.contrasenaPattern)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      phone: new FormControl('', [Validators.required, Validators.pattern(this.phonePatten)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(12), Validators.pattern(this.contrasenaPattern)]),
       password_confirmation: new FormControl('', [Validators.required]),
     },
-      { validators: this.matchingPasswords('password', 'password_confirmation') });
+    { validators: this.matchingPasswords('password', 'password_confirmation') });
   }
 
   matchingPasswords(password: string, passwordconfirmation: string) {
@@ -305,7 +300,7 @@ async loginGoogleWeb() {
     return this.fb.login(['public_profile', 'email'])
       .then( (res: FacebookLoginResponse) => {
         let params = new Array<string>();
-        this.fb.api('/me?fields=id,email,name,first_name,last_name,gender,birthday', params).then(resp => {
+        this.fb.api('/me?fields=email,name,first_name,last_name', params).then(resp => {
           if(resp.email) {
             that.nUsuario.name = resp.first_name;
             that.nUsuario.lastname = resp.last_name;

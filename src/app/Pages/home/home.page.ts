@@ -43,6 +43,8 @@ export class HomePage implements OnInit {
 
   imageHome = null;
   imageDescription = null;
+  magins = 0;
+  notifications = [];
 
   constructor(
     private router: Router,
@@ -64,14 +66,24 @@ export class HomePage implements OnInit {
     this.getCurrentHour();
     this.getActiveLesson();
     this.getActiveCourse();
-    this.localNotification();
+  }
+
+  getNotification() {
+    this.share.consultarNotificaciones(this.token).subscribe(resp => {
+      resp.data.map( (notification: any) => {
+        if(notification.id_profile === this.usertk.profile_id) {
+          this.notifications.push(notification);
+        }
+      });
+      this.localNotification();
+    });
   }
 
   showMessageCoins() {
     this.alertController.create({
       header: "MAGIN's",
       message: '<div class="img-alert"><img src="../../../assets/home/money.png" alt="g-maps"></div>Suma más monedas oficiales por medio de la interacción y socialización diaria en la aplicación.',
-      buttons: ['¡Seguir Sumando!'],
+      buttons: ['Sigue Sumando!'],
       cssClass: 'coins'
     }).then(alert => alert.present());
   }
@@ -99,7 +111,18 @@ export class HomePage implements OnInit {
       this.log.logdataInfData(dt).subscribe( infoUser => {
         this.usertk = infoUser;
         this.getMiactividad(this.usertk.id);
+        this.obtenerMonedas();
+        this.getNotification();
       });
+    });
+  }
+
+  obtenerMonedas() {
+    this.share.consultarMonedas(this.token, this.usertk.id).subscribe( resp => {
+      if(resp.data.length > 0) {
+        this.magins = resp.data[0].magin;
+      }
+    }, error => {
     });
   }
 
@@ -149,12 +172,11 @@ export class HomePage implements OnInit {
   }
 
   localNotification() {
-    let titleNotif = 'Mensaje de Venki';
-    shuffleArray(this.encourageMsg).forEach((message: any, index: any) => {
+    shuffleArray(this.notifications).forEach((message: any, index: any) => {
       this.localN.schedule({
         id: index,
-        title: titleNotif,
-        text: message,
+        title: message.titulo,
+        text: message.mensaje,
         trigger: {
           in: 1 + (index * 2),
           unit: ELocalNotificationTriggerUnit.DAY,

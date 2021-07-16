@@ -83,11 +83,14 @@ export class ChatPage implements OnInit {
   getUsersChats() {
     this.loadingService.loadingPresent({spinner: "circles" });
     this.chatS.getchatsUser(this.idUser, this.token).subscribe((chatData: any)  => {
-      var chats = chatData.data.filter( (user: any) => user.receiver_id !== this.idUser);
-      chats.map( (chat: any) => {
-        const message = chat;
-        message.messagesReceptor = chat.messages.filter( (mess: any) => mess.user_id !== this.idUser);
-        this.userList.push(message);
+      chatData.data.map( (chat: any) => {
+        if(chat.receiver_id === this.idUser) {
+          chat.usuario = chat.transmitter;
+        } else {
+          chat.usuario = chat.receiver;
+        }
+        chat.messagesReceptor = chat.messages.filter( (mess: any) => mess.user_id !== this.idUser);
+        this.userList.push(chat);
       });
       this.userList = this.userList.sort((a: any,b: any) => {
         if(a.messagesReceptor.length > 0 && b.messagesReceptor.length > 0 ) {

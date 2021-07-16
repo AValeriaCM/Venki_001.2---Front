@@ -1,9 +1,8 @@
 import { AuthService } from './../_services/auth.service';
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { take, map } from 'rxjs/operators';
-import { AlertController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { CanActivate, ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Storage } from '@ionic/storage';
+import { ShareserviceService } from '../_services/shareservice.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +12,21 @@ export class AuthGuard implements CanActivate {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private alercrtl: AlertController) { }
+    private storage: Storage,
+    private shareSercie: ShareserviceService
+  ) { }
 
-  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.auth.user.pipe(
-      take(1),
-      map(user => {
-        if (!user) {
-          this.alercrtl.create({
-            header: 'Unauthorized',
-            message: 'No tiene los permisos',
-            buttons: ['OK']
-          }).then(alert => alert.present());
-          this.router.navigateByUrl('/');
-          return false;
-        } else {
+    canActivate(
+      next: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot) {
+        if (this.auth.auth()) {
           return true;
+        } else {
+          this.storage.remove('user-dt');
+          this.shareSercie.guardarLeccionActiva(null);
+          this.router.navigateByUrl('/login');
+          return false;
         }
-      })
-    );
-  }
+    }
 
 }

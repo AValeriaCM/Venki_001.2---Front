@@ -67,8 +67,8 @@ export class ExamenPage implements OnInit, OnDestroy {
       this.token = resp;
       this.log.logdataInfData(this.token).subscribe( infoUser => {
         this.user = infoUser;
+        this.loadPage();
       });
-      this.loadPage();
     });
   }
 
@@ -76,12 +76,8 @@ export class ExamenPage implements OnInit, OnDestroy {
 
     this.share.obtenerCursos(this.token).subscribe( data => {
 
-      console.log('data', data);
-      console.log('this.leccion', this.leccion);
-      console.log('this.informacion', this.informacion);
-
       if(data.data.length > 0) {
-        const o = data.data.find( c => c.id === this.leccion)
+        const o = data.data.find( c => c.id === this.informacion.infoCurso.id)
         if(o) {
           if(o.examen) {
             this.share.obtenerExamenes(o.examen.id, this.token).subscribe( resp => {

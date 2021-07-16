@@ -131,7 +131,7 @@
     <ion-row class="ion-align-items-center ion-no-padding">
       <ion-col size="10">
         <textarea autosize maxRow="4" placeholder="Envia un mensaje" [(ngModel)]="menajeNuevo"
-          class="msg-input"></textarea>
+          class="msg-input" style="background: white;"></textarea>
       </ion-col>
       <ion-col size="2" class="send">
         <button expand="block" [disabled]="menajeNuevo === ''" class="msg-btn" (click)="enviarMensaje()">

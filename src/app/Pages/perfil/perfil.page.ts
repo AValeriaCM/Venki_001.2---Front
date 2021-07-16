@@ -14,6 +14,7 @@ import { AvatarPage } from '../popup/avatar/avatar.page';
 import { environment } from 'src/environments/environment';
 import { ImagesService } from 'src/app/_services/images.service';
 import { LoadingService } from 'src/app/_services/loading.service';
+import { TerminosNinosPage } from '../terminos-ninos/terminos-ninos.page';
 
 @Component({
   selector: 'app-perfil',
@@ -97,6 +98,16 @@ export class PerfilPage implements OnInit {
 
   profileUser = null;
 
+  year = (new Date()).getFullYear();
+
+  edad = 18;
+
+  ischeckNino = [
+    {
+      selected: false
+    }
+  ];
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -110,11 +121,13 @@ export class PerfilPage implements OnInit {
     private popover:PopoverController,
     private edit: RegistroService,
     private images: ImagesService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private pop:PopoverController
   ) { 
     this.getAuthUser();
     this.getToken();
     this.refreshProfile();
+    this.refrescarMetricas();
   }
 
   ngOnInit() {
@@ -138,6 +151,14 @@ export class PerfilPage implements OnInit {
         this.profileUser = res.name;
         this.usertk.profile.id = res.id;
         this.usertk.surveyed = 0;
+      }
+    });
+  }
+  
+  refrescarMetricas() {
+    this.share.varMetricas.subscribe( res => {
+      if(res) {
+        this.usertk.surveyed = 1;
       }
     });
   }
@@ -243,8 +264,26 @@ export class PerfilPage implements OnInit {
 
   getcursos(userid: any) {
     this.share.getCursosUsuario(userid, this.token).subscribe(info => {
-      this.coursesProgress = info.data.filter( (course: any) => course.pivot.progress != 1 );
-      this.coursesCompleted = info.data.filter( (course: any) => course.pivot.progress == 1 );
+      info.data.map( (resp: any) => {
+        this.share.obtenerLeccionesUsuario(resp.id, this.token, userid).subscribe( respuesta => {
+          respuesta.data.map( (leccion: any) => {
+            const find = resp.lessons.find( (o: any) => o.id === leccion.id_lesson && o.course_id === leccion.id_course );
+            if(find) {
+              find.status = 1
+            }
+          });
+          const totalLecciones = resp.lessons.length;
+          const totalHechas = resp.lessons.filter( (o: any) => o.status === 1 ).length;
+          if( totalLecciones > 0 ) {
+            resp.progreso = totalHechas/totalLecciones;
+          }
+          this.loadingService.loadingDismiss();
+        }, error => {
+          this.loadingService.loadingDismiss();
+        });
+      });
+
+      this.coursesCompleted = info.data;
     });
   }
 
@@ -307,40 +346,55 @@ export class PerfilPage implements OnInit {
   */
   inicializarFormulario(dt: any) {
     this.editarForm = new FormGroup({
-      name : new FormControl(dt.name, [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
-      lastname : new FormControl(dt.lastname, [Validators.required, Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
-      birthday : new FormControl(dt.birthday, [Validators.required]),
+      name : new FormControl(dt.name, [Validators.pattern(this.nombrePattern)]),
+      lastname : new FormControl(dt.lastname, [Validators.pattern(this.nombrePattern)]),
+      birthday : new FormControl(dt.birthday),
       email : new FormControl(dt.email, [Validators.required, Validators.min(7) , Validators.max(70), Validators.pattern(this.emailPattern)]),
-      phone : new FormControl(dt.phone, [Validators.required, Validators.minLength(8) , Validators.maxLength(22), Validators.pattern(this.phonePatten)]),
+      phone : new FormControl(dt.phone, [Validators.pattern(this.phonePatten)]),
       description : new FormControl(dt.description),
-      institution : new FormControl(dt.institution, [Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
-      city : new FormControl(dt.city, [Validators.min(5) , Validators.max(35), Validators.pattern(this.nombrePattern)]),
+      institution : new FormControl(dt.institution, [Validators.pattern(this.nombrePattern)]),
+      city : new FormControl(dt.city, [Validators.pattern(this.nombrePattern)]),
       status : new FormControl(dt.status),
-      sex : new FormControl(null),
-      placeOfBirth : new FormControl(null),
-      height : new FormControl(null),
-      weight : new FormControl(null),
-      dominantFoot: new FormControl(null),
-      dominantHand: new FormControl(null),
-      graduationYear: new FormControl(null),
-      highSchoolAverage: new FormControl(null),
-      gpa: new FormControl(null),
-      sat: new FormControl(null),
-      toefl: new FormControl(null),
-      mainSport: new FormControl(null),
-      playingPosition: new FormControl(null),
-      events: new FormControl(null),
-      time: new FormControl(null),
-      records: new FormControl(null),
-      route: new FormControl(null),
-      rankings: new FormControl(null),
-      recognitions: new FormControl(null),
-      press: new FormControl(null),
-      differences: new FormControl(null),
-      competencies: new FormControl(null),
-      goals: new FormControl(null)
+      sex : new FormControl(dt.sex === 'null' ? '' : dt.sex),
+      placeOfBirth : new FormControl(dt.placeOfBirth === 'null' ? '' : dt.placeOfBirth),
+      height : new FormControl(dt.height === 'null' ? '' : dt.height),
+      weight : new FormControl(dt.weight === 'null' ? '' : dt.weight),
+      dominantFoot: new FormControl(dt.dominantFoot === 'null' ? '' : dt.dominantFoot),
+      dominantHand: new FormControl(dt.dominantHand === 'null' ? '' : dt.dominantHand),
+      graduationYear: new FormControl(dt.graduationYear === 'null' ? '' : dt.graduationYear),
+      highSchoolAverage: new FormControl(dt.highSchoolAverage === 'null' ? '' : dt.highSchoolAverage),
+      gpa: new FormControl(dt.gpa === 'null' ? '' : dt.gpa),
+      sat: new FormControl(dt.sat === 'null' ? '' : dt.sat),
+      toefl: new FormControl(dt.toefl === 'null' ? '' : dt.toefl),
+      mainSport: new FormControl(dt.mainSport === 'null' ? '' : dt.mainSport),
+      playingPosition: new FormControl(dt.playingPosition === 'null' ? '' : dt.playingPosition),
+      events: new FormControl(dt.events === 'null' ? '' : dt.events),
+      time: new FormControl(dt.time === 'null' ? '' : dt.time),
+      records: new FormControl(dt.records === 'null' ? '' : dt.records),
+      route: new FormControl(dt.route === 'null' ? '' : dt.route),
+      rankings: new FormControl(dt.rankings === 'null' ? '' : dt.rankings),
+      recognitions: new FormControl(dt.recognitions === 'null' ? '' : dt.recognitions),
+      press: new FormControl(dt.press === 'null' ? '' : dt.press),
+      differences: new FormControl(dt.differences === 'null' ? '' : dt.differences),
+      competencies: new FormControl(dt.competencies === 'null' ? '' : dt.competencies),
+      goals: new FormControl(dt.goals === 'null' ? '' : dt.goals)
     });
   }
+
+  cambioFecha($event){
+    const convertAge = new Date($event);
+    const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+    this.edad = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+  }
+
+  terminosMostrarNinos()
+  {
+    this.pop.create({component:TerminosNinosPage,
+    showBackdrop:false}).then((popoverElement)=>{
+      popoverElement.present();
+    })
+  }
+
 
   editar(){
     this.editarUser = this.editarForm.value;

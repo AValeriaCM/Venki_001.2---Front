@@ -27,12 +27,12 @@
 
   <div class="message">
     <div *ngFor="let msg of menjs">
-      <div class="message other-message left" *ngIf="data.transmitter.id !== msg.user_id">
+      <div class="message other-message left" *ngIf="transmiterID !== msg.user_id">
         <span>{{msg.message}}</span>
         <div class="ion-text-left" style="color: #ffffff;font-size: 11px;margin-right: 15px;">{{msg.created_at | date:'short'}}</div>
       </div>
 
-      <div class="message my-message right" *ngIf="data.transmitter.id === msg.user_id">
+      <div class="message my-message right" *ngIf="transmiterID === msg.user_id">
         <div class="ion-text-right" style="color: white;font-size: 17px;">{{msg.message}}</div>
         <div class="time ion-text-right" style="color: white;font-size: 11px;">{{msg.created_at | date:'short'}}</div>
       </div>
@@ -47,8 +47,7 @@
   <ion-toolbar>
     <ion-row class="ion-align-items-center ion-no-padding">
       <ion-col size="10">
-        <textarea autosize maxRow="4" placeholder="Escribe un mensaje" [(ngModel)]="newMsg"
-          class="msg-input"></textarea>
+        <textarea autosize maxRow="4" placeholder="Escribe un mensaje" [(ngModel)]="newMsg" class="msg-input" style="background: white;"></textarea>
       </ion-col>
       <ion-col size="2" class="send">
         <button expand="block" [disabled]="newMsg === ''" class="msg-btn" (click)="enviarMsg()">

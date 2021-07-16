@@ -19,8 +19,8 @@
 
         <div style="padding: 10px 25px;text-align: justify;">
           <p>
-            Felicidades, acabas de terminar todas las lecciones del curso <strong>{{ informacion.infoCurso.name }}</strong>, a continuacion debes responder un examen, 
-            recuerda que al finalizar dependiendo de tu calificación obtendras un trofeo.
+            Felicidades, acabas de terminar todas las lecciones del curso <strong>{{ informacion.infoCurso.name }}</strong>, a continuación debes responder un examen, 
+            recuerda que al finalizar dependiendo de tu calificación obtendrás un trofeo.
           </p>
         </div>
       
@@ -68,7 +68,7 @@
             </ion-list-header>
         
             <ion-item *ngFor="let respuesta of pregunta.respuestas">
-              <ion-label>{{ respuesta }}</ion-label>
+              <ion-label style="white-space: break-spaces;">{{ respuesta }}</ion-label>
               <ion-radio value="{{respuesta}}"></ion-radio>
             </ion-item>
     

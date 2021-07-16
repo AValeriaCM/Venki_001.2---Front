@@ -18,6 +18,8 @@ const TOKE_PRIMERA_VEZ = 'state-frist-time';
 const TOKEN_PRIMERA_MOVILE = 'M_TK';
 const USER_INFO = 'user-dt';
 const INFO_TEMP = 'tempInfo';
+const TOKEN = 'token';
+const ESPIRES = 'expires'
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,8 @@ export class AuthService {
   private userData = new BehaviorSubject(null);
   private DataFinal = new BehaviorSubject(null);
   private primeraV: any;
+
+  token: string;
 
   constructor(private storage: Storage,
               private plt: Platform,
@@ -63,6 +67,7 @@ export class AuthService {
     return this.loginService.login(correo, contrasena).pipe(
       take(1),
       map( res => {
+            this.guardarToken(res);
             this.storage.set(TOKEN_KEY_REFRESH, res['refresh_token']);
             return res['access_token'];
       }),
@@ -75,6 +80,26 @@ export class AuthService {
       })
     );
   }
+
+  private guardarToken(user: any) {
+    this.token = user.access_token;
+    sessionStorage.setItem('token', user.access_token);
+    sessionStorage.setItem('expires', user.expires_at);
+  }
+
+  auth(): boolean {
+    if (this.token.length < 30) {
+      return false;
+    }
+    const expires = new Date(sessionStorage.getItem('expires'));
+
+    if (expires > new Date()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
   setTokenMovile(movileTk: any){
     this.storage.set(TOKEN_PRIMERA_MOVILE, movileTk);
@@ -158,7 +183,7 @@ export class AuthService {
     return obj;
   }
 
-  logout(){
+  logout() {
     this.storage.remove(USER_INFO);
     this.shareSercie.guardarLeccionActiva(null);
     this.storage.remove(TOKEN_KEY).then( ()  => {

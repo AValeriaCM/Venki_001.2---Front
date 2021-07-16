@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@an
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
 import { PassObjectService } from 'src/app/_services/pass-object.service';
+import { ShareserviceService } from 'src/app/_services/shareservice.service';
 @Component({
   selector: 'app-diagnostico-etapa',
   templateUrl: './diagnostico-etapa.page.html',
@@ -23,6 +24,7 @@ export class DiagnosticoEtapaPage implements OnInit {
     private pEtapa: PassObjectService,
     private router: Router,
     private pObjecto: PassObjectService,
+    private share: ShareserviceService,
     private changeDetectorRef: ChangeDetectorRef
     ) { }
 
@@ -125,6 +127,7 @@ export class DiagnosticoEtapaPage implements OnInit {
 
   continue() {
     if ( this.etapa == 4 ) {
+      this.share.varProfile.next(true);
       this.router.navigate(['/users/perfil/estadisticas']);
     } else {
       if(this.info.status == 1) {

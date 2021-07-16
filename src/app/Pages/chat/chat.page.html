@@ -56,12 +56,12 @@
 
       <ion-list style="padding: 0;">
         <ion-item *ngFor="let cont of userList | filter:filterList" class="friend">
-          <ion-avatar slot="start" *ngIf="cont.receiver" >
-            <img src="assets/avatar/{{cont.receiver.avatar}}.png" (click)="abrirDialogo(cont)">
+          <ion-avatar slot="start" *ngIf="cont.usuario" >
+            <img src="assets/avatar/{{cont.usuario.avatar}}.png" (click)="abrirDialogo(cont)">
           </ion-avatar>
-          <div class="user-list" (click)="abrirDialogo(cont)" *ngIf="cont.receiver" >
+          <div class="user-list" (click)="abrirDialogo(cont)" *ngIf="cont.usuario">
             <div style="display: flex;width: 100%;">
-              <ion-label color="primary" class="label-user-chat">{{cont.receiver.name}} {{cont.receiver.lastname}}</ion-label>
+              <ion-label color="primary" class="label-user-chat">{{cont.usuario.name}} {{cont.usuario.lastname}}</ion-label>
               <ion-label *ngIf="cont.messagesReceptor.length > 0" class="label-date">{{ cont.messagesReceptor[cont.messagesReceptor.length-1].created_at | date: 'dd/MM/yyyy'}}</ion-label>
             </div>
             <ion-label *ngIf="cont.messagesReceptor.length > 0" class="label-message">{{ (cont.messagesReceptor[cont.messagesReceptor.length-1].message>50)? (cont.messagesReceptor[cont.messagesReceptor.length-1].message | slice:0:50)+'...':(cont.messagesReceptor[cont.messagesReceptor.length-1].message) }}</ion-label>

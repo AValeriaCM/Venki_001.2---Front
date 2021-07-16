@@ -125,50 +125,54 @@ export class ContenidoPage implements OnInit, OnDestroy {
         if(this.quizHistory.length > 0) {
           this.share.guardarquices(this.quizHistory, this.token).subscribe( resp => {
             this.share.removerQuiz();
+            this.submit();
           }, error => {
             this.mostrarmensaje('Ah ocurrido un error, comuniquese con el administrador', 'Error', 'red-snackbar');
           });
+        } else {
+          this.submit();
         }
-
-        this.loadingService.loadingPresent({spinner: "circles" });
-        this.share.obtenerLeccionesUsuario(this.course.course_id, this.token, this.user.id).subscribe(data => {
-          this.loadingService.loadingDismiss();
-          const validate = data.data.find( (o: any) => o.id_lesson === this.course.id && o.course_id === this.course.course_id);
-          if(validate) {
-            this.share.guardarLeccionActiva(null);
-            this.alertProgreso();
-            this.share.varLeciones.next();
-            this.router.navigateByUrl('/users/entrena/vercurso');
-          } else {
-            const leccionActual = {
-              id_user: this.user.id,
-              id_course: this.course.course_id,
-              id_lesson: this.course.id
-            }
-            this.loadingService.loadingPresent({spinner: "circles" });
-            this.share.guardarleccion(leccionActual, this.token).subscribe( resp => {
-              this.loadingService.loadingDismiss();
-              this.share.guardarLeccionActiva(null);
-              if( (this.cursoGeneral.lessons.length - 1 ) === data.data.length) {
-                this.share.varExamen.next();
-                this.router.navigateByUrl('/users/entrena/vercurso/verleccion/examen');
-              } else {
-                this.alertProgreso();
-                this.share.varLeciones.next();
-                this.router.navigateByUrl('/users/entrena/vercurso');
-              }
-            }, error => {
-              this.loadingService.loadingDismiss();
-              this.mostrarmensaje('Ah ocurrido un error, comuniquese con el administrador', 'Error', 'red-snackbar');
-            });
-          }
-        }, error => {
-          this.loadingService.loadingDismiss();
-        });
       }
     });
   }
 
+  submit() {
+    this.loadingService.loadingPresent({spinner: "circles" });
+    this.share.obtenerLeccionesUsuario(this.course.course_id, this.token, this.user.id).subscribe(data => {
+      this.loadingService.loadingDismiss();
+      const validate = data.data.find( (o: any) => o.id_lesson === this.course.id && o.course_id === this.course.course_id);
+      if(validate) {
+        this.share.guardarLeccionActiva(null);
+        this.alertProgreso();
+        this.share.varLeciones.next();
+        this.router.navigateByUrl('/users/entrena/vercurso');
+      } else {
+        const leccionActual = {
+          id_user: this.user.id,
+          id_course: this.course.course_id,
+          id_lesson: this.course.id
+        }
+        this.loadingService.loadingPresent({spinner: "circles" });
+        this.share.guardarleccion(leccionActual, this.token).subscribe( resp => {
+          this.loadingService.loadingDismiss();
+          this.share.guardarLeccionActiva(null);
+          if( (this.cursoGeneral.lessons.length - 1 ) === data.data.length) {
+            this.share.varExamen.next();
+            this.router.navigateByUrl('/users/entrena/vercurso/verleccion/examen');
+          } else {
+            this.alertProgreso();
+            this.share.varLeciones.next();
+            this.router.navigateByUrl('/users/entrena/vercurso');
+          }
+        }, error => {
+          this.loadingService.loadingDismiss();
+          this.mostrarmensaje('Ah ocurrido un error, comuniquese con el administrador', 'Error', 'red-snackbar');
+        });
+      }
+    }, error => {
+      this.loadingService.loadingDismiss();
+    });
+  }
   async alertProgreso() {
     this.alert = await this.alertController.create({
       header: 'Felicidades',

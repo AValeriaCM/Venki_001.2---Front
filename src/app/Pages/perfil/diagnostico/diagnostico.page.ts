@@ -74,6 +74,7 @@ export class DiagnosticoPage implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   getToken() {
@@ -210,7 +211,7 @@ export class DiagnosticoPage implements OnInit {
       this.color = this.colors[0];
     }
 
-    this.slidefromHtml.lockSwipeToPrev(true);
+    // this.slidefromHtml.lockSwipeToPrev(true);
 
     if(this.profileid) {
       this.getCategorys();
@@ -361,11 +362,25 @@ export class DiagnosticoPage implements OnInit {
           this.slidefromHtml.lockSwipeToNext(false);
           if (item.calificacionVal !== 0) {
             this.surveyID = item.survey_id;
+            if(item.answers.length > 0) {
+              const find = item.answers.find( (answer: any) => +answer.id === +item.calificacionVal);
+              if(find) {
+                item.valMultiple = find.point;
+              }
+            }
             if(item.subcategory_id === null) {
-              res.push({ id: item.id, r: item.calificacionVal, ct: item.category_id });
+              if(item.valMultiple) {
+                res.push({ id: item.id, r: item.valMultiple, ct: item.category_id });
+              } else {
+                res.push({ id: item.id, r: item.calificacionVal, ct: item.category_id });
+              }
               this.finalDta = res;
             } else {
-              res.push({ id: item.id, r: item.calificacionVal, ct: item.subcategory_id });
+              if(item.valMultiple) {
+                res.push({ id: item.id, r: item.valMultiple, ct: item.subcategory_id });
+              } else {
+                res.push({ id: item.id, r: item.calificacionVal, ct: item.subcategory_id });
+              }
               this.finalDta = res;
             }
           }

@@ -31,6 +31,7 @@ export class ShareserviceService {
   varProfile = new Subject<any>();
   varLeciones = new Subject<any>();
   varExamen = new Subject<any>();
+  varMetricas = new Subject<any>();
 
   private cart = [];
 
@@ -534,6 +535,22 @@ export class ShareserviceService {
 
   consultarResultados(token:any, idUser: any) {
     return this.http.get<any>(this.basePath + `api/examen/resultados/user/${idUser}`, {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  consultarMonedas(token:any, idUser: any) {
+    return this.http.get<any>(this.basePath + `api/users/${idUser}/coins`, {
+      headers: new HttpHeaders()
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Authorization', 'Bearer ' + token)
+    });
+  }
+
+  consultarNotificaciones(token:any) {
+    return this.http.get<any>(this.basePath + `api/notifications`, {
       headers: new HttpHeaders()
       .set('X-Requested-With', 'XMLHttpRequest')
       .set('Authorization', 'Bearer ' + token)

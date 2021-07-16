@@ -78,9 +78,7 @@ export class CategoriaPage implements OnInit {
 
   getProfiles() {
     this.loadingService.loadingPresent({message: "Por favor espere", spinner: "circles" });
-    console.log('this.token', this.token);
     this.porfiles.getProfiles(this.token).subscribe((resp: any) => {
-      console.log('resp', resp);
       this.loadProfiles(resp);
       this.loadingService.loadingDismiss();
     }, error => {

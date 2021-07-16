@@ -57,11 +57,12 @@
   <br>
   <ion-title style="text-align: center;">Publicaciones</ion-title>
   <ion-list *ngFor="let pst of miactividad" style="background-color: transparent !important;" class="itemCssFActividad  list-mdActividad">
-    <ion-card class="border-post">
+    <ion-card class="border-post" *ngIf="pst.user">
       <div class="boder">
         <ion-item class="border-bottom: 1px solid #e8e7e7;">
-          <ion-avatar slot="start" class="avatar-user">
-            <img src="assets/avatar/{{pst.user.avatar}}.png" (click)="verUser(pst.user)">
+          <ion-avatar slot="start" class="avatar-user" >
+            <img *ngIf="pst.user.avatar" src="assets/avatar/{{pst.user.avatar}}.png" (click)="verUser(pst.user)">
+            <img *ngIf="!pst.user.avatar" src="assets/avatar/avatar-nuts1.png" (click)="verUser(pst.user)">
           </ion-avatar>
           <ion-label (click)="verUser(pst.user)">
             <h3 class="name-user">{{pst.user.name}} {{pst.user.lastname}}</h3>
